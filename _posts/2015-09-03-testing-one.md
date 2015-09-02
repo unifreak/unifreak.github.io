@@ -13,13 +13,11 @@ title: testing post one
   {% endfor %}
 </ul>
 
-{% highlight javascript %}
-var str = 'some thing';
-var num = 1;
+    var str = 'some thing';
+    var num = 1;
 
-function do() {
-    return str + num;
-}
+    function do() {
+        return str + num;
+    }
 
-do();
-{% endhighlight %}
+    do();
