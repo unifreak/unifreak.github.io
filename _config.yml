@@ -1,1 +1,6 @@
 highlighter: pygments
+
+url: http://localhost:4000/
+
+defaults:
+    url: http://localhost:4000/

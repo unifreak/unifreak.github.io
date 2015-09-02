@@ -1,8 +1,13 @@
 ---
 title: testing post one
+layout: default
 ---
 
 #testing one
+
+{{site.url}}
+
+{{page.title}}
 
 <ul>
   {% for post in site.posts %}
@@ -13,11 +18,10 @@ title: testing post one
   {% endfor %}
 </ul>
 
-    var str = 'some thing';
-    var num = 1;
-
-    function do() {
-        return str + num;
+{% highlight java linenos=table %}
+public class HelloWorld {
+    public static void main(String args[]) {
+      System.out.println("Hello World!");
     }
-
-    do();
+}
+{% endhighlight %}
