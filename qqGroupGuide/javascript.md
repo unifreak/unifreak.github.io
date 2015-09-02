@@ -1,6 +1,5 @@
 ---
 title: ##Javascript用群指南
-layout: post
 ---
 #用群指南(<small>_version 1_</small>)
 
