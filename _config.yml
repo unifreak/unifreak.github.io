@@ -1,6 +1,10 @@
+pygments: on
 highlighter: pygments
-
 url: http://localhost:4000/
+markdown: redcarpet # github flavored markdown
+
+redcarpet:
+    no_fenced_code_blocks: true # enable original fenced code block(```)
 
 defaults:
     url: http://localhost:4000/

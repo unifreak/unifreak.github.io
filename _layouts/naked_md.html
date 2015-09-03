@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" type="text/css" href="{{site.url}}/css/markdownreader.css">
+    <link rel="stylesheet" type="text/css" href="{{site.url}}/css/pygments_monokai.css">
+    <link rel="stylesheet" type="text/css" href="{{site.url}}/css/code_block.css">
+</head>
+<body>
+
+<div id="markdown-container">
+    {{ content }}
+</div>
+
+<div id="markdown-outline">
+    
+</div>
+
+<div id="markdown-backTop" onclick="window.scrollTo(0,0)"></div>
+
+<script type="text/javascript" src="{{site.url}}/javascripts/markdownreader.js"></script>
+
+</body>
+</html>
