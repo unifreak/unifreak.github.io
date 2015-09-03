@@ -1,6 +1,5 @@
 ---
 title: javascript
-<!-- layout: markdown_reader -->
 ---
 #用群指南(<small>_version 1_</small>)
 

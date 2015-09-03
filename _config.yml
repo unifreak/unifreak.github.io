@@ -1,6 +1,7 @@
 url: http://unifreak.github.io/
 highlighter: pygments
 markdown: redcarpet # github flavored markdown
+permalink: pretty
 
 redcarpet:
     no_fenced_code_blocks: true # enable original fenced code block(```)
@@ -25,5 +26,4 @@ defaults:
         path: ""
         type: "qqGroupGuide"
     values:
-        permalink: /:title.html
         layout: markdown_reader
