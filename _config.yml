@@ -25,5 +25,5 @@ defaults:
         path: ""
         type: "qqGroupGuide"
     values:
-        permalink: /:collection/:title/
+        permalink: /:title.html
         layout: markdown_reader
