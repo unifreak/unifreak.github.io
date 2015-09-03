@@ -1,6 +1,6 @@
 ---
 title: ##Javascript用群指南
-layout: naked_md
+<!-- layout: markdown_reader -->
 ---
 #用群指南(<small>_version 1_</small>)
 
