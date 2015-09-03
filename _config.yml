@@ -11,16 +11,16 @@ collections:
 
 
 defaults:
-  - scope:
-        path: ""
-        type: "posts"
-    values:
-        permalink: /:categories/:title/
-  - scope:
-        path: ""
-        type: "qqGroupGuide"
-    values:
-        permalink: /:collection/:title/
+  # - scope:
+  #       path: ""
+  #       type: "posts"
+  #   values:
+  #       permalink: /:categories/:title/
+  # - scope:
+  #       path: ""
+  #       type: "qqGroupGuide"
+  #   values:
+  #       permalink: /:collection/:title/
   - scope:
         path: ""
         type: "qqGroupGuide"
