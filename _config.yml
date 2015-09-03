@@ -12,15 +12,17 @@ collections:
 
 defaults:
   - scope:
-        type: posts
+        path: ""
+        type: "posts"
     values:
         permalink: /:categories/:title/
   - scope:
         path: ""
+        type: "qqGroupGuide"
     values:
         permalink: /:collection/:title/
   - scope:
         path: ""
-        type: qqGroupGuide
+        type: "qqGroupGuide"
     values:
         layout: markdown_reader
