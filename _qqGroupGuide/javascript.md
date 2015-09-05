@@ -74,11 +74,24 @@ title: ##javascript 用群指南
 
 ##相关资源
 
-- Mozilla JS: <https://developer.mozilla.org/zh-CN/docs/Web/JavaScript>
+###在线
+
+- MDN: <https://developer.mozilla.org/zh-CN/docs/Web/JavaScript>
 - ECMAScript 官网: <http://www.ecmascript.org/docs.php>
 - 深入理解 JS: <http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html>
+- W3School 中文: <http://www.w3school.com.cn/js/index.asp>
+
+\* W3School 被很多国内大牛推崇, 但是被很多国外大牛所鄙斥(详见 <http://www.w3fools.com/>). 如果可能, 尽量使用 MDN.
+
+###书籍
+
+- [Javascript 高级编程程序设计][book_JsAdvanced]
+- [JavaScript 语言精粹][book_JsGoodPart]
+
 
 
 [askArt]:http://kb.cnblogs.com/page/181270/
+[book_JsAdvanced]:http://www.amazon.cn/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E6%B3%BD%E5%8D%A1%E6%96%AF/dp/B007OQQVMY/ref=sr_1_1?s=books&ie=UTF8&qid=1441451069&sr=1-1&keywords=javascript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1
+[book_JsGoodPart]:http://www.amazon.cn/JavaScript%E8%AF%AD%E8%A8%80%E7%B2%BE%E7%B2%B9-%E9%81%93%E6%A0%BC%E6%8B%89%E6%96%AF%E2%80%A2%E5%85%8B%E7%BD%97%E5%85%8B%E7%A6%8F%E5%BE%B7/dp/B0097CON2S/ref=sr_1_1?s=books&ie=UTF8&qid=1441451189&sr=1-1&keywords=javascript%E8%AF%AD%E8%A8%80%E7%B2%BE%E7%B2%B9
 
 
