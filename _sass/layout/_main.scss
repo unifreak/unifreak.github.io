@@ -1,0 +1,67 @@
+#l-main {
+    article {
+        background: $articlebg;
+        padding-right: 3rem;
+        margin-top: 5rem;
+        box-shadow: 0 0 2px 2px #eee;
+        border-radius: 5px;
+
+        .date {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .day {
+            background-color: black;
+            color: white;
+            width: 5rem;
+            height: 5rem;
+            margin: 2rem auto 0.5rem auto;
+            font: normal normal bold 2.4rem/4.9rem "Verdana",sans-serif;
+            @include border-radius(50%);
+        }
+
+        .category {
+            font-style: italic;
+            font-family: comic sans ms, cursive;
+        }
+
+        .title {
+            font: normal bold 4rem Georgia, serif;
+            margin-bottom: 0.4rem;
+            text-shadow: 2px 3px 0px #C1C1C1;
+        }
+
+        .tags li {
+            float: right;
+            margin-left: 1rem;
+            padding: 0rem 1rem;
+            background-color: rgb(63, 188, 232);
+            color: white;
+            @include border-radius(15px);
+        }
+
+        hr {
+            clear: both;
+        }
+
+        .excerpt {
+            font-size: 2rem;
+            letter-spacing: 0.2px;
+            font-family: Georgia;
+            text-align: justify;
+        }
+
+        .continue {
+            margin: 0 2rem 2rem;
+            float: right;
+            border-radius: 5px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .excerpt {
+        margin-left: -20%;
+    }
+}
