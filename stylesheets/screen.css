@@ -4237,12 +4237,15 @@ ul {
   border-right: 1px solid #fff;
   padding: 0;
 }
+#l-header .subnav {
+  height: 0;
+}
 #l-header .subnav li {
   display: none;
-  background: #121b20;
   position: relative;
   z-index: 100;
   border-top: 1px solid white;
+  background-color: #eeeeee;
 }
 #l-header .subnav:hover li {
   display: block;
@@ -4300,16 +4303,23 @@ ul {
     letter-spacing: -0.7rem;
   }
   #l-header .navbar {
-    visibility: hidden;
+    display: none;
     height: 6rem;
     position: absolute;
     top: 3.9rem;
     width: 100%;
     z-index: 200;
   }
+  #l-header .subnav {
+    height: auto;
+  }
+  #l-header .subnav li {
+    background: #121b20;
+  }
   #l-header .navicon {
     display: block;
     font-size: 3rem;
+    height: 4rem;
     padding-top: 2.4rem;
     text-align: right;
     padding-right: 2rem;
@@ -4318,9 +4328,6 @@ ul {
     width: 100%;
     padding-top: 0;
     background-color: rgba(44, 63, 74, 0.6);
-  }
-  #l-header .navicon:hover + .navbar, #l-header .navbar:hover {
-    visibility: visible;
   }
   #l-header nav > ul > li {
     text-align: center;
@@ -4391,7 +4398,7 @@ ul {
 }
 
 @media (max-width: 768px) {
-  .excerpt {
+  article .excerpt {
     margin-left: -20%;
   }
 }
@@ -4426,8 +4433,8 @@ ul {
 }
 
 @media (max-width: 768px) {
-  #l-footer ul {
-    position: absolute;
-    top: 3rem;
+  #l-footer address {
+    text-align: left;
+    margin-bottom: 2rem;
   }
 }

@@ -61,7 +61,9 @@
 }
 
 @media (max-width: 768px) {
-    .excerpt {
-        margin-left: -20%;
+    article {
+        .excerpt {
+            margin-left: -20%;
+        }
     }
 }

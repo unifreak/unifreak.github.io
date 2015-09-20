@@ -35,9 +35,10 @@
 
 @media (max-width: 768px) {
     #l-footer {
-        ul {
-            position: absolute;
-            top: 3rem;
+        address {
+            text-align: left;
+            margin-bottom: 2rem;
         }
+
     }
 }
