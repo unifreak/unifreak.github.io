@@ -4398,8 +4398,9 @@ ul {
 }
 
 @media (max-width: 768px) {
-  article .excerpt {
-    margin-left: -20%;
+  #l-main .title {
+    font-size: 3rem;
+    margin-bottom: 2rem;
   }
 }
 /**
