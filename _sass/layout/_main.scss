@@ -32,15 +32,6 @@
             text-shadow: 2px 3px 0px #C1C1C1;
         }
 
-        .tags li {
-            float: right;
-            margin-left: 1rem;
-            padding: 0rem 1rem;
-            background-color: rgb(63, 188, 232);
-            color: white;
-            @include border-radius(15px);
-        }
-
         hr {
             clear: both;
         }
@@ -60,9 +51,35 @@
     }
 }
 
+ul.tags {
+    margin: 0 !important;
+}
+
+.tags li {
+    float: left;
+    margin-left: 1rem;
+    padding: 0rem 1rem;
+    background-color: #8BB3C1;
+    color: white;
+    @include border-radius(15px);
+}
+
+.tags li:first-child {
+    margin-left: 0;
+}
+
+#postTitle {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+#postMeta {
+    font-style: italic;
+}
+
 @media (max-width: 768px) {
     #l-main {
-        .title {
+        article .title {
             font-size: 3rem;
             margin-bottom: 2rem;
         }

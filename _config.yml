@@ -4,13 +4,28 @@ markdown: redcarpet # github flavored markdown
 redcarpet:
     no_fenced_code_blocks: true # enable original fenced code block(```)
 
+mode: dev
 url: http://unifreak.github.io/
+devurl: http://localhost:4000/
 name: UniFreak
-tagLine: On the way to death
 title: UniFreak | Another yet unique freak is showing a freakshow
 description: "Fanghao's personal weblog, on coding or such stuff"
-authorName: FangHao
-authorTitle: PHP Coder
+
+my:
+    displayName: UniFreak
+    realName: FangHao
+    contact:
+        qq: 744910240
+        email: fanghao90s@gmail.com
+        github: http://www.github.com/UniFreak
+        tel: 15671542698
+        address:
+            country: China
+            state: Hubei
+            city: Wuhan
+            distribute: Hongshan
+            postcode: 450000
+            cell: "XuefuJiayuan"
 
 collections:
     qqGroupGuide:

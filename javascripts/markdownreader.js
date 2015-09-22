@@ -1,7 +1,7 @@
 (function(document) {
 
     function updateOutline() {
-        var arrAllHeader = document.querySelectorAll("h1,h2,h3,h4,h5,h6");
+        var arrAllHeader = document.querySelectorAll("#markdown-container h1,#markdown-container h2,#markdown-container h3,#markdown-container h4,#markdown-container h5,#markdown-container h6");
         var arrOutline = ['<ul>'];
         var header, headerText;
         var id = 0;
@@ -39,13 +39,13 @@
             outline.innerHTML = arrOutline.join('');
             showOutline();
         }
-        else outline.style.display = 'none'; 
+        else outline.style.display = 'none';
     }
 
     function showOutline() {
         var outline = document.getElementById('markdown-outline');
         var markdownContainer = document.getElementById('markdown-container');
-        outline.style.left = markdownContainer.offsetLeft + markdownContainer.offsetWidth + 10 + 'px';
+        // outline.style.left = markdownContainer.offsetLeft + markdownContainer.offsetWidth + 10 + 'px';
         outline.style.maxHeight = document.body.clientHeight - 30;
         outline.style.display = 'block';
     }

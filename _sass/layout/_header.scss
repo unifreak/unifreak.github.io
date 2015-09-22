@@ -9,9 +9,10 @@
 
     h1 {
         margin-top: 0;
-        margin-bottom: $general-margin;
-        font: normal small-caps bold 16rem/9.5rem "verdana",helvetica, sans-serif;
+        margin-bottom: 35px;
+        font: normal small-caps bold 17rem/9.5rem "verdana",helvetica, sans-serif;
         letter-spacing: -1rem;
+        margin-left: -2rem;
     }
 
     p {
@@ -26,7 +27,7 @@
     }
 
     .navbar {
-        background-color: $navbg;
+        background-color: white;
 
         i {
             position: absolute;
@@ -47,12 +48,16 @@
         text-align: center;
         font-size: 2rem;
         line-height: 5rem;
-        border-right: 1px solid #fff;
+        border-right: 1px solid #e0e0e0;
         padding: 0;
     }
 
+    nav > ul > li:hover {
+        background: #ccc;
+    }
+
     .subnav {
-        height: 0;
+        max-height: 5rem;
     }
 
     .subnav li {
@@ -61,6 +66,10 @@
         z-index: 100;
         border-top: 1px solid white;
         background-color: rgb(238, 238, 238);
+    }
+
+    .subnav li:hover {
+        background-color: #ccc;
     }
 
     .subnav:hover li {
@@ -75,6 +84,7 @@
         @include border-radius(45px);
         padding-left: 2rem;
         color: black;
+        border: 1px solid #e0e0e0;
     }
 
     #search:focus {
@@ -86,9 +96,7 @@
 @media (max-width:1200px) {
     #l-header {
         p {
-            float: left;
-            padding-right: 4rem;
-            margin-top: 0;
+            display: none;
         }
     }
 }
@@ -103,6 +111,10 @@
 
         p {
             display: none;
+        }
+
+        nav > ul > li {
+            border-bottom: 1px solid #e0e0e0;
         }
 
         div.search {
@@ -145,6 +157,10 @@
             background: rgba(18, 27, 32, 1);
         }
 
+        .subnav li:hover {
+            background: darken(rgba(18, 27, 32, 1), 5);
+        }
+
         .navicon {
             display: block;
             font-size: 3rem;
@@ -164,7 +180,11 @@
             background-color: rgba(37, 57, 69, 1);
             width: 100%;
             margin-right: 2rem;
-            border-bottom: 1px solid white;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        nav > ul > li:hover {
+            background: darken(rgba(37, 57, 69, 1), 5);
         }
 
         .search {
