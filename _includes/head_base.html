@@ -19,4 +19,6 @@
 
 
 <!-- 百度统计 -->
-<!-- <script type="text/javascript" src="{{crturl}}javascripts/baidu_statistics.js"></script> -->
+{% if site.mode != 'dev' %}
+<script type="text/javascript" src="{{crturl}}javascripts/baidu_statistics.js"></script>
+{% endif %}
