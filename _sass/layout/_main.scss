@@ -3,7 +3,7 @@
         background: $articlebg;
         padding-right: 3rem;
         margin-top: 5rem;
-        box-shadow: 0 0 2px 2px #eee;
+        box-shadow: 0 0 10px #999;
         border-radius: 5px;
 
         .date {
@@ -49,6 +49,96 @@
             border-radius: 5px;
         }
     }
+
+    #about {
+        background-color: white;
+
+        header, section {
+            padding-left: 7.5rem;
+            padding-right: 7.5rem;
+        }
+
+        section {
+            margin-bottom: 6rem;
+        }
+
+        header {
+            background-color: #1C3340;
+            color: white;
+            max-height: 18rem;
+
+            img {
+                max-width: 17rem;
+                position: relative;
+                top: 9rem;
+                border-radius: 50%;
+                border: 4px solid white;
+            }
+
+            h1 {
+                margin-left: 21.5rem;
+                padding-bottom: 1rem;
+                position: relative;
+                top: -5rem;
+            }
+        }
+
+        section h2 {
+            font-size: 4rem;
+            color: #1c3340;
+            margin: 0;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #1C3340;
+        }
+
+        section#intro {
+            h2 {
+                font-size: 7rem;
+                margin-left: 21.2rem;
+                margin-top: -2rem;
+                border-bottom: none;
+            }
+
+            p {
+                font-size: 2rem;
+            }
+        }
+
+
+        section#skillsets {
+            i {
+                font-weight: bold;
+                font-size: 3rem;
+            }
+
+            ul {
+                margin-top: 2rem;
+            }
+
+            ul li {
+                font-size: 2rem;
+                display: inline;
+                background-color: #000000;
+                color: white;
+                border: 1px solid #1C3340;
+                padding: 3px;
+                border-radius: 4px;
+                margin-left: 1rem;
+            }
+        }
+
+        section#findme li {
+            display: inline;
+            font-size: 6rem;
+            margin-right: 3rem;
+        }
+
+        section#action {
+            font-size: 2rem;
+        }
+    }
+
+
 }
 
 ul.tags {

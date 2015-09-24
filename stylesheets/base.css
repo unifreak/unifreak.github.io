@@ -4364,7 +4364,7 @@ ul {
   background: #f6f6f6;
   padding-right: 3rem;
   margin-top: 5rem;
-  box-shadow: 0 0 2px 2px #eee;
+  box-shadow: 0 0 10px #999;
   border-radius: 5px;
 }
 #l-main article .date {
@@ -4404,6 +4404,75 @@ ul {
   margin: 0 2rem 2rem;
   float: right;
   border-radius: 5px;
+}
+#l-main #about {
+  background-color: white;
+}
+#l-main #about header, #l-main #about section {
+  padding-left: 7.5rem;
+  padding-right: 7.5rem;
+}
+#l-main #about section {
+  margin-bottom: 6rem;
+}
+#l-main #about header {
+  background-color: #1C3340;
+  color: white;
+  max-height: 18rem;
+}
+#l-main #about header img {
+  max-width: 17rem;
+  position: relative;
+  top: 9rem;
+  border-radius: 50%;
+  border: 4px solid white;
+}
+#l-main #about header h1 {
+  margin-left: 21.5rem;
+  padding-bottom: 1rem;
+  position: relative;
+  top: -5rem;
+}
+#l-main #about section h2 {
+  font-size: 4rem;
+  color: #1c3340;
+  margin: 0;
+  margin-bottom: 1rem;
+  border-bottom: 3px solid #1C3340;
+}
+#l-main #about section#intro h2 {
+  font-size: 7rem;
+  margin-left: 21.2rem;
+  margin-top: -2rem;
+  border-bottom: none;
+}
+#l-main #about section#intro p {
+  font-size: 2rem;
+}
+#l-main #about section#skillsets i {
+  font-weight: bold;
+  font-size: 3rem;
+}
+#l-main #about section#skillsets ul {
+  margin-top: 2rem;
+}
+#l-main #about section#skillsets ul li {
+  font-size: 2rem;
+  display: inline;
+  background-color: #000000;
+  color: white;
+  border: 1px solid #1C3340;
+  padding: 3px;
+  border-radius: 4px;
+  margin-left: 1rem;
+}
+#l-main #about section#findme li {
+  display: inline;
+  font-size: 6rem;
+  margin-right: 3rem;
+}
+#l-main #about section#action {
+  font-size: 2rem;
 }
 
 ul.tags {

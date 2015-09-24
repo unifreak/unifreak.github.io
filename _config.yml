@@ -4,8 +4,8 @@ markdown: redcarpet # github flavored markdown
 redcarpet:
     no_fenced_code_blocks: true # enable original fenced code block(```)
 
-# mode: dev
-mode: product
+mode: dev
+# mode: product
 url: http://unifreak.github.io/
 devurl: http://localhost:4000/
 name: UniFreak
@@ -15,10 +15,14 @@ description: "Fanghao's personal weblog, on coding or such stuff"
 my:
     displayName: UniFreak
     realName: FangHao
+    realName_cn: 方浩
+    jobTitle: "PHP Coder"
     contact:
         qq: 744910240
         email: fanghao90s@gmail.com
         github: http://www.github.com/UniFreak
+        qzone: http://744910240.qzone.qq.com
+        pinterest: https://www.pinterest.com/miblah/
         tel: 15671542698
         address:
             country: China
@@ -27,6 +31,10 @@ my:
             distribute: Hongshan
             postcode: 450000
             cell: "XuefuJiayuan"
+    skills:
+        frontend: ["HTML | Markdown", "CSS | SASS", "JS | jQuery", "Bootstrap"]
+        backend: ["PHP", "MySQL", "Redis", "Regex", "Laravel", "OSC"]
+        tools: ["Sublime Text", "Git | Github", "Linux", "Jekyll | Liquid"]
 
 collections:
     qqGroupGuide:
