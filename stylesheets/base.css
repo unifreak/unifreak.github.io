@@ -4481,6 +4481,14 @@ ul {
 #l-main div#whoops h1 {
   font-size: 6rem;
 }
+#l-main div#building {
+  text-align: center;
+  padding-top: 10rem;
+}
+#l-main div#building i {
+  font-size: 15rem;
+  color: #1C3340;
+}
 
 ul.tags {
   margin: 0 !important;
