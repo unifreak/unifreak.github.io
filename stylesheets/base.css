@@ -4474,6 +4474,13 @@ ul {
 #l-main #about section#action {
   font-size: 2rem;
 }
+#l-main div#whoops {
+  text-align: center;
+  height: 300px;
+}
+#l-main div#whoops h1 {
+  font-size: 6rem;
+}
 
 ul.tags {
   margin: 0 !important;

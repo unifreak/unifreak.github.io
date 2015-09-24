@@ -138,7 +138,14 @@
         }
     }
 
+    div#whoops {
+        text-align: center;
+        height: 300px;
 
+        h1 {
+            font-size: 6rem;
+        }
+    }
 }
 
 ul.tags {
