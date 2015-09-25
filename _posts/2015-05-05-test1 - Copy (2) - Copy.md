@@ -1,8 +1,8 @@
 ---
 title: "##javascript 用群指南"
-tags: [guide, qq, whatever]
+tags: [guide, whatever]
 layout: post
-category: qqGuide
+category: cate2
 excerpt: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
