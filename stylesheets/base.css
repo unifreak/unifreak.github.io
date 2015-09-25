@@ -4391,6 +4391,9 @@ ul {
   margin-bottom: 0.4rem;
   text-shadow: 2px 3px 0px #C1C1C1;
 }
+#l-main article .title a {
+  color: #333;
+}
 #l-main article hr {
   clear: both;
 }
