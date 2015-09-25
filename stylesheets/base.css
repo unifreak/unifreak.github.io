@@ -4540,25 +4540,44 @@ ul.tags {
   font-style: italic;
 }
 
-#categoryList, #tagList {
+#filterList {
   background-color: #F6F6F6;
   margin-top: 5rem;
   padding: 0;
   font-size: 2rem;
   box-shadow: 0 0 10px #999;
 }
-#categoryList li, #tagList li {
+#filterList li {
   height: 5rem;
   line-height: 5rem;
   border-bottom: 2px solid #DDDDDD;
   padding-left: 2rem;
 }
-#categoryList li.current, #tagList li.current {
+#filterList li.current {
   background-color: #1C3340;
 }
-#categoryList li:hover:not(.current), #tagList li:hover:not(.current) {
+#filterList li:hover:not(.current) {
   background-color: white;
   cursor: pointer;
+}
+#filterList a, #filterList a:visited, #filterList a:hover {
+  text-decoration: none;
+  color: #337ab7;
+}
+
+.tagCnt, .cateCnt {
+  float: right;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  background-color: #F6F6F6;
+  height: 50%;
+  height: 2rem;
+  width: 2rem;
+  margin-top: 1.5rem;
+  text-align: center;
+  line-height: 2rem;
+  box-shadow: 0 0 3px #1C3340;
+  border-radius: 50%;
 }
 
 @media (max-width: 768px) {

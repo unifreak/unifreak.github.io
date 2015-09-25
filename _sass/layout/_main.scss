@@ -210,7 +210,7 @@ ul.tags {
     font-style: italic;
 }
 
-#categoryList, #tagList {
+#filterList {
     background-color: #F6F6F6;
     margin-top: 5rem;
     padding: 0;
@@ -232,6 +232,26 @@ ul.tags {
             cursor: pointer;
         }
     }
+
+    a, a:visited, a:hover {
+        text-decoration: none;
+        color: #337ab7;
+    }
+}
+
+.tagCnt, .cateCnt {
+    float: right;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    background-color: #F6F6F6;
+    height: 50%;
+    height: 2rem;
+    width: 2rem;
+    margin-top: 1.5rem;
+    text-align: center;
+    line-height: 2rem;
+    box-shadow: 0 0 3px #1C3340;
+    border-radius: 50%;
 }
 
 @media (max-width: 768px) {

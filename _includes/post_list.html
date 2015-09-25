@@ -1,3 +1,5 @@
+{% include mode_switcher.html %}
+
 {% if paginator %}
     {% for post in paginator.posts %}
         {% include post_list_item.html %}
@@ -32,7 +34,8 @@
             <a href="{{ paginator.next_page_path | prepend: crturl }}">NEXT</a>
         {% endif %}
     {% elsif jsPagiLoaded != true %}
-        <script type="text/javascript" src="../javascripts/pagination.js"></script>
+        <script type="text/javascript" src="{{crturl}}javascripts/pagination.js"></script>
+        <script type="text/javascript" src="{{crturl}}javascripts/listAndPagi.js"></script>
         {% assign jsPagiLoaded = true %}
     {% endif %}
 

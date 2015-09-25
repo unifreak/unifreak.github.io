@@ -2,11 +2,12 @@
 layout: base
 ---
 <div class="row">
-    <ul class="col-lg-2" id="categoryList">
+    <ul class="col-lg-2" id="filterList">
         {% assign idx = 0 %}
         {% for category in site.categories %}
-            <li {% if idx == 0 %} class="current" {% endif %} data-category="{{ category | first }}">
-                <a href="#">{{ category | first }}
+            <li {% if idx == 0 %} class="current" {% endif %} data-show="{{ category | first }}">
+                <a href="javascript:void(0)">
+                {{ category | first }}
                 <span class="cateCnt">{{ category | last | size }}</span>
                 </a>
             </li>
@@ -16,7 +17,7 @@ layout: base
 
     {% assign cateIdx = 0 %}
     {% for category in site.categories %}
-        <section class="categoryShowcase col-lg-9 col-lg-offset-1 {% if cateIdx > 0 %} hide {% else %} current {% endif %}" data-category="{{ category | first }}">
+        <section class="showcase col-lg-9 col-lg-offset-1 {% if cateIdx > 0 %} hide {% else %} current {% endif %}" data-show="{{ category | first }}">
             {% for posts in category %}
                 {% include post_list.html posts=posts cateIdx=cateIdx %}
                 {% assign cateIdx = cateIdx | plus: 1 %}
@@ -24,42 +25,3 @@ layout: base
         </section>
     {% endfor %}
 </div>
-
-<script type="text/javascript">
-$('document').ready(function() {
-    generatePagi();
-
-    $('#categoryList li').click(function(e) {
-        var cate = $(this).data('category');
-
-        $('.categoryShowcase:visible')
-            .removeClass('current')
-            .addClass('hide');
-        $('.categoryShowcase').filter('[data-category=' + cate + ']')
-            .removeClass('hide')
-            .addClass('current');
-
-        $('#categoryList li.current').removeClass('current');
-        $('#categoryList li[data-category=' + cate + ']').addClass('current');
-
-        generatePagi();
-
-    });
-
-    function generatePagi() {
-        var dataSource = $.makeArray($('.categoryShowcase.current article'));
-
-        $('.categoryShowcase.current #paginator').pagination({
-            dataSource: dataSource,
-            pageSize: 7,
-            callback: function(data, pagination) {
-                $(dataSource).hide();
-                $(data).show();
-                console.log(pagination);
-            }
-        });
-
-    }
-
-});
-</script>
