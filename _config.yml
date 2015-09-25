@@ -44,10 +44,11 @@ collections:
         output: true
 
 defaults:
-  # - scope:
-  #       path: ""
-  #       type: "posts"
-  #   values:
+  - scope:
+        path: ""
+        type: "posts"
+    values:
+        excerpt: "{{ page.content }} | slice: 0 300"
   #       permalink: /:categories/:title/
   # - scope:
   #       path: ""
