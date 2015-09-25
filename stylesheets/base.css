@@ -4587,6 +4587,27 @@ ul.tags {
     font-size: 3rem;
     margin-bottom: 2rem;
   }
+  #l-main #about header img {
+    max-width: 10rem;
+    position: static;
+    display: block;
+    margin: 0 auto;
+  }
+  #l-main #about header h1 {
+    margin: 0 auto;
+    text-align: center;
+    position: static;
+  }
+  #l-main #about section#intro h2 {
+    font-size: 4rem;
+    margin: 0;
+    border-bottom: 3px solid #1C3340;
+  }
+  #l-main #about section#skillsets ul li {
+    display: block;
+    margin: 1rem;
+    width: 50%;
+  }
 }
 /**
  * ----------------------------------------------------------------------------------------
