@@ -13,11 +13,11 @@
     {% endfor %}
 {% endif %}
 
-{% if displayPagi %}
+{% if displayPagi or paginator %}
 <div class="row" id="paginator">
     {% if paginator.total_pages > 1 %}
         {% if paginator.previous_page %}
-            <a href="{{ paginator.previous_page_path | prepend: crturl }}">PREV</a>
+            <a href="{{ paginator.previous_page_path | prepend: crturl }}">«</a>
         {% endif %}
 
         {% for page in (1..paginator.total_pages) %}
@@ -26,12 +26,12 @@
             {% elsif page == 1 %}
                 <a href="{{ crturl }}">{{ page }}</a>
             {% else %}
-                <a href="/{{ site.paginate_path | prepend: crturl | replace: ':num', page }}">{{ page }}</a>
+                <a href="{{ site.paginate_path | prepend: crturl | replace: ':num', page }}">{{ page }}</a>
             {% endif %}
         {% endfor %}
 
         {% if paginator.next_page %}
-            <a href="{{ paginator.next_page_path | prepend: crturl }}">NEXT</a>
+            <a href="{{ paginator.next_page_path | prepend: crturl }}">»</a>
         {% endif %}
     {% elsif jsPagiLoaded != true %}
         <script type="text/javascript" src="{{crturl}}javascripts/pagination.js"></script>
