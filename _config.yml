@@ -4,8 +4,11 @@ markdown: redcarpet # github flavored markdown
 redcarpet:
     no_fenced_code_blocks: true # enable original fenced code block(```)
 
-# mode: dev
-mode: product
+paginate: 7
+paginate_path: "page:num"
+
+mode: dev
+# mode: product
 url: http://unifreak.github.io/
 devurl: http://localhost:4000/
 name: UniFreak

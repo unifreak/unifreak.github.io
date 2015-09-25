@@ -4489,6 +4489,28 @@ ul {
   font-size: 15rem;
   color: #1C3340;
 }
+#l-main div#paginator {
+  margin: 0 auto;
+  max-width: auto;
+  text-align: center;
+  margin-top: 3rem;
+}
+#l-main div#paginator a, #l-main div#paginator span {
+  min-width: 2rem;
+  font-size: 2rem;
+  border-radius: 2px;
+  border: 1px solid #337AB7;
+  display: inline-block;
+  padding: 2px 11px;
+  box-shadow: 0 0 2px #337AB7;
+}
+#l-main div#paginator ul li {
+  float: left;
+  margin-right: 1rem;
+}
+#l-main div#paginator ul li.active {
+  background: #8BB3C1;
+}
 
 ul.tags {
   margin: 0 !important;
@@ -4516,6 +4538,27 @@ ul.tags {
 
 #postMeta {
   font-style: italic;
+}
+
+#categoryList, #tagList {
+  background-color: #F6F6F6;
+  margin-top: 5rem;
+  padding: 0;
+  font-size: 2rem;
+  box-shadow: 0 0 10px #999;
+}
+#categoryList li, #tagList li {
+  height: 5rem;
+  line-height: 5rem;
+  border-bottom: 2px solid #DDDDDD;
+  padding-left: 2rem;
+}
+#categoryList li.current, #tagList li.current {
+  background-color: #1C3340;
+}
+#categoryList li:hover:not(.current), #tagList li:hover:not(.current) {
+  background-color: white;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {

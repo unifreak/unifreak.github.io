@@ -156,6 +156,32 @@
             color: #1C3340;
         }
     }
+
+    div#paginator {
+        margin: 0 auto;
+        max-width: auto;
+        text-align: center;
+        margin-top: 3rem;
+
+        a, span {
+            min-width: 2rem;
+            font-size: 2rem;
+            border-radius: 2px;
+            border: 1px solid #337AB7;
+            display: inline-block;
+            padding: 2px 11px;
+            box-shadow: 0 0 2px #337AB7;
+        }
+
+        ul li {
+            float: left;
+            margin-right: 1rem;
+        }
+
+        ul li.active {
+            background: #8BB3C1;;
+        }
+    }
 }
 
 ul.tags {
@@ -182,6 +208,30 @@ ul.tags {
 
 #postMeta {
     font-style: italic;
+}
+
+#categoryList, #tagList {
+    background-color: #F6F6F6;
+    margin-top: 5rem;
+    padding: 0;
+    font-size: 2rem;
+    box-shadow: 0 0 10px #999;
+
+    li {
+        height: 5rem;
+        line-height: 5rem;
+        border-bottom: 2px solid #DDDDDD;
+        padding-left: 2rem;
+
+        &.current {
+            background-color: #1C3340;
+        }
+
+        &:hover:not(.current) {
+            background-color: white;
+            cursor: pointer;
+        }
+    }
 }
 
 @media (max-width: 768px) {

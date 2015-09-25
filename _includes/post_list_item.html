@@ -1,0 +1,23 @@
+<article class="row">
+    <div class="date col-lg-2 col-md-2 col-sm-2">
+        <p class="day">{{ post.date | date: "%d" }}</p>
+        <p class="month">{{ post.date | date: "%b/%Y" }}</p>
+        <p class="category">{{ post.categories[0] }}</p>
+    </div>
+
+    <div class="col-lg-10 col-md-10 col-sm-10">
+        <h2 class="title">{{ post.title }}</h2>
+        <ul class="tags">
+            {% for tag in post.tags %}
+            <li><i class="fa fa-tag"> {{ tag }}</i></li>
+            {% endfor %}
+        </ul>
+        <br>
+        <hr class="clearfix">
+        <p class="excerpt">
+            {{ post.excerpt }}
+        </p>
+    </div>
+
+    <button class="continue">FULL ARTICLE</button>
+</article>

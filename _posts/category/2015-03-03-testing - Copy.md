@@ -2,7 +2,7 @@
 title: "##javascript 用群指南"
 tags: [guide, qq, whatever]
 layout: post
-category: qqGuide
+category: whatever2
 ---
 #用群指南(<small>_version 1_</small>)
 
