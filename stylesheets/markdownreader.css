@@ -1,6 +1,6 @@
 *{margin:0;padding:0;}
 #markdown-container{
-    margin:2.5rem auto 2.5rem auto;
+    margin:5rem auto 2.5rem auto;
     background-color: white;
     border:1px solid #ccc;
     box-shadow:0 0 10px #999;
@@ -13,7 +13,7 @@
     font:13.34px helvetica,arial,freesans,clean,sans-serif;
     color:black;
 }
-#markdowncontainer p {
+#markdown-container p {
     margin:1em 0;
     line-height:1.5em;
 }
@@ -47,6 +47,9 @@
 #markdown-container ol{margin:1em 0 1em 2em;}
 #markdown-container ul li,
 #markdown-container ol li{margin-top:.5em;margin-bottom:.5em;}
+#markdown-container ul li{list-style-type:disc;}
+#markdown-container ul ul li, #markdown-container ol ul li{list-style-type:circle;}
+#markdown-container ol li{list-style-type: decimal;}
 #markdown-container ul ul,
 #markdown-container ul ol,
 #markdown-container ol ol,

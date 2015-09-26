@@ -15,7 +15,7 @@
         <br>
         <hr class="clearfix">
         <p class="excerpt">
-            {{ post.excerpt }}
+            {{ post.excerpt | strip_html | newline_to_br }}
         </p>
     </div>
 

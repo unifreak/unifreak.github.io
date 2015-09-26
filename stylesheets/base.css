@@ -4534,8 +4534,9 @@ ul.tags {
 }
 
 #postTitle {
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: bold;
+  margin-bottom: 0rem !important;
 }
 
 #postMeta {
