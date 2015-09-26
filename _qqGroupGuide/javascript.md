@@ -88,10 +88,6 @@ title: ##javascript 用群指南
 - [Javascript 高级编程程序设计][book_JsAdvanced]
 - [JavaScript 语言精粹][book_JsGoodPart]
 
-|name | value|
-|-----|------|
-|one|two|
-
 
 [askArt]:http://kb.cnblogs.com/page/181270/
 [book_JsAdvanced]:http://www.amazon.cn/JavaScript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E6%B3%BD%E5%8D%A1%E6%96%AF/dp/B007OQQVMY/ref=sr_1_1?s=books&ie=UTF8&qid=1441451069&sr=1-1&keywords=javascript%E9%AB%98%E7%BA%A7%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1

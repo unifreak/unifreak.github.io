@@ -4410,6 +4410,7 @@ ul {
 }
 #l-main #about {
   background-color: white;
+  margin-bottom: 2.5rem;
 }
 #l-main #about header, #l-main #about section {
   padding-left: 7.5rem;
