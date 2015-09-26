@@ -31,6 +31,17 @@
 #markdown-container a{color:#4183c4;text-decoration:none;}
 #markdown-container a:hover{text-decoration:underline;}
 #markdown-container a code,a:link code,a:visited code{color:#4183c4;}
+#markdown-container code {
+    padding: 0.2em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(0,0,0,0.08);
+    border-radius: 3px;
+}
+#markdown-container pre code {
+    background-color: transparent;
+    font-size: 100%;
+}
 #markdown-container h2,h3{margin:1em 0;}
 #markdown-container h1,
 #markdown-container h2,

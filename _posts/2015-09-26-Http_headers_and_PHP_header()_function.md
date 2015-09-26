@@ -1,12 +1,18 @@
 ---
 title: "HTTP 头和 PHP header() 函数"
 layout: post
+category: translation
+tags: [php, http]
 excerpt: "许多初级到中级的的 PHP 程序员把 header() 函数当作某种神秘巫术. 他们可以照着代码示例把功能实现, 但是还是不知道到底它是如果运作的. 我最开始就是这样的.
 
 
 实际上它非常简单. 在这篇文章中, 我会解释 HTTP 头(header) 是如何运作的, 它们与 PHP 的关系, 以及它们的 meta 标签 equivalents(对应物)"
-category: translation
 ---
+_原文链接: <http://www.nicholassolutions.com/tutorials/php/headers.html>_
+
+_版权: 本文受 Creative Commons License 版权保护, 你可以在 Creative Commons Attribution NonCommercial NoDerives 2.5 License 下分发该文_
+
+
 #引言
 
 许多初级到中级的的 PHP 程序员把 [header()][header reference] 函数当作某种神秘巫术. 他们可以照着代码示例把功能实现, 但是还是不知道到底它是如果运作的. 我最开始就是这样的.
@@ -435,8 +441,6 @@ header('Pragma: no-cache'); //HTTP/1.0
 还有额外一点, 记住头信息就像是词语: 它们交流信息并请求某些操作被执行, 但是本身并不强制任何事情. 99.9% 的情况下, 浏览器和服务器和谐合作, 事情发展很顺利. 但记住在现实中, 是不是你会遇到一些混蛋 (黑客), 或者一些只想按照自己意愿做事的东西 (Internet Explorer). web 开发从很多角度讲是一个客服性质的工作, 所以你应该尽全力避免这些东西, 满足客户的 '特殊需要' :-)
 
 ---
-
-(本文受 Creative Commons License 版权保护, 你可以在 Creative Commons Attribution NonCommercial NoDerives 2.5 License 下分发该文)
 
 [header reference]: http://www.php.net/manual/function.header.php
 [http]: http://en.wikipedia.org/wiki/HyperText_Transfer_Protocol

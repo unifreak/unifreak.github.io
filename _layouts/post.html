@@ -22,7 +22,7 @@
                         {% endfor %}
                     </ul>
                     {% endif %}
-                    <p id="postMeta">posted on {{ page.date | date_to_string }} under <a href="#">category</a> {{ page.categories[0] }}</p>
+                    <p id="postMeta">posted on {{ page.date | date_to_string }} under category <a href="{{crturl}}category/">{{ page.categories[0] }}</a></p>
 
                 </header>
 
