@@ -20,6 +20,9 @@ $('document').ready(function() {
 
     function generatePagi() {
         var dataSource = $.makeArray($('.showcase.current article'));
+        if(!dataSource.length) {
+            return false;
+        }
 
         $('.showcase.current #paginator').pagination({
             dataSource: dataSource,
