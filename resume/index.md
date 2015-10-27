@@ -54,7 +54,7 @@ layout: markdownreader_bare
 
 #技术/工具
 
-**语言**: PHP MySql Redis Regex JS HTML/CSS Markdown SASS Liquid
+**语言**: PHP MySql Redis Regex JS/JQuery HTML/CSS Markdown SASS Liquid
 
 **框架**: ThinkPHP OSC Bootstrap
 
@@ -62,7 +62,7 @@ layout: markdownreader_bare
 
 #自我评价
 
-为人稳重可靠, 兴趣广泛, 学习能力很强, 比较注重细节, 对新技术有很大热情和钻研韧劲
+为人稳重可靠, 兴趣广泛, 学习能力很强, 善于利用网络解决各种技术问题, 比较注重细节, 对新技术有很大热情和钻研韧劲
 
 注重 OOP ,设计模式等软件架构方面知识的学习与使用, 认为编程不仅是实用的技术, 也是一门艺术
 
