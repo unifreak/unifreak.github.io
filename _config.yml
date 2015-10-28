@@ -10,8 +10,8 @@ layout: post
 permalink: /:categories/:title
 excerpt_separator: "[-----]"
 
-# mode: dev
-mode: product
+mode: dev
+# mode: product
 url: https://unifreak.github.io/
 devurl: http://localhost:4000/
 name: UniFreak

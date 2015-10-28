@@ -17,7 +17,7 @@ layout: markdownreader_bare
 
 ###河南众商联盟科技公司 <small>2013.7~2014.1</small>
 
-主要负责前台  JS 效果实现, 以及 bug 修复
+主要负责前台  JS 效果实现, 以及 bug 修复<br><br>
 
 ###武汉邦普特进出口有限公司 <small>2014.3~2015.10</small>
 
@@ -76,4 +76,4 @@ layout: markdownreader_bare
 [app]: https://itunes.apple.com/us/app/born-pretty/id986675944?mt=8
 [jekyllCn]: http://jekyllcn.com
 [jekyllthemes]: http://jekyllthemes.org
-[jekyllrc]: http://themes.jekyllrc.org
+[jekyllrc]: http://themes.jekyllrc.orgd
