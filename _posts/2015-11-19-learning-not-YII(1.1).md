@@ -2,7 +2,7 @@
 title: "YII(版本1) 权威指南学习笔记(未完结)"
 layout: post
 category: notes
-tags: [php]
+tags: [php, framework]
 excerpt: "Yii 是一个基于组件的高性能 PHP 框架, 用于快速开发大型 Web 应用. 它使 Web 开发中的 可复用度最大化, 可以显著提高你的 Web 应用开发速度. Yii 这个名字(读作易(Yee) 或 [ji:])代表 简单(easy), 高效(efficient) 和 可扩展(extensible)."
 ---
 
