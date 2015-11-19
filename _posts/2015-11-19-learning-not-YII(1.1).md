@@ -533,6 +533,7 @@ public function actionLogin() {
 ##收集表格输入(批量)
 
 action:
+
 ```php
 <?php
 public function actionBatchUpdate()
@@ -559,6 +560,7 @@ public function actionBatchUpdate()
 ```
 
 view:
+
 ```php
 <div class="form">
 <?php echo CHtml::beginForm(); ?>
@@ -582,6 +584,7 @@ view:
 ##使用表单生成器 @todo
 
 action: 
+
 ```php
 <?php
 public function actionLogin() {
@@ -597,6 +600,7 @@ public function actionLogin() {
 ```
 
 protected/views/site/loginForm.php:
+
 ```php
 <?php
 return array(
@@ -629,6 +633,7 @@ return array(
 ```
 
 view:
+
 ```php
 <h1>Login</h1>
 
