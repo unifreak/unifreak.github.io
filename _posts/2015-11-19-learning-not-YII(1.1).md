@@ -19,6 +19,7 @@ WEB 应用一般为 `index.php`, 控制台应用一般为 `yii.php` 并在文件
 WEB:
 
 ```php
+<?php
 // 定义全局常量
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'dev');
@@ -83,23 +84,28 @@ exit($exitCode);
 - 默认控制器在 `CWebApplication::defaultController` 中定义, 默认动作为 `index`, 对应的方法名为 `actionIndex`, 可通过 `CController::defaultAction` 修改
 
     ```php
+    <?php
     class SiteController extends CController {
     }
+    ?>
     ```
 
 - 也可以由一个动作类来定义动作, 以便重用动作:
 
     ```php
+    <?php
     class UpdateAction extends CAction {
         public function run() {
             // place the action logic here
         }
     }
+    ?>
     ```
 
 - 然后需覆盖控制器类的 `actions` 方法:
 
     ```php
+    <?php
     class PostController extends CController {
         public function actions() {
             return array(
@@ -107,11 +113,13 @@ exit($exitCode);
             );
         }
     }
+    ?>
     ```
 
 动作参数绑定:
 
 ```php
+<?php
 // in PostController:
 public function actionCreate(array $category, $language = 'en') {
     // 动作参数绑定功能将会把传入 action 的参数和 $_GET 中的数据绑定
@@ -119,6 +127,7 @@ public function actionCreate(array $category, $language = 'en') {
     // 因为没有为 $category 提供默认值, 如果 $_GET 中没有 category 这一项则会报错
     // array 类型声明会确保 $category 为一个数组(自动将基本类型转换为数组)
 }
+?>
 ```
 
 过滤器可被配置在动作执行之前或之后执行, 如访问控制过滤器, 性能过滤器(参见[访问控制过滤器][accessControlFilter])
@@ -128,14 +137,17 @@ public function actionCreate(array $category, $language = 'en') {
     - 可被定义为一个 `filter` 前缀的控制器方法:
 
     ```php
+    <?php
     public function filterAccessControl($filterChain) {
         // 调用 $filterChain->run() 以继续后续过滤器与动作的执行。
     }
+    ?>
     ```
 
     - 也可是一个 `CFilter` 或其子类的实例:
 
     ```php
+    <?php
     class PerformanceFilter extends CFilter {
         protected function preFilter($filterChain) {
             // 动作被执行之前应用的逻辑
@@ -146,11 +158,13 @@ public function actionCreate(array $category, $language = 'en') {
             // 动作执行之后应用的逻辑
         }
     }
+    ?>
     ```
 
 - 配置使用: 需要覆盖控制器的 `filter()` 方法:
 
     ```php
+    <?php
     class PostController extends CController {
         ......
         public function filters() {
@@ -163,6 +177,7 @@ public function actionCreate(array $category, $language = 'en') {
             );
         }
     }
+    ?>
     ```
 
 ##模型
@@ -180,10 +195,12 @@ Yii 实现了两种类型的模型: 表单模型和 Active Record, 二者都继�
 可以通过在视图中使用 `$this->propertyName` 访问控制器的任何属性, 也可以在控制器中将数据传递到视图中:
 
 ```php
+<?php
 $this->render('edit', array(
     'var1'=>$value1,
     'var2'=>$value2,
 ));
+?>
 ```
 
 `protected/views/layouts/main.php` 是默认的`布局`文件, 可通过 `CWebApplication::layout` 自定义. 要渲染一个不带布局的视图, 需调用 `CController::renderPartial`
@@ -193,6 +210,7 @@ $this->render('edit', array(
 - 定义
 
     ```php
+    <?php
     class MyWidget extends CWidget {
         public function init() {
             // 此方法会被 CController::beginWidget() 调用
@@ -202,6 +220,7 @@ $this->render('edit', array(
             // 此方法会被 CController::endWidget() 调用
         }
     }
+    ?>
     ```
 
 - 按如下视图脚本来使用一个小物件:
@@ -255,26 +274,32 @@ $this->render('edit', array(
 1. 定义组件事件(`on` 开头)
 
     ```php
+    <?php
     public function onClicked($event) {
         $this->raiseEvent('onClicked', $event);
     }
+    ?>
     ```
 
 2. 定义事件回调
 
     ```php
+    <?php
     function callbackName($event) {
         ......
     }
+    ?>
     ```
 
 3. 绑定事件回调
 
     ```php
+    <?php
     $component->onClicked=$callback;
     // 或使用匿名函数
     $component->onclicked=function($event) {
     }
+    ?>
     ```
 
 组件行为
@@ -292,29 +317,35 @@ $this->render('edit', array(
 - 绑定行为:
     
     ```php
+    <?php
     // $name 在组件中实现了对行为的唯一识别
     $component->attachBehavior($name,$behavior);
     // test() 是行为中的方法。
     $component->test();
+    ?>
     ```
 
 - 访问行为:
 
     ```php
+    <?php
     $behavior=$component->tree;
     // 等于下行代码：
     // $behavior=$component->asa('tree');
+    ?>
     ```
 
 - 禁用行为:
 
     ```php
+    <?php
     $component->disableBehavior($name);
     // 下面的代码将抛出一个异常
     $component->test();
     $component->enableBehavior($name);
     // 现在就可以使用了
     $component->test();
+    ?>
     ```
 
 ##模块
@@ -362,11 +393,13 @@ $this->render('edit', array(
 预导入: 在 `CWebApplication::run()` 之前执行:
 
 ```php
+<?php
 Yii::$classMap=array(
     'ClassName1' => 'path/to/ClassName1.php',
     'ClassName2' => 'path/to/ClassName2.php',
     ......
 );
+?>
 ```
 
 导入目录: `Yii::import('system.web.*');`
@@ -376,6 +409,7 @@ Yii::$classMap=array(
 ##创建模型
 
 ```php
+<?php
 class LoginForm extends CFormModel {
     // 定义特性(我们把用于存储用户输入或数据库数据的属性成为特性(attribute))
     public $username;
@@ -414,11 +448,13 @@ class LoginForm extends CFormModel {
             $this->addError('password','错误的用户名或密码。');
     }
 }
+?>
 ```
 
 <a name="massiveAssign">块赋值(massive assignment)</a>
 
 ```php
+<?php
 $model = new LoginForm();
 if (isset($_POST['LoginForm'])) {
     /**
@@ -430,6 +466,7 @@ if (isset($_POST['LoginForm'])) {
      */
     $model->attributes = $_POST['LoginForm'];
 }
+?>
 ```
 
 <a name="triggerValidation">触发验证</a>
@@ -446,6 +483,7 @@ if (isset($_POST['LoginForm'])) {
 ##创建动作
 
 ```php
+<?php
 public function actionLogin() {
     $model=new LoginForm;
     if(isset($_POST['LoginForm'])) {
@@ -458,6 +496,7 @@ public function actionLogin() {
     // 显示登录表单
     $this->render('login',array('model'=>$model));
 }
+?>
 ```
 
 ##创建视图
@@ -495,6 +534,7 @@ public function actionLogin() {
 
 action:
 ```php
+<?php
 public function actionBatchUpdate()
 {
     // 假设每一项（item）是一个 'Item' 类的实例，
@@ -515,6 +555,7 @@ public function actionBatchUpdate()
     // 显示视图收集表格输入
     $this->render('batchUpdate',array('items'=>$items));
 }
+?>
 ```
 
 view:
@@ -542,6 +583,7 @@ view:
 
 action: 
 ```php
+<?php
 public function actionLogin() {
     $model = new LoginForm;
     $form = new CForm('application.views.site.loginForm', $model);
@@ -551,10 +593,12 @@ public function actionLogin() {
         $this->render('login', array('form'=>$form));
     }
 }
+?>
 ```
 
 protected/views/site/loginForm.php:
-```
+```php
+<?php
 return array(
     'title'=>'Please provide your login credential',
 
@@ -581,6 +625,7 @@ return array(
         ),
     ),
 );
+?>
 ```
 
 view:
@@ -601,16 +646,19 @@ view:
 - 使用 `CDbConnection`:
 
 ```php
+<?php
 $connection=new CDbConnection($dsn,$username,$password);
 // 建立连接。你可以使用  try...catch 捕获可能抛出的异常
 $connection->active=true;
 ......
 $connection->active=false;  // 关闭连接
+?>
 ```
 
 - 作为应用组件配置, 然后使用 `Yii::app()->db` 访问
 
 ```php
+<?php
 array(
     ......
     'components'=>array(
@@ -624,6 +672,7 @@ array(
         ),
     ),
 )
+?>
 ```
 
 ##执行 SQL 语句
@@ -631,28 +680,33 @@ array(
 1. 创建 `CDbCommand` 实例
 
     ```php
+    <?php
     $connection=Yii::app()->db;   // 假设你已经建立了一个 "db" 连接
     // 如果没有，你可能需要显式建立一个连接：
     // $connection=new CDbConnection($dsn,$username,$password);
     $command=$connection->createCommand($sql);
     // 如果需要，此 SQL 语句可通过如下方式修改：
     // $command->text=$newSQL;
+    ?>
     ```
 
 2. 使用以下方法执行语句
 
     ```php
+    <?php
     $rowCount=$command->execute();   // 执行无查询 SQL(Insert, delete, update)
     $dataReader=$command->query();   // 执行一个 SQL 查询(select), 返回 CDbDataReader 实例
     $rows=$command->queryAll();      // 查询并返回结果中的所有行
     $row=$command->queryRow();       // 查询并返回结果中的第一行
     $column=$command->queryColumn(); // 查询并返回结果中的第一列
     $value=$command->queryScalar();  // 查询并返回结果中第一行的第一个字段
+    ?>
     ```
 
 3. 获取查询结果
 
     ```php
+    <?php
     $dataReader=$command->query();
     // 重复调用 read() 直到它返回 false
     while(($row=$dataReader->read())!==false) { ... }
@@ -660,11 +714,13 @@ array(
     foreach($dataReader as $row) { ... }
     // 一次性提取所有行到一个数组
     $rows=$dataReader->readAll();
+    ?>
     ```
 
 4. 使用事务
 
     ```php
+    <?php
     $transaction=$connection->beginTransaction();
     try {
         $connection->createCommand($sql1)->execute();
@@ -674,11 +730,13 @@ array(
     } catch(Exception $e) { // 如果有一条查询失败，则会抛出异常
         $transaction->rollBack();
     }
+    ?>
     ```
 
 5. 使用 Prepare Statment
 
     ```php
+    <?php
     // 一条带有两个占位符 ":username" 和 ":email"的 SQL
     $sql="INSERT INTO tbl_user (username, email) VALUES(:username,:email)";
     $command=$connection->createCommand($sql);
@@ -691,11 +749,13 @@ array(
     $command->bindParam(":username",$username2,PDO::PARAM_STR);
     $command->bindParam(":email",$email2,PDO::PARAM_STR);
     $command->execute();
+    ?>
     ```
 
 6. 绑定结果列
 
     ```php
+    <?php
     $sql="SELECT username, email FROM tbl_user";
     $dataReader=$connection->createCommand($sql)->query();
     // 使用 $username 变量绑定第一列 (username) 
@@ -705,6 +765,7 @@ array(
     while($dataReader->read()!==false) {
         // $username 和 $email 含有当前行中的 username 和 email 
     }
+    ?>
     ```
 
 7. 使用表前缀
@@ -720,6 +781,7 @@ array(
 可用的查询构建器示例:
 
 ```php
+<?php
 // 1. 数据查询
 
 // SELECT *
@@ -880,23 +942,28 @@ createIndex('idx_username', 'tbl_user', 'username')
 
 // DROP INDEX `idx_username` ON `tbl_user`
 dropIndex('idx_username', 'tbl_user')
+?>
 ```
 
 也可通过使用属性赋值方式:
 
 ```php
+<?php
 $command->select = array('id', 'username');
+?>
 ```
 
 或在创建 `CDbCommand` 是传配置参数的方式构建:
 
 ```php
+<?php
 $row = Yii::app()->db->createCommand(array(
     'select' => array('id', 'username'),
     'from' => 'tbl_user',
     'where' => 'id=:id',
     'params' => array(':id'=>1),
 ))->queryRow();
+?>
 ```
 
 构建完成后, 可以使用在[执行 SQL 语句][runSql]中讲到的方法执行之; 也可使用 `CDbCommand::getText()` 获取最后构建完工后的 SQL 语句, 绑定的参数被保存在 `CDbCommand::params` 中
@@ -920,6 +987,7 @@ $row = Yii::app()->db->createCommand(array(
 定义 AR 类:
 
 ```php
+<?php
 class Post extends CActiveRecord {
     public static function model($className=__CLASS__) {
         return parent::model($className);
@@ -941,6 +1009,7 @@ class Post extends CActiveRecord {
         // return array('pk1', 'pk2');
     }
 }
+?>
 ```
 
 创建记录:
@@ -948,12 +1017,14 @@ class Post extends CActiveRecord {
 - 如果表的主键是自增的, 在插入完成后, AR 实例将包含一个更新的主键
 
 ```php
+<?php
 $post=new Post;
 $post->title='sample post';
 $post->content='content for the sample post';
 // 如果要使用 Mysql 的 NOW(), 必须使用 CDbExpression, 单纯的 'NOW()' 将会被作为字符串对待
 $post->create_time=new CDbExpression('NOW()');
 $post->save();
+?>
 ```
 
 读取记录:
@@ -962,6 +1033,7 @@ $post->save();
 - `findAll` 系列返回 AR 实例数组, 或者空数组
 
 ```php
+<?php
 // 1. 常规
 // 查找满足指定条件的结果中的第一行
 $post=Post::model()->find($condition,$params);
@@ -1002,6 +1074,7 @@ $post=Post::model()->find(array(
     'condition'=>'postID=:postID',
     'params'=>array(':postID'=>10),
 ));
+?>
 ```
 
 更新记录:
@@ -1011,12 +1084,14 @@ $post=Post::model()->find(array(
 - 直接更新数据表中的一行或多行而不首先载入也是可行的:
 
 ```php
+<?php
 // 更新符合指定条件的行
 Post::model()->updateAll($attributes,$condition,$params);
 // 更新符合指定条件和主键的行
 Post::model()->updateByPk($pk,$attributes,$condition,$params);
 // 更新满足指定条件的行的计数列
 Post::model()->updateCounters($counters,$condition,$params);
+?>
 ```
 
 删除记录:
@@ -1024,17 +1099,21 @@ Post::model()->updateCounters($counters,$condition,$params);
 - 实例化后删除: 这样删除之后, AR 实例仍不改变
 
 ```php
+<?php
 $post=Post::model()->findByPk(10); // 假设有一个帖子，其 ID 为 10
 $post->delete(); // 从数据表中删除此行
+?>
 ```
 
 - 不实例化直接删除
 
 ```php
+<?php
 // 删除符合指定条件的行
 Post::model()->deleteAll($condition,$params);
 // 删除符合指定条件和主键的行
 Post::model()->deleteByPk($pk,$condition,$params);
+?>
 ```
 
 如果要确定两个 AR 是否是同一个记录, 只需对比它们的主键值, 或直接调用 `CActiveRecord::equals()`
@@ -1053,6 +1132,7 @@ Post::model()->deleteByPk($pk,$condition,$params);
 事务处理, 参见[使用事务][useTransaction]
 
 ```php
+<?php
 $model=Post::model();
 $transaction=$model->dbConnection->beginTransaction();
 try {
@@ -1065,6 +1145,7 @@ try {
 } catch(Exception $e) {
     $transaction->rollBack();
 }
+?>
 ```
 
 命名范围: 即查询时的过滤器
@@ -1072,6 +1153,7 @@ try {
 - 定义
 
 ```php
+<?php
 class Post extends CActiveRecord {
     /**
      * 默认命名范围, 隐式应用于所有关于此模型的 SELECT 查询
@@ -1098,12 +1180,15 @@ class Post extends CActiveRecord {
         );
     }
 }
+?>
 ```
 
 - 使用
 
 ```php
+<?php
 $posts=Post::model()->published()->recently()->findAll();
+?>
 ```
 
 ##关系型 Active Record
@@ -1121,6 +1206,7 @@ $posts=Post::model()->published()->recently()->findAll();
 声明关系
 
 ```php
+<?php
 class Post extends CActiveRecord {
     public function relations() {
         return array(
@@ -1153,11 +1239,13 @@ class User extends CActiveRecord {
         );
     }
 }
+?>
 ```
 
 执行关联查询
 
 ```php
+<?php
 // 1. 懒惰式加载: 
 // 获取 ID 为 10 的帖子
 $post=Post::model()->findByPk(10);
@@ -1201,11 +1289,13 @@ $user=User::model()->findByPk(1);
 $posts=$user->posts(array('condition'=>'status=1'));
 
 // 如果关系中没有相关的实例，则相应的属性将为 null(BELONGS_TO, HAS_ONE) 或一个空数组(HAS_MANY, MANY_MANY)
+?>
 ```
 
 使用命名空间
 
 ```php
+<?php
 // 1.
 class User extends CActiveRecord {
     public function relations() {
@@ -1219,6 +1309,7 @@ class User extends CActiveRecord {
 $posts=Post::model()->published()->recently()->with('comments')->findAll();
 // 3.
 $posts=Post::model()->published()->recently()->with('comments')->findAll();
+?>
 ```
 
 ##数据库迁移 @todo
@@ -1232,6 +1323,7 @@ $posts=Post::model()->published()->recently()->with('comments')->findAll();
 定义身份类:
 
 ```php
+<?php
 class UserIdentity extends CUserIdentity {
     private $_id;
 
@@ -1264,11 +1356,13 @@ class UserIdentity extends CUserIdentity {
         return $this->_id;
     }
 }
+?>
 ```
 
 登录和注销:
 
 ```php
+<?php
 // 1. 使用提供的用户名和密码登录用户
 $identity=new UserIdentity($username,$password);
 if($identity->authenticate()) {
@@ -1287,6 +1381,7 @@ Yii::app()->user->logout();
 // 要确保用户部件的allowAutoLogin被设置为true。
 // 保留用户登陆状态时间7天
 Yii::app()->user->login($identity,3600*24*7);
+?>
 ```
 
 如果使用 cookie 登录, 要确保不要保存敏感信息到 State, 而是保存到持久存储(数据库) 上, 最好(参见[安全][security]):
@@ -1302,6 +1397,7 @@ Yii::app()->user->login($identity,3600*24*7);
 过滤器定义之后, 还要通过重载 `CController::accessRules` 指定具体授权规则
 
 ```php
+<?php
 class PostController extends CController {
     /**
      * 配置数组的值可为
@@ -1330,6 +1426,7 @@ class PostController extends CController {
         );
     }
 }
+?>
 ```
 
 如果授权失败
@@ -1337,6 +1434,7 @@ class PostController extends CController {
 - 已经配置 `CWebUser::loingUrl`, 则重定向到此 URL, 可以这样配置:
 
     ```php
+    <?php
     array(
         ......
         'components'=>array(
@@ -1346,6 +1444,7 @@ class PostController extends CController {
             ),
         ),
     )
+    ?>
     ```
 
 - 否则显示一个 401 HTTP 例外
@@ -1353,7 +1452,9 @@ class PostController extends CController {
 如果希望在用户登录成功后转到之前页面:
 
 ```php
+<?php
 Yii::app()->request->redirect(Yii::app()->user->returnUrl);
+?>
 ```
 
 ##基于角色的访问控制(Role-Based Access Control)
@@ -1365,6 +1466,7 @@ Yii::app()->request->redirect(Yii::app()->user->returnUrl);
 Yii 提供了两种授权管理器： `CPhpAuthManager` 和 `CDbAuthManager`. 前者将授权数据存储在一个 PHP 脚本文件中而后者存储在数据库中.  配置 `CWebApplication::authManager` 应用组件时, 我们需要指定使用哪个授权管理器组件类, 以及所选授权管理器组件的初始化属性值:
 
 ```php
+<?php
 return array(
     'components'=>array(
         'db'=>array(
@@ -1377,6 +1479,7 @@ return array(
         ),
     ),
 );
+?>
 ```
 
 然后, 我们便可以使用 `Yii::app()->authManager` 访问
@@ -1399,6 +1502,7 @@ return array(
 如:
 
 ```php
+<?php
 // 并不需要在每个请求中都要运行
 $auth=Yii::app()->authManager;
 
@@ -1432,11 +1536,13 @@ $auth->assign('reader','readerA');
 $auth->assign('author','authorB');
 $auth->assign('editor','editorC');
 $auth->assign('admin','adminD');
+?>
 ```
 
 权限检查:
 
 ```php
+<?php
 if(Yii::app()->user->checkAccess('createPost')) {
     // 创建帖子
 }
@@ -1446,6 +1552,7 @@ $params=array('post'=>$post);
 if(Yii::app()->user->checkAccess('updateOwnPost',$params)) {
     // 更新帖子
 }
+?>
 ```
 
 默认角色就是一个隐式分配给每个用户的角色, 这些用户包括通过身份验证的用户和游客
@@ -1453,6 +1560,7 @@ if(Yii::app()->user->checkAccess('updateOwnPost',$params)) {
 配置:
 
 ```php
+<?php
 return array(
     'components'=>array(
         'authManager'=>array(
@@ -1461,16 +1569,19 @@ return array(
         ),
     ),
 );
+?>
 ```
 
 定义:
 
 ```php
+<?php
 $bizRule='return !Yii::app()->user->isGuest;';
 $auth->createRole('authenticated', 'authenticated user', $bizRule);
 
 $bizRule='return Yii::app()->user->isGuest;';
 $auth->createRole('guest', 'guest user', $bizRule);
+?>
 ```
 
 ##安全
@@ -1495,6 +1606,7 @@ $auth->createRole('guest', 'guest user', $bizRule);
     防范: GET 请求只允许检索数据而不能修改服务器上的任何数据, 而 POST 请求应当含有一些可以被服务器识别的随机数值, 用来保证表单数据的来源和运行结果发送的去向是相同的
 
     ```php
+    <?php
     // 启用 CsrfValidation 组件
     // 该组件会自动在用 CHtml::form 生成的表单中嵌入一个保存随机值的隐藏项, 在表单提交的时候发送到服务器进行验证
     return array(
@@ -1504,6 +1616,7 @@ $auth->createRole('guest', 'guest user', $bizRule);
             ),
         ),
     );
+    ?>
     ```
 
 - Cookie 攻击
@@ -1518,6 +1631,7 @@ $auth->createRole('guest', 'guest user', $bizRule);
     - 在 cookie 有变动的时候验证 cookie 的内容
 
     ```php
+    <?php
     // 1. 启用 CookieValidation 组件 
     return array(
         'components'=>array(
@@ -1535,6 +1649,7 @@ $auth->createRole('guest', 'guest user', $bizRule);
     // 设置一个cookie
     $cookie=new CHttpCookie($name,$value);
     Yii::app()->request->cookies[$name]=$cookie;
+    ?>
     ```
 
 [security]: #security
