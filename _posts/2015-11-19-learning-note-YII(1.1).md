@@ -84,8 +84,10 @@ exit($exitCode);
 - 默认控制器在 `CWebApplication::defaultController` 中定义, 默认动作为 `index`, 对应的方法名为 `actionIndex`, 可通过 `CController::defaultAction` 修改
 
     ```php
+    <?php
     class SiteController extends CController {
     }
+    ?>
     ```
 
 - 也可以由一个动作类来定义动作, 以便重用动作:
