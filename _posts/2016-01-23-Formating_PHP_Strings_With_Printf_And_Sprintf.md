@@ -3,12 +3,12 @@ title: "使用 php printf() 和 sprintf() 格式化字符串"
 layout: post
 category: translation
 tags: [php]
-excerpt: "和其他许多编程语言一样, PHP 也有功能强大的 printf() 和 sprintf() 函数, 它们提供了很多格式化字符串的方式. 当你想要某些数据更易度, 或者需要传递数据给其他程式的时候, 这两个函数很有用.
+excerpt: "和其他许多编程语言一样, PHP 也有功能强大的 printf() 和 sprintf() 函数, 它们提供了很多格式化字符串的方式. 当你想要某些数据更易读, 或者需要传递数据给其他程式的时候, 这两个函数很有用.
 这篇教程就会教你如何使用 printf() 和 sprintf() 来格式化字符串."
 ---
 _原文在 2009/11/19 发表于 <http://www.elated.com/articles/formatting-php-strings-printf-sprintf/>_
 
-和其他许多编程语言一样, PHP 也有功能强大的 [`printf()`][printf] 和 [`sprintf()`][sprintf] 函数, 它们提供了很多格式化字符串的方式. 当你想要某些数据更易度, 或者需要传递数据给其他程式的时候, 这两个函数很有用.
+和其他许多编程语言一样, PHP 也有功能强大的 [`printf()`][printf] 和 [`sprintf()`][sprintf] 函数, 它们提供了很多格式化字符串的方式. 当你想要某些数据更易读, 或者需要传递数据给其他程式的时候, 这两个函数很有用.
 
 PHP 也有许多专门用途的格式化字符串的函数 - 比如 [`date()`][date] 函数, 适合用于格式化日期字符串. 而 `printf()` 和 `sprintf()` 则适合更为通用的格式化.
 
@@ -119,7 +119,6 @@ printf( "%'*-10s", "Hello" );  // 输出 "Hello*****"
 
 ```php
 <?php 
-printf( "%f", 123.456 );  // Displays "123.456000"
 printf( "%f", 123.456 );  // 输出 "123.456000"
 ?>
 ```
