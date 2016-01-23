@@ -3,8 +3,8 @@ title: "使用 php printf() 和 sprintf() 格式化字符串"
 layout: post
 category: translation
 tags: [php]
-excerpt: "和其他许多编程语言一样, PHP 也有功能强大的 `printf()` 和 `sprintf()` 函数, 它们提供了很多格式化字符串的方式. 当你想要某些数据更易度, 或者需要传递数据给其他程式的时候, 这两个函数很有用.
-这篇教程就会教你如何使用 `printf()` 和 `sprintf()` 来格式化字符串."
+excerpt: "和其他许多编程语言一样, PHP 也有功能强大的 printf() 和 sprintf() 函数, 它们提供了很多格式化字符串的方式. 当你想要某些数据更易度, 或者需要传递数据给其他程式的时候, 这两个函数很有用.
+这篇教程就会教你如何使用 printf() 和 sprintf() 来格式化字符串."
 ---
 _原文由 Matt Doyle 在 2009/11/19 发表于 <http://www.elated.com/articles/formatting-php-strings-printf-sprintf/>_
 
@@ -19,10 +19,8 @@ PHP 也有许多专门用途的格式化字符串的函数 - 比如 [`date()`][d
 了解 `printf()` 的最简单方式就是通过示例. 下面这个例子打印一个包含了两个数字的字符串:
 
 ```php
-<?php
 // 打印 "Australia comprises 6 states and 10 territories"
 printf( "Australia comprises %d states and %d territories", 6, 10 );
-?>
 ```
 
 注意这个字符串在被打印出的时候, 第一个 `%d` 被第二个参数 `6` 替换, 第二个 `%d` 则被第三个参数 `10` 替换. 其工作原理即:
@@ -184,4 +182,11 @@ echo $result;
 
 #相关函数
 
-其他相关的函数包括 `fprintf()`, 用于将结果写到流(如文件). 还有 `vprintf()`/`vsprintf()`/`vfprintf()`, 它们使用一个数组参数, 而非参数列表.
+其他相关的函数包括 [`fprintf()`][fprintf], 用于将结果写到流(如文件). 还有 [`vprintf()`][vprintf]/[`vsprintf()`][vsprintf]/[`vfprintf()`][vfprintf], 它们使用一个数组参数, 而非参数列表.
+
+[printf]: http://php.net/manual/en/function.printf.php
+[sprintf]: http://php.net/manual/en/function.sprintf.php
+[fprintf]: http://php.net/manual/en/function.fprintf.php
+[vprintf]: http://php.net/manual/en/function.vprintf.php
+[vsprintf]: http://php.net/manual/en/function.vsprintf.php
+[vfprintf]: http://php.net/manual/en/function.vfprintf.php
