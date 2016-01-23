@@ -19,8 +19,10 @@ PHP 也有许多专门用途的格式化字符串的函数 - 比如 [`date()`][d
 了解 `printf()` 的最简单方式就是通过示例. 下面这个例子打印一个包含了两个数字的字符串:
 
 ```php
+<?php
 // 打印 "Australia comprises 6 states and 10 territories"
 printf( "Australia comprises %d states and %d territories", 6, 10 );
+?>
 ```
 
 注意这个字符串在被打印出的时候, 第一个 `%d` 被第二个参数 `6` 替换, 第二个 `%d` 则被第三个参数 `10` 替换. 其工作原理即:
@@ -29,9 +31,9 @@ printf( "Australia comprises %d states and %d territories", 6, 10 );
 
 - 所有格式说明符都以 `%` 开头. 它按对应的顺序以特定方式格式化目标字符串之后的参数, 然后将其插入到最终的字符串中, 并显示到网页.
 
-__NOTE:__如果想要打印 `%` 符, 使用 `%%`.
+__NOTE:__ 如果想要打印 `%` 符, 使用 `%%`.
 
-#格式说明符
+#类型说明符
 
 上面那个例子使用的 `%d` 这个格式说明符, 会将参数按照有符号十进制数字格式化. 这个 `d` 被称为类型说明符. `printf()` 支持很多类型说明符. 下面是类型说明符的完整列表:
 
@@ -89,7 +91,7 @@ printf( "%+d", -36 );  // 输出 "-36"
 
 通过在 `%` 前面插入一个填充说明符来指定填充规则. 填充说明符使用以下格式:
 
-`<填充符><宽度>`:
+<填充符><宽度>:
 
 - <填充符> 可以是 `0` 或空格. 如果你不指定则默认使用空格. 如果你想要指定其他填充符, 需在它之前加一个 `'` 字符.
 
@@ -126,9 +128,9 @@ printf( "%f", 123.456 );  // 输出 "123.456000"
 
 ```php
 <?php 
-printf( "%.2f", 123.456 );  // 输出 "123.46"
+printf( "%.2f", 123.456 );   // 输出 "123.46"
 printf( "%.10f", 123.456 );  // 输出 "123.4560000000"
-printf( "%.0f", 123.456 );  // 输出 "123"
+printf( "%.0f", 123.456 );   // 输出 "123"
  ?>
 ```
 
@@ -136,7 +138,6 @@ printf( "%.0f", 123.456 );  // 输出 "123"
 
 ```php
 <?php 
-printf( "%08.2f", 123.456 );  // Displays "00123.46"
 printf( "%08.2f", 123.456 );  // 输出 "00123.46"
  ?>
 ```
@@ -145,7 +146,6 @@ printf( "%08.2f", 123.456 );  // 输出 "00123.46"
 
 ```php
 <?php 
-printf( "%.2s", "Hello" );  // Displays "He"
 printf( "%.2s", "Hello" );  // 输出 "He"
  ?>
 ```
@@ -185,6 +185,7 @@ echo $result;
 其他相关的函数包括 [`fprintf()`][fprintf], 用于将结果写到流(如文件). 还有 [`vprintf()`][vprintf]/[`vsprintf()`][vsprintf]/[`vfprintf()`][vfprintf], 它们使用一个数组参数, 而非参数列表.
 
 [printf]: http://php.net/manual/en/function.printf.php
+[date]: http://php.net/manual/en/function.date.php
 [sprintf]: http://php.net/manual/en/function.sprintf.php
 [fprintf]: http://php.net/manual/en/function.fprintf.php
 [vprintf]: http://php.net/manual/en/function.vprintf.php
