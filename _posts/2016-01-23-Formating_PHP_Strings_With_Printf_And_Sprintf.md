@@ -6,7 +6,7 @@ tags: [php]
 excerpt: "和其他许多编程语言一样, PHP 也有功能强大的 printf() 和 sprintf() 函数, 它们提供了很多格式化字符串的方式. 当你想要某些数据更易度, 或者需要传递数据给其他程式的时候, 这两个函数很有用.
 这篇教程就会教你如何使用 printf() 和 sprintf() 来格式化字符串."
 ---
-_原文由 Matt Doyle 在 2009/11/19 发表于 <http://www.elated.com/articles/formatting-php-strings-printf-sprintf/>_
+_原文在 2009/11/19 发表于 <http://www.elated.com/articles/formatting-php-strings-printf-sprintf/>_
 
 和其他许多编程语言一样, PHP 也有功能强大的 [`printf()`][printf] 和 [`sprintf()`][sprintf] 函数, 它们提供了很多格式化字符串的方式. 当你想要某些数据更易度, 或者需要传递数据给其他程式的时候, 这两个函数很有用.
 
