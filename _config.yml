@@ -13,31 +13,26 @@ excerpt_separator: "[-----]"
 
 # mode: dev
 mode: product
-url: https://unifreak.github.io/
+url: https://elegia.github.io/
 devurl: http://localhost:4000/
-name: UniFreak
-title: UniFreak | Another yet unique freak is showing a freakshow
-description: "Fanghao's personal weblog, on coding or such stuff"
+name: ἔλεγος
+title: ἔλεγος | Another yet unique freak is showing a freakshow
+description: "專業創作「活輓」、「訃聞」、「墓誌銘」。"
 
 my:
-    displayName: UniFreak
-    realName: FangHao
-    realName_cn: 方浩
-    jobTitle: "PHP Coder"
+    displayName: Marc
+    realName: MXJ
+    realName_cn: MXJ
+    jobTitle: "Lecturer"
     contact:
-        qq: 744910240
-        email: fanghao90s@gmail.com
-        github: http://www.github.com/UniFreak
-        qzone: http://744910240.qzone.qq.com
-        pinterest: https://www.pinterest.com/miblah/
-        tel: 15671542698
+        qq: 
+        email: marc.meng@mail.ru
+        github: 
+        qzone: 
+        tel: 
         address:
             country: China
-            state: Hubei
-            city: Wuhan
-            distribute: Hongshan
-            postcode: 450000
-            cell: "XuefuJiayuan"
+            city: Canton
     skills:
         frontend: ["HTML | Markdown", "CSS | SASS", "JS | jQuery", "Bootstrap"]
         backend: ["PHP", "MySQL", "Redis", "Regex", "Laravel", "OSC"]
