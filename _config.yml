@@ -30,14 +30,14 @@ my:
         github: http://www.github.com/UniFreak
         qzone: http://744910240.qzone.qq.com
         pinterest: https://www.pinterest.com/miblah/
-        tel: 15671542698
+        tel: 15532915861
         address:
             country: China
-            state: Hubei
-            city: Wuhan
-            distribute: Hongshan
-            postcode: 450000
-            cell: "XuefuJiayuan"
+            state: Beijing
+            city: Beijing
+            distribute: ChaoYang
+            postcode: 000000
+            cell: "AnHuiLi"
     skills:
         frontend: ["HTML | Markdown", "CSS | SASS", "JS | jQuery", "Bootstrap"]
         backend: ["PHP", "MySQL", "Redis", "Regex", "Laravel", "OSC"]
