@@ -1,7 +1,7 @@
 ---
 title: "手动安装 WAMP 环境"
 layout: post
-category: tutorial
+category: translation
 tags: [wamp, tuts]
 excerpt: "虽然集成环境很方面, 但是也经常遇到各种奇怪问题, 所以我最终打算自己搭建 wamp 环境. 搜索网络在 stackoverflow 网站看到此问答, 按照其步骤安装成功. 所以将其翻译出来, 以备将来参考"
 ---
