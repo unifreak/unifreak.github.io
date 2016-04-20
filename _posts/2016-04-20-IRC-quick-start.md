@@ -2,7 +2,7 @@
 title: "IRC 急速入门"
 layout: post
 category: tutorial
-tags: [irc] [入门]
+tags: [irc, tuts]
 excerpt: "该教程只是为了让你在几分钟内就连上 IRC 网络并开始聊天. IRC 功能强大, 如果要深入了解, http://www.irchelp.org 是个不错的资源"
 ---
 # 名词
