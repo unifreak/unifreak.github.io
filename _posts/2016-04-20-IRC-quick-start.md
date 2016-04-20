@@ -80,7 +80,7 @@ excerpt: "该教程只是为了让你在几分钟内就连上 IRC 网络并开�
 
 4. 现在来到主界面
 
-    ![主界面]({{cuturl}}/images/posts/201604/hexChatChatUI.png)
+    ![主界面]({{cuturl}}/images/posts/201604/hexChatUI.png)
 
     输入 `/msg NickServ register <password> <email>` 以注册当前昵称
 
