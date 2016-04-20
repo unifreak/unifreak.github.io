@@ -66,7 +66,7 @@ excerpt: "该教程只是为了让你在几分钟内就连上 IRC 网络并开�
     首次打开 hexChat 会自动弹出网络配置窗口. 
     也可以使用菜单 `HexChat`->`Network Lists` 打开该窗口
 
-    ![配置窗口]({{cuturl}}/images/posts/201604/hexChatServerlist.png)
+    ![配置窗口](/images/posts/201604/hexChatServerlist.png)
 
     填写自己想要的昵称
 
@@ -74,13 +74,13 @@ excerpt: "该教程只是为了让你在几分钟内就连上 IRC 网络并开�
 
 3. 连接成功后会弹出此窗口
     
-    ![连接成功]({{cuturl}}/images/posts/201604/hexChatConnSuccess.png)
+    ![连接成功](/images/posts/201604/hexChatConnSuccess.png)
 
     取消选中 `always show this ...`, 点击 `OK`
 
 4. 现在来到主界面
 
-    ![主界面]({{cuturl}}/images/posts/201604/hexChatUI.png)
+    ![主界面](/images/posts/201604/hexChatUI.png)
 
     输入 `/msg NickServ register <password> <email>` 以注册当前昵称
 

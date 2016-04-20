@@ -88,7 +88,7 @@ _原回答在 2014/04/30 由 `user256743` 发表于 <http://superuser.com/questi
 
 打开 `http://localhost/phpinfo.php`, 如果你看到类似如下输出, 说明 PHP 解析正常:
 
-![phpinfo output]({{cuturl}}/images/posts/201604/phpinfoOutput.png)
+![phpinfo output](/images/posts/201604/phpinfoOutput.png)
 
 ###[可选] 启用 PHP MySql 扩展
 
