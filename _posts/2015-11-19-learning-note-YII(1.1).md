@@ -1387,7 +1387,7 @@ $this->createUrl('post/read', array('id' => 100));
 
 __使用自定义 URL 解析器:__
 
-1. 定义解析器类
+- 定义解析器类
 
 ```php
 <?php 
@@ -1427,7 +1427,7 @@ class CarUrlRule extends CBaseUrlRule
 ?>
 ```
 
-2. 指定 URL 转发规则:
+- 指定 URL 转发规则:
 
 ```php
 <?php 
