@@ -1321,6 +1321,123 @@ $posts=Post::model()->published()->recently()->with('comments')->findAll();
 
 #专题
 
+##URL 管理
+
+__配置 URL 格式及转发规则:__
+
+_NOTE: 过多的规则会导致应用性能下降_
+
+```php
+<?php 
+// 在配置文件中:
+array(
+    'components'=>array(
+        'urlManager'=>array(
+            'urlFormat'=>'path', // 格式
+            'rules'=>array(      // 转发规则
+                // 1.
+                // `pattern` 用于和当前 URL 的 path info 做匹配
+                // 匹配成功的话, 会跳转到对应的 `route` 指定的 CA
+                'pattern1'=>'route1',
+
+                // 2.
+                // 也可以使用数组形式指定转发规则, 如此一来便能针对同一 pattern  指定多个规则, 或者通过 verb 来支持 RESTful URL
+                array(
+                    'route1', 
+                    'pattern'=>'pattern1', 
+                    'urlSuffix'=>'.xml', 
+                    'caseSensitive'=>false
+                ),
+                // 可用的选项包括: `pattern`, `urlSuffix`, `caseSensitive`, `defualtParams`, `matchValue`, `verb`, `parsisngOnly`
+
+                // 3.
+                // 使用命名参数: <ParamName:ParamPattern>
+                // 当 URL 被解析后, 命名的参数会自动生成到 $_GET 中
+                'http://<user:\w+>.example.com/<lang:\w+>/profile' => 'user/profile',
+
+                // 示例:
+                array(
+                    'api/<controller>/update', 
+                    'pattern'=>'api/<controller:\w+>/<id:\d+>', 
+                    'verb'=>'PUT, POST'
+                ),
+                array(
+                    'api/<controller>/delete', 
+                    'pattern'=>'api/<controller:\w+>/<id:\d+>', 
+                    'verb'=>'DELETE'
+                ),
+                '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+                '<action:(login|logout|about)>' => 'site/<action>',
+            ),
+        ),
+    ),
+);
+?>
+```
+
+__生成 URL:__
+
+```php
+<?php 
+// createUrl 生成相对 URL
+$this->createUrl('post/read', array('id' => 100));
+// 如果要得到绝对 URL, 可以使用 `Yii::app()->hostInfo;` 或 `CController::createAbsosluteUrl`
+?>
+```
+
+__使用自定义 URL 解析器:__
+
+1. 定义解析器类
+
+```php
+<?php 
+/**
+ * 自定义 URL 解析器必须继承 CBasUrlRule, 并实现 `createUrl()` 和 `parseUrl`
+ */
+class CarUrlRule extends CBaseUrlRule
+{
+    public $connectionID = 'db';
+ 
+    public function createUrl($manager,$route,$params,$ampersand)
+    {
+        if ($route==='car/index')
+        {
+            if (isset($params['manufacturer'], $params['model']))
+                return $params['manufacturer'] . '/' . $params['model'];
+            else if (isset($params['manufacturer']))
+                return $params['manufacturer'];
+        }
+        return false;  // this rule does not apply
+    }
+ 
+    public function parseUrl($manager,$request,$pathInfo,$rawPathInfo)
+    {
+        if (preg_match('%^(\w+)(/(\w+))?$%', $pathInfo, $matches))
+        {
+            // check $matches[1] and $matches[3] to see
+            // if they match a manufacturer and a model in the database
+            // If so, set $_GET['manufacturer'] and/or $_GET['model']
+            // and return 'car/index'
+        }
+        return false;  // this rule does not apply
+    }
+}
+
+
+?>
+```
+
+2. 指定 URL 转发规则:
+
+```php
+<?php 
+array(
+        'class' => 'application.components.CarUrlRule',
+        'connectionID' => 'db',
+    ), 
+?>
+```
+
 ##验证
 
 验证即核查一个人是否真实他声称的那个人(用户名, 密码); 授权即检查是否有权操作特定的资源
