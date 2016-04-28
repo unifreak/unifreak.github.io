@@ -28,8 +28,9 @@
 
         .title {
             font: normal bold 4rem Georgia, serif;
+            font-family: 微软雅黑, Helvetica;
             margin-bottom: 0.4rem;
-            text-shadow: 2px 3px 0px #C1C1C1;
+            /*text-shadow: 2px 3px 0px #C1C1C1;*/
 
             a {
                 color: #333;
@@ -42,6 +43,7 @@
 
         .excerpt {
             font-size: 2rem;
+            font-family: 微软雅黑, Helvetica;
             letter-spacing: 0.2px;
             font-family: Georgia;
             text-align: justify;
