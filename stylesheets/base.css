@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
  * 1. Set default font family to sans-serif.
@@ -4388,8 +4389,9 @@ ul {
 }
 #l-main article .title {
   font: normal bold 4rem Georgia, serif;
+  font-family: 微软雅黑, Helvetica;
   margin-bottom: 0.4rem;
-  text-shadow: 2px 3px 0px #C1C1C1;
+  /*text-shadow: 2px 3px 0px #C1C1C1;*/
 }
 #l-main article .title a {
   color: #333;
@@ -4399,8 +4401,8 @@ ul {
 }
 #l-main article .excerpt {
   font-size: 2rem;
+  font-family: 微软雅黑, Helvetica;
   letter-spacing: 0.2px;
-  font-family: Georgia;
   text-align: justify;
 }
 #l-main article .continue {
