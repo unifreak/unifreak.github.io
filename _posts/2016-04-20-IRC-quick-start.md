@@ -14,7 +14,7 @@ excerpt: "该教程只是为了让你在几分钟内就连上 IRC 网络并开�
 - **IRC 网络**
     
     依据 IRC 协议组成的聊天网络, 
-    全世界有多个, 比较知名的有 `freenode`, `EFnet`, `DALnet` 等
+    比较知名的有 `freenode`, `EFnet`, `DALnet` 等
 
 - **IRC 服务器**
 
@@ -42,7 +42,7 @@ excerpt: "该教程只是为了让你在几分钟内就连上 IRC 网络并开�
 
     知名的客户端有 mIRC, xChat, HexChat 等
 
-    下载 HexChat: https://yunpan.cn/cPAeheC6kQucf  访问密码 c7ad
+    下载 HexChat: https://hexchat.github.io/downloads.html
 
 - **IRC 命令**
 

@@ -3,7 +3,7 @@ title: "手动安装 WAMP 环境"
 layout: post
 category: translation
 tags: [wamp, tuts]
-excerpt: "虽然集成环境很方面, 但是也经常遇到各种奇怪问题, 所以我最终打算自己搭建 wamp 环境. 搜索网络在 stackoverflow 网站看到此问答, 按照其步骤安装成功. 所以将其翻译出来, 以备将来参考"
+excerpt: "虽然集成环境很方便, 但是也经常遇到各种奇怪问题, 所以我最终打算自己搭建 WAMP 环境. 搜索网络在 stackoverflow 网站看到此问答, 按照其步骤安装成功. 所以将其整理翻译出来, 以备将来参考"
 ---
 _原回答在 2014/04/30 由 `user256743` 发表于 <http://superuser.com/questions/748117/how-to-manually-install-apache-php-and-mysql-on-windows>_
 
@@ -14,7 +14,7 @@ _原回答在 2014/04/30 由 `user256743` 发表于 <http://superuser.com/questi
 如果你的系统是 64 的, 建议尽量下载并使用 64 位的各软件
 
 你当然可以下载自己想要的版本的各软件, 也可以把各软件装到自己想要的目录中
-但是为了方便, 建议完全跟着教程来
+但是为了避免不必要的麻烦, 建议完全跟着教程来
 
 #参考
 
@@ -26,7 +26,7 @@ _原回答在 2014/04/30 由 `user256743` 发表于 <http://superuser.com/questi
 1. 下载 &nbsp;&nbsp;[Apache][apacheDown]
 2. 下载 &nbsp;&nbsp;[PHP][phpDown]
 3. 下载 &nbsp;&nbsp;[MySQL][mysqlDown]
-4. [可选]下载 &nbsp;&nbsp;[VS2012][vsDown]
+4. 下载 &nbsp;&nbsp;[VS2012][vsDown][可选]
 
 #安装
 
@@ -37,7 +37,7 @@ _原回答在 2014/04/30 由 `user256743` 发表于 <http://superuser.com/questi
 打开 cmd, 运行
 
     cd C:\Apache24\bin
-    httpd.exe``
+    httpd.exe
 
 如果不报错, 则说明安装正常
 
@@ -60,7 +60,7 @@ _原回答在 2014/04/30 由 `user256743` 发表于 <http://superuser.com/questi
 
 ###安装 PHP
 
-在 C 盘根目录新建文件夹 `PHP/`, 解压 PHP  压缩包 到此文件夹中完事儿后路径看上去是这样: `C:\PHP\ext`
+在 C 盘根目录新建文件夹 `PHP/`, 解压 PHP  压缩包 到此文件夹中, 路径看上去是这样: `C:\PHP\ext`
 
 在 `C:\PHP` 目录中, 重命名 `php.ini-production` 或者 `php.ini-development` 为 `php.ini`
 
