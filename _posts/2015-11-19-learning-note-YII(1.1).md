@@ -1319,6 +1319,185 @@ $posts=Post::model()->published()->recently()->with('comments')->findAll();
 
 ##数据库迁移 @todo
 
+#缓存
+
+##配置
+
+```php
+<?php 
+array(
+    ......
+    'components'=>array(
+        ......
+        'cache'=>array(
+            // 支持的缓存包括:
+            // - CMemCache
+            // - CXCache
+            // - CEAcceleratorCache
+            // - CDbCache: 默认使用 runtime 目录下的 SQLite3 数据库
+            // - CZendDataCache
+            // - CFileCache
+            // - CDummyCache: 只是为了开发阶段模拟尚未实现的缓存功能
+            'class'=>'system.caching.CMemCache',
+            'servers'=>array(
+                array('host'=>'server1', 'port'=>11211, 'weight'=>60),
+                array('host'=>'server2', 'port'=>11211, 'weight'=>40),
+            ),
+        ),
+    ),
+);
+ ?>
+```
+
+##数据缓存(用于存储变量)
+
+###存取操作
+
+```php
+<?php 
+// 生成
+// 过期时间 30 可选, 同一个应用中的缓存 id 必须唯一
+Yii::app()->cache->set($id, $value, 30); 
+
+// 调取
+// 1. 单个
+$value=Yii::app()->cache->get($id);
+if ($value === false)
+{
+    // 因为在缓存中没找到 $value ，重新生成它 ，
+    // 并将它存入缓存以备以后使用：
+    // Yii::app()->cache->set($id,$value);
+}
+// 2. 批量
+$values=Yii::app()->cache->mget(array $ids);
+
+// 删除
+Yii::app()->cache->delete($id);
+
+// 重刷
+Yii::app()->cache->flush();
+
+// CCache 实现了 ArrayAccess, 所以也可通过下列方式操作:
+$cache=Yii::app()->cache;
+$cache['var1']=$value1;  // 相当于: $cache->set('var1',$value1);
+$value2=$cache['var2'];  // 相当于: $value2=$cache->get('var2');
+ ?>
+```
+
+###缓存依赖
+
+除了过期设置，缓存数据也可能会因为依赖条件发生变化而失效。例如，如果我们缓存了某些文件的内容，而这些文件发生了改变，我们就应该让缓存的数据失效
+
+```php
+<?php 
+// 此值将在30秒后失效
+// 也可能因依赖的文件发生了变化而更快失效
+Yii::app()->cache->set($id, $value, 30, new CFileCacheDependency('FileName'));
+// 可用的依赖有:
+// - CFileCacheDependency: 如果文件的最后修改时间发生改变
+// - CDirectoryCacheDependency: 如果目录和其子目录中的文件发生改变
+// - CDbCacheDependency: 如果指定 SQL 语句的查询结果发生改变
+// - CGlobalStateCacheDependency: 如果指定的全局状态发生改变
+// - CChainedCacheDependency: 如果链中的任何依赖发生改变
+// - CExpressionDependency: 如果指定的 PHP 表达式的结果发生改变
+ ?>
+```
+
+##片段缓存
+
+###基本使用方法
+
+```php
+<?php if($this->beginCache($id)) { // 如果缓存有效, 则输出缓存... ?>
+    ...被缓存的内容...
+<?php $this->endCache(); } // ...否则在此处存储缓存 ?>
+```
+
+###使用缓存选项
+
+`beginCache()` 和 `endCache()` 方法是 `COutputCache` widget 的包装, 因此 `COutputCache` 的所有属性都可以在缓存选项中初始化
+
+```php
+<?php if($this->beginCache(
+            $id, 
+            array(
+                // 过期时间, 默认 60
+                'duration' => 3600,
+                // 依赖, 可以是一个实现 `ICacheDependency` 的对象, 
+                // 或能生成依赖对象想的配置数组
+                // 参见数据缓存
+                'dependency' => array(
+                    'class'=>'system.caching.dependencies.CDbCacheDependency',
+                    'sql'=>'SELECT MAX(lastModified) FROM Post'
+                ),
+                // 变化, 指定缓存将根据哪些因素变化
+                // 其他可用的有: `varyByRoute`, `varyBySession`, `varyByParam`, `varyByLanguage`
+                'varyByExpression' => 'Yii::app()->user->isGuest',
+                // 请求类型: 只对指定的请求类型启用缓存
+                'requestTypes' => array('GET')
+                )
+            )
+        ) { ?>
+        ...被缓存的内容...
+<?php $this->endCache(); } ?>
+```
+
+###嵌套
+
+片段缓存可以嵌套, 当数据存储在外部缓存无效, 内部缓存仍然可以提供有效的内部片段. 然而反之就不行了
+
+##页面缓存
+
+如果想要缓存整个页面, 我们应该跳过产生网页内容的动作执行. 我们可以使用 `COutputCache` 或 `CHttpCacheFilter` 作为动作过滤器来完成这一任务
+
+###COutputCache
+
+```php
+<?php 
+public function filters()
+{
+    return array(
+        array(
+            'COutputCache',
+            'duration'=>100,
+            'varyByParam'=>array('id'),
+        ),
+    );
+}
+?>
+```
+
+###CHttpCacheFilter
+
+```php
+<?php 
+public function filters()
+{
+    return array(
+        array(
+            'CHttpCacheFilter + index',
+            'lastModified'=>Yii::app()->db->createCommand("SELECT MAX(`update_time`) FROM {{post}}")->queryScalar(),
+        ),
+    );
+}
+?>
+```
+
+##动态内容
+
+动态内容是指, 即使是在片段缓存包括的内容中也不会被缓存, 而是通过传递给 `renderDynamic` 的有效回调函数生成
+
+回调可以是指向当前控制器类的方法或者全局函数的字符串名, 
+也可以是一个数组名指向一个类的方法
+
+```php
+<?php if($this->beginCache($id)) { ?>
+...被缓存的片段内容...
+    <?php $this->renderDynamic($callback); ?>
+...被缓存的片段内容...
+<?php $this->endCache(); } ?>
+```
+
 #专题
 
 ##URL 管理
