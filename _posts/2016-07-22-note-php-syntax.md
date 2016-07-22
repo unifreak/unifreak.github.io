@@ -52,8 +52,12 @@ _note_: 给 `define()` 传递第三个参数 `true` 会让常量区分大小写
 
 ##声明 (弱类型)
 
-    $varName = varValue;
-    $var1 = $var2 = $var3 = value;
+```php
+<?php
+$varName = varValue;
+$var1 = $var2 = $var3 = value;
+?>
+```
 
 ##命名
 
@@ -64,26 +68,43 @@ _note_: 给 `define()` 传递第三个参数 `true` 会让常量区分大小写
 
 ##可变变量
 
-    $var1 = $$var2;
+```php
+<?php
+$var1 = $$var2;
+?>
+```
 
 为避免产生类似 `$$var[1]` 的困惑, 使用大括号像这样分隔
 
-    ${$var[1]} 或 ${$var}[1]
+```php
+<?php
+${$var[1]} // 或 
+${$var}[1]
+?>
+```
 
 ##赋值
 
 - 值赋值
 
-        $var1 = 10;
-        $var2 = var1;           // 将 var1 的值赋给 var2
-        $var1 = 100;            // var1 = 100; var2 = 10(不变)
+    ```php
+    <?php
+    $var1 = 10;
+    $var2 = var1;           // 将 var1 的值赋给 var2
+    $var1 = 100;            // var1 = 100; var2 = 10(不变)
+    ?>
+    ```
 
 - 引用赋值
 
-        $var1 = 10;
-        $var2 = & var1;         // 使用 "&", 将 var1 地址给 var2, 此时 
-                                // var1 和 var2 都指向同一个地址
-        $var1 = 100;            // var1 = 100; var2 = 100
+    ```php
+    <?php
+    $var1 = 10;
+    $var2 = & var1;         // 使用 "&", 将 var1 地址给 var2, 此时 
+                            // var1 和 var2 都指向同一个地址
+    $var1 = 100;            // var1 = 100; var2 = 100
+    ?>
+    ```
 
 ##类型
 
@@ -91,15 +112,23 @@ _note_: 给 `define()` 传递第三个参数 `true` 会让常量区分大小写
 
 - `int`, `integer` (4个字节)
 
-        $int = 10;   // 十进制
-        $int = 045;  // 八进制(以0开头)
-        $int = 0xff; // 十六进制(以0x开头)
+    ```php
+    <?php
+    $int = 10;   // 十进制
+    $int = 045;  // 八进制(以0开头)
+    $int = 0xff; // 十六进制(以0x开头)
+    ?>
+    ```
 
 - `bool`, `boolean`
 
 - `float`, `double`, `real` (8个字节)
 
-        $float = 3.14E-2; // 科学计数法                 
+    ```php
+    <?php
+    $float = 3.14E-2; // 科学计数法                 
+    ?>
+    ```
 
 - `string`
 
@@ -126,8 +155,12 @@ _note_: 给 `define()` 传递第三个参数 `true` 会让常量区分大小写
 
     _note_: `String` 类型中的单个字符可以用 `{}` 或 `[]` 访问, 如:
 
-        $str = 'str';
-        echo $str{0}; // 或 $str[0]
+    ```php
+    <?php
+    $str = 'str';
+    echo $str{0}; // 或 $str[0]
+    ?>
+    ```
 
 ###复合
 
@@ -239,17 +272,25 @@ _note_: 给 `define()` 传递第三个参数 `true` 会让常量区分大小写
 
 - 定义
 
-        // 1. define:
-        define("CONSTANT_NAME", 'constantValue');
-        // 2. const:必须处于最顶端的作用区域, <5.3: 只能用于类中
-        const CONSTANT_NAME = 'constantValue';
+    ```php
+    <?php
+    // 1. define:
+    define("CONSTANT_NAME", 'constantValue');
+    // 2. const:必须处于最顶端的作用区域, <5.3: 只能用于类中
+    const CONSTANT_NAME = 'constantValue';
+    ?>
+    ```
 
 - 获取
 
-        // 1. defined(): 判断常量是否定义
-        defined("constantName");
-        // 2. constant(): 获取常量名为 constName 的常量值
-        constant('constName');
+    ```php
+    <?php
+    // 1. defined(): 判断常量是否定义
+    defined("constantName");
+    // 2. constant(): 获取常量名为 constName 的常量值
+    constant('constName');
+    ?>
+    ```
 
 - 魔术常量
 
@@ -289,13 +330,17 @@ _note_: 给 `define()` 传递第三个参数 `true` 会让常量区分大小写
 
 *`&&` 与 `and`, `||` 与 `or` 的区别:
 
-    // "||" 的优先级比 "or" 高
-    $e = false || true; // $e 被赋值为 (false || true)，结果为 true
-    $f = false or true; // $f 被赋值为 false ("=" 的优先级比 "or" 高)
+```php
+<?php
+// "||" 的优先级比 "or" 高
+$e = false || true; // $e 被赋值为 (false || true)，结果为 true
+$f = false or true; // $f 被赋值为 false ("=" 的优先级比 "or" 高)
 
-    // "&&" 的优先级比 "and"　高
-    $g = true && false; // $g 被赋值为 (true && false)，结果为 false
-    $h = true and false; // $h 被赋值为 true ("=" 的优先级比 "and" 高)
+// "&&" 的优先级比 "and"　高
+$g = true && false; // $g 被赋值为 (true && false)，结果为 false
+$h = true and false; // $h 被赋值为 true ("=" 的优先级比 "and" 高)
+?>
+```
 
 #流程控制
 
@@ -311,28 +356,36 @@ _note_: 给 `define()` 传递第三个参数 `true` 会让常量区分大小写
 
     + 多路分支
 
-            if() { }... elseif() { }... else { }
-            switch(变量) {      // 变量最好只用整形和字符串
-                case 变量值:    // 各个 case 都是互斥的,  可以利
-                    code...;    // 用此特性简写一些条件判断
-                    break;      // 跳出循环. 可以利用 break 匹配多种情况
-                case 变量值:
-                    code...;    // 如果 case 的语句为空, 则将控制转移到下一个 
-                                // case, 实现多个 case 共用一段代码
-                    break;
-                ...
-                default:        // 默认执行的语句
-                    code...;
-            }
-            foreach() { }
+        ```php
+        <?php
+        if() { }... elseif() { }... else { }
+        switch(变量) {      // 变量最好只用整形和字符串
+            case 变量值:    // 各个 case 都是互斥的,  可以利
+                code...;    // 用此特性简写一些条件判断
+                break;      // 跳出循环. 可以利用 break 匹配多种情况
+            case 变量值:
+                code...;    // 如果 case 的语句为空, 则将控制转移到下一个 
+                            // case, 实现多个 case 共用一段代码
+                break;
+            ...
+            default:        // 默认执行的语句
+                code...;
+        }
+        foreach() { }
 
-            if...else...        // 适用于范围条件
-            switch...case       // 适用于定点值条件
-            foreach...          // 适用于数组
+        if...else...        // 适用于范围条件
+        switch...case       // 适用于定点值条件
+        foreach...          // 适用于数组
+        ?>
+        ```
 
     + 三目运算符
 
-            boolean ? true_value : false_value
+        ```php
+        <?php
+        boolean ? true_value : false_value
+        ?>
+        ```
 
 - 循环结构
 
@@ -341,14 +394,22 @@ _note_: 给 `define()` 传递第三个参数 `true` 会让常量区分大小写
 
 - `break`: 退出剩余循环
 
-        break 1;                // 默认, 退出一层循环
-        break 2;                // 退出两层循环
+    ```php
+    <?php
+    break 1;                // 默认, 退出一层循环
+    break 2;                // 退出两层循环
+    ?>
+    ```
                                 // 以此类推
 - `continue`: 跳过本次循环
 
-        continue 1;
-        continue 2;
-        // 以此类推
+    ```php
+    <?php
+    continue 1;
+    continue 2;
+    // 以此类推
+    ?>
+    ```
 
 - *`declare (directive)`
 
@@ -374,9 +435,13 @@ _note_: 如果你要使用浮点作为键, 使用字符串形式如 '1.5', '1.6'
 
 ##遍历
 
-    for() { ... }                                           // 有很多限制
-    foreach( $arr as $key => $val ) { ...  }                // 首选
-    while( list( $key,$val ) = each( $user ) ) { ... }      // 效率更高
+```php
+<?php
+for() { ... }                                           // 有很多限制
+foreach( $arr as $key => $val ) { ...  }                // 首选
+while( list( $key,$val ) = each( $user ) ) { ... }      // 效率更高
+?>
+```
 
 使用  `next()` `prev()` `reset()` `end()` `current()` 可以操作数组指针
 
@@ -394,10 +459,14 @@ _note_: 如果你要使用浮点作为键, 使用字符串形式如 '1.5', '1.6'
 
 - 定义
 
-        function 函数名(形参, 形参 , ...) {
-            函数体
-            return 返回值;
-        }
+    ```php
+    <?php
+    function 函数名(形参, 形参 , ...) {
+        函数体
+        return 返回值;
+    }
+    ?>
+    ```
 
 - 定义可变数量的参数列表
 
@@ -443,12 +512,16 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
 ###声明
 
+```php
+<?php
     class 类名        // `stdClass` 和 `__PHP_Incomplete_Class` 为 PHP 保留字
     {
         成员属性      // 定义成员属性必须使用 $, 访问成员属性不用使用 $ 符号
                      *// 属性中的变量可以初始化, 但是初始化的值必须是常数
         成员方法
     }
+?>
+```
 
 ###命名
 
@@ -654,14 +727,22 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
 - 展示(适用于开发环境)
 
+    ```php
+    <?php
         display_errors = on # 默认为 off
         error_reporting() # 默认为除了 E_NOTICE 和 E_STRICT 的所有错误
+    ?>
+    ```
 
 - 记录(适用于线上环境)
 
+    ```php
+    <?php
         log_errors = on
         error_log = /path/to/filename # 或者 error_log = syslog
         error_log()
+    ?>
+    ```
 
 - 抑制: `@`
 
@@ -671,6 +752,8 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
     - 自定义错误处理函数:
 
+        ```php
+        <?php
             function handleError($errno, $errstr,$error_file,$error_line)
             {
                 echo "<b>Error:</b> [$errno] $errstr - $error_file:$error_line";
@@ -680,17 +763,23 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
             }
             set_error_handler("handleError");
             trigger_error();
+        ?>
+        ```
 
     - 抛出异常: `throw..try..catch`
 
     - 自定义异常处理函数:
 
+        ```php
+        <?php
             function exception_handler($exception) {
                 echo "Uncaught exception: " , $exception->getMessage(), "\n";
             }
             set_exception_handler('exception_handler');
             throw new Exception('Uncaught Exception');
             echo "Not Executed\n";
+        ?>
+        ```
 
 #*生成器
 
@@ -706,19 +795,35 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
 除了生成简单的值
 
+```php
+<?php
     yield $id;
+?>
+```
 
 你也可以在生成值的时候指定键名
 
+```php
+<?php
     yield $id => $fields;
+?>
+```
 
 如果在一个表达式上下文(例如在一个赋值表达式的右侧)中使用 `yield`, 你必须使用圆括号把 `yield` 申明包围起来
 
+```php
+<?php
     $data = (yield $value); 
+?>
+```
 
 或
 
+```php
+<?php
     $data = (yield $key => $value);
+?>
+```
 
 `yield` 可以在没有参数传入的情况下被调用来生成一个 `NULL` 值并配对一个自动的键名
 
@@ -728,20 +833,32 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
 - 变量的引用传递
 
+    ```php
+    <?php
         $var = &$var2 // 所有对 $var 的更改将反映到 $var2
+    ?>
+    ```
 
 - 函数的引用传递
 
+    ```php
+    <?php
         function fun(&$var) {
             // 所有对 $var 的更改将反映到 $var 指向的变量         
             // 也可以用全局变量实现
         }
+    ?>
+    ```
 
 - 函数的引用返回
 
+    ```php
+    <?php
         function &fun(){
             return ...
         }
+    ?>
+    ```
 
    *此时, 如果要将函数返回作为引用赋值, 必须在赋值时加 `&`, 如 `$var = &fun();`
     函数名前面的 `&`和赋值时的 `&` 两者缺一不可
