@@ -1,11 +1,11 @@
 td.linenos {
     color: #4a4a40;
     background: #e7e7e1;
-    border-radius: 5px 0px 0px 10px;    
-    border: none !important; 
+    border-radius: 5px 0px 0px 10px;
+    border: none !important;
 }
 
-div.highlight {
+div.highlight, div.highlighter-rouge {
     width: 97%;
     margin-left: 1px;
     background: #49483e url('../images/monokaibg.jpg') top left;
@@ -17,7 +17,7 @@ div.highlight {
 td.code {
     width: 100%;
     background: #49483e url('../images/monokaibg.jpg') top left;
-    color: white;    
+    color: white;
     border-radius: 5px;
 }
 
