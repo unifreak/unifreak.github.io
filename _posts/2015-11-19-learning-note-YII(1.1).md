@@ -136,30 +136,30 @@ public function actionCreate(array $category, $language = 'en') {
 
     - 可被定义为一个 `filter` 前缀的控制器方法:
 
-    ```php
-    <?php
-    public function filterAccessControl($filterChain) {
-        // 调用 $filterChain->run() 以继续后续过滤器与动作的执行。
-    }
-    ?>
-    ```
+        ```php
+        <?php
+        public function filterAccessControl($filterChain) {
+            // 调用 $filterChain->run() 以继续后续过滤器与动作的执行。
+        }
+        ?>
+        ```
 
     - 也可是一个 `CFilter` 或其子类的实例:
 
-    ```php
-    <?php
-    class PerformanceFilter extends CFilter {
-        protected function preFilter($filterChain) {
-            // 动作被执行之前应用的逻辑
-            return true; // 如果动作不应被执行，此处返回 false
-        }
+        ```php
+        <?php
+        class PerformanceFilter extends CFilter {
+            protected function preFilter($filterChain) {
+                // 动作被执行之前应用的逻辑
+                return true; // 如果动作不应被执行，此处返回 false
+            }
 
-        protected function postFilter($filterChain) {
-            // 动作执行之后应用的逻辑
+            protected function postFilter($filterChain) {
+                // 动作执行之后应用的逻辑
+            }
         }
-    }
-    ?>
-    ```
+        ?>
+        ```
 
 - 配置使用: 需要覆盖控制器的 `filter()` 方法:
 
@@ -650,35 +650,35 @@ view:
 
 - 使用 `CDbConnection`:
 
-```php
-<?php
-$connection=new CDbConnection($dsn,$username,$password);
-// 建立连接。你可以使用  try...catch 捕获可能抛出的异常
-$connection->active=true;
-......
-$connection->active=false;  // 关闭连接
-?>
-```
+    ```php
+    <?php
+    $connection=new CDbConnection($dsn,$username,$password);
+    // 建立连接。你可以使用  try...catch 捕获可能抛出的异常
+    $connection->active=true;
+    ......
+    $connection->active=false;  // 关闭连接
+    ?>
+    ```
 
 - 作为应用组件配置, 然后使用 `Yii::app()->db` 访问
 
-```php
-<?php
-array(
-    ......
-    'components'=>array(
+    ```php
+    <?php
+    array(
         ......
-        'db'=>array(
-            'class'=>'CDbConnection',
-            'connectionString'=>'mysql:host=localhost;dbname=testdb',
-            'username'=>'root',
-            'password'=>'password',
-            'emulatePrepare'=>true,  // needed by some MySQL installations
+        'components'=>array(
+            ......
+            'db'=>array(
+                'class'=>'CDbConnection',
+                'connectionString'=>'mysql:host=localhost;dbname=testdb',
+                'username'=>'root',
+                'password'=>'password',
+                'emulatePrepare'=>true,  // needed by some MySQL installations
+            ),
         ),
-    ),
-)
-?>
-```
+    )
+    ?>
+    ```
 
 ##执行 SQL 语句
 
@@ -1021,66 +1021,66 @@ class Post extends CActiveRecord {
 
 - 如果表的主键是自增的, 在插入完成后, AR 实例将包含一个更新的主键
 
-```php
-<?php
-$post=new Post;
-$post->title='sample post';
-$post->content='content for the sample post';
-// 如果要使用 Mysql 的 NOW(), 必须使用 CDbExpression, 单纯的 'NOW()' 将会被作为字符串对待
-$post->create_time=new CDbExpression('NOW()');
-$post->save();
-?>
-```
+    ```php
+    <?php
+    $post=new Post;
+    $post->title='sample post';
+    $post->content='content for the sample post';
+    // 如果要使用 Mysql 的 NOW(), 必须使用 CDbExpression, 单纯的 'NOW()' 将会被作为字符串对待
+    $post->create_time=new CDbExpression('NOW()');
+    $post->save();
+    ?>
+    ```
 
 读取记录:
 
 - `find` 系列返回一个 AR 实例, 或者 `null`
 - `findAll` 系列返回 AR 实例数组, 或者空数组
 
-```php
-<?php
-// 1. 常规
-// 查找满足指定条件的结果中的第一行
-$post=Post::model()->find($condition,$params);
-$post=Post::model()->find('postID=:postID', array(':postID'=>10));
-// 查找具有指定主键值的那一行
-$post=Post::model()->findByPk($postID,$condition,$params);
-// 查找具有指定属性值的行
-$post=Post::model()->findByAttributes($attributes,$condition,$params);
-// 通过指定的 SQL 语句查找结果中的第一行
-$post=Post::model()->findBySql($sql,$params);
+    ```php
+    <?php
+    // 1. 常规
+    // 查找满足指定条件的结果中的第一行
+    $post=Post::model()->find($condition,$params);
+    $post=Post::model()->find('postID=:postID', array(':postID'=>10));
+    // 查找具有指定主键值的那一行
+    $post=Post::model()->findByPk($postID,$condition,$params);
+    // 查找具有指定属性值的行
+    $post=Post::model()->findByAttributes($attributes,$condition,$params);
+    // 通过指定的 SQL 语句查找结果中的第一行
+    $post=Post::model()->findBySql($sql,$params);
 
-// 查找满足指定条件的所有行
-$posts=Post::model()->findAll($condition,$params);
-// 查找带有指定主键的所有行
-$posts=Post::model()->findAllByPk($postIDs,$condition,$params);
-// 查找带有指定属性值的所有行
-$posts=Post::model()->findAllByAttributes($attributes,$condition,$params);
-// 通过指定的SQL语句查找所有行
-$posts=Post::model()->findAllBySql($sql,$params);
+    // 查找满足指定条件的所有行
+    $posts=Post::model()->findAll($condition,$params);
+    // 查找带有指定主键的所有行
+    $posts=Post::model()->findAllByPk($postIDs,$condition,$params);
+    // 查找带有指定属性值的所有行
+    $posts=Post::model()->findAllByAttributes($attributes,$condition,$params);
+    // 通过指定的SQL语句查找所有行
+    $posts=Post::model()->findAllBySql($sql,$params);
 
-// 获取满足指定条件的行数
-$n=Post::model()->count($condition,$params);
-// 通过指定的 SQL 获取结果行数
-$n=Post::model()->countBySql($sql,$params);
-// 检查是否至少有一行复合指定的条件
-$exists=Post::model()->exists($condition,$params);
+    // 获取满足指定条件的行数
+    $n=Post::model()->count($condition,$params);
+    // 通过指定的 SQL 获取结果行数
+    $n=Post::model()->countBySql($sql,$params);
+    // 检查是否至少有一行复合指定的条件
+    $exists=Post::model()->exists($condition,$params);
 
-// 2. 使用 `CDbCriteria`
-$criteria=new CDbCriteria;
-$criteria->select='title';  // 只选择 'title' 列
-$criteria->condition='postID=:postID';
-$criteria->params=array(':postID'=>10);
-$post=Post::model()->find($criteria); // $params 不需要了
+    // 2. 使用 `CDbCriteria`
+    $criteria=new CDbCriteria;
+    $criteria->select='title';  // 只选择 'title' 列
+    $criteria->condition='postID=:postID';
+    $criteria->params=array(':postID'=>10);
+    $post=Post::model()->find($criteria); // $params 不需要了
 
-// 3. 传递数组
-$post=Post::model()->find(array(
-    'select'=>'title',
-    'condition'=>'postID=:postID',
-    'params'=>array(':postID'=>10),
-));
-?>
-```
+    // 3. 传递数组
+    $post=Post::model()->find(array(
+        'select'=>'title',
+        'condition'=>'postID=:postID',
+        'params'=>array(':postID'=>10),
+    ));
+    ?>
+    ```
 
 更新记录:
 
@@ -1088,38 +1088,38 @@ $post=Post::model()->find(array(
 
 - 直接更新数据表中的一行或多行而不首先载入也是可行的:
 
-```php
-<?php
-// 更新符合指定条件的行
-Post::model()->updateAll($attributes,$condition,$params);
-// 更新符合指定条件和主键的行
-Post::model()->updateByPk($pk,$attributes,$condition,$params);
-// 更新满足指定条件的行的计数列
-Post::model()->updateCounters($counters,$condition,$params);
-?>
+    ```php
+    <?php
+    // 更新符合指定条件的行
+    Post::model()->updateAll($attributes,$condition,$params);
+    // 更新符合指定条件和主键的行
+    Post::model()->updateByPk($pk,$attributes,$condition,$params);
+    // 更新满足指定条件的行的计数列
+    Post::model()->updateCounters($counters,$condition,$params);
+    ?>
 ```
 
 删除记录:
 
 - 实例化后删除: 这样删除之后, AR 实例仍不改变
 
-```php
-<?php
-$post=Post::model()->findByPk(10); // 假设有一个帖子，其 ID 为 10
-$post->delete(); // 从数据表中删除此行
-?>
-```
+    ```php
+    <?php
+    $post=Post::model()->findByPk(10); // 假设有一个帖子，其 ID 为 10
+    $post->delete(); // 从数据表中删除此行
+    ?>
+    ```
 
 - 不实例化直接删除
 
-```php
-<?php
-// 删除符合指定条件的行
-Post::model()->deleteAll($condition,$params);
-// 删除符合指定条件和主键的行
-Post::model()->deleteByPk($pk,$condition,$params);
-?>
-```
+    ```php
+    <?php
+    // 删除符合指定条件的行
+    Post::model()->deleteAll($condition,$params);
+    // 删除符合指定条件和主键的行
+    Post::model()->deleteByPk($pk,$condition,$params);
+    ?>
+    ```
 
 如果要确定两个 AR 是否是同一个记录, 只需对比它们的主键值, 或直接调用 `CActiveRecord::equals()`
 
@@ -1157,44 +1157,44 @@ try {
 
 - 定义
 
-```php
-<?php
-class Post extends CActiveRecord {
-    /**
-     * 默认命名范围, 隐式应用于所有关于此模型的 SELECT 查询
-     */
-    public function defaultScope() {
-        return array(
-            'condition'=>"language='".Yii::app()->language."'",
-        );
-    }
+    ```php
+    <?php
+    class Post extends CActiveRecord {
+        /**
+         * 默认命名范围, 隐式应用于所有关于此模型的 SELECT 查询
+         */
+        public function defaultScope() {
+            return array(
+                'condition'=>"language='".Yii::app()->language."'",
+            );
+        }
 
-    /**
-     * 这里定义的命名范围可以被显式应用于 SELECT,UPDATE,CREATE,DELETE 操作
-     * @return {[type]} [description]
-     */
-    public function scopes() {
-        return array(
-            'published'=>array(
-                'condition'=>'status=1',
-            ),
-            'recently'=>array(
-                'order'=>'create_time DESC',
-                'limit'=>5,
-            ),
-        );
+        /**
+         * 这里定义的命名范围可以被显式应用于 SELECT,UPDATE,CREATE,DELETE 操作
+         * @return {[type]} [description]
+         */
+        public function scopes() {
+            return array(
+                'published'=>array(
+                    'condition'=>'status=1',
+                ),
+                'recently'=>array(
+                    'order'=>'create_time DESC',
+                    'limit'=>5,
+                ),
+            );
+        }
     }
-}
-?>
-```
+    ?>
+    ```
 
 - 使用
 
-```php
-<?php
-$posts=Post::model()->published()->recently()->findAll();
-?>
-```
+    ```php
+    <?php
+    $posts=Post::model()->published()->recently()->findAll();
+    ?>
+    ```
 
 ##关系型 Active Record
 
@@ -1568,54 +1568,54 @@ __使用自定义 URL 解析器:__
 
 - 定义解析器类
 
-```php
-<?php 
-/**
- * 自定义 URL 解析器必须继承 CBasUrlRule, 并实现 `createUrl()` 和 `parseUrl`
- */
-class CarUrlRule extends CBaseUrlRule
-{
-    public $connectionID = 'db';
- 
-    public function createUrl($manager,$route,$params,$ampersand)
+    ```php
+    <?php 
+    /**
+     * 自定义 URL 解析器必须继承 CBasUrlRule, 并实现 `createUrl()` 和 `parseUrl`
+     */
+    class CarUrlRule extends CBaseUrlRule
     {
-        if ($route==='car/index')
+        public $connectionID = 'db';
+     
+        public function createUrl($manager,$route,$params,$ampersand)
         {
-            if (isset($params['manufacturer'], $params['model']))
-                return $params['manufacturer'] . '/' . $params['model'];
-            else if (isset($params['manufacturer']))
-                return $params['manufacturer'];
+            if ($route==='car/index')
+            {
+                if (isset($params['manufacturer'], $params['model']))
+                    return $params['manufacturer'] . '/' . $params['model'];
+                else if (isset($params['manufacturer']))
+                    return $params['manufacturer'];
+            }
+            return false;  // this rule does not apply
         }
-        return false;  // this rule does not apply
-    }
- 
-    public function parseUrl($manager,$request,$pathInfo,$rawPathInfo)
-    {
-        if (preg_match('%^(\w+)(/(\w+))?$%', $pathInfo, $matches))
+     
+        public function parseUrl($manager,$request,$pathInfo,$rawPathInfo)
         {
-            // check $matches[1] and $matches[3] to see
-            // if they match a manufacturer and a model in the database
-            // If so, set $_GET['manufacturer'] and/or $_GET['model']
-            // and return 'car/index'
+            if (preg_match('%^(\w+)(/(\w+))?$%', $pathInfo, $matches))
+            {
+                // check $matches[1] and $matches[3] to see
+                // if they match a manufacturer and a model in the database
+                // If so, set $_GET['manufacturer'] and/or $_GET['model']
+                // and return 'car/index'
+            }
+            return false;  // this rule does not apply
         }
-        return false;  // this rule does not apply
     }
-}
 
 
-?>
-```
+    ?>
+    ```
 
 - 指定 URL 转发规则:
 
-```php
-<?php 
-array(
-        'class' => 'application.components.CarUrlRule',
-        'connectionID' => 'db',
-    ), 
-?>
-```
+    ```php
+    <?php 
+    array(
+            'class' => 'application.components.CarUrlRule',
+            'connectionID' => 'db',
+        ), 
+    ?>
+    ```
 
 ##验证
 

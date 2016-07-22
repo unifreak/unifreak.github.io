@@ -185,58 +185,58 @@ ${$var}[1]
 
 - 转到 `BOOLEAN`
 
-| 从 | 转换结果|
-|----|----|
-|`FALSE` |`FALSE`|
-| `0` | `FALSE`|
-|`0.0` |`FALSE`|
-| `""` |`FALSE`|
-| `" "` |`FALSE`|
-| `"0"` |`FALSE`|
-| 空数组 |`FALSE`|
-| 空对象 |`FALSE`|
-| NULL |`FALSE`|
-|其他| `TRUE` |
+    | 从 | 转换结果|
+    |----|----|
+    |`FALSE` |`FALSE`|
+    | `0` | `FALSE`|
+    |`0.0` |`FALSE`|
+    | `""` |`FALSE`|
+    | `" "` |`FALSE`|
+    | `"0"` |`FALSE`|
+    | 空数组 |`FALSE`|
+    | 空对象 |`FALSE`|
+    | NULL |`FALSE`|
+    |其他| `TRUE` |
     
 - 转到 `INT`
 
-| 从 | 转换结果|
-|----|----|
-|布尔|`FALSE` -> `0`,  `TRUE` -> `1`|
-|浮点数|向零取整|
-|字符串|以合法的数字开始则为这个数字, 否则就是 `0`|
+    | 从 | 转换结果|
+    |----|----|
+    |布尔|`FALSE` -> `0`,  `TRUE` -> `1`|
+    |浮点数|向零取整|
+    |字符串|以合法的数字开始则为这个数字, 否则就是 `0`|
 
 - 转到 `FLOAT`
 
-| 从 | 转换结果|
-|----|----|
-|字符串|以合法的数字开始则为这个数字, 否则就是 `0`|
-|其他|先转换为 `INT`, 再转换为 `FLOAT`|
+    | 从 | 转换结果|
+    |----|----|
+    |字符串|以合法的数字开始则为这个数字, 否则就是 `0`|
+    |其他|先转换为 `INT`, 再转换为 `FLOAT`|
 
 - 转到 `STRING`
 
-| 从 | 转换结果|
-|----|----|
-|布尔| `FLASE` -> `""`, `TRUE` -> `"1"`|
-|数组| `"Array"`|
-|对象| `"Object"`|
-|资源| `"Resource id #n"`|
-|`NULL`| `""`|
+    | 从 | 转换结果|
+    |----|----|
+    |布尔| `FLASE` -> `""`, `TRUE` -> `"1"`|
+    |数组| `"Array"`|
+    |对象| `"Object"`|
+    |资源| `"Resource id #n"`|
+    |`NULL`| `""`|
 
 - 转到 `ARRAY`
 
-| 从 | 转换结果|
-|----|----|
-|任意类型| 一个仅有一个元素的数组|
+    | 从 | 转换结果|
+    |----|----|
+    |任意类型| 一个仅有一个元素的数组|
 
 - 转到 `OBJECT`
 
-| 从 | 转换结果|
-|----|----|
-|从任意类型|实例化一个内置类 `stdClass` 的对象|
-|`NULL`|新的实例为空|
-|数组|键名成为属性名并具有相对应的值|
-|其它的值|名为 `scalar` 的成员变量将包含该值|
+    | 从 | 转换结果|
+    |----|----|
+    |从任意类型|实例化一个内置类 `stdClass` 的对象|
+    |`NULL`|新的实例为空|
+    |数组|键名成为属性名并具有相对应的值|
+    |其它的值|名为 `scalar` 的成员变量将包含该值|
 
 ##作用域
 
@@ -348,11 +348,19 @@ $h = true and false; // $h 被赋值为 true ("=" 的优先级比 "and" 高)
 - 分支(条件|选择)结构
     + 单路分支
 
-            if() { }
+        ```php
+        <?php
+        if() { }
+        ?>
+        ```
 
     + 双路分支
 
-            if() { } else { }
+        ```php
+        <?php
+        if() { } else { }
+        ?>
+        ```
 
     + 多路分支
 
@@ -398,9 +406,10 @@ $h = true and false; // $h 被赋值为 true ("=" 的优先级比 "and" 高)
     <?php
     break 1;                // 默认, 退出一层循环
     break 2;                // 退出两层循环
+                            // 以此类推
     ?>
     ```
-                                // 以此类推
+                                
 - `continue`: 跳过本次循环
 
     ```php
@@ -514,12 +523,12 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
 ```php
 <?php
-    class 类名        // `stdClass` 和 `__PHP_Incomplete_Class` 为 PHP 保留字
-    {
-        成员属性      // 定义成员属性必须使用 $, 访问成员属性不用使用 $ 符号
-                     *// 属性中的变量可以初始化, 但是初始化的值必须是常数
-        成员方法
-    }
+class 类名        // `stdClass` 和 `__PHP_Incomplete_Class` 为 PHP 保留字
+{
+    成员属性      // 定义成员属性必须使用 $, 访问成员属性不用使用 $ 符号
+                 *// 属性中的变量可以初始化, 但是初始化的值必须是常数
+    成员方法
+}
 ?>
 ```
 
@@ -618,12 +627,12 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
 - 比较
 
-|比较内容| `==` | `===` |
-|----|----|
-|引用|`true`|`true`|
-|有相同属性值的两个实例|`true`|`false`|
-|属性值不同的两个实例|`false`|`false`|
-    
+    |比较内容| `==` | `===` |
+    |----|----|----|
+    |引用|`true`|`true`|
+    |有相同属性值的两个实例|`true`|`false`|
+    |属性值不同的两个实例|`false`|`false`|
+        
 
 ##魔术方法 (不同时机自动调用以完成特定功能的系统定义方法  )
 
@@ -729,8 +738,8 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
     ```php
     <?php
-        display_errors = on # 默认为 off
-        error_reporting() # 默认为除了 E_NOTICE 和 E_STRICT 的所有错误
+    display_errors = on # 默认为 off
+    error_reporting() # 默认为除了 E_NOTICE 和 E_STRICT 的所有错误
     ?>
     ```
 
@@ -738,9 +747,9 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
     ```php
     <?php
-        log_errors = on
-        error_log = /path/to/filename # 或者 error_log = syslog
-        error_log()
+    log_errors = on
+    error_log = /path/to/filename # 或者 error_log = syslog
+    error_log()
     ?>
     ```
 
@@ -754,15 +763,15 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
         ```php
         <?php
-            function handleError($errno, $errstr,$error_file,$error_line)
-            {
-                echo "<b>Error:</b> [$errno] $errstr - $error_file:$error_line";
-                echo "<br />";
-                echo "Terminating PHP Script";
-                die();
-            }
-            set_error_handler("handleError");
-            trigger_error();
+        function handleError($errno, $errstr,$error_file,$error_line)
+        {
+            echo "<b>Error:</b> [$errno] $errstr - $error_file:$error_line";
+            echo "<br />";
+            echo "Terminating PHP Script";
+            die();
+        }
+        set_error_handler("handleError");
+        trigger_error();
         ?>
         ```
 
@@ -772,12 +781,12 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
         ```php
         <?php
-            function exception_handler($exception) {
-                echo "Uncaught exception: " , $exception->getMessage(), "\n";
-            }
-            set_exception_handler('exception_handler');
-            throw new Exception('Uncaught Exception');
-            echo "Not Executed\n";
+        function exception_handler($exception) {
+            echo "Uncaught exception: " , $exception->getMessage(), "\n";
+        }
+        set_exception_handler('exception_handler');
+        throw new Exception('Uncaught Exception');
+        echo "Not Executed\n";
         ?>
         ```
 
@@ -797,7 +806,7 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
 ```php
 <?php
-    yield $id;
+yield $id;
 ?>
 ```
 
@@ -805,7 +814,7 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
 ```php
 <?php
-    yield $id => $fields;
+yield $id => $fields;
 ?>
 ```
 
@@ -813,7 +822,7 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
 ```php
 <?php
-    $data = (yield $value); 
+$data = (yield $value); 
 ?>
 ```
 
@@ -821,7 +830,7 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
 ```php
 <?php
-    $data = (yield $key => $value);
+$data = (yield $key => $value);
 ?>
 ```
 
@@ -835,7 +844,7 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
     ```php
     <?php
-        $var = &$var2 // 所有对 $var 的更改将反映到 $var2
+    $var = &$var2 // 所有对 $var 的更改将反映到 $var2
     ?>
     ```
 
@@ -843,10 +852,10 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
     ```php
     <?php
-        function fun(&$var) {
-            // 所有对 $var 的更改将反映到 $var 指向的变量         
-            // 也可以用全局变量实现
-        }
+    function fun(&$var) {
+        // 所有对 $var 的更改将反映到 $var 指向的变量         
+        // 也可以用全局变量实现
+    }
     ?>
     ```
 
@@ -854,9 +863,9 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
     ```php
     <?php
-        function &fun(){
-            return ...
-        }
+    function &fun(){
+        return ...
+    }
     ?>
     ```
 
@@ -869,7 +878,7 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
 - 用途
 
-    如果程序比较大, 引用同一个对象的变量比较多并且希望用完该对象后手工清除它, 建议用 `&` 方式, 然后用 $var = null 的方式清除;
+    如果程序比较大, 引用同一个对象的变量比较多并且希望用完该对象后手工清除它, 建议用 `&` 方式, 然后用 `$var = null` 的方式清除;
 
     对于大数组的传递, 建议用 `&` 方式, 毕竟节省内存空间使用
 
@@ -877,22 +886,22 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 
 - 超全局变量
 
-|变量|概述|
-|----|----|
-|`$GLOBALS`|所有全局变量, 包括用户自定义的和超全局数组|
-|`$_SERVER`|服务器和当前脚本环境相关数据|
-|`$_GET`|GET 方法提交的数据|
-|`$_POST`|POST 方法提交的数据|
-|`$_FILES`|POST 方法上传文件的信息|
-|*`$_REQUEST`|GET, POST, COOKIE 提交的数据(尽量避免使用该数组)|
-|`$_SESSION`||
-|`$_COOKIE`||
-|`$_ENV`|执行环境相关数据|
-|||
-|`php_errormsg`|错误发生的作用域的前一个错误信息(`track_errors` 配置项需开启)|
-|`$http_response_header`| 响应头|
-|`$argc`|传递给脚本的参数数目(命令行下)|
-|`$argv`|传递给脚本的参数数组(命令行下)|
+    |变量|概述|
+    |----|----|
+    |`$GLOBALS`|所有全局变量, 包括用户自定义的和超全局数组|
+    |`$_SERVER`|服务器和当前脚本环境相关数据|
+    |`$_GET`|GET 方法提交的数据|
+    |`$_POST`|POST 方法提交的数据|
+    |`$_FILES`|POST 方法上传文件的信息|
+    |*`$_REQUEST`|GET, POST, COOKIE 提交的数据(尽量避免使用该数组)|
+    |`$_SESSION`||
+    |`$_COOKIE`||
+    |`$_ENV`|执行环境相关数据|
+    |||
+    |`php_errormsg`|错误发生的作用域的前一个错误信息(`track_errors` 配置项需开启)|
+    |`$http_response_header`| 响应头|
+    |`$argc`|传递给脚本的参数数目(命令行下)|
+    |`$argv`|传递给脚本的参数数组(命令行下)|
 
 - 异常
 
