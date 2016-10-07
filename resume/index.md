@@ -7,7 +7,7 @@ layout: markdownreader_bare
 - 手机: 155 3291 5861
 - Email: fanghao90s@gmail.com
 - QQ: 744910240
-- 兴趣: 吉他 骑行
+- 兴趣: 吉他 骑行 摄影
 
 #教育经历
 
@@ -36,6 +36,44 @@ layout: markdownreader_bare
 
 管理  Linux 服务器的配置的运行, 如网站服务器的更换, 性能监控 , 定时任务等
 
+##北京飞马国际供应链管理有限公司 (2015.11-2016.8)
+
+前期负责ERP系统的票据管理模块:
+
+- 完成数据库设计
+- 框架基础数据层的编码
+
+后被调到前台研发部, 负责主站[大宗网][dazong]:
+
+- 用户中心模块的整体改版升级
+- 消息服务模块的接口设计和编码工作
+- 上传服务模块的接口设计和编码工作
+
+以上工作完成后, 转至后台研发部, 负责后台项目的管理工作:
+
+- 和产品经理通力合作, 负责运营系统和 CRM 项目的需求评估与把控
+- 和测试人员一道, 对项目进行排期, 并跟踪项目进度, 实现产品迭代更新
+- 细化并分配各项需求任务给开发同事, 并确保各项规范(数据库, 代码, git)的实施
+- 和开发同事一道, 同其他系统交互配合, 完成以下开发工作
+    + 运营系统:
+        * 交易管理(贸易参数, 交易时间, 消息开关, 合同, 违约, 申诉等)
+        * 审核管理(客户审核, 公司审核)
+        * 监控管理(运营监控, 违约监控, 数据报表, 日志查询)
+        * 系统管理(菜单, 角色, 权限)
+    + CRM 系统:
+        * 分类管理(商品, 新闻)
+        * 内容管理(新闻, 焦点图, 友情链接, 网站碎片)
+        * 系统管理(菜单, 角色, 权限)
+        * 对移动端 API 实现
+
+#其他项目
+
+- [荣耀互动][ryhudong]
+    
+    一个关于旅游咨询和团体服务的企业站
+
+    完成其前台的动态展示和后台的 CRM 管理系统的开发工作
+
 #开源项目经验
 
 ###个人博客 
@@ -46,6 +84,12 @@ layout: markdownreader_bare
 
 已被 [jekyllthemes.org][jekyllthemes] 和 [themes.jekyllrc.org][jekyllrc] 收录
 
+###[SublimeText DirectEdit][directEdit] 插件
+   
+用于快速打开预配置的常用文件(比如 php.ini, host, vhost 配置文件等)
+
+使用 Python 开发
+
 ###参与贡献
 
 - [jekyll 中文][jekyllCn]
@@ -54,25 +98,33 @@ layout: markdownreader_bare
 
 #技术/工具
 
-**语言**: PHP MySql Redis Regex JS/JQuery HTML/CSS Markdown SASS Liquid
+**语言**: PHP SQL HTML/CSS SASS Markdown Regex JS ES6 Regex Liquid
 
-**框架**: ThinkPHP OSC Bootstrap
+**框架**: Yii ThinkPHP OSC Bootstrap jQuery/jQueryUI 
 
-**工具**: Linux Git SublimeText Jekyll
+**工具**: Linux MySql Redis  SublimeText Git/GitLab/Github Jira Jekyll
 
 #自我评价
 
-为人稳重可靠, 兴趣广泛, 学习能力很强, 善于利用网络解决各种技术问题, 比较注重细节, 对新技术有很大热情和钻研韧劲
+为人稳重可靠, 兴趣广泛, 学习能力很强, 善于解决问题
+
+注重细节, 注重代码美学和安全性, 关注并热心学习和应用新技术
 
 注重 OOP ,设计模式等软件架构方面知识的学习与使用, 认为编程不仅是实用的技术, 也是一门艺术
 
 英文能力强(CET6), 经常阅读外文技术书籍, 并在 IRC 网络上和外国牛人探讨技术问题
+
+兴趣广泛, 对 PHP 开发的边角相关技术和理论也广泛涉猎(前端, 设计等)
+
 
 
 [en]: http://bornprettystore.com
 [fr]: http://neejolie.fr
 [jp]: http://harunouta.com
 [de]: http://nurbesten.de
+[dazong]: http://dazong.com
+[directEdit]: https://packagecontrol.io/packages/DirectEdit
+[ryhudong]: http://ryhudong.com
 [app]: https://itunes.apple.com/us/app/born-pretty/id986675944?mt=8
 [jekyllCn]: http://jekyllcn.com
 [jekyllthemes]: http://jekyllthemes.org
