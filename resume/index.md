@@ -34,9 +34,9 @@ layout: markdownreader_bare
 
 在网站系统中加入 Redis 缓存层, 有效降低数据库符合, 提高网站的加载速度
 
-管理  Linux 服务器的配置的运行, 如网站服务器的更换, 性能监控 , 定时任务等
+管理  Linux 服务器的配置的运行, 如网站服务器的更换, 性能监控 , 定时任务等<br><br>
 
-###北京飞马国际供应链管理有限公司 (2015.11-2016.8)
+###北京飞马国际供应链管理有限公司 <small>2015.11-2016.8</small>
 
 前期负责ERP系统的票据管理模块:
 
@@ -82,13 +82,13 @@ layout: markdownreader_bare
 
 使用 jekyll, SASS 和 Liquid 模板语言, 搭建于 github page 平台
 
-已被 [jekyllthemes.org][jekyllthemes] 和 [themes.jekyllrc.org][jekyllrc] 收录
+已被 [jekyllthemes.org][jekyllthemes] 和 [themes.jekyllrc.org][jekyllrc] 收录<br><br>
 
 ###[SublimeText DirectEdit][directEdit] 插件
    
 用于快速打开预配置的常用文件(比如 php.ini, host, vhost 配置文件等)
 
-使用 Python 开发
+使用 Python 开发<br><br>
 
 ###参与贡献
 
