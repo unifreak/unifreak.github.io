@@ -25,28 +25,28 @@ title: UniFreak | Another yet unique freak is showing a freakshow
 description: "Fanghao's personal weblog, on coding or such stuff"
 
 my:
-    displayName: UniFreak
-    realName: FangHao
-    realName_cn: 方浩
-    jobTitle: "PHP Coder"
+    displayName: monsterdogfly
+    realName: Jaya Lee
+    realName_cn: 李俊瑶
+    jobTitle: "PM && OEI engineer"
     contact:
-        qq: 744910240
-        email: fanghao90s@gmail.com
-        github: http://www.github.com/UniFreak
-        qzone: http://744910240.qzone.qq.com
-        pinterest: https://www.pinterest.com/miblah/
-        tel: 15532915861
+        qq: 542468041
+        email: lijunyao@sicun.org
+        github: http://www.github.com/monsterdogfly
+        qzone: http://542468041.qzone.qq.com
+        pinterest: None
+        tel: 15527796468
         address:
             country: China
-            state: Beijing
-            city: Beijing
-            distribute: ChaoYang
-            postcode: 000000
-            cell: "AnHuiLi"
+            state: Hubei Province
+            city: WuHan
+            distribute: HongShan
+            postcode: 430074
+            cell: "Huazhong University of Science and Technology"
     skills:
-        frontend: ["HTML | Markdown", "CSS | SASS", "JS | jQuery", "Bootstrap"]
-        backend: ["PHP", "MySQL", "Redis", "Regex", "Laravel", "OSC"]
-        tools: ["Sublime Text", "Git | Github", "Linux", "Jekyll | Liquid"]
+        frontend: [unknown]
+        backend: [unknown]
+        tools: [unknown]
 
 collections:
     qqGroupGuide:
