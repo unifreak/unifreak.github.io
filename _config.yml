@@ -21,14 +21,14 @@ mode: product
 url: https://monsterdogfly.github.io/
 devurl: http://localhost:4000/
 name: M.D.FLY
-title: Uncle and Girl
+title: Enjoying Afternoon Tea
 description: lijjunyao's lovely blog
 
 my:
     displayName: monsterdogfly
     realName: Jaya Lee
     realName_cn: 李俊瑶
-    jobTitle: "PM && OEI engineer"
+    jobTitle: "PM && OEIer"
     contact:
         qq: 542468041
         email: lijunyao@sicun.org
@@ -44,9 +44,9 @@ my:
             postcode: 430074
             cell: "Huazhong University of Science and Technology"
     skills:
-        frontend: [unknown]
-        backend: [unknown]
-        tools: [unknown]
+        frontend: [交互设计；光学工程]
+        backend: [产品经理；嵌入式工程师]
+        tools: [Axure；PS；C；Matlab；Keil；Zemax；Meshmixer]
 
 collections:
     qqGroupGuide:
