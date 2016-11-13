@@ -18,11 +18,11 @@ excerpt_separator: "[-----]"
 
 # mode: dev
 mode: product
-url: https://unifreak.github.io/
+url: https://monsterdogfly.github.io/
 devurl: http://localhost:4000/
-name: UniFreak
-title: UniFreak | Another yet unique freak is showing a freakshow
-description: "Fanghao's personal weblog, on coding or such stuff"
+name: Monsterdogfly
+title: Uncle and Girl
+description: lijjunyao's lovely blog
 
 my:
     displayName: monsterdogfly
