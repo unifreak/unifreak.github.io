@@ -5,7 +5,7 @@ category: translation
 tags: [pattern]
 excerpt: "Martin Fowler 针对 '控制反转' 这个概念给出了自己的解释, 以澄清当下对该概念的迷思. 以及常用的实现方式和示例"
 ---
-_原文在 2005/06/26 发表于 <http://http://martinfowler.com/bliki/InversionOfControl.html>_
+_原文在 2005/06/26 发表于 <http://martinfowler.com/bliki/InversionOfControl.html>_
 
 在使用框架的时候, 经常会遇到 '控制反转', 它也的确是框架的一个典型特征.
 
