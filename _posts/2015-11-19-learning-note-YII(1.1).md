@@ -975,7 +975,7 @@ $row = Yii::app()->db->createCommand(array(
 
 同一个 `CDbCommand` 实例可用于多次构建不同的查询, 但是记得要再另一次之前调用 `CDbCommand::reset()` 以清理上次的查询
 
-##<a name="ActiveRecord">Active Record</a>
+## <a name="ActiveRecord">Active Record</a>
 
 每个 AR 类代表一个数据表(或视图), 数据表(或视图)的列在 AR 类中体现为类的属性, 一个 AR 实例则表示表中的一行
 
@@ -1953,13 +1953,13 @@ $auth->createRole('guest', 'guest user', $bizRule);
     ?>
     ```
 
-[security]: # security
-[filter]: # filter
-[accessControlFilter]: # accessControlFilter
-[runSql]: # runSql
-[FormModel]: # FormModel
-[ActiveRecord]: # ActiveRecord
+[security]: #security
+[filter]: #filter
+[accessControlFilter]: #accessControlFilter
+[runSql]: #runSql
+[FormModel]: #FormModel
+[ActiveRecord]: #ActiveRecord
 [Alias]: #
-[triggerValidation]: # triggerValidation
-[massiveAssign]: # massiveAssign
+[triggerValidation]: #triggerValidation
+[massiveAssign]: #massiveAssign
 [useTransaction]: #
