@@ -560,7 +560,7 @@ class 类名        // `stdClass` 和 `__PHP_Incomplete_Class` 为 PHP 保留字
 
     如果一个类被声明为 `final`, 则不能被继承
 
-###`static` 关键字: 静态属性/方法
+### `static` 关键字: 静态属性/方法
 
 *定义静态(类)属性和方法, 使用 `::` 访问      
 
