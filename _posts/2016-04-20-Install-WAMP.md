@@ -7,7 +7,7 @@ excerpt: "虽然集成环境很方便, 但是也经常遇到各种奇怪问题, 
 ---
 _原回答在 2014/04/30 由 `user256743` 发表于 <http://superuser.com/questions/748117/how-to-manually-install-apache-php-and-mysql-on-windows>_
 
-#环境
+# 环境
 
 我的系统是 Win7 32 位
 
@@ -16,21 +16,21 @@ _原回答在 2014/04/30 由 `user256743` 发表于 <http://superuser.com/questi
 你当然可以下载自己想要的版本的各软件, 也可以把各软件装到自己想要的目录中
 但是为了避免不必要的麻烦, 建议完全跟着教程来
 
-#参考
+# 参考
 
 - http://httpd.apache.org/docs/current/platform/windows.html
 - http://www.php.net/manual/en/install.windows.apache2.php
 
-#准备
+# 准备
 
 1. 下载 &nbsp;&nbsp;[Apache][apacheDown]
 2. 下载 &nbsp;&nbsp;[PHP][phpDown]
 3. 下载 &nbsp;&nbsp;[MySQL][mysqlDown]
 4. 下载 &nbsp;&nbsp;[VS2012][vsDown][可选]
 
-#安装
+# 安装
 
-###安装 Apache
+### 安装 Apache
 
 解压 Apache 到 C 盘根目录, 解压完后目录应该像这样: `C:\Apache24\bin`
 
@@ -58,7 +58,7 @@ _原回答在 2014/04/30 由 `user256743` 发表于 <http://superuser.com/questi
 
 如果你想要开机自动启动 Apache, 运行 `httpd.exe -k install`. 然后可以在 windows 服务中控制 Apache2.4, 让其自动启动
 
-###安装 PHP
+### 安装 PHP
 
 在 C 盘根目录新建文件夹 `PHP/`, 解压 PHP  压缩包 到此文件夹中, 路径看上去是这样: `C:\PHP\ext`
 
@@ -66,7 +66,7 @@ _原回答在 2014/04/30 由 `user256743` 发表于 <http://superuser.com/questi
 
 打开 `php.ini`, 找到 `extension_dir = "ext"` 这一行并取消注释(去掉行前的 ;)
 
-###配置 Apache 使用 PHP
+### 配置 Apache 使用 PHP
 
 打开 `C:\Apache24\conf\httpd.conf`
 
@@ -98,7 +98,7 @@ _原回答在 2014/04/30 由 `user256743` 发表于 <http://superuser.com/questi
 
 现在, 你变可以使用 `mysqli` 或 `PDO` 来操作 MySQL 数据库了
 
-###安装 MySQL
+### 安装 MySQL
 
 双击下载的 MySQL 文件
 
@@ -108,7 +108,7 @@ _原回答在 2014/04/30 由 `user256743` 发表于 <http://superuser.com/questi
 
 安装完后, 可以右击右下角的 MySQL Notifier 图标, 禁用其开机自启动
 
-###DONE
+### DONE
 
 你现在已经配置完成整个 WAMP 环境了
 
