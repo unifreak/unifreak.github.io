@@ -90,7 +90,7 @@ _原回答在 2014/04/30 由 `user256743` 发表于 <http://superuser.com/questi
 
 ![phpinfo output](/images/posts/201604/phpinfoOutput.png)
 
-###[可选] 启用 PHP MySql 扩展
+### [可选] 启用 PHP MySql 扩展
 
 打开 `C:\PHP\php.ini`
 

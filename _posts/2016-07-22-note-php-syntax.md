@@ -345,7 +345,7 @@ $h = true and false; // $h 被赋值为 true ("=" 的优先级比 "and" 高)
 # 流程控制
 
 - 顺序结构
-- 分支(条件|选择)结构
+- 分支(条件/选择)结构
     + 单路分支
 
         ```php
@@ -590,7 +590,7 @@ class 类名        // `stdClass` 和 `__PHP_Incomplete_Class` 为 PHP 保留字
 
 *你可以把静态属性初始化为整型或数组, 但不能指向另一个变量或函数返回值，也不能指向一个对象
 
-###`const` 关键字: 类常量
+### `const` 关键字: 类常量
 
 *声明类常量, 定义和使用时都不需要 `$` 符号, 使用 `<类名>::` 访问
 
@@ -647,10 +647,14 @@ class 类名        // `stdClass` 和 `__PHP_Incomplete_Class` 为 PHP 保留字
     + `__get(string $name)`: 读取未定义或不可见的变量的值时被调用
     + `__isset(string $name)`: 当对未定义或不可见的变量调用 `isset()` 或 `empty()` 时被调用
     + `__unset(string $name)`: 对未定义或不可见的变量调用 `unset()` 时被调用
+
     - - -
+
     + `__call(string $name , array $arguments)`: 调用一个未定义或不可见方法时被调用, 用于错误处理
     + `__callStatic(string $name , array $arguments)`: 在静态方法中调用一个未定义或不可见的方法时被调用
+
     - - -
+
     + `__clone()`: 当使用 `clone` 复制对象时被调用, 用于对副本初始化(`$this `代表副本, `$that` 代表原本)操作
     + `__toString()`: 当直接以字符串形式输出对象时被调用
     + `__sleep()`: 当对象被序列化时被调用, 常用于提交未提交的数据等类似的清理操作或部分序列化
@@ -659,7 +663,9 @@ class 类名        // `stdClass` 和 `__PHP_Incomplete_Class` 为 PHP 保留字
     + `__invoke()`: 当尝试以调用函数的方式调用一个对象时
     + `__setState()`: 当调用 `var_export()` 导出类时
     + `__debugInfo()`: 当 `var_dump()` 对象时
+
     - - - 
+
     + `__autoload($class_name)`: 试图使用尚未被定义的类时自动调用, 这是唯一一个在类外部使用的魔术方法
 
 ## Trait
@@ -790,7 +796,7 @@ class 类名        // `stdClass` 和 `__PHP_Incomplete_Class` 为 PHP 保留字
         ?>
         ```
 
-#*生成器
+# *生成器
 
 生成器允许你在 `foreach` 代码块中写代码来迭代一组数据而不需要在内存中创建一个数组
 
