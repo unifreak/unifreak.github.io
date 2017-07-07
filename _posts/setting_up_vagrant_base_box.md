@@ -4,7 +4,7 @@
 - https://www.mojowill.com/geek/howto-install-php-5-4-5-5-or-5-6-on-centos-6-and-centos-7/
 
 # use
-- centos 5.8
+- centos 6.8
 - vbox 5.1
 - vagrant 1.9.4
 
