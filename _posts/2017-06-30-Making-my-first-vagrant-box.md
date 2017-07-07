@@ -1,7 +1,7 @@
 ---
 title: "制作自己第一个 vagrant box"
 layout: post
-category: [note, tutorial]
+category: [tutorial]
 tags: [php, vagrant]
 excerpt: "作为程序员, 基本上换一次工作, 换一个电脑就要搭建一次开发环境. 手工搭建环境并不是件容易的事儿. 虽然网上有很多教程和文档可供参考, 但是在实际操作时总是会遇到莫名其妙的坑, 一折腾就是半天. 所以自己终于下决心自己打包一个 vagrant box 了. 这篇文章就当是笔记, 为以后作参考"
 ---
