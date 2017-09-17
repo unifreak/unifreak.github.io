@@ -1,4 +1,4 @@
-# highlighter: pygments
+﻿# highlighter: pygments
 highlighter: rouge
 
 markdown: redcarpet
@@ -22,7 +22,7 @@ url: https://monsterdogfly.github.io/
 devurl: http://localhost:4000/
 name: M.D.FLY
 title: Tech House of FLY
-description: lijjunyao s lovely blog
+description: lijunyao s lovely blog
 
 my:
     displayName: monsterdogfly
