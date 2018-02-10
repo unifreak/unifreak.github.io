@@ -3,44 +3,47 @@ layout: markdownreader_bare
 ---
 
 
-##李俊瑶_个人简历
+## 李俊瑶_个人简历
 
 ---
-####基本信息
+#### 基本信息
 
 学校：中国舰船研究院
+
 学历：硕士研究生
+
 联系电话：15527796468
+
 联系邮箱：lijunyao@sicun.org
-加入技术团队：华科校团委思存工作室
+
+曾加入技术团队：华科校团委思存工作室
 
 ---
 
-####爱好&&技能
+#### 部分技能
  - 文案策划
- - 阅读涉猎
  - 交互设计
- - 团队管理
 
 ---
-####教育经历
+#### 教育经历
  - 华中科技大学 光学与电子信息学院 光电信息工程
  - 中国舰船研究院 光学工程
 
 ---
 
-####相关项目
+#### 相关项目
  - 同课同行APP
  - 梧桐网站
  - 醉晚亭网站
  - 项目记录系统内建网站
  - 记录系统内建网站
  - 基于傅里叶变换的联合相关器的实验研究（本科毕业设计）
+ - 水下图像处理
 
 ---
 
-####技术/工具
- - 语言：C 汇编 Markdown
- - 工具：Axure Photoshop Word Matlab VisualStudio Keil Zemax
+#### 技术/工具
+ - 语言：C Markdown 
+ - 工具：Axure Photoshop Word Matlab VisualStudio 
  - 技术：Interactive_design graphic_design information_optical image_processing
 
