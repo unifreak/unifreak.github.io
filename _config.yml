@@ -46,7 +46,7 @@ my:
     skills:
         frontend: [交互设计；光学工程]
         backend: [产品经理；嵌入式工程师]
-        tools: [Axure；PS；C；Matlab；Keil；Zemax；Meshmixer]
+        tools: [Axure；PS；C；Matlab]
 
 collections:
     qqGroupGuide:
