@@ -19,10 +19,8 @@ PHP 也有许多专门用途的格式化字符串的函数 - 比如 [`date()`][d
 了解 `printf()` 的最简单方式就是通过示例. 下面这个例子打印一个包含了两个数字的字符串:
 
 ```php
-<?php
 // 打印 "Australia comprises 6 states and 10 territories"
 printf( "Australia comprises %d states and %d territories", 6, 10 );
-?>
 ```
 
 注意这个字符串在被打印出的时候, 第一个 `%d` 被第二个参数 `6` 替换, 第二个 `%d` 则被第三个参数 `10` 替换. 其工作原理即:
@@ -54,9 +52,7 @@ __NOTE:__ 如果想要打印 `%` 符, 使用 `%%`.
 下面是一些类型说明符的示例:
 
 ```php
-<?php 
 printf( "Here's the number %s as a float (%f), a binary integer (%b), an octal integer (%o), and a hex integer (%x).", 543.21, 543.21, 543.21, 543.21, 543.21 );
-?>
 ```
 
 这段代码会输出:
@@ -70,19 +66,15 @@ Here's the number 543.21 as a float (543.210000), a binary integer (1000011111),
 默认情况下, `printf()` 只会在负数前加正负符号:
 
 ```php
-<?php 
 printf( "%d", 36 );   // 输出 "36"
 printf( "%d", -36 );  // 输出 "-36"
-?>
 ```
 
 如果你也想让 `printf()` 在正数前加符号, 可以在类型说明符前指定一个符号说明符 `+`:
 
 ```php
-<?php 
 printf( "%+d", 36 );   // 输出 "+36"
 printf( "%+d", -36 );  // 输出 "-36"
-?>
 ```
 
 # 填充
@@ -101,7 +93,6 @@ printf( "%+d", -36 );  // 输出 "-36"
 这是些填充说明符示例:
 
 ```php
-<?php 
 printf( "%04d", 12 );          // 输出 "0012"
 printf( "%04d", 1234 );        // 输出 "1234"
 printf( "%04d", 12345 );       // 输出 "12345"
@@ -109,7 +100,6 @@ printf( "% 10s", "Hello" );    // 输出 "     Hello"
 printf( "%10s", "Hello" );     // 输出 "     Hello"
 printf( "%'*10s", "Hello" );   // 输出 "*****Hello"
 printf( "%'*-10s", "Hello" );  // 输出 "Hello*****"
-?>
 ```
 
 留意第三个示例, 填充说明符并不会导致目标字符串被截断为 4 个字符. __填充只会在必要处增加字符__
@@ -119,35 +109,27 @@ printf( "%'*-10s", "Hello" );  // 输出 "Hello*****"
 当使用 `f` 或者 `F` 类型说明符格式化浮点数时, PHP 默认会取到小数点后面 6 位:
 
 ```php
-<?php 
 printf( "%f", 123.456 );  // 输出 "123.456000"
-?>
 ```
 
 如果要指定不同的精度, 就要用到精度说明符了. 精度说明符是一个 `.` 号后跟一个数字, 并应放到类型说明符之前. 如:
 
 ```php
-<?php 
 printf( "%.2f", 123.456 );   // 输出 "123.46"
 printf( "%.10f", 123.456 );  // 输出 "123.4560000000"
 printf( "%.0f", 123.456 );   // 输出 "123"
- ?>
 ```
 
 如果你既指定了填充说明符又指定了精度说明符, `printf()` 会将整个数字(包括整数和小数部分)填充到指定长度:
 
 ```php
-<?php 
 printf( "%08.2f", 123.456 );  // 输出 "00123.46"
- ?>
 ```
 
 如果你同时使用 `s` 类型说明符和精度说明符, `printf()` 会截断目标字符串到指定的长度:
 
 ```php
-<?php 
 printf( "%.2s", "Hello" );  // 输出 "He"
- ?>
 ```
 
 # 参数交换
@@ -157,10 +139,8 @@ printf( "%.2s", "Hello" );  // 输出 "He"
 要这样做, 在 `%` 符和类型说明符之间插入一个 `$` 号. 如:
 
 ```php
-<?php 
 // 输出 "Australia comprises 10 territories and 6 states"
 printf( 'Australia comprises %2$d territories and %1$d states', 6, 10 );
- ?>
 ```
 
 在上面的例子中, 第一个格式说明符是 `%2$d`. 意即: "将目标字符串后的第二个参数作为十进制整数格式化". 第二个格式说明符 `%1$d` 即: "将目标字符串后的第一个参数作为十进制整数格式化". 这样, 参数便以不同与默认的顺序格式化.
@@ -172,12 +152,10 @@ printf( 'Australia comprises %2$d territories and %1$d states', 6, 10 );
 那 `sprintf()` 又是干嘛的呢? 这个函数和 `printf()` 只有一点不同: 它会将格式化后的结果返回, 而不是直接输出. 这样你就可以将结果赋给变量, 进行其他操作等. 如果你想要在输出它之前进行额外的处理, 或者保存到数据库等, 那这点会很有用. 下面是示例:
 
 ```php
-<?php 
 $result = sprintf( "Australia comprises %d states and %d territories", 6, 10 );
 
 // 输出 "Australia comprises 6 states and 10 territories"
 echo $result;
- ?>
 ```
 
 # 相关函数
