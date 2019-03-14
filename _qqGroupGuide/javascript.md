@@ -1,9 +1,9 @@
 ---
 title: ##javascript 用群指南
 ---
-#用群指南(<small>_version 1_</small>)
+# 用群指南(<small>_version 1_</small>)
 
-##群信息
+## 群信息
 
 - 名称: ##Javascript(487247839)
 - <a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=5705b77f50b97c169bd50554c8c68c9888d184f4f0c97128a9875d1239a0d685"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="##Javascript" title="##Javascript"></a>
@@ -14,7 +14,7 @@ title: ##javascript 用群指南
     - 安置目眠(937928908)
     - 十年挂南墙(228366407)
 
-##初衷
+## 初衷
 
 群主极少用 QQ 群来交流技术问题, 因为大家都有共同的体验:
 
@@ -26,7 +26,7 @@ title: ##javascript 用群指南
 
 总之就是: 交流质量太差
 
-所以群主经常用 IRC 网络进行技术交流, 其中不乏国外大神, 能解决大部分问题. 
+所以群主经常用 IRC 网络进行技术交流, 其中不乏国外大神, 能解决大部分问题.
 
 但是还是有一些缺点:
 
@@ -36,7 +36,7 @@ title: ##javascript 用群指南
 
 所以只好自己建群, 尽量去维护 IRC 网络的交流体验, 又能充分利用 QQ 群的优点
 
-##交流原则
+## 交流原则
 
 - 尽量使用简单的群名片, 方便 @
 - 尽量使用 codebin 来共享代码, 常用 JS codebin
@@ -49,11 +49,11 @@ title: ##javascript 用群指南
 - 除问题相关的图片外, 禁发其他图片
 - 禁发广告(包括招聘广告)
 
-##管理员职责
+## 管理员职责
 
 发现群成员违背原则, 第一次提出警告并禁言 2 分钟, 第二次踢出
 
-##关于问问题(<small>参见 [提问的智慧][askArt]</small>)
+## 关于问问题(<small>参见 [提问的智慧][askArt]</small>)
 
 1. 问问题之前, 先自己进行代码测试, 或者查考相关手册, 利用搜索引擎, **优先自己解决**
 2. 如果自己解决不了, 请**描述清楚自己的问题**, 包括
@@ -64,17 +64,17 @@ title: ##javascript 用群指南
 4. 如需让人查看你的代码, 请**使用 jsbin 或 jsfiddle**
 5. 直接描述问题, 无需进行 '大神在吗?' 等之类的客套
 
-##我可以为群做什么
+## 我可以为群做什么
 
 如果你想要增大群阵容, 请粘贴下面内容到你想推荐的群里面
 
->如果群友厌倦了垃圾表情, 垃圾信息满天飞, 正儿八经问个技术问题却被忽略的交流环境, 请进群 487247839 (##Javascript). 
+>如果群友厌倦了垃圾表情, 垃圾信息满天飞, 正儿八经问个技术问题却被忽略的交流环境, 请进群 487247839 (##Javascript).
 
 >只欢迎真正进行技术交流的程序员, 喜欢发垃圾图片的群友或 hr 请绕步
 
-##相关资源
+## 相关资源
 
-###在线
+### 在线
 
 - MDN: <https://developer.mozilla.org/zh-CN/docs/Web/JavaScript>
 - ECMAScript 官网: <http://www.ecmascript.org/docs.php>
@@ -83,7 +83,7 @@ title: ##javascript 用群指南
 
 \* W3School 被很多国内大牛推崇, 但是被很多国外大牛所鄙斥(详见 <http://www.w3fools.com/>). 如果可能, 尽量使用 MDN.
 
-###书籍
+### 书籍
 
 - [Javascript 高级编程程序设计][book_JsAdvanced]
 - [JavaScript 语言精粹][book_JsGoodPart]
