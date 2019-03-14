@@ -16,8 +16,8 @@ layout: post
 permalink: /:categories/:title
 excerpt_separator: "[-----]"
 
-# mode: dev
-mode: product
+mode: dev
+# mode: product
 url: https://unifreak.github.io/
 devurl: http://localhost:4000/
 name: UniFreak
@@ -35,17 +35,17 @@ my:
         github: http://www.github.com/UniFreak
         qzone: http://744910240.qzone.qq.com
         pinterest: https://www.pinterest.com/miblah/
-        tel: 15532915861
+        tel: 153 6999 7084
         address:
             country: China
             state: Beijing
             city: Beijing
             distribute: ChaoYang
             postcode: 000000
-            cell: "AnHuiLi"
+            cell: "Wangxin Garden"
     skills:
         frontend: ["HTML | Markdown", "CSS | SASS", "JS | jQuery", "Bootstrap"]
-        backend: ["PHP", "MySQL", "Redis", "Regex", "Laravel", "OSC"]
+        backend: ["PHP", "Python", "Shell", MySQL", "Redis", "Regex", "Laravel", "Lumen"]
         tools: ["Sublime Text", "Git | Github", "Linux", "Jekyll | Liquid"]
 
 collections:
