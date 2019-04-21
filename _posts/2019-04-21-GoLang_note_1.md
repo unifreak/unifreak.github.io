@@ -37,7 +37,7 @@ excerpt: "本文包含了 Go 语言的简介, 环境搭建, 以及基本语法�
 
 ## 有趣链接
 - go playground 内部: <http://blog.golang.org/playground>
-- 为什么类型名在变量名之后: <<https://blog.golang.org/gos-declaration-syntax>
+- 为什么类型名在变量名之后: <https://blog.golang.org/gos-declaration-syntax>
 - defer: <https://blog.golang.org/defer-panic-and-recover>
 
 # 语法
