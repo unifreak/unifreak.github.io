@@ -1,12 +1,11 @@
 ---
 layout: base
 ---
-{% include mode_switcher.html %}
 
 {% assign my = site.my %}
 <div class="row" id="about">
     <header id="title">
-        <img src="{{ crturl }}images/me.png">
+        <img src="{{ site.url }}images/me.png">
         <h1>{{ my.realName_cn }} | <small>{{ my.jobTitle | upcase }}</small></h1>
     </header>
 
@@ -50,7 +49,7 @@ layout: base
 
     <section id="action">
         <h2>MORE</h2>
-        <a href="{{ crturl }}resume">查看我的在线简历</a>
+        <a href="{{ site.url }}resume">查看我的在线简历</a>
         <span> 或 </span>
         <a href="mailto:{{ my.contact.email }}">给我写邮件</a>
     </section>

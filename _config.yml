@@ -1,25 +1,28 @@
 # highlighter: pygments
 highlighter: rouge
 
-# markdown: redcarpet
-# redcarpet:
-#   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
-# markdown: kramdown
-# kramdown:
-#     input: GFM
-#     syntax_highlighter: rouge
+markdown: kramdown
 
-gems: [jekyll-paginate]
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts: # Rouge Options › https://github.com/jneen/rouge#full-options
+    css_class: 'highlight'
+    # default_lang: console
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+
+plugins: [jekyll-paginate]
 paginate: 7
 paginate_path: "page:num"
 layout: post
 permalink: /:categories/:title
 excerpt_separator: "[-----]"
 
-# mode: dev
-mode: product
 url: https://unifreak.github.io/
-devurl: http://localhost:4000/
 name: UniFreak
 title: UniFreak | Another yet unique freak is showing a freakshow
 description: "Fanghao's personal weblog, on coding or such stuff"

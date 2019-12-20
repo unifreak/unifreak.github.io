@@ -1,5 +1,3 @@
-{% include mode_switcher.html %}
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +20,7 @@
                         {% endfor %}
                     </ul>
                     {% endif %}
-                    <p id="postMeta">posted on {{ page.date | date_to_string }} under category <a href="{{crturl}}category/">{{ page.categories[0] }}</a></p>
+                    <p id="postMeta">posted on {{ page.date | date_to_string }} under category <a href="{{site.url}}/category/">{{ page.categories[0] }}</a></p>
 
                 </header>
 
@@ -38,6 +36,6 @@
 
     {% include footer.html %}
 
-    <script type="text/javascript" src="{{crturl}}javascripts/markdownreader.js"></script>
+    <script type="text/javascript" src="{{site.url}}/javascripts/markdownreader.js"></script>
 </body>
 </html>
