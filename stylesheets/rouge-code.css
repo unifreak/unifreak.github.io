@@ -5,6 +5,7 @@ div.highlight {
     color: white;
     padding: 5px 5px 5px 15px;
     border-radius: 5px;
+    overflow: auto;
 }
 
 div.highlight code {
