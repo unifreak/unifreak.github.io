@@ -32,9 +32,9 @@
 #markdown-container a:hover{text-decoration:underline;}
 #markdown-container a code,a:link code,a:visited code{color:#4183c4;}
 #markdown-container code {
-    padding: 0.2em;
+    border: 1px solid #ddd;
+    padding: 1px;
     margin: 0;
-    font-size: 85%;
     background-color: rgba(0,0,0,0.08);
     border-radius: 3px;
 }
@@ -112,7 +112,7 @@
 }
 #markdown-container table th,
 #markdown-container table td{
-    border:1px solid #ddd !important;
+    border:1px solid #ddd;
     padding: 5px;
     line-height: 1.5;
     vertical-align: top;

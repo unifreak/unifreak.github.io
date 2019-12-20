@@ -53,10 +53,8 @@ _note_: 给 `define()` 传递第三个参数 `true` 会让常量区分大小写
 ## 声明 (弱类型)
 
 ```php
-<?php
 $varName = varValue;
 $var1 = $var2 = $var3 = value;
-?>
 ```
 
 ## 命名
@@ -69,18 +67,14 @@ $var1 = $var2 = $var3 = value;
 ## 可变变量
 
 ```php
-<?php
 $var1 = $$var2;
-?>
 ```
 
 为避免产生类似 `$$var[1]` 的困惑, 使用大括号像这样分隔
 
 ```php
-<?php
-${$var[1]} // 或 
+${$var[1]} // 或
 ${$var}[1]
-?>
 ```
 
 ## 赋值
@@ -88,22 +82,18 @@ ${$var}[1]
 - 值赋值
 
     ```php
-    <?php
     $var1 = 10;
     $var2 = var1;           // 将 var1 的值赋给 var2
     $var1 = 100;            // var1 = 100; var2 = 10(不变)
-    ?>
     ```
 
 - 引用赋值
 
     ```php
-    <?php
     $var1 = 10;
-    $var2 = & var1;         // 使用 "&", 将 var1 地址给 var2, 此时 
+    $var2 = & var1;         // 使用 "&", 将 var1 地址给 var2, 此时
                             // var1 和 var2 都指向同一个地址
     $var1 = 100;            // var1 = 100; var2 = 100
-    ?>
     ```
 
 ## 类型
@@ -113,11 +103,9 @@ ${$var}[1]
 - `int`, `integer` (4个字节)
 
     ```php
-    <?php
     $int = 10;   // 十进制
     $int = 045;  // 八进制(以0开头)
     $int = 0xff; // 十六进制(以0x开头)
-    ?>
     ```
 
 - `bool`, `boolean`
@@ -125,9 +113,7 @@ ${$var}[1]
 - `float`, `double`, `real` (8个字节)
 
     ```php
-    <?php
-    $float = 3.14E-2; // 科学计数法                 
-    ?>
+    $float = 3.14E-2; // 科学计数法
     ```
 
 - `string`
@@ -147,7 +133,7 @@ ${$var}[1]
 
         解析变量, 定界符可以带双引号, 也可以不带, 如 `<<<HERE` 或 `<<<"HERE"`
 
-    + `NOWDOC` 
+    + `NOWDOC`
 
         不解析变量, 定界符必须带单引号, 如 `<<<'NOW'`, 但结尾定界符不用单引号
 
@@ -156,10 +142,8 @@ ${$var}[1]
     _note_: `String` 类型中的单个字符可以用 `{}` 或 `[]` 访问, 如:
 
     ```php
-    <?php
     $str = 'str';
     echo $str{0}; // 或 $str[0]
-    ?>
     ```
 
 ### 复合
@@ -197,7 +181,7 @@ ${$var}[1]
     | 空对象 |`FALSE`|
     | NULL |`FALSE`|
     |其他| `TRUE` |
-    
+
 - 转到 `INT`
 
     | 从 | 转换结果|
@@ -273,23 +257,19 @@ ${$var}[1]
 - 定义
 
     ```php
-    <?php
     // 1. define:
     define("CONSTANT_NAME", 'constantValue');
     // 2. const:必须处于最顶端的作用区域, <5.3: 只能用于类中
     const CONSTANT_NAME = 'constantValue';
-    ?>
     ```
 
 - 获取
 
     ```php
-    <?php
     // 1. defined(): 判断常量是否定义
     defined("constantName");
     // 2. constant(): 获取常量名为 constName 的常量值
     constant('constName');
-    ?>
     ```
 
 - 魔术常量
@@ -331,7 +311,6 @@ ${$var}[1]
 *`&&` 与 `and`, `||` 与 `or` 的区别:
 
 ```php
-<?php
 // "||" 的优先级比 "or" 高
 $e = false || true; // $e 被赋值为 (false || true)，结果为 true
 $f = false or true; // $f 被赋值为 false ("=" 的优先级比 "or" 高)
@@ -339,7 +318,6 @@ $f = false or true; // $f 被赋值为 false ("=" 的优先级比 "or" 高)
 // "&&" 的优先级比 "and"　高
 $g = true && false; // $g 被赋值为 (true && false)，结果为 false
 $h = true and false; // $h 被赋值为 true ("=" 的优先级比 "and" 高)
-?>
 ```
 
 # 流程控制
@@ -349,30 +327,25 @@ $h = true and false; // $h 被赋值为 true ("=" 的优先级比 "and" 高)
     + 单路分支
 
         ```php
-        <?php
         if() { }
-        ?>
         ```
 
     + 双路分支
 
         ```php
-        <?php
         if() { } else { }
-        ?>
         ```
 
     + 多路分支
 
         ```php
-        <?php
         if() { }... elseif() { }... else { }
         switch(变量) {      // 变量最好只用整形和字符串
             case 变量值:    // 各个 case 都是互斥的,  可以利
                 code...;    // 用此特性简写一些条件判断
                 break;      // 跳出循环. 可以利用 break 匹配多种情况
             case 变量值:
-                code...;    // 如果 case 的语句为空, 则将控制转移到下一个 
+                code...;    // 如果 case 的语句为空, 则将控制转移到下一个
                             // case, 实现多个 case 共用一段代码
                 break;
             ...
@@ -384,15 +357,12 @@ $h = true and false; // $h 被赋值为 true ("=" 的优先级比 "and" 高)
         if...else...        // 适用于范围条件
         switch...case       // 适用于定点值条件
         foreach...          // 适用于数组
-        ?>
         ```
 
     + 三目运算符
 
         ```php
-        <?php
         boolean ? true_value : false_value
-        ?>
         ```
 
 - 循环结构
@@ -403,21 +373,17 @@ $h = true and false; // $h 被赋值为 true ("=" 的优先级比 "and" 高)
 - `break`: 退出剩余循环
 
     ```php
-    <?php
     break 1;                // 默认, 退出一层循环
     break 2;                // 退出两层循环
                             // 以此类推
-    ?>
     ```
-                                
+
 - `continue`: 跳过本次循环
 
     ```php
-    <?php
     continue 1;
     continue 2;
     // 以此类推
-    ?>
     ```
 
 - *`declare (directive)`
@@ -445,11 +411,9 @@ _note_: 如果你要使用浮点作为键, 使用字符串形式如 '1.5', '1.6'
 ## 遍历
 
 ```php
-<?php
 for() { ... }                                           // 有很多限制
 foreach( $arr as $key => $val ) { ...  }                // 首选
 while( list( $key,$val ) = each( $user ) ) { ... }      // 效率更高
-?>
 ```
 
 使用  `next()` `prev()` `reset()` `end()` `current()` 可以操作数组指针
@@ -469,17 +433,15 @@ while( list( $key,$val ) = each( $user ) ) { ... }      // 效率更高
 - 定义
 
     ```php
-    <?php
     function 函数名(形参, 形参 , ...) {
         函数体
         return 返回值;
     }
-    ?>
     ```
 
 - 定义可变数量的参数列表
 
-    + <5.5: 
+    + <5.5:
 
         使用 `func_num_args()`, `func_get_args()`, `func_get_arg()`
 
@@ -522,14 +484,12 @@ PHP 支持可变函数的概念. 这意味着如果一个变量名后有圆括�
 ### 声明
 
 ```php
-<?php
 class 类名        // `stdClass` 和 `__PHP_Incomplete_Class` 为 PHP 保留字
 {
     成员属性      // 定义成员属性必须使用 $, 访问成员属性不用使用 $ 符号
                  *// 属性中的变量可以初始化, 但是初始化的值必须是常数
     成员方法
 }
-?>
 ```
 
 ### 命名
@@ -562,16 +522,16 @@ class 类名        // `stdClass` 和 `__PHP_Incomplete_Class` 为 PHP 保留字
 
 ### `static` 关键字: 静态属性/方法
 
-*定义静态(类)属性和方法, 使用 `::` 访问      
+*定义静态(类)属性和方法, 使用 `::` 访问
 
 *定义和访问静态属性需要使用 `$` 符号
 
-*静态方法访问方式: 
+*静态方法访问方式:
 
 1. `类::方法`
 2. `实例->方法`
 
-*静态属性访问方式: 
+*静态属性访问方式:
 
 1. `类::属性`
 2. `实例::$属性`
@@ -622,7 +582,7 @@ class 类名        // `stdClass` 和 `__PHP_Incomplete_Class` 为 PHP 保留字
 - 序列化: `serialize()` 和 `unserialize`
 
     将一个对象转换为一个包含字节流的字符串或反之
-    
+
     用于将对象长时间保存在数据库或文件中, 或者在多个 php 文件间传输时
 
 - 比较
@@ -632,7 +592,7 @@ class 类名        // `stdClass` 和 `__PHP_Incomplete_Class` 为 PHP 保留字
     |引用|`true`|`true`|
     |有相同属性值的两个实例|`true`|`false`|
     |属性值不同的两个实例|`false`|`false`|
-        
+
 
 ## 魔术方法 (不同时机自动调用以完成特定功能的系统定义方法  )
 
@@ -664,7 +624,7 @@ class 类名        // `stdClass` 和 `__PHP_Incomplete_Class` 为 PHP 保留字
     + `__setState()`: 当调用 `var_export()` 导出类时
     + `__debugInfo()`: 当 `var_dump()` 对象时
 
-    - - - 
+    - - -
 
     + `__autoload($class_name)`: 试图使用尚未被定义的类时自动调用, 这是唯一一个在类外部使用的魔术方法
 
@@ -688,7 +648,7 @@ class 类名        // `stdClass` 和 `__PHP_Incomplete_Class` 为 PHP 保留字
 
     + 使用 `namespace` 关键字
     + 必须在其他所有代码之前(除 `declare` 语句)
-    + 同一个命名空间可以定义在多个文件中. 
+    + 同一个命名空间可以定义在多个文件中.
     将全局的非命名空间中的代码与命名空间中的代码组合在一起, 只能使用大括号形式的语法. 全局代码必须用一个不带名称的 `namespace`  语句加上大括号括起来
     + 除了开始的 `declare` 语句外, 命名空间的括号外不得有任何 PHP 代码
 
@@ -743,20 +703,16 @@ class 类名        // `stdClass` 和 `__PHP_Incomplete_Class` 为 PHP 保留字
 - 展示(适用于开发环境)
 
     ```php
-    <?php
     display_errors = on #默认为 off
     error_reporting() #默认为除了 E_NOTICE 和 E_STRICT 的所有错误
-    ?>
     ```
 
 - 记录(适用于线上环境)
 
     ```php
-    <?php
     log_errors = on
     error_log = /path/to/filename #或者 error_log = syslog
     error_log()
-    ?>
     ```
 
 - 抑制: `@`
@@ -768,7 +724,6 @@ class 类名        // `stdClass` 和 `__PHP_Incomplete_Class` 为 PHP 保留字
     - 自定义错误处理函数:
 
         ```php
-        <?php
         function handleError($errno, $errstr,$error_file,$error_line)
         {
             echo "<b>Error:</b> [$errno] $errstr - $error_file:$error_line";
@@ -778,7 +733,6 @@ class 类名        // `stdClass` 和 `__PHP_Incomplete_Class` 为 PHP 保留字
         }
         set_error_handler("handleError");
         trigger_error();
-        ?>
         ```
 
     - 抛出异常: `throw..try..catch`
@@ -786,14 +740,12 @@ class 类名        // `stdClass` 和 `__PHP_Incomplete_Class` 为 PHP 保留字
     - 自定义异常处理函数:
 
         ```php
-        <?php
         function exception_handler($exception) {
             echo "Uncaught exception: " , $exception->getMessage(), "\n";
         }
         set_exception_handler('exception_handler');
         throw new Exception('Uncaught Exception');
         echo "Not Executed\n";
-        ?>
         ```
 
 # *生成器
@@ -811,33 +763,25 @@ class 类名        // `stdClass` 和 `__PHP_Incomplete_Class` 为 PHP 保留字
 除了生成简单的值
 
 ```php
-<?php
 yield $id;
-?>
 ```
 
 你也可以在生成值的时候指定键名
 
 ```php
-<?php
 yield $id => $fields;
-?>
 ```
 
 如果在一个表达式上下文(例如在一个赋值表达式的右侧)中使用 `yield`, 你必须使用圆括号把 `yield` 申明包围起来
 
 ```php
-<?php
-$data = (yield $value); 
-?>
+$data = (yield $value);
 ```
 
 或
 
 ```php
-<?php
 $data = (yield $key => $value);
-?>
 ```
 
 `yield` 可以在没有参数传入的情况下被调用来生成一个 `NULL` 值并配对一个自动的键名
@@ -849,30 +793,24 @@ $data = (yield $key => $value);
 - 变量的引用传递
 
     ```php
-    <?php
     $var = &$var2 // 所有对 $var 的更改将反映到 $var2
-    ?>
     ```
 
 - 函数的引用传递
 
     ```php
-    <?php
     function fun(&$var) {
-        // 所有对 $var 的更改将反映到 $var 指向的变量         
+        // 所有对 $var 的更改将反映到 $var 指向的变量
         // 也可以用全局变量实现
     }
-    ?>
     ```
 
 - 函数的引用返回
 
     ```php
-    <?php
     function &fun(){
         return ...
     }
-    ?>
     ```
 
    *此时, 如果要将函数返回作为引用赋值, 必须在赋值时加 `&`, 如 `$var = &fun();`

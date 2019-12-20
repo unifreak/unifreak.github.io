@@ -1,12 +1,5 @@
-td.linenos {
-    color: #4a4a40;
-    background: #e7e7e1;
-    border-radius: 5px 0px 0px 10px;
-    border: none !important;
-}
-
-div.highlight, div.highlighter-rouge {
-    width: 97%;
+div.highlight {
+    width: 100%;
     margin-left: 1px;
     background: #49483e url('../images/monokaibg.jpg') top left;
     color: white;
@@ -14,9 +7,13 @@ div.highlight, div.highlighter-rouge {
     border-radius: 5px;
 }
 
+div.highlight code {
+    border: none !important;
+    padding: 0 !important;
+}
+
 td.code {
     width: 100%;
-    background: #49483e url('../images/monokaibg.jpg') top left;
     color: white;
     border-radius: 5px;
 }
