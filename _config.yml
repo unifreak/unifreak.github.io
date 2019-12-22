@@ -8,7 +8,9 @@ kramdown:
   syntax_highlighter_opts: # Rouge Options › https://github.com/jneen/rouge#full-options
     css_class: 'highlight'
 
-plugins: [jekyll-paginate]
+plugins:
+  - jekyll-paginate
+  - jekyll-compass
 paginate: 7
 paginate_path: "page:num"
 layout: post
