@@ -1,3 +1,13 @@
 ---
 ---
-@import "base"
+
+@import "base/normalize";
+@import "bootstrap/grid";
+
+@import "base/base";
+@import "base/ie8";
+@import "font/font-awesome";
+
+@import "layout/header";
+@import "layout/main";
+@import "layout/footer";
