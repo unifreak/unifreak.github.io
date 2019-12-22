@@ -20,7 +20,7 @@
                         {% endfor %}
                     </ul>
                     {% endif %}
-                    <p id="postMeta">posted on {{ page.date | date_to_string }} under category <a href="{{site.url}}/category/">{{ page.categories[0] }}</a></p>
+                    <p id="postMeta">posted on {{ page.date | date_to_string }} under category <a href="{{ site.baseurl }}/category/">{{ page.categories[0] }}</a></p>
 
                 </header>
 
@@ -36,6 +36,6 @@
 
     {% include footer.html %}
 
-    <script type="text/javascript" src="{{site.url}}/assets/js/markdownreader.js"></script>
+    <script type="text/javascript" src="{{ site.baseurl }}/assets/js/markdownreader.js"></script>
 </body>
 </html>

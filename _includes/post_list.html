@@ -32,8 +32,8 @@
             <a href="{{ paginator.next_page_path | prepend: site.url }}">»</a>
         {% endif %}
     {% elsif jsPagiLoaded != true %}
-        <script type="text/javascript" src="{{site.url}}/assets/js/pagination.js"></script>
-        <script type="text/javascript" src="{{site.url}}/assets/js/listAndPagi.js"></script>
+        <script type="text/javascript" src="{{ site.baseurl }}/assets/js/pagination.js"></script>
+        <script type="text/javascript" src="{{ site.baseurl }}/assets/js/listAndPagi.js"></script>
         {% assign jsPagiLoaded = true %}
     {% endif %}
 
