@@ -19,7 +19,10 @@ excerpt_separator: "[-----]"
 
 url: https://unifreak.github.io/
 name: unifreak
-title: UniFreak | Another yet unique freak is showing a freakshow
+title: unifreak | another yet unique freak is showing a freakshow
+shout:
+  - on the way to death
+  - on the way of learning
 description: "Fanghao's personal weblog, on coding or such stuff"
 
 my:

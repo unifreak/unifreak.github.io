@@ -6,7 +6,7 @@
 #l-footer {
     background-color: rgb(28, 51, 64);
     color: white;
-    margin-top: 7rem;
+    margin-top: 5rem;
     padding: 1.5rem;
 
     h3 {
@@ -40,5 +40,12 @@
             margin-bottom: 2rem;
         }
 
+        h3 {
+            text-align: left;
+        }
+
+        #rss {
+            text-align: left;
+        }
     }
 }

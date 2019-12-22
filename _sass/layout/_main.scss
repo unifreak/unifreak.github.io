@@ -6,9 +6,14 @@
         box-shadow: 0 0 10px #999;
         border-radius: 5px;
 
+        &:not(:first-of-type) {
+            margin-top: 2.5rem;
+        }
+
         .date {
             text-align: center;
             font-weight: bold;
+            margin-top: 2rem;
         }
 
         .day {
@@ -18,6 +23,7 @@
             height: 5rem;
             margin: 2rem auto 0.5rem auto;
             font: normal normal bold 2.4rem/4.9rem "Verdana",sans-serif;
+            box-shadow: 0 0 2px #999;
             @include border-radius(50%);
         }
 
@@ -164,9 +170,8 @@
     }
 
     div#paginator {
-        margin: 0 auto;
         max-width: auto;
-        margin-top: 3rem;
+        margin-top: 2.5rem;
 
         a, span {
             min-width: 2rem;
@@ -262,9 +267,45 @@ ul.tags {
 
 @media (max-width: 768px) {
     #l-main {
+        article {
+            padding-right: 0;
+            margin-top: 3rem;
+            margin-left: -0.5rem;
+            margin-right: -0.5rem;
+
+            &:not(:first-of-type) {
+                margin-top: 1rem;
+            }
+        }
+
         article .title {
-            font-size: 3rem;
-            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        article .date {
+            display: none;
+        }
+
+        article .excerpt {
+            font-size: 1.4rem;
+            margin-bottom: 0rem;
+        }
+
+        article .continue {
+            font-size: 1rem;
+            margin: 0 2rem 1rem;
+        }
+
+        article hr {
+            margin: 0rem;
+        }
+
+        .tags li {
+            font-size: 1rem;
+        }
+
+        #paginator {
+            margin-left: -0.5rem;
         }
 
         #about {

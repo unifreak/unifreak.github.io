@@ -7,8 +7,9 @@
 
 
             <div class="col-lg-5">
-                <p>On the way to death</p>
-                <p>On the way of learning</p>
+              {% for line in site.shout %}
+                <p>{{ line }}</p>
+              {% endfor %}
             </div>
         </div>
 
