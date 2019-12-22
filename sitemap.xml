@@ -8,14 +8,14 @@ layout: null
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     {% for post in site.posts %}
     <url>
-        <loc>{{ post.url | prepend: site.baseurl | prepend: site.url }}</loc>
+        <loc>{{ post.url | prepend: site.url | prepend: site.url }}</loc>
         <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
         <changefreq>weekly</changefreq>
     </url>
     {% endfor %}
     {% for post in site.pages %}{% if post.isNavItem %}
     <url>
-        <loc>{{ post.url | prepend: site.baseurl | prepend: site.url }}</loc>
+        <loc>{{ post.url | prepend: site.url | prepend: site.url }}</loc>
         <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
         <changefreq>weekly</changefreq>
     </url>

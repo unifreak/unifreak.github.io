@@ -24,7 +24,7 @@
             {% elsif page == 1 %}
                 <a href="{{ site.url }}">{{ page }}</a>
             {% else %}
-                <a href="{{ site.paginate_path | prepend: site.url | replace: ':num', page }}">{{ page }}</a>
+                <a href="{{ site.url }}/{{ site.paginate_path | replace: ':num', page }}">{{ page }}</a>
             {% endif %}
         {% endfor %}
 
@@ -32,8 +32,8 @@
             <a href="{{ paginator.next_page_path | prepend: site.url }}">»</a>
         {% endif %}
     {% elsif jsPagiLoaded != true %}
-        <script type="text/javascript" src="{{ site.baseurl }}/assets/js/pagination.js"></script>
-        <script type="text/javascript" src="{{ site.baseurl }}/assets/js/listAndPagi.js"></script>
+        <script type="text/javascript" src="{{ site.url }}/assets/js/pagination.js"></script>
+        <script type="text/javascript" src="{{ site.url }}/assets/js/listAndPagi.js"></script>
         {% assign jsPagiLoaded = true %}
     {% endif %}
 
