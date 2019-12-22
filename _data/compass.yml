@@ -2,6 +2,8 @@
 # see https://github.com/mscharley/jekyll-compass
 
 # Set this to the root of your project when deployed:
+asset_cache_buster: none
+cache: false
 http_path: "/"
 css_dir: "assets/css"
 sass_dir: "_sass"
