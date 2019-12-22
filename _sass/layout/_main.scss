@@ -24,7 +24,7 @@
             margin: 2rem auto 0.5rem auto;
             font: normal normal bold 2.4rem/4.9rem "Verdana",sans-serif;
             box-shadow: 0 0 2px #999;
-            @include border-radius(50%);
+            border-radius: 50%;
         }
 
         .category {
@@ -204,7 +204,7 @@ ul.tags {
     padding: 0rem 1rem;
     background-color: #8BB3C1;
     color: white;
-    @include border-radius(15px);
+    border-radius: 15px;
 }
 
 .tags li:first-child {

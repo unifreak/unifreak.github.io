@@ -9,5 +9,3 @@ gem 'kramdown'
 gem 'json'
 gem 'compass'
 # gem 'wdm', '>= 0.1.1' if Gem.win_platform? # for jekyll --watch enable in windows
-
-gem "jekyll-compass", "~> 2.0"
