@@ -52,3 +52,8 @@ my:
     backend: ["PHP", "Python", "Shell", MySQL", "Redis", "Regex", "Laravel", "Lumen"]
     tools: ["Sublime Text", "Git | Github", "Linux", "Jekyll | Liquid"]
 
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "post"
