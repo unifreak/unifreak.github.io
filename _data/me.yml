@@ -1,22 +1,27 @@
-# About page data
-displayName: UniFreak
-realName: FangHao
-realName_cn: 方浩
-jobTitle: "PHP Coder"
+# About page & Footer
+name: 方浩
+job: "PHP Coder"
+hi: "HIYA!"
+avatar_img: "/assets/img/me.png"
+intro:
+  - "一个 PHP 程序员, 技术宅, 总是在追求上进的吹毛求疵者"
+  - "除了敲代码, 还喜欢看书, 听音乐, 以及猫猫狗狗"
+  - "业余时间你会看到我不是在像模像样的弹吉他, 就是骑着车子在城里晃荡"
 skills:
-  __语言__: PHP Python Shell C SQL HTML/CSS  JS/ES6 jQuery Markdown Regex
-  __框架__: Laravel/Lumen ThinkPHP Yii Flask Vue.js SASS Bootstrap jQuery Liquid
-  __工具__: Linux Docker Git SublimeText MySQL Nginx Redis Composer Jekyll
+  - name: "Programming"
+    icon-class: "fa fa-terminal"
+    list: ["PHP", "Python", "Shell", "C", "SQL", "HTML / CSS", "JS / ES6", "jQuery", "Markdown", "Regex"]
+  - name: "Framework"
+    icon-class: "fa fa-th-list"
+    list: ["Laravel / Lumen", "ThinkPHP", "Yii", "Flask", "Vue.js", "SASS", "Bootstrap", "jQuery", "Liquid"]
+  - name: "Tools"
+    icon-class: "fa fa-cogs"
+    list: ["Linux", "Docker", "Git", "SublimeText", "MySQL", "Nginx", "Redis", "Composer", "Jekyll"]
 
-
-  frontend: ["HTML | Markdown", "CSS | SASS", "JS | jQuery", "Bootstrap"]
-  backend: ["PHP", "Python", "Shell", MySQL", "Redis", "Regex", "Laravel", "Lumen"]
-  tools: ["Sublime Text", "Git | Github", "Linux", "Jekyll | Liquid"]
-
-# Site footer data
+display_name: UniFreak
 contact:
-  - {name: "Mobile", icon-class: "fa fa-mobile", text: "153 6999 7084", link: "tel: 15369997084"}
+  - {name: "Mobile", icon-class: "fa fa-phone-square", text: "153 6999 7084", link: "tel: 15369997084"}
   - {name: "Email", icon-class: "fa fa-envelope", text: "fanghao90s@gmail.com", link: "mailto: fanghao90s@gmail.com"}
 social:
-  - {name: "QQ", icon-class: "fa fa-qq", text: "744910240", link: ""}
-  - {name: "GitHub", icon-class: "fa fa-github", text: "https://github.com/unifreak", link: "https://github.com/UniFreak"}
+  - {name: "GitHub", icon-class: "fa fa-github-square", text: "https://github.com/unifreak", link: "https://github.com/UniFreak"}
+  - {name: "QQ", icon-class: "fa fa-qq", text: "744910240", link: "https://user.qzone.qq.com/744910240"}

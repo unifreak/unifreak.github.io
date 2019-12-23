@@ -2,57 +2,44 @@
 layout: base
 ---
 
-{% assign my = site.my %}
+{% assign my = site.data.me %}
 <div class="row" id="about">
     <header id="title">
-        <img src="{{ site.url }}/assets/img/me.png">
-        <h1>{{ my.realName_cn }} | <small>{{ my.jobTitle | upcase }}</small></h1>
+        <img src="{{ my.avatar_img | prepend: site.url }}">
+        <h1>{{ my.name }} | <small>{{ my.job | upcase }}</small></h1>
     </header>
 
     <section id="intro">
-        <h2>HIYA!</h2>
-        <p>一个 PHP 程序员, 技术宅, 总是在追求上进的吹毛求疵者</p>
-        <p>除了敲代码, 还喜欢看书, 听音乐, 以及猫猫狗狗</p>
-        <p>业余时间你会看到我不是在像模像样的弹吉他, 就是骑着车子在城里晃荡</p>
+        <h2>{{ my.hi }}</h2>
+        {% for line in my.intro %}
+        <p>{{ line }}</p>
+        {% endfor %}
     </section>
 
     <section id="skillsets">
-        <h2>SKILLSETS</h2>
-        <div id="frontend">
-            <i class="fa fa-tv"></i>
-            {% for skill in my.skills.frontend %}
-            <span>{{ skill }}</span>
+        <h2>SKILL SETS</h2>
+        {% for skillset in my.skills %}
+          <div>
+            <i class="{{ skillset.icon-class }}" title=" {{ skillset.name }}"></i>
+            {% for skill in skillset.list %}
+              <span>{{ skill }}</span>
             {% endfor %}
-        </div>
-        <div id="backend">
-            <i class="fa fa-cog"> </i>
-            {% for skill in my.skills.backend %}
-            <span>{{ skill }}</span>
-            {% endfor %}
-        </div>
-        <div id="tools">
-            <i class="fa fa-wrench"></i>
-            {% for skill in my.skills.tools %}
-            <span>{{ skill }}</span>
-            {% endfor %}
-        </div>
+            <hr>
+          </div>
+        {% endfor %}
     </section>
 
     <section id="findme">
         <h2>FIND ME ON</h2>
         <ul>
-            <li><a href="{{ my.contact.github }}"><i class="fa fa-github"></i></a></li>
-            <li><a href="{{ my.contact.qzone }}"><i class="fa fa-qq"></i></a></li>
-            <li><a href="{{ my.contact.pinterest }}"><i class="fa fa-pinterest"></i></a></li>
+          {% for social in my.social %}
+            <li><a href="{{ social.link }}"><i class=" {{ social.icon-class }}"></i></a></li>
+          {% endfor %}
         </ul>
     </section>
 
     <section id="action">
         <h2>MORE</h2>
         <a href="{{ site.url }}/resume">查看我的在线简历</a>
-        <span> 或 </span>
-        <a href="mailto:{{ my.contact.email }}">给我写邮件</a>
     </section>
-
 </div>
-<!-- {% include disqus_load.html %} -->

@@ -133,9 +133,12 @@
                 background-color: #000000;
                 color: white;
                 border: 1px solid #1C3340;
-                padding: 3px;
+                padding: 0.5rem;
                 border-radius: 4px;
-                margin: 1rem;
+                margin: 0rem;
+                &:first-of-type {
+                    margin-left: 2rem;
+                }
             }
         }
 
@@ -277,8 +280,18 @@ ul.tags {
                 padding-right: 3rem;
             }
 
-            #skillsets i {
+            section#skillsets i {
                 display: none;
+            }
+
+            section#skillsets {
+                div span {
+                    margin: 0rem;
+                    line-height: 4rem;
+                    &:first-of-type {
+                        margin-left: 0rem;
+                    }
+                }
             }
         }
     }
@@ -350,13 +363,6 @@ ul.tags {
                     font-size: 4rem;
                     margin: 0;
                     border-bottom: 3px solid #1C3340;
-                }
-            }
-
-            section#skillsets {
-                div span {
-                    margin: 0rem;
-                    line-height: 4rem;
                 }
             }
 
