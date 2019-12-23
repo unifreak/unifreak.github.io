@@ -117,18 +117,17 @@
             }
         }
 
-
         section#skillsets {
             i {
                 font-weight: bold;
                 font-size: 3rem;
             }
 
-            ul {
+            div {
                 margin-top: 2rem;
             }
 
-            ul li {
+            div span {
                 font-size: 2rem;
                 display: inline;
                 background-color: #000000;
@@ -136,18 +135,22 @@
                 border: 1px solid #1C3340;
                 padding: 3px;
                 border-radius: 4px;
-                margin-left: 1rem;
+                margin: 1rem;
             }
         }
 
         section#findme li {
             display: inline;
-            font-size: 6rem;
+            font-size: 4rem;
             margin-right: 3rem;
         }
 
         section#action {
             font-size: 2rem;
+        }
+
+        i.fa {
+            width: 3rem;
         }
     }
 
@@ -181,6 +184,7 @@
             border: 1px solid #337AB7;
             display: inline-block;
             padding: 2px 11px;
+            line-height: 4rem;
             box-shadow: 0 0 2px #337AB7;
         }
 
@@ -266,6 +270,21 @@ ul.tags {
     border-radius: 50%;
 }
 
+@media (max-width: 992px) {
+    #l-main {
+        #about {
+            header, section {
+                padding-left: 3rem;
+                padding-right: 3rem;
+            }
+
+            #skillsets i {
+                display: none;
+            }
+        }
+    }
+}
+
 @media (max-width: 768px) {
     #l-main {
         article {
@@ -311,6 +330,8 @@ ul.tags {
 
         #about {
             header {
+                padding: 2rem;
+
                 img {
                     max-width: 10rem;
                     position: static;
@@ -325,17 +346,26 @@ ul.tags {
                 }
             }
 
-            section#intro h2 {
-                font-size: 4rem;
-                margin: 0;
-                border-bottom: 3px solid #1C3340;
+            section#intro {
+                h2 {
+                    font-size: 4rem;
+                    margin: 0;
+                    border-bottom: 3px solid #1C3340;
+                }
             }
 
-            section#skillsets ul li {
-                display: block;
-                margin: 1rem;
+            section#skillsets {
+                div span {
+                    margin: 0rem;
+                    line-height: 4rem;
+                }
             }
 
+            #intro, #skillsets, #findme, #action {
+                p {
+                    font-size: 1.7rem;
+                }
+            }
         }
     }
 

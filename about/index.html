@@ -18,24 +18,24 @@ layout: base
 
     <section id="skillsets">
         <h2>SKILLSETS</h2>
-        <ul id="frontend">
-            <i class="fa fa-tv">前端</i>
+        <div id="frontend">
+            <i class="fa fa-tv"></i>
             {% for skill in my.skills.frontend %}
-            <li>{{ skill }}</li>
+            <span>{{ skill }}</span>
             {% endfor %}
-        </ul>
-        <ul id="backend">
-            <i class="fa fa-cog"> 后端</i>
+        </div>
+        <div id="backend">
+            <i class="fa fa-cog"> </i>
             {% for skill in my.skills.backend %}
-            <li>{{ skill }}</li>
+            <span>{{ skill }}</span>
             {% endfor %}
-        </ul>
-        <ul id="tools">
-            <i class="fa fa-wrench"> 工具</i>
+        </div>
+        <div id="tools">
+            <i class="fa fa-wrench"></i>
             {% for skill in my.skills.tools %}
-            <li>{{ skill }}</li>
+            <span>{{ skill }}</span>
             {% endfor %}
-        </ul>
+        </div>
     </section>
 
     <section id="findme">
