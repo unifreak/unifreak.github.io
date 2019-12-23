@@ -10,17 +10,7 @@
     padding: 1.5rem;
 
     h3 {
-        text-align: center;
         margin-bottom: 0.5rem;
-    }
-
-    address {
-        text-align: right;
-        padding-right: 2rem;
-    }
-
-    #rss {
-        text-align: center;
     }
 
     .rss {
@@ -28,24 +18,6 @@
     }
 
     #legal {
-        text-align: center;
         color: rgb(141, 141, 141);
-    }
-}
-
-@media (max-width: 768px) {
-    #l-footer {
-        address {
-            text-align: left;
-            margin-bottom: 2rem;
-        }
-
-        h3 {
-            text-align: left;
-        }
-
-        #rss {
-            text-align: left;
-        }
     }
 }

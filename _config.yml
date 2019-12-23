@@ -28,30 +28,6 @@ collections:
   book_reviews:
     output: true
 
-my:
-  displayName: UniFreak
-  realName: FangHao
-  realName_cn: 方浩
-  jobTitle: "PHP Coder"
-  contact:
-    qq: 744910240
-    email: fanghao90s@gmail.com
-    github: http://www.github.com/UniFreak
-    qzone: http://744910240.qzone.qq.com
-    pinterest: https://www.pinterest.com/miblah/
-    tel: 153 6999 7084
-    address:
-      country: China
-      state: Beijing
-      city: Beijing
-      distribute: ChaoYang
-      postcode: 000000
-      cell: "Wangxin Garden"
-  skills:
-    frontend: ["HTML | Markdown", "CSS | SASS", "JS | jQuery", "Bootstrap"]
-    backend: ["PHP", "Python", "Shell", MySQL", "Redis", "Regex", "Laravel", "Lumen"]
-    tools: ["Sublime Text", "Git | Github", "Linux", "Jekyll | Liquid"]
-
 defaults:
   - scope:
       path: ""

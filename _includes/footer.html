@@ -1,36 +1,50 @@
-{% assign my = site.my %}
+{% assign my = site.data.me %}
 <footer id="l-footer">
     <div class="container">
         <div class="row">
-            <div id="contact" class="col-lg-6 col-lg-offset-1 col-md-6 col-md-offset-1 col-sm-9">
-                <h3>CONTACT</h3>
-                <div class="row">
-                    <address id="address" class="col-lg-6 col-md-6 col-sm-6">
-                        {{ my.contact.address.country }} {{ my.contact.address.state }} {{ my.contact.address.city }}<br>
-                        {{ my.contact.address.distribute }}, {{ my.contact.address.postcode }}<br>
-                        {{ my.contact.address.cell }}<br>
-                        {{ my.realName }}<br>
-                    </address>
+          <div id="social" class="col-lg-5 col-md-5 col-sm-12">
+            <h3>SOCIAL</h3>
+            <ul>
+              {% for social in my.social %}
+                <li>
+                  <i class="{{ social.icon-class }}" title="{{ social.name }}"></i>
+                  {% if social.link != "" %}
+                    <a href="{{ social.link }}">&nbsp;&nbsp;{{ social.text }}</a>
+                  {% else %}
+                    {{ social.text }}
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
 
-                    <ul class="col-lg-6 col-md-6 col-sm-6">
-                        <li class="qq"><i class="fa fa-qq"></i> &nbsp;&nbsp;{{ my.contact.qq }}</li>
-                        <li class="email"><i class="fa fa-envelope"></i> <a href="mailto:{{ my.contact.email }}"> &nbsp;&nbsp;{{ my.contact.email }}</a></li>
-                        <li class="tel"><i class="fa fa-mobile"></i> <a href="tel:{{ my.contact.tel }}">&nbsp;&nbsp; {{ my.contact.tel }}</a></li>
-                        <li class="github"><i class="fa fa-github"></i> <a href="{{ my.contact.github }}"> &nbsp;&nbsp;{{ my.contact.github }}</a></li>
-                    </ul>
-                </div>
-            </div>
+          <div id="contact" class="col-lg-4 col-md-4 col-sm-12">
+            <h3>CONTACT</h3>
+            <ul>
+              {% for contact in my.contact %}
+                <li>
+                  <i class="{{ contact.icon-class }}" title="{{ contact.name }}"></i>
+                  {% if contact.link != "" %}
+                    <a href="{{ contact.link }}">&nbsp;&nbsp;{{ contact.text }}</a>
+                  {% else %}
+                    {{ contact.text }}
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
 
-            <div id="rss" class="col-lg-2 col-md-2 col-sm-2">
-                    <h3>SUBSCRIBE</h3>
-                <a href="feed.xml">
-                    <i class="rss fa fa-rss-square"></i>
-                </a>
-            </div>
+          <div id="rss" class="col-lg-3 col-md-3 col-sm-12">
+            <h3>SUBSCRIBE</h3>
+            <a href="feed.xml">
+              <i class="rss fa fa-rss-square"></i>
+            </a>
+          </div>
         </div>
 
         <p id="legal">
-            Copyright (c) 2019 {{ my.displayName }} | Powered by <a href="http://jekyllrb.com">Jekyll</a> &amp; <a href="http://github.com">GitHub</a> | designed &amp; build by <a href="http://unifreak.github.io">UniFreak</a>
+            Copyright (c) {{ 'now' | date: "%Y" }} {{ my.displayName }} | Powered by <a href="http://jekyllrb.com">Jekyll</a> &amp; <a href="http://github.com">GitHub</a> | designed &amp; build by <a href="http://unifreak.github.io">UniFreak</a><br />
+            The blog posts on this site are licensed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
         </p>
     </div>
 </footer>
