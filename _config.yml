@@ -49,8 +49,8 @@ my:
         tools: ["Sublime Text", "Git | Github", "Linux", "Jekyll | Liquid"]
 
 collections:
-    qqGroupGuide:
-        output: true
+  series:
+
 
 defaults:
   - scope:
@@ -58,8 +58,3 @@ defaults:
         type: "posts"
     values:
         excerpt: "{{ page.content }} | slice: 0 300"
-  - scope:
-        path: ""
-        type: "qqGroupGuide"
-    values:
-        layout: markdownreader_bare
