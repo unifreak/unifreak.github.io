@@ -24,6 +24,10 @@ shout:
   - on the way of learning
 description: "Fanghao's personal weblog, on coding or such stuff"
 
+disqus:
+  shortname: 'unifreak'
+  comments: true
+
 collections:
   book_reviews:
     output: true

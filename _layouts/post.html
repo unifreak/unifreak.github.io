@@ -31,7 +31,11 @@
             </div>
 
             <!-- {% include disqus_load.html %} -->
+            {% if site.disqus.comments %}
+              {% include disqus.html %}
+            {% endif %}
         </div>
+
     </div>
 
     {% include footer.html %}
