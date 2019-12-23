@@ -58,6 +58,7 @@
             margin: 0 2rem 2rem;
             float: right;
             border-radius: 5px;
+            background-color: #dfdfdf;
         }
     }
 
@@ -211,17 +212,17 @@ ul.tags {
     margin-left: 0;
 }
 
-#postTitle {
+#post-title {
     font-size: 4rem;
     font-weight: bold;
     margin-bottom: 0rem !important;
 }
 
-#postMeta {
+#post-meta {
     font-style: italic;
 }
 
-#filterList {
+#post-list {
     background-color: #F6F6F6;
     margin-top: 5rem;
     padding: 0;
@@ -250,7 +251,7 @@ ul.tags {
     }
 }
 
-.tagCnt, .cateCnt {
+.tag-count, .cate-count {
     float: right;
     font-size: 1.5rem;
     margin-right: 1rem;
@@ -287,13 +288,13 @@ ul.tags {
         }
 
         article .excerpt {
-            font-size: 1.4rem;
+            font-size: 1.7rem;
             margin-bottom: 0rem;
         }
 
         article .continue {
             font-size: 1rem;
-            margin: 0 2rem 1rem;
+            margin: 1rem 2rem 1rem;
         }
 
         article hr {
@@ -336,5 +337,9 @@ ul.tags {
             }
 
         }
+    }
+
+    #post-list {
+        margin-top: 3rem;
     }
 }

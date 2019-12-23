@@ -12,7 +12,7 @@
         <div class="row">
             <div id="markdown-container" class="col-lg-9">
                 <header>
-                    <p id="postTitle">{{ page.title }}</p>
+                    <p id="post-title">{{ page.title }}</p>
                     {% if page.tags %}
                     <ul class="tags clearfix">
                         {% for tag in page.tags %}
@@ -20,7 +20,7 @@
                         {% endfor %}
                     </ul>
                     {% endif %}
-                    <p id="postMeta">posted on {{ page.date | date_to_string }} under category <a href="{{ site.url }}/category/">{{ page.categories[0] }}</a></p>
+                    <p id="post-meta">posted on {{ page.date | date_to_string }} under category <a href="{{ site.url }}/category/">{{ page.categories[0] }}</a></p>
 
                 </header>
 

@@ -2,14 +2,14 @@
 layout: base
 ---
 <div class="row">
-    <ul class="col-lg-2" id="filterList">
+    <ul class="col-lg-2" id="post-list">
         {% assign idx = 0 %}
         {% for tag in site.tags %}
             <li {% if idx == 0 %} class="current" {% endif %} data-show="{{ tag | first }}">
                 <a href="javascript:void(0)">
                 <i class="fa fa-tag"></i>
                  {{ tag | first }}
-                <span class="tagCnt">{{ tag | last | size }}</span>
+                <span class="tag-count">{{ tag | last | size }}</span>
                 </a>
             </li>
             {% assign idx = idx | plus: 1 %}

@@ -2,13 +2,13 @@
 layout: base
 ---
 <div class="row">
-    <ul class="col-lg-2" id="filterList">
+    <ul class="col-lg-2" id="post-list">
         {% assign idx = 0 %}
         {% for category in site.categories %}
             <li {% if idx == 0 %} class="current" {% endif %} data-show="{{ category | first }}">
                 <a href="javascript:void(0)">
                 {{ category | first }}
-                <span class="cateCnt">{{ category | last | size }}</span>
+                <span class="cate-count">{{ category | last | size }}</span>
                 </a>
             </li>
             {% assign idx = idx | plus: 1 %}
