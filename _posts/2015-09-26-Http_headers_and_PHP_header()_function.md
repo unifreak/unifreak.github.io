@@ -5,7 +5,6 @@ category: translation
 tags: [php, http]
 excerpt: "许多初级到中级的的 PHP 程序员把 header() 函数当作某种神秘巫术. 他们可以照着代码示例把功能实现, 但是还是不知道到底它是如果运作的. 我最开始就是这样的.
 
-
 实际上它非常简单. 在这篇文章中, 我会解释 HTTP 头(header) 是如何运作的, 它们与 PHP 的关系, 以及它们的 meta 标签 equivalents(对应物)"
 ---
 _原文链接: <http://www.nicholassolutions.com/tutorials/php/headers.html>_

@@ -8,15 +8,18 @@
     {% include header.html %}
 
     {% assign group_name = page.path | split: "/" | first %}
-    {% case group_name %}
-      {% when 'category' %}
-        {% assign groups = site.categories %}
-      {% when 'tag' %}
-       {% assign groups = site.tags %}
-      {% when 'series' %}
-       {% assign groups = site.collections %}
-    {% endcase %}
-    {% include group_list.html groups=groups %}
+
+    {% if group_name == "series" %}
+      {% include series_list.html groups=site.collections %}
+    {% else %}
+      {% case group_name %}
+        {% when 'category' %}
+          {% assign groups = site.categories %}
+        {% when 'tag' %}
+         {% assign groups = site.tags %}
+      {% endcase %}
+      {% include group_list.html groups=groups %}
+    {% endif %}
 
     {% include footer.html %}
 </body>

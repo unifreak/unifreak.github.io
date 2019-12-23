@@ -1,0 +1,36 @@
+<!-- posts grouped by collections -->
+
+<div>
+  <section id="l-main">
+  <div class="container">
+    <div class="row">
+        <ul class="col-lg-2" id="group-list">
+            {% assign idx = 0 %}
+            {% for group in include.groups }} %}
+              <!-- Jekyll have a built-in `posts` collection
+                So here we need to filter it out -->
+              {% unless group.label == "posts" %}
+                <li {% if idx == 0 %} class="current" {% endif %} data-show="{{ group.label }}">
+                    <a href="javascript:void(0)">
+                    {{ group.label | replace: "_", " " | replace: "-", " "}}
+                    <span class="cate-count">{{ group.docs | size }}</span>
+                    </a>
+                </li>
+              {% endunless %}
+              {% assign idx = idx | plus: 1 %}
+            {% endfor %}
+        </ul>
+
+        {% assign groupIdx = 0 %}
+        {% for group in include.groups %}
+          {% unless group.label == "posts" %}
+            <section class="showcase col-lg-9 col-lg-offset-1 {% if groupIdx > 0 %} hide {% else %} current {% endif %}" data-show="{{ group | first }}">
+              {% include post_list.html posts=group.docs groupIdx=groupIdx %}
+              {% assign groupIdx = groupIdx | plus: 1 %}
+            </section>
+          {% endunless %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>
