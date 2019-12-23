@@ -3,131 +3,99 @@ layout: post_bare
 ---
 # 基本信息
 
-- **方浩** | 男 | 1990.10
-- 手机: 153 6999 7084
-- Email: fanghao90s@gmail.com
-- QQ: 744910240
-- 兴趣: 吉他 骑行 摄影
+__方浩__ \| 1990.10 \| PHP 开发 \| 北京
 
-# 教育经历
+手机: [153 **6999** 7084](tel:15369997084)
 
-- 2010.9~2013.6 河南商业高等专科<small>(现已升本为河南牧业经济学院)</small> 计算机系网络技术专业
+Email: [fanghao90s@gmail.com](mailto:fanghao90s@gmail.com)
 
 # 工作经历
 
+## 优信集团 (2016.10-2019.07)
 
-### 优信集团 <small>2016.10-至今</small>
+_优信是一家二手车电商交易平台_
+- 维护并完成 **5** 个核心金融项目的需求评估设计和实现
+- 梳理业务和代码流程, 主导重构了信审和交易 **2** 个系统的接口及其与其他系统之间的交互流程
+- 应用缓存, 异步化处理等技术, 把多个核心接口性能从 **500ms** 降到了 **200ms** 以内
+- 抽象并实现了 **13** 个核心业务模块和系统组件并广泛应用于金融组内 **9** 个项目中
+- 在组内进行业务流程或技术分享, 实践并推行各种最佳实践: PSR, TDD, 自动化, RESTful 等
 
-...[待补充]
+## 北京飞马国际供应链管理有限公司 (2015.11-2016.8)
 
+_飞马国际是一家大宗商品在线交易平台_
+- 完成 ERP, 运营, CRM 等后台系统以及主站大宗网的需求评估设计与研发工作
+- 确保数据库, 代码, 文档, 分支管理等各项规范的正确实施
 
-### 北京飞马国际供应链管理有限公司 <small>2015.11-2016.8</small>
+## 武汉邦普特进出口公司 (2013.7-2015.10)
 
-前期负责ERP系统的票据管理模块:
+_邦普特是一家跨国电商, 主营美妆类产品_
+- **4** 个不同语言站点的产品信息复制, 促销活动, APP 接口及后台管理等功能实现
+- 及其 cPanel 服务器的邮箱, 数据库, ftp, http 等服务器及定时任务的管理维护工作
+- 与客服密切交流, 梳理日常工作流, 并提取成需求, 开发商品管理, 统计, 话术模板等多种工具提升其工作效率
 
-- 完成数据库设计
-- 框架基础数据层的编码
+# 项目经历
 
-后被调到前台研发部, 负责主站[大宗网][dazong]:
+## 信审系统 & 交易系统
 
-- 用户中心模块的整体改版升级
-- 消息服务模块的接口设计和编码工作
-- 上传服务模块的接口设计和编码工作
+信审和交易两个系统是优信金融的核心业务系统, 分别负责客户的贷前信审和交易购车环节
+系统使用 Lumen + Dingo/api 提供接口服务
 
-以上工作完成后, 转至后台研发部, 负责后台项目的管理工作:
+由于业务本身的复杂性和长期的技术债务, 面临如下问题:
+- 接口定义和系统行为混乱, 与其他系统交互复杂, 性能低下
+- 接口正确性过度依赖 QA, 线上 bug 率高且难于调试
+- 代码的风格杂糅混乱, 难以理解
+- 代码逻辑分支复杂, 重复实现, 耦合度高, 难以扩展
 
-- 和产品经理通力合作, 负责运营系统和 CRM 项目的需求评估与把控
-- 和测试人员一道, 对项目进行排期, 并跟踪项目进度, 实现产品迭代更新
-- 细化并分配各项需求任务给开发同事, 并确保各项规范(数据库, 代码, git)的实施
-- 和开发同事一道, 同其他系统交互配合, 完成以下开发工作
-    + 运营系统:
-        * 交易管理(贸易参数, 交易时间, 消息开关, 合同, 违约, 申诉等)
-        * 审核管理(客户审核, 公司审核)
-        * 监控管理(运营监控, 违约监控, 数据报表, 日志查询)
-        * 系统管理(菜单, 角色, 权限)
-    + CRM 系统:
-        * 分类管理(商品, 新闻)
-        * 内容管理(新闻, 焦点图, 友情链接, 网站碎片)
-        * 系统管理(菜单, 角色, 权限)
-        * 对移动端 API 实现
+工作期间, 通过采取如下行动解决这些问题:
+- 和产品及 QA 交流, 重新梳理业务流程, 主导进行了系统的逻辑拆分和接口重构, 系统行为更加内聚和明晰
+- 解决系统 phpunit/artisan/http 不同环境变量读取问题, 以支持和推广 TDD
+- 开发 QLog 包, 提供调试模式, 自动为 SQL 查询, http 请求, 接口响应打 log, 显著减少了接口调试时间
+- 开发 fetcher, rememberable-db 包, 统一并简化了各系统的接口请求和查询缓存等行为的实现与配置化
+- 开发购车特征锁, 解决因多端同时操作导致的数据不一致及订单金额错误问题
+- 以 PSR2 为基础制定编码规范, 通过 githook+phpmd 进行自动检测纠正, 把问题数从 **1000** 以上降至 **100** 以内
+- 实现资方路由器, 金融方案管道, 订单生成器等核心业务模块, 灵活支持资方的接入分配和金融活动定制等需求
 
+## Exciler 异步校验系统
 
-### 武汉邦普特进出口有限公司 <small>2014.3~2015.10</small>
+金融订单因为涉及金额, 正确性无比重要
+为快速发现订单的金额错误, 减少 QA 使用 Excel 手动校验的巨大工作量, 独立设计并实现了 Exciler 系统:
+- 用 **1** 周时间熟悉了 ES6 和 Vue.js 等现代化的前端技术并开发完成前端配置界面
+- 运用策略和访问者等模式, 灵活支持了多种数据源和配置源, 以及版本化的单元格映射配置等复杂功能
+- 通过 Exciler 及时发现并修正了线上 **11** 个系统或 Excel 文件本身的 bug
 
-完成商城网站后台管理的诸多功能需求, 如:
+## QLog 包
 
-- 产品信息一键拷贝功能
-- [英][en], [法][fr], [日][jp], [德][de] 四个站点产品信息同步功能(主从复制)
-- 各种商品促销手段(折扣, 组合, 秒杀)的实现
-- 以及比如销售人员的绩效计算, banner 管理, 支付接口等功能
+业务系统经常因为调试打大量 log. 独立抽象并设计了 QLog, 实现了以下功能:
+- 支持环境敏感化的配置, 用于定制 log 队列名称, 默认频道等行为
+- 通过暂存区, 支持调试模式下的 log 打印输出
+- 使用 Laravel 的事件机制, 实现自动 log SQL 查询, http 请求及请求和响应体
+- 统一 log 格式, 自动生成 session id, 为 log 的异步处理和搜索及请求链串连提供便利
+- 提供 log 耗时和内存使用信息, 极大方便了接口性能瓶颈的定位
 
-与仓库系统程序员合作完成网站和仓库系统的库存管理功能
+## 开源项目
 
-与 IOS 程序员合作完成整套 [APP][app] 的 API 实现
+- __个人技术博客及 Jekyll 模板__: <http://unifreak.github.io>
 
-在网站系统中加入 Redis 缓存层, 有效降低数据库符合, 提高网站的加载速度
+    使用 jekyll, SASS, Liquid 模板技术, 搭建于 github page 平台.
+    被 <http://www.jekyllthemes.org> 和 <http://themes.rubyjekyll.com> 收录
 
-管理  Linux 服务器的配置的运行, 如网站服务器的更换, 性能监控 , 定时任务等<br><br>
+- __SublimeText 插件: DirectOpen 和 DirectCopy__
 
-# 开源项目经验
-
-### 个人博客
-
-独立设计并完成个人技术博客: http://unifreak.github.io
-
-使用 jekyll, SASS 和 Liquid 模板语言, 搭建于 github page 平台
-
-已被 [jekyllthemes.org][jekyllthemes] 和 [themes.jekyllrc.org][jekyllrc] 收录<br><br>
-
-### [SublimeText DirectEdit][directEdit] 插件
-
-用于快速打开预配置的常用文件(比如 php.ini, host, vhost 配置文件等)
-
-使用 Python 开发<br><br>
-
-### [SublimeText DirectCopy][directCopy] 插件
-
-用于快速复制预配置的文本内容
-
-使用 Python 开发<br><br>
-
-### 参与贡献
-
-- [jekyll 中文][jekyllCn]
-- [jekyllthemes.org][jekyllthemes]
-- [themes.jekyllrc.org][jekyllrc]
+    使用 Python + SublimeText API 开发, DirectOpen 用于快速打开常用文件, DirectCopy 用于快速复制文本模板
 
 # 技术/工具
 
-**语言**: PHP Python Shell SQL HTML/CSS SASS Markdown Regex JS ES6 Regex Liquid
+- __语言__ PHP Python Shell C SQL HTML/CSS JS/ES6 jQuery Markdown Regex
+- __框架__ Laravel/Lumen ThinkPHP Yii Flask Vue.js SASS Bootstrap jQuery Liquid
+- __工具__ Linux Docker Git SublimeText MySQL Nginx Redis Composer Jekyll
 
-**框架**: Laravel/Lumen Flask Yii ThinkPHP Bootstrap jQuery/jQueryUI
+# 教育经历
 
-**工具**: Linux MySql Redis  SublimeText Git/GitLab/Github Jira Jekyll
+2010.9-2013.6 河南商业高等专科学校 计算机系网络技术专业
 
 # 自我评价
 
-为人稳重可靠, 兴趣广泛, 学习能力很强, 善于解决问题
-
-注重细节, 注重代码美学和安全性, 关注并热心学习和应用新技术
-
-注重 OOP ,设计模式等软件架构方面知识的学习与使用, 认为编程不仅是实用的技术, 也是一门艺术
-
-英文能力强(CET6), 经常阅读外文技术书籍, 并在 IRC 网络上和外国牛人探讨技术问题
-
-兴趣广泛, 对 PHP 开发的边角相关技术和理论也广泛涉猎(前端, 设计等)
-
-
-
-[en]: http://bornprettystore.com
-[fr]: http://neejolie.fr
-[jp]: http://harunouta.com
-[de]: http://nurbesten.de
-[dazong]: http://dazong.com
-[directEdit]: https://packagecontrol.io/packages/DirectEdit
-[directCopy]: https://packagecontrol.io/packages/DirectCopy
-[ryhudong]: http://ryhudong.com
-[app]: https://itunes.apple.com/us/app/born-pretty/id986675944?mt=8
-[jekyllCn]: http://jekyllcn.com
-[jekyllthemes]: http://jekyllthemes.org
-[jekyllrc]: http://themes.jekyllrc.orgd
+抽象和设计能力强, 热衷应用 OOAD 和设计模式分析和解决复杂业务问题 <br />
+思维清晰, 为人随和, 善于团队交流与合作 <br />
+注重实效, 关注细节, 热心研究和应用新技术, 拥抱开源和分享精神 <br />
+学习和英语能力强, 持续通过专业杂志和书籍, 以及源码阅读提升专业能力
