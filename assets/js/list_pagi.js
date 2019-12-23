@@ -1,7 +1,7 @@
 $('document').ready(function() {
     generatePagi();
 
-    $('#post-list li').click(function(e) {
+    $('#group-list li').click(function(e) {
         var show = $(this).data('show');
 
         $('.showcase:visible')
@@ -11,8 +11,8 @@ $('document').ready(function() {
             .removeClass('hide')
             .addClass('current');
 
-        $('#post-list li.current').removeClass('current');
-        $('#post-list li[data-show=' + show + ']').addClass('current');
+        $('#group-list li.current').removeClass('current');
+        $('#group-list li[data-show=' + show + ']').addClass('current');
 
         generatePagi();
 

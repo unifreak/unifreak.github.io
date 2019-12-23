@@ -1,0 +1,30 @@
+<div>
+  <section id="l-main">
+  <div class="container">
+    <div class="row">
+        <ul class="col-lg-2" id="group-list">
+            {% assign idx = 0 %}
+            {% for group in include.groups }} %}
+                <li {% if idx == 0 %} class="current" {% endif %} data-show="{{ group | first }}">
+                    <a href="javascript:void(0)">
+                    {{ group | first }}
+                    <span class="cate-count">{{ group | last | size }}</span>
+                    </a>
+                </li>
+                {% assign idx = idx | plus: 1 %}
+            {% endfor %}
+        </ul>
+
+        {% assign groupIdx = 0 %}
+        {% for group in include.groups %}
+            <section class="showcase col-lg-9 col-lg-offset-1 {% if groupIdx > 0 %} hide {% else %} current {% endif %}" data-show="{{ group | first }}">
+                {% for posts in group %}
+                    {% include post_list.html posts=posts groupIdx=groupIdx %}
+                    {% assign groupIdx = groupIdx | plus: 1 %}
+                {% endfor %}
+            </section>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>

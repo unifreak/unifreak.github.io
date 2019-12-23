@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include head_base.html %}
+</head>
+
+<body>
+    {% include header.html %}
+
+    {% assign group_name = page.path | split: "/" | first %}
+    {% case group_name %}
+      {% when 'category' %}
+        {% assign groups = site.categories %}
+      {% when 'tag' %}
+       {% assign groups = site.tags %}
+      {% when 'series' %}
+       {% assign groups = site.collections %}
+    {% endcase %}
+    {% include group_list.html groups=groups %}
+
+    {% include footer.html %}
+</body>
+</html>

@@ -24,6 +24,11 @@ shout:
   - on the way of learning
 description: "Fanghao's personal weblog, on coding or such stuff"
 
+collections:
+  book_reviews:
+    name: "Book Reviews"
+    output: true
+
 my:
     displayName: UniFreak
     realName: FangHao
@@ -47,10 +52,6 @@ my:
         frontend: ["HTML | Markdown", "CSS | SASS", "JS | jQuery", "Bootstrap"]
         backend: ["PHP", "Python", "Shell", MySQL", "Redis", "Regex", "Laravel", "Lumen"]
         tools: ["Sublime Text", "Git | Github", "Linux", "Jekyll | Liquid"]
-
-collections:
-  series:
-
 
 defaults:
   - scope:
