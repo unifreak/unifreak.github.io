@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+    {% include head_base.html %}
+</head>
+
+<head>
     <title>{{ page.title }}</title>
-    <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/markdownreader_bare.css">
+    <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/post_bare.css">
     <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/rouge-code.css">
-    <!-- favicon -->
-    <link rel="shortcut icon" href="{{ site.url }}/favicon.ico" type="image/icon">
-    <link rel="icon" href="{{ site.url }}/favicon.ico" type="image/icon">
-    <!-- 百度统计 -->
-    <script type="text/javascript" src="{{ site.url }}/assets/js/baidu_statistics.js"></script>
 
     <style type="text/css">
         #disqus_thread {
@@ -29,7 +28,6 @@
 
 <div id="markdown-backTop" onclick="window.scrollTo(0,0)"></div>
 
-
-<script type="text/javascript" src="{{ site.url }}/assets/js/markdownreader_bare.js"></script>
+<script type="text/javascript" src="{{ site.url }}/assets/js/post_bare.js"></script>
 </body>
 </html>

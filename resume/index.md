@@ -1,5 +1,5 @@
 ---
-layout: markdownreader_bare
+layout: post_bare
 ---
 # 基本信息
 
