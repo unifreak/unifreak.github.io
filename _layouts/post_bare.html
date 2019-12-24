@@ -1,21 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    {% include head_base.html %}
-</head>
-
-<head>
-    <title>{{ page.title }}</title>
-    <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/post_bare.css">
-    <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/rouge-code.css">
-
-    <style type="text/css">
-        #disqus_thread {
-            margin-top: 3rem;
-        }
-    </style>
-</head>
-<body>
+---
+layout: default
+markdown: true
+bare: true
+---
 
 <div id="markdown-container">
     {{ content }}
@@ -27,5 +14,3 @@
 <div id="markdown-backTop" onclick="window.scrollTo(0,0)"></div>
 
 <script type="text/javascript" src="{{ site.url }}/assets/js/post_bare.js"></script>
-</body>
-</html>

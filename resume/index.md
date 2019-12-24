@@ -5,7 +5,7 @@ layout: post_bare
 
 __方浩__ \| 1990.10 \| PHP 开发 \| 北京
 
-手机: [153 **6999** 7084](tel:15369997084)
+手机: [153 6999 7084](tel:15369997084)
 
 Email: [fanghao90s@gmail.com](mailto:fanghao90s@gmail.com)
 

@@ -7,9 +7,26 @@
 
 <link rel="shortcut icon" href="{{ site.url }}/favicon.ico" type="image/icon">
 <link rel="icon" href="{{ site.url }}/favicon.ico" type="image/icon">
+
+<!-- stylesheets -->
 <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/base.css">
 <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/simplePagination.css">
 
+{% if layout.markdown %}
+  <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/highlight-theme.css">
+  <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/rouge-code.css">
+{% endif %}
+
+{% if page.layout == "post" %}
+  <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/post.css">
+{% endif %}
+
+{% if page.layout == "post_bare" %}
+  <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/post_bare.css">
+{% endif %}
+
+
+<!-- javascripts -->
 <script type="text/javascript" src="{{ site.url }}/assets/js/jquery.js"></script>
 
 <!--[if lt IE 9]>

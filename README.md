@@ -1,12 +1,9 @@
-# Update
-- if not renderred correctly, check `dev` mode
+My personal blog, built with Jekyll and Github page.
 
 # Intro
 
-My personal blog, built with Jekyll and Github page.
+# Features
 
-# If you want to use this theme
+# Install & Configuration
 
-1. fork it
-
-That's it
+# Blogging

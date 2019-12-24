@@ -1,44 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-    {% include head_base.html %}
-    {% include head_post.html %}
-</head>
+---
+layout: default
+markdown: true
+---
+<div class="row">
+  <div id="markdown-container" class="col-lg-9">
+    <header>
+      <p id="post-title">{{ page.title | replace: "_", " " | capitalize}}</p>
+      {% if page.tags %}
+      <ul class="tags clearfix">
+        {% for tag in page.tags %}
+        <li><i class="fa fa-tag"></i> {{ tag }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      <p id="post-meta">posted on <b>{{ page.date | date_to_string }}</b>
+        {% if page.categories[0] %}
+        under category <a href="{{ site.url }}/category/">{{ page.categories[0] }}</a>
+        {% endif %}
+      </p>
+    </header>
 
-<body>
-    {% include header.html %}
+    {{ content }}
+  </div>
 
-    <div class="container">
-        <div class="row">
-            <div id="markdown-container" class="col-lg-9">
-                <header>
-                    <p id="post-title">{{ page.title | replace: "_", " " | capitalize}}</p>
-                    {% if page.tags %}
-                    <ul class="tags clearfix">
-                        {% for tag in page.tags %}
-                        <li><i class="fa fa-tag"></i> {{ tag }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                    <p id="post-meta">posted on {{ page.date | date_to_string }} under category <a href="{{ site.url }}/category/">{{ page.categories[0] }}</a></p>
+  <div id="markdown-outline" class="col-lg-3">
+  </div>
 
-                </header>
-
-                {{ content }}
-            </div>
-
-            <div id="markdown-outline" class="col-lg-3">
-            </div>
-
-            {% if site.disqus.comments %}
-              {% include disqus.html %}
-            {% endif %}
-        </div>
-
-    </div>
-
-    {% include footer.html %}
-
-    <script type="text/javascript" src="{{ site.url }}/assets/js/post.js"></script>
-</body>
-</html>
+  {% if site.disqus.comments %}
+    {% include disqus.html %}
+  {% endif %}
+</div>

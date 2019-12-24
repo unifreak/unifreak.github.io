@@ -1,11 +1,19 @@
+---
+layout: compress
+---
 <!DOCTYPE html>
 <html>
 <head>
-    {% include head_base.html %}
+  {% include head.html %}
 </head>
 
-<body>
+<!-- bare layout means not header and footer
+  like resume
+-->
+{% unless layout.bare %}
+  <body>
     {% include header.html %}
+
     <section id="l-main">
         <div class="container">
             {{ content }}
@@ -13,5 +21,9 @@
     </section>
 
     {% include footer.html %}
-</body>
+  </body>
+{% else %}
+  {{ content }}
+{% endunless %}
+
 </html>

@@ -1,7 +1,7 @@
 ---
 title: "Martin Fowler: 控制反转"
 layout: post
-category: translation
+category: [translation, note]
 tags: [pattern]
 excerpt: "Martin Fowler 针对 '控制反转' 这个概念给出了自己的解释, 以澄清当下对该概念的迷思. 以及常用的实现方式和示例"
 ---

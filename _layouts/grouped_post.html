@@ -1,26 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    {% include head_base.html %}
-</head>
+---
+layout: default
+---
 
-<body>
-    {% include header.html %}
+{% assign group_name = page.path | split: "/" | first %}
 
-    {% assign group_name = page.path | split: "/" | first %}
-
-    {% if group_name == "series" %}
-      {% include series_list.html groups=site.collections %}
-    {% else %}
-      {% case group_name %}
-        {% when 'category' %}
-          {% assign groups = site.categories %}
-        {% when 'tag' %}
-         {% assign groups = site.tags %}
-      {% endcase %}
-      {% include group_list.html groups=groups %}
-    {% endif %}
-
-    {% include footer.html %}
-</body>
-</html>
+{% if group_name == "series" %}
+  {% include series_list.html groups=site.collections %}
+{% else %}
+  {% case group_name %}
+    {% when 'category' %}
+      {% assign groups = site.categories %}
+    {% when 'tag' %}
+     {% assign groups = site.tags %}
+  {% endcase %}
+  {% include group_list.html groups=groups %}
+{% endif %}
