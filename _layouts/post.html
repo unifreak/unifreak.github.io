@@ -15,7 +15,7 @@ markdown: true
       {% endif %}
       <p id="post-meta">posted on <b>{{ page.date | date_to_string }}</b>
         {% if page.categories[0] %}
-        under category <a href="{{ site.url }}/category/">{{ page.categories[0] }}</a>
+        under category <b>{{ page.categories | join: ", " }}</b>
         {% endif %}
       </p>
     </header>
