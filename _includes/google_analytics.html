@@ -1,5 +1,5 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
-{% if jekyll.environment == "production" %}
+{% if site.google_analytics.id and jekyll.environment == "production" %}
 <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics.id }}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
