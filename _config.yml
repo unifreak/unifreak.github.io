@@ -31,6 +31,10 @@ disqus:
   shortname: 'unifreak'
   comments: true
 
+jekyll_analytics:
+  GoogleAnalytics:          # Add, if you want to track with Google Analytics
+    id: UA-154982899-1      # Required - replace with your tracking id
+
 collections:
   book_reviews:
     output: true
