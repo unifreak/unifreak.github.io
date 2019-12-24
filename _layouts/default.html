@@ -15,9 +15,10 @@ layout: compress
     {% include header.html %}
 
     <section id="l-main">
-        <div class="container">
-            {{ content }}
-        </div>
+      <div class="container">
+        {% include search_result.html %}
+        {{ content }}
+      </div>
     </section>
 
     {% include footer.html %}

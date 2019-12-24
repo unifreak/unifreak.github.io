@@ -1,0 +1,60 @@
+<article id="search-result-wrapper" class="col-lg-12 hidden">
+  <h3>Search Results:</h3>
+  <div id="search-result"></div>
+</article>
+
+<style>
+#search-result-wrapper {
+  font-size: 2rem;
+  background-color: #eee;
+  padding: 5rem;
+  padding-left: 31rem;
+  margin-top: 3rem;
+}
+#search-result {
+  padding-left: 3rem;
+}
+
+@media (max-width: 1200px) {
+  #search-result-wrapper {
+    font-size: 1.7rem;
+    padding: 2rem;
+  }
+
+  #search-result {
+    padding-left: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #search-result-wrapper {
+    margin-top: 24rem !important;
+  }
+}
+</style>
+
+<script>
+$(document).ready(function() {
+  input = $("#search-input");
+  wrapper = $("#search-result-wrapper");
+
+  wrapper.hide();
+  wrapper.removeClass("hidden");
+  input.on("keyup change", function() {
+    if (! input.val()) {
+      wrapper.slideUp("ease");
+    } else {
+      wrapper.slideDown("ease");
+    }
+  });
+});
+</script>
+
+<script src="{{ site.url }}/assets/js/simple-jekyll-search.min.js"></script>
+<script>
+  SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('search-result'),
+    json: '/search.json'
+  });
+</script>
