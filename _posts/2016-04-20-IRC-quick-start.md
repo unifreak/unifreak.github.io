@@ -12,8 +12,8 @@ excerpt: "该教程只是为了让你在几分钟内就连上 IRC 网络并开�
     一种网络聊天协议
 
 - **IRC 网络**
-    
-    依据 IRC 协议组成的聊天网络, 
+
+    依据 IRC 协议组成的聊天网络,
     比较知名的有 `freenode`, `EFnet`, `DALnet` 等
 
 - **IRC 服务器**
@@ -63,24 +63,24 @@ excerpt: "该教程只是为了让你在几分钟内就连上 IRC 网络并开�
 
 2. 配置网络
 
-    首次打开 hexChat 会自动弹出网络配置窗口. 
+    首次打开 hexChat 会自动弹出网络配置窗口.
     也可以使用菜单 `HexChat`->`Network Lists` 打开该窗口
 
-    ![配置窗口](/images/posts/201604/hexChatServerlist.png)
+    ![配置窗口](/assets/img/posts/201604/hexChatServerlist.png)
 
     填写自己想要的昵称
 
     在 `Networks` 的列表中点选 `freenode`, 然后点击 `Connect` 连接到 `freenode`
 
 3. 连接成功后会弹出此窗口
-    
-    ![连接成功](/images/posts/201604/hexChatConnSuccess.png)
+
+    ![连接成功](/assets/img/posts/201604/hexChatConnSuccess.png)
 
     取消选中 `always show this ...`, 点击 `OK`
 
 4. 现在来到主界面
 
-    ![主界面](/images/posts/201604/hexChatUI.png)
+    ![主界面](/assets/img/posts/201604/hexChatUI.png)
 
     输入 `/msg NickServ register <password> <email>` 以注册当前昵称
 

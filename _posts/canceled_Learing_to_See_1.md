@@ -9,7 +9,7 @@ excerpt: "一旦摄影机被举起, 你应当做的就是找到你一开始被�
 _原文由 Dale Wilson 发表于 <https://digital-photography-school.com/for-beginners-learning-to-see/>_
 
 
-![lake](/images/posts/201903/lts1.1.jpg)
+![lake](/assets/img/posts/201903/lts1.1.jpg)
 > 一条当地湖泊的花岗岩沿岸可能蕴含无限个潜在好照片. 摄影和景象(真实或感知)息息相关
 
 
@@ -37,7 +37,7 @@ _原文由 Dale Wilson 发表于 <https://digital-photography-school.com/for-beg
 而这, 却是初学摄影者的一个问题. 多年以来我们一直训练自己不仅阅读, 而且从左到右的阅读, 还经常忽略一些相干的细节.
 
 
-![backyard](/images/posts/201903/lts1.2.jpg)
+![backyard](/assets/img/posts/201903/lts1.2.jpg)
 > 对于自然摄影者来说, 后院是个很好的演练场. 低下身仔细观察那些花朵, 可能有惊喜等着你.
 
 
@@ -53,5 +53,5 @@ _原文由 Dale Wilson 发表于 <https://digital-photography-school.com/for-beg
 就跟著名的名言供应商, 专业棒球运动员 Yogi Berra 所说的一样: "看看周围, 你就能观察到很多事儿".
 
 
-![rotate lake](/images/posts/201903/lts1.3.jpg)
+![rotate lake](/assets/img/posts/201903/lts1.3.jpg)
 > 在训练眼睛的同时训练想象力, 将会为我们打开另一个崭新的世界. 这个湖百年来都是土著居民的泛舟路线. 我把图像旋转 90 度, 想象着具有双臂的大地母亲搂着自己的骨盆和未降生的孩子.
