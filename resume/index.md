@@ -4,9 +4,9 @@ layout: post_bare
 
 # 基本信息
 
-__方浩__ \| 1990.10 \| PHP 开发 \| 北京
-手机: [153 6999 7084](tel:15369997084)
-email: [fanghao90s@gmail.com](mailto:fanghao90s@gmail.com)
+__方浩__ \| 1990.10 \| PHP 开发 \| 北京 <br />
+手机: [153 6999 7084](tel:15369997084) <br />
+Email: [fanghao90s@gmail.com](mailto:fanghao90s@gmail.com) <br />
 博客: <https://unifreak.github.io>
 
 # 工作经历
@@ -76,20 +76,25 @@ email: [fanghao90s@gmail.com](mailto:fanghao90s@gmail.com)
 
 - __Jekyll 模板__: [jekyll-theme-textalic](https://github.com/unifreak/jekyll-theme-textalic)
 
-使用 jekyll, SASS, Liquid 模板技术, 搭建于 github page 平台
-被 jekyll 官方主题库 [https://jekyll-themes.com](https://jekyll-themes.com/textalic/) 和 <http://www.jekyllthemes.org> 收录
+    使用 jekyll, SASS, Liquid 模板技术, 搭建于 github page 平台
+
+    被 jekyll 官方主题库 [https://jekyll-themes.com](https://jekyll-themes.com/textalic/) 和 <http://www.jekyllthemes.org> 收录
 
 - __SublimeText 插件: DirectOpen 和 DirectCopy__
 
-使用 Python + SublimeText API 开发
-DirectOpen 用于快速打开常用文件
-DirectCopy 用于快速复制文本模板
+    使用 Python + SublimeText API 开发
+
+    DirectOpen 用于快速打开常用文件
+
+    DirectCopy 用于快速复制文本模板
 
 # 技术/工具
 
-__语言__: PHP Python Shell C SQL HTML/CSS  JS/ES6 jQuery Markdown Regex
-__框架__: Laravel/Lumen ThinkPHP Yii Flask Vue.js SASS Bootstrap jQuery Liquid
-__工具__: Linux Docker Git SublimeText MySQL Nginx Redis Composer Jekyll
+__语言__ `PHP` `Python` `Shell` `C` `SQL` `HTML/CSS` `JS/ES6` `jQuery` `Markdown` `Regex`
+
+__框架__ `Laravel/Lumen` `ThinkPHP` `Yii` `Flask` `Vue`.js `SASS` `Bootstrap` `jQuery` `Liquid`
+
+__工具__ `Linux` `Docker` `Git` `SublimeText` `MySQL` `Nginx` `Redis` `Composer` `Jekyll`
 
 # 教育经历
 
@@ -98,6 +103,9 @@ __工具__: Linux Docker Git SublimeText MySQL Nginx Redis Composer Jekyll
 # 自我评价
 
 抽象和设计能力强, 热衷应用 OOAD 和设计模式分析和解决复杂业务问题
+
 思维清晰, 为人随和, 善于团队交流与合作
+
 注重实效, 关注细节, 热心研究和应用新技术, 拥抱开源和分享精神
+
 学习和英语能力强, 持续通过专业杂志和书籍, 以及源码阅读提升专业能力
