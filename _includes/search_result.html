@@ -54,11 +54,11 @@ $(document).ready(function() {
 });
 </script>
 
-<script src="{{ site.url }}/assets/js/simple-jekyll-search.min.js"></script>
+<script src="{{ '/assets/js/simple-jekyll-search.min.js' | relative_url }}"></script>
 <script>
   SimpleJekyllSearch({
     searchInput: document.getElementById('search-input'),
     resultsContainer: document.getElementById('search-result'),
-    json: '/search.json'
+    json: "{{ '/search.json' | relative_url }}"
   });
 </script>

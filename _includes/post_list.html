@@ -15,25 +15,25 @@
 <div class="row" id="paginator">
     {% if paginator.total_pages > 1 %}
         {% if paginator.previous_page %}
-            <a href="{{ paginator.previous_page_path | prepend: site.url }}">«</a>
+            <a href="{{ paginator.previous_page_path | relative_url }}">«</a>
         {% endif %}
 
         {% for page in (1..paginator.total_pages) %}
             {% if page == paginator.page %}
                 <span class="active">{{ page }}</span>
             {% elsif page == 1 %}
-                <a href="{{ site.url }}">{{ page }}</a>
+                <a href="{{ '/' | relative_url }}">{{ page }}</a>
             {% else %}
-                <a href="{{ site.url }}/{{ site.paginate_path | replace: ':num', page }}">{{ page }}</a>
+                <a href="{{ site.paginate_path | replace: ':num', page | relative_url }}">{{ page }}</a>
             {% endif %}
         {% endfor %}
 
         {% if paginator.next_page %}
-            <a href="{{ paginator.next_page_path | prepend: site.url }}">»</a>
+            <a href="{{ paginator.next_page_path | relative_url }}">»</a>
         {% endif %}
     {% elsif jsPagiLoaded != true %}
-        <script type="text/javascript" src="{{ site.url }}/assets/js/pagination.js"></script>
-        <script type="text/javascript" src="{{ site.url }}/assets/js/list_pagi.js"></script>
+        <script type="text/javascript" src="{{ '/assets/js/pagination.js' | relative_url }}"></script>
+        <script type="text/javascript" src="{{ '/assets/js/list_pagi.js' | relative_url }}"></script>
         {% assign jsPagiLoaded = true %}
     {% endif %}
 

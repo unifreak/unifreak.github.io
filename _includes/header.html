@@ -19,16 +19,16 @@
         <div class="row navbar">
             <nav class="col-lg-8 col-md-8 col-xs-12">
                 <ul class="row">
-                    <li class="col-lg-3"><a href="{{ site.url }}">HOME</a></li>
+                    <li class="col-lg-3"><a href="{{ '/' | relative_url }}">HOME</a></li>
                     <li class="col-lg-3">
                         <ul class="subnav">
                             <a href="javascript:void(0)">POST</a>
-                            <li><a href="{{ site.url }}/category">CATEGORY</a></li>
-                            <li><a href="{{ site.url }}/tag">TAG</a></li>
+                            <li><a href="{{ '/category' | relative_url }}">CATEGORY</a></li>
+                            <li><a href="{{ '/tag' | relative_url }}">TAG</a></li>
                         </ul>
                     </li>
-                    <li class="col-lg-3"><a href="{{ site.url }}/series">SERIES</a></li>
-                    <li class="col-lg-3"><a href="{{ site.url }}/about">ABOUT</a></li>
+                    <li class="col-lg-3"><a href="{{ '/series' | relative_url }}">SERIES</a></li>
+                    <li class="col-lg-3"><a href="{{ '/about' | relative_url }}">ABOUT</a></li>
                 </ul>
             </nav>
 

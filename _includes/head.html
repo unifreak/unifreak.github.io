@@ -6,30 +6,30 @@
 {% feed_meta %}
 {% seo %}
 
-<link rel="shortcut icon" href="{{ site.url }}/favicon.ico" type="image/icon">
-<link rel="icon" href="{{ site.url }}/favicon.ico" type="image/icon">
+<link rel="shortcut icon" href="{{ '/favicon.ico' | relative_url }}" type="image/icon">
+<link rel="icon" href="{{ '/favicon.ico' | relative_url }}" type="image/icon">
 
 <!-- stylesheets -->
-<link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/base.css">
-<link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/simplePagination.css">
+<link rel="stylesheet" type="text/css" href="{{ '/assets/css/base.css' | relative_url }}">
+<link rel="stylesheet" type="text/css" href="{{ '/assets/css/simplePagination.css' | relative_url }}">
 
 {% if layout.markdown %}
-  <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/highlight-theme.css">
-  <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/rouge-code.css">
+  <link rel="stylesheet" type="text/css" href="{{ '/assets/css/highlight-theme.css' | relative_url }}">
+  <link rel="stylesheet" type="text/css" href="{{ '/assets/css/rouge-code.css' | relative_url }}">
 {% endif %}
 
 {% if page.layout == "post" %}
-  <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/post.css">
+  <link rel="stylesheet" type="text/css" href="{{ '/assets/css/post.css' | relative_url }}">
 {% endif %}
 
 {% if page.layout == "post_bare" %}
-  <link rel="stylesheet" type="text/css" href="{{ site.url }}/assets/css/post_bare.css">
+  <link rel="stylesheet" type="text/css" href="{{ '/assets/css/post_bare.css' | relative_url }}">
 {% endif %}
 
 
 <!-- javascripts -->
-<script type="text/javascript" src="{{ site.url }}/assets/js/jquery.js"></script>
+<script type="text/javascript" src="{{ '/assets/js/jquery.js' | relative_url }}"></script>
 
 <!--[if lt IE 9]>
-<script src="{{ site.url }}/assets/js/html5shiv.js"></script>
+<script src="{{ '/assets/js/html5shiv.js' | relative_url }}"></script>
 <![endif]-->

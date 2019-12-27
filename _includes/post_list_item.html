@@ -6,7 +6,7 @@
     </div>
 
     <div class="col-lg-10 col-md-10 col-sm-10">
-        <h2 class="title"><a href="{{ post.url }}">
+        <h2 class="title"><a href="{{ post.url | relative_url }}">
           {{ post.title | replace: "_", " " | capitalize }}
         </a></h2>
         <ul class="tags">
@@ -17,9 +17,9 @@
         <br>
         <hr class="clearfix">
         <p class="excerpt">
-            {{ post.excerpt | strip_html | newline_to_br | truncatewords: 20 }}
+            {{ post.excerpt | strip_html | truncatewords: 25 }}
         </p>
     </div>
 
-    <button class="continue"><a href="{{ post.url }}">FULL ARTICLE</a></button>
+    <button class="continue"><a href="{{ post.url | relative_url }}">FULL ARTICLE</a></button>
 </article>

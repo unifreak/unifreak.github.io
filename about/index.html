@@ -5,7 +5,7 @@ layout: default
 {% assign my = site.data.me %}
 <div class="row" id="about">
     <header id="title">
-        <img src="{{ my.avatar_img | prepend: site.url }}">
+        <img src="{{ my.avatar_img | relative_url }}">
         <h1>{{ my.name }} | <small>{{ my.job | upcase }}</small></h1>
     </header>
 
@@ -40,6 +40,6 @@ layout: default
 
     <section id="action">
         <h2>MORE</h2>
-        <a href="{{ site.url }}/resume">查看我的在线简历</a>
+        <a href="{{ '/resume' | relative_url }}">Check out my resume</a>
     </section>
 </div>

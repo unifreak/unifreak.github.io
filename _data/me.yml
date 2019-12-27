@@ -1,11 +1,12 @@
 # About page & Footer
+
 name: 方浩
 job: "PHP Coder"
 hi: "HIYA!"
 avatar_img: "/assets/img/me.png"
 intro:
   - "一个 PHP 程序员, 技术宅, 总是在追求上进的吹毛求疵者"
-  - "除了敲代码, 还喜欢看书, 听音乐, 以及猫猫狗狗"
+  - "除了敲代码, 还喜欢看书, 听摇滚, 做瑜伽, 以及猫猫狗狗"
   - "业余时间你会看到我不是在像模像样的弹吉他, 就是骑着车子在城里晃荡"
 skills:
   - name: "Programming"
@@ -23,5 +24,6 @@ contact:
   - {name: "Mobile", icon-class: "fa fa-phone-square", text: "153 6999 7084", link: "tel: 15369997084"}
   - {name: "Email", icon-class: "fa fa-envelope", text: "fanghao90s@gmail.com", link: "mailto: fanghao90s@gmail.com"}
 social:
-  - {name: "GitHub", icon-class: "fa fa-github-square", text: "https://github.com/unifreak", link: "https://github.com/UniFreak"}
+  - {name: "GitHub", icon-class: "fa fa-github-square", text: "https://github.com/unifreak", link: "https://github.com/unifreak"}
+  - {name: "StackOverflow", icon-class: "fa fa-stack-overflow", text: "stack-overflow", link: "https://stackoverflow.com/users/3776039/unifreak"}
   - {name: "QQ", icon-class: "fa fa-qq", text: "744910240", link: "https://user.qzone.qq.com/744910240"}

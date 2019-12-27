@@ -19,23 +19,23 @@ layout: post
 permalink: /:categories/:title
 excerpt_separator: "[-----]"
 
-url: https://unifreak.github.io/
-name: unifreak
-title: unifreak | another yet unique freak is showing a freakshow
-shout:
-  - on the way to death
-  - on the way of learning
-description: "Fanghao's personal weblog, on coding or such stuff"
+url: # Required: replace this with your domain
+name: unifreak # Required: will be displayed on every page's header
+title: FangHao's blog # Required: site's default title
+shout: # Required: **TWO** lines, will be displayed on page's header.
+  - NEVER
+  - OR NOW
+description: "Fanghao's personal blog, on IT tech, personal thoughts and other things..." # Required
 
 disqus:
-  shortname: 'unifreak'
-  comments: true
+  comments: true # Global toggle on/off disqus comment
+  shortname: unifreak # Required if you use disqus. Repalce with your disqus shortname here
 
 google_analytics:
-  id: "UA-154982899-1"      # Required - replace with your tracking id
+  id: "UA-154982899-1" # Required if you use google analytics. Replace with your tracking id here
 
-collections:
-  book_reviews:
+collections: # Define post series here
+  book_review:
     output: true
 
 defaults:

@@ -36,7 +36,7 @@
 
           <div id="rss" class="col-lg-3 col-md-3 col-sm-12">
             <h3>SUBSCRIBE</h3>
-            <a href="{{ site.url }}/feed.xml">
+            <a href="{{ '/feed.xml' | relative_url }}">
               <i class="rss fa fa-rss-square"></i>
             </a>
           </div>
@@ -49,7 +49,7 @@
     </div>
 </footer>
 
-<script type="text/javascript" src="{{ site.url }}/assets/js/base.js"></script>
+<script type="text/javascript" src="{{ '/assets/js/base.js' | relative_url }}"></script>
 
 {% include google_analytics.html %}
 
@@ -58,5 +58,5 @@
 {% endunless%}
 
 {% if page.layout == "post" %}
-<script type="text/javascript" src="{{ site.url }}/assets/js/post.js"></script>
+<script type="text/javascript" src="{{ '/assets/js/post.js' | relative_url }}"></script>
 {% endif %}
