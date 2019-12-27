@@ -2,10 +2,102 @@
 layout: post_bare
 ---
 
-# YOUR RESUME
+# 基本信息
 
-You can put your resume here, This file is linked on /about page
+__方浩__ \| 1990.10 \| PHP 开发 \| 北京
+手机: [153 6999 7084](tel:15369997084)
+email: [fanghao90s@gmail.com](mailto:fanghao90s@gmail.com)
+博客: <https://unifreak.github.io>
 
-This page use `post_bare` layout, and this layout support GFM markdown
+# 工作经历
 
-`post_bare` layout just look like this page
+## 优信集团 (2016.10-2019.07)
+
+优信是一家二手车电商交易平台
+- 维护并完成 **5** 个核心金融项目的需求评估设计和实现
+- 梳理业务和代码流程, 主导重构了信审和交易 **2** 个系统的接口及其与其他系统之间的交互流程
+- 应用缓存, 异步化处理等技术, 把多个核心接口性能从 500ms 降到了 200ms 以内
+- 抽象并实现了 **13** 个核心业务模块和系统组件并广泛应用于金融组内 **9** 个项目中
+- 在组内进行业务流程或技术分享, 实践并推行各种最佳实践: PSR, TDD, 自动化, RESTful 等
+
+## 北京飞马国际供应链管理有限公司 (2015.11-2016.8)
+
+飞马国际是一家大宗商品在线交易平台
+- 完成 ERP, 运营, CRM 等后台系统以及主站大宗网的需求评估设计与研发工作
+- 确保数据库, 代码, 文档, 分支管理等各项规范的正确实施
+
+## 武汉邦普特进出口公司 (2013.7-2015.10)
+
+邦普特是一家跨国电商, 主营美妆类产品
+- **4** 个不同语言站点的产品信息复制, 促销活动, APP 接口及后台管理等功能实现
+- 及其 cPanel 服务器的邮箱, 数据库, ftp, http 等服务器及定时任务的管理维护工作
+- 与客服密切交流, 梳理日常工作流, 并提取成需求, 开发商品管理, 统计, 话术模板等多种工具提升其工作效率
+
+# 项目经历
+
+## 信审系统 & 交易系统
+
+信审和交易两个系统是优信金融的核心业务系统, 分别负责客户的贷前信审和交易购车环节
+系统使用 Lumen + Dingo/api 提供接口服务
+
+由于业务本身的复杂性和长期的技术债务, 面临如下问题:
+- 接口定义和系统行为混乱, 与其他系统交互复杂, 性能低下
+- 接口正确性过度依赖 QA, 线上 bug 率高且难于调试
+- 代码的风格杂糅混乱, 难以理解
+- 代码逻辑分支复杂, 重复实现, 耦合度高, 难以扩展
+
+工作期间, 通过采取如下行动解决这些问题:
+- 和产品及 QA 交流, 重新梳理业务流程, 主导进行了系统的逻辑拆分和接口重构, 系统行为更加内聚和明晰
+- 解决系统 phpunit/artisan/http 不同环境变量读取问题, 以支持和推广 TDD
+- 开发 QLog 包, 提供调试模式自动为 SQL 查询, http 请求, 接口响应打 log, 显著减少了接口调试时间
+- 开发 fetcher, rememberable-db 包, 统一并简化了各系统的接口请求和查询缓存等行为的实现与配置化
+- 开发购车特征锁, 解决因多端同时操作导致的数据不一致及订单金额错误问题
+- 以 PSR2 为基础制定编码规范, 通过 githook+phpmd 进行自动检测纠正, 把问题数从 **1000** 以上降至 **100** 以内
+- 实现资方路由器, 金融方案管道, 订单生成器等核心业务模块, 灵活支持资方的接入分配和金融活动定制等需求
+
+## Exciler 异步校验系统
+
+金融订单因为涉及金额, 正确性无比重要
+为快速发现订单的金额错误, 减少 QA 使用 Excel 手动校验的巨大工作量, 独立设计并实现了 Exciler 系统:
+- 用 **1** 周时间熟悉了 ES6 和 Vue.js 等现代化的前端技术并开发完成前端配置界面
+- 运用策略和访问者等模式, 灵活支持了多种数据源和配置源, 以及版本化的单元格映射配置等复杂功能
+- 通过 Exciler 及时发现并修正了线上 **11** 个系统或 Excel 文件本身的 bug
+
+## QLog 包
+
+业务系统经常因为调试打大量 log. 独立抽象并设计了 QLog, 实现了以下功能:
+- 支持环境敏感化的配置, 用于定制 log 队列名称, 默认频道等行为
+- 通过暂存区, 支持调试模式下的 log 打印输出
+- 使用 Laravel 的事件机制, 实现自动 log SQL 查询, http 请求及请求和响应体
+- 统一 log 格式, 自动生成 session id, 为 log 的异步处理和搜索及请求链串连提供便利
+- 提供 log 耗时和内存使用信息, 极大方便了接口性能瓶颈的定位
+
+## 开源项目
+
+- __Jekyll 模板__: [jekyll-theme-textalic](https://github.com/unifreak/jekyll-theme-textalic)
+
+使用 jekyll, SASS, Liquid 模板技术, 搭建于 github page 平台
+被 jekyll 官方主题库 [https://jekyll-themes.com](https://jekyll-themes.com/textalic/) 和 <http://www.jekyllthemes.org> 收录
+
+- __SublimeText 插件: DirectOpen 和 DirectCopy__
+
+使用 Python + SublimeText API 开发
+DirectOpen 用于快速打开常用文件
+DirectCopy 用于快速复制文本模板
+
+# 技术/工具
+
+__语言__: PHP Python Shell C SQL HTML/CSS  JS/ES6 jQuery Markdown Regex
+__框架__: Laravel/Lumen ThinkPHP Yii Flask Vue.js SASS Bootstrap jQuery Liquid
+__工具__: Linux Docker Git SublimeText MySQL Nginx Redis Composer Jekyll
+
+# 教育经历
+
+2010.9-2013.6 河南商业高等专科学校 计算机系网络技术专业
+
+# 自我评价
+
+抽象和设计能力强, 热衷应用 OOAD 和设计模式分析和解决复杂业务问题
+思维清晰, 为人随和, 善于团队交流与合作
+注重实效, 关注细节, 热心研究和应用新技术, 拥抱开源和分享精神
+学习和英语能力强, 持续通过专业杂志和书籍, 以及源码阅读提升专业能力
