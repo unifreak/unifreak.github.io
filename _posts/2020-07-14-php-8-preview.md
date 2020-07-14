@@ -1,10 +1,22 @@
+---
+title: "PHP 8 特性预览"
+layout: post
+category: note
+tags: [php]
+description: PHP 8 syntax, feature, preview
+excerpt: "PHP 将于 2020 年 11 月 26 日发布. 这篇文章简要罗列了一些其重要更新. 注意, PHP 8 仍在开发. 此列表随时间可能变得不全."
+---
 
+_这是一个阅读 [这篇文章]('https://stitcher.io/blog/new-in-php-8') 后的简要总结_
+
+---
 
 PHP 将于 2020 年 11 月 26 日发布.
 
+注意, PHP 8 仍在开发. 此列表随时间可能变得不全.
+
 # 新特性
 
-注意, PHP 8 仍在开发. 此列表随时间可能变得不全.
 
 ### 联合类型
 
