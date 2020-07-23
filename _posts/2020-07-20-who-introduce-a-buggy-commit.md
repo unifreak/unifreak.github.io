@@ -18,10 +18,10 @@ _原文: <https://vishaltelangre.com/chasing-a-bad-commit/>_
 
 有几个可能的解决办法:
 
-选项 1: 从最后一个提交开始, 一个一个的签出上一次的提交, 运行测试看是否能通过, 直到找到最近一次能测试通过的提交. 那么罪魁祸首肯定就是它之后的那次提交了
-选项 2: 如果你必须得签出然后运行测试 100 多次呢? 太费劲了. 你可以把任务分成片, 分派给不同的人同时去做
-选项 3: 你肯定已经想到更好的方式了 --- 二分查找. 甚至可以写一个脚本自动帮你做二分查找的工作
-选项 4: 也就是今天的主题: 使用 `git bisect`. 它实际上就是一个帮你做这种二分查找工作的工具
+- 选项 1: 从最后一个提交开始, 一个一个的签出上一次的提交, 运行测试看是否能通过, 直到找到最近一次能测试通过的提交. 那么罪魁祸首肯定就是它之后的那次提交了
+- 选项 2: 如果你必须得签出然后运行测试 100 多次呢? 太费劲了. 你可以把任务分成片, 分派给不同的人同时去做
+- 选项 3: 你肯定已经想到更好的方式了 --- 二分查找. 甚至可以写一个脚本自动帮你做二分查找的工作
+- 选项 4: 也就是今天的主题: 使用 `git bisect`. 它实际上就是一个帮你做这种二分查找工作的工具
 
 # git bisect
 
@@ -31,7 +31,7 @@ _原文: <https://vishaltelangre.com/chasing-a-bad-commit/>_
 
 开始一次 `bisect` 会话:
 
-```bash
+```shell
 $ git bisect start
 ```
 
@@ -39,7 +39,7 @@ $ git bisect start
 
 假设现在我们在 `master` 分支, 我们可以用当前的 `HEAD`, 告诉 `git bisect` 最近的这次提交是 "坏提交"
 
-```bash
+```shell
 # 确定是在 master 分支
 $ git branch
 * master
@@ -58,7 +58,7 @@ $ git bisect bad HEAD # 或直接 `git bisect bad`
 接着, 找到一个 "好提交" (测试能通过的).
 假设我们知道自己上次的提交能测试通过, 并且被我们打了 `v12.0.1` 的标签. 我们可以先签出那次提交, 然后标记其为 good.
 
-```bash
+```shell
 $ git checkout v12.0.1
 
 # 标记为好提交
@@ -72,7 +72,7 @@ Bisecting: 46 revisions left to test after this (roughly 6 steps)
 
 我们也可以看看 `bisect` 当前的进度, 使用 `git bisect view` 看一下二分查找的边界和当前检查的提交
 
-```bash
+```shell
 $ git bisect view --oneline
 * 5b91861 (master, origin/master) Merge 'feature/one' branch into 'origin/master' branch
 * ...
@@ -86,7 +86,7 @@ $ git bisect view --oneline
 
 继续看看当前签出的提交是不是坏提交吧
 
-```bash
+```shell
 # 运行测试
 $ phpunit
 ...........                                                       11 / 11 (100%)
@@ -100,7 +100,7 @@ Bisecting: 23 revisions left to test after this (roughly 5 steps)
 
 反复上面的步骤 5 次之后, `git bisect` 给出了我们最早引入 bug 的提交
 
-```bash
+```shell
 # 测试失败: 坏提交
 $ git bisect bad
 Bisecting: 11 revisions left to test after this (roughly 4 steps)
@@ -133,7 +133,7 @@ Date:   Fri Jun 19 14:02:09 2020 -0400
 
 工作完成, 别忘了清理一下 `git bisect` 会话.
 
-```bash
+```shell
 $ git bisect reset
 Previous HEAD position was efd1083
 Switched to branch 'master'
@@ -144,7 +144,7 @@ Your branch is up to date with 'origin/master'.
 
 `git bisect` 可以运行并执行任何命令或脚本. 如果命令或脚本运行的退出码是 0, 它便自动标记为好提交. 反之如果退出码是 1~127 (包括 127, 除去 125), 它便自动标记为坏提交.
 
-```bash
+```shell
 # 开始 bisect 会话, 同时告诉 bisect 一个好提交和一个坏提交
 $ git bisect start HEAD v12.0.1
 Bisecting: 46 revisions left to test after this (roughly 6 steps)
