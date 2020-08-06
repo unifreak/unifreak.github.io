@@ -37,8 +37,6 @@ google_analytics:
 collections: # Define post series here
   book_review:
     output: true
-  tmp:
-    output: true
 
 defaults:
   - scope:
