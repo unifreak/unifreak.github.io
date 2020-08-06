@@ -13,10 +13,18 @@ markdown: true
         {% endfor %}
       </ul>
       {% endif %}
-      <p id="post-meta">posted on <b>{{ page.date | date_to_string }}</b>
-        {% if page.categories[0] %}
+
+      <p id="post-meta">
+      posted
+      {% if page.date %}
+         on <b>{{ page.date | date_to_string }}</b>
+      {% endif %}
+      {% if page.categories[0] %}
         under category <b>{{ page.categories | join: ", " }}</b>
-        {% endif %}
+      {% endif %}
+      {% unless page.collection == 'posts'  %}
+        in series <b>{{ page.collection }}</b>
+      {% endunless %}
       </p>
     </header>
 
