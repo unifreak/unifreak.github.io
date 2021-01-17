@@ -21,9 +21,9 @@ skills:
 
 display_name: UniFreak
 contact:
-  - {name: "Mobile", icon-class: "fa fa-phone-square", text: "153 6999 7084", link: "tel: 15369997084"}
+  # - {name: "Mobile", icon-class: "fa fa-phone-square", text: "153 6999 7084", link: "tel: 15369997084"}
   - {name: "Email", icon-class: "fa fa-envelope", text: "fanghao90s@gmail.com", link: "mailto: fanghao90s@gmail.com"}
 social:
   - {name: "GitHub", icon-class: "fa fa-github-square", text: "https://github.com/unifreak", link: "https://github.com/unifreak"}
   - {name: "StackOverflow", icon-class: "fa fa-stack-overflow", text: "stack-overflow", link: "https://stackoverflow.com/users/3776039/unifreak"}
-  - {name: "QQ", icon-class: "fa fa-qq", text: "744910240", link: "https://user.qzone.qq.com/744910240"}
+  # - {name: "QQ", icon-class: "fa fa-qq", text: "744910240", link: "https://user.qzone.qq.com/744910240"}
