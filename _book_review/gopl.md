@@ -1,6 +1,7 @@
 ---
-stars: 4
+stars: 5
 date: 2021-09-10
+title: The Go Programming Langauge
 ---
 
 读这本书让我重新体验了一次读 K&R C 的乐趣.
@@ -36,3 +37,4 @@ date: 2021-09-10
 - Go specification: <https://golang.org/ref/spec>
 - Go 谚语: <http://go-proverbs.github.io> 作者分享的一些 Go 谚语, 类似 "Errors are values" 之类的
 - 答案参考: <https://github.com/torbiak/gopl>, <https://github.com/ray-g/gopl> 推荐后面那个, 有单元测试
+- Go spec, index pdf: <https://github.com/UniFreak/learn-gopl/tree/master/reference/>
