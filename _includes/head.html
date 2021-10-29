@@ -30,7 +30,18 @@
 <!-- javascripts -->
 <script type="text/javascript" src="{{ '/assets/js/jquery.js' | relative_url }}"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+{% for math in page.usemath %}
+  {% if math == "latex" %}
+    <!-- latex math support -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  {% endif %}
+
+  {% if math == "ascii" %}
+    <!-- asciimath support -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=AM_CHTML"></script>
+  {% endif %}
+{% endfor %}
 
 <!--[if lt IE 9]>
 <script src="{{ '/assets/js/html5shiv.js' | relative_url }}"></script>
