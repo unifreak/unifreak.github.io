@@ -56,10 +56,10 @@ gcc 把源文件转换为可执行文件, 基本要经历四个阶段, 每个阶
 
 ## 单个文件的编译
 
-    gcc -Wall bad.c -o bad
+    gcc -Wall main.c -o hello
 
 - `-Wall` 选项见[编译警告][warning])
-- `-o` 指定产生的可执行文件名称. 默认为 a.out
+- `-o hello` 指定产生的可执行文件名称. 默认为 a.out
 
 ## 多个文件的编译
 
