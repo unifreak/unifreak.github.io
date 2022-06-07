@@ -33,7 +33,7 @@ disqus:
   shortname: unifreak # Required if you use disqus. Repalce with your disqus shortname here
 
 google_analytics:
-  id: "UA-154982899-1" # Required if you use google analytics. Replace with your tracking id here
+  id: "G-35QT9DQRZH" # Required if you use google analytics. Replace with your tracking id here
 
 collections: # Define post series here
   book_review:
