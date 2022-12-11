@@ -2,7 +2,7 @@
 title: "软件开发的依赖问题"
 layout: post
 category: translation
-tags: ["engineering"]
+tags: [engineering]
 excerpt: "最近读到一篇 Russ Cox 写的关于软件依赖管理的文章, 其中有些示例很有趣. 整理一下, 分享给大家."
 ---
 
