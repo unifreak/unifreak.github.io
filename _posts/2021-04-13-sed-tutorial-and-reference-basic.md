@@ -3,10 +3,12 @@ title: "Sed 简明教程和参考 - 基础篇"
 layout: post
 category: note
 tags: [shell, sed]
-excerpt: "内容总结自学习书籍 <Linux 命令行与 Shell 脚本编程大全>. 基础篇包含如何在命令行和使用文件运行 sed 脚本, 进行常见的单行匹配, 打印, 编辑, 替换和删除等操作. 高级篇涉及多行文本操作, 保持空间, 模式替代等相关内容."
+
+excerpt: "内容总结自学习书籍 <Linux 命令行与 Shell 脚本编程大全>. 基础篇包含如何在命令行和使用文件运行 sed 脚本,
+进行常见的单行匹配, 打印, 编辑, 替换和删除等操作. 高级篇涉及多行文本操作, 保持空间, 模式替代等相关内容."
 ---
 
-_本文内容总结自书籍 [Linux 命令行与 shell 脚本编程大全](https://union-click.jd.com/jdc?e=&p=AyIGZRprFQETB1QYXBIyVlgNRQQlW1dCFFlQCxxKQgFHRE5XDVULR0UVARMHVBhcEh1LQglGa3VmagA2aQZqYHt5DGJFFgJLAgtzM3UOHjdUK1gUAhIAXR1aHQMiN1Uca0NsEgZUGloUBxYAUitaJQIVB1wZWxEFFwdWE10lBRIOZX8ETXVRUwVBayUyETdlK1slASJFO0heRVYUAAUSWBRSRwIHT1kcVRJSBU5eRwpCBgYZWhxSIgVUGl8c "Linux 命令行与 shell 脚本编程大全")_
+_本文内容总结自书籍 [Linux 命令行与 shell 脚本编程大全](https://union-click.jd.com/jdc?e=618%7Cpc%7C&p=JF8BANYJK1olXwUAU11UD0sRBV8IGVsdVQICUm4ZVxNJXF9RXh5UHw0cSgYYXBcIWDoXSQVJQwYAVFZVDEsRHDZNRwYlFUJnCSkrFg11YDNcez9uHGECMT0pXkcbM244GFoVXQEKUl9VCXsnA2g4STXN67Da8e9B3OGY1uefK1olXQEEVVZeAEIQAmoJEmsSXQ8yMAEFfwhDUzU4K2sWbQECXUpbegpFF2l6K2sVbQUyFjBUDR4fV2YOElNGCFEHB11ZWEIWBm8MTlgWVQ5WAF0IXXsVAm4MEmsl)_
 
 **Sed**: Stream EDitor
 

@@ -2,7 +2,7 @@
 title: "Go 语言学习笔记 (01)"
 layout: post
 category: note
-tags: [go]
+tags: [golang]
 excerpt: "本文包含了 Go 语言的简介, 环境搭建, 以及基本语法中的变量, 函数, 包等相关内容"
 ---
 
