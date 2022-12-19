@@ -18,7 +18,7 @@ components in golang to get readers going, then add more details and depth into
 things we already familiar with in each chapters later. At last, you find
 yourself learnt most things in Go Spec, in detail.
 
-The most value thing in this book, is that it focus only realistic requirement
+The most valuable thing in this book is that it focus on realistic requirement
 to code for, and the code example is both interesting and enlightening.
 
 For learner who already familiar with programming in other language, I recommend
