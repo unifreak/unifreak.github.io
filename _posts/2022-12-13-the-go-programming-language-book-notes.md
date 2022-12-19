@@ -10,24 +10,17 @@ a quick reference."
 ---
 
 This is the reading note while I'm learning golang by reading the book [The Go
-Programming Language](https://amzn.to/3W9uFMp).
+Programming Language](https://amzn.to/3W9uFMp), but also contains info from other
+resource like go blog, or video courses, etc. I'll keep it updated while I'm
+learning golang.
 
 This article is not meant for beginner, but rather a quick reference.
 
-I'd recommend you to read this book as well, it's well writen, covers golang in
+I'd recommend you to read this book as well, it's well written, covers golang in
 both width and depth, as you can see from this article. Although it's now a bit
-old, doesn't cover go1.8's generic feature. But even so, what I learned from
-this book cann't be learned else where.
-
-# See
-
-Book: [The Go Programming Language](https://amzn.to/3W9uFMp).
-
-<https://go.dev/tour/>
-
-<https://go.dev/doc/effective_go>
-
-<https://go.dev/talks/2012/splash.article>
+old, doesn't cover new features of go1.8 (This article does). But even so, what
+I learned from this book can't be learned else where. You can [read my detailed
+book review](http://unifreak.github.io/book_review/gopl_en).
 
 # Basics
 
@@ -675,7 +668,7 @@ parameters.
 
 ## Slices
 
-<https://go.dev/blog/slices-intro>
+https://go.dev/blog/slices-intro
 
 Slice is a dynamically-sized, flexible view into the elements of an array. A
 slice is a lightweight data structure that gives access to a subsequence
@@ -752,6 +745,9 @@ e := []struct {
 
 // 2-D slice
 f := [][]string{
+	// type declaration []string is optional for primitive types like string.
+	// but it's good idea to always specify type declaration when you are
+	// dealing with more complex types.
     []string{"_", "_", "_"},
     []string{"_", "_", "_"},
     []string{"_", "_", "_"},
@@ -763,7 +759,8 @@ f := [][]string{
 //      make([]T, len, cap)
 //
 // make creates an unnamed array variable and return a slice of it; the array is
-// accessible only through the returned slice.
+// accessible only through the returned slice. This is useful when number of
+// element is known.
 g := make([]int, 3, 5) // make a []int slice with 3 length(zeroed) and 5 capacity
 
 // Zero Value.
@@ -2785,9 +2782,9 @@ var cache = struct {
 }
 
 func Lookup(key string) string {
-    // the variable cache gives more expressive names to the variables related to
-    // the cache, and because the sync.Mutex field is embedded within it, its Lock
-    // and Unlock methods are promoted
+    // the variable cache gives more expressive names to the variables related
+    // to the cache, and because the sync.Mutex field is embedded within it,
+    // its Lock and Unlock methods are promoted
     cache.Lock()
     v := cache.mapping[key]
     cache.Unlock()
@@ -2803,9 +2800,9 @@ distanceFromP := p.Distance     // method value
 fmt.Println(distanceFromP(q))   // "5"
 ```
 
-Method values are useful when a pacakge's API calls for a function value, and the
-client's desired behavior for that function is to call a method on a specific
-receiver.
+Method values are useful when a pacakge's API calls for a function value, and
+the client's desired behavior for that function is to call a method on a
+specific receiver.
 
 ```go
 type Rocket struct { /* ... */ }
@@ -2820,8 +2817,9 @@ time.AfterFunc(10 * time.Second, func() { r.Launch() })
 time.AfterFunc(10 * time.Second, r.Launch)
 ```
 
-A *method expression* written T.f or `(*T).f` where T is a type, yields a function
-value with a regular first parameter taking the place of the receiver.
+A *method expression* written T.f or `(*T).f` where T is a type, yields a
+function value with a regular first parameter taking the place of the
+receiver.
 
 ```go
 distance := Point.Distance  // method expression
@@ -2912,7 +2910,7 @@ opaque.
 
 # Interface
 
-See: https://research.swtch.com/interfaces
+See: https://research.swtch.com/interfaces.
 
 A *concrete type* specifies the exact representation of its values and exposes
 the intrinsic operations of that representation. It may also provide additional
@@ -2926,24 +2924,24 @@ interface type, you know nothing about what is *is*; you know only what i
 can *do*, or more precisely, what behaviors are provided by its methods.
 
 A variable of interface type stores a pair: the concrete value assigned to the
-variable, and that value's type descriptor. To be more precise, the value is the
-underlying concrete data item that implements the interface and the type describes
-the full type of that item.
+variable, and that value's type descriptor. To be more precise, the value is
+the underlying concrete data item that implements the interface and the type
+describes the full type of that item.
 
-Interface types express generalizations or abstractions about the behaviors of other
-types.
+Interface types express generalizations or abstractions about the behaviors of
+other types.
 
 A type *satisfies* an interface if it possesses all the methods the interface
-requires. Go programmers often say that a concrete type "is a" particular interface
-type, meaning that is satisfies the interface.
+requires. Go programmers often say that a concrete type "is a" particular
+interface type, meaning that is satisfies the interface.
 
-What makes Go's interfaces so distinctive is that they are satisfied
-implicitly. This design lets you create new interfaces that are satisfied by
+What makes Go's interfaces so distinctive is that they are *satisfied
+implicitly*. This design lets you create new interfaces that are satisfied by
 existing concrete types without changing the existing types.
 
 ```go
-// An interface type specifies a set of methods that a concrete type must possess
-// to be considered an instance of that interface.
+// An interface type specifies a set of methods that a concrete type must
+// possess to be considered an instance of that interface.
 //
 // The order in which the methods appear is immaterial. All that matters is the
 // set of methods.
@@ -2970,8 +2968,8 @@ type ReadWriter interface {
 
 // Assignment
 //
-// The rules is simple: an expression may be assigned to an interface only if its
-// type satisfies the interface.
+// The rules is simple: an expression may be assigned to an interface only if
+// its type satisfies the interface.
 var w io.Writer
 w = os.Stdout       // OK: *os.File has Write method
 w = time.Second     // compile error: time.Duration lacks Write method
@@ -2979,10 +2977,10 @@ w = time.Second     // compile error: time.Duration lacks Write method
 // This rule applied even when the right-hand side is itself an interface
 var rw io.ReadWriter w = rw                 // OK: io.ReadWriter has Write method
 
-// Although it's legal to call a *T method on an argument of type T so long as the
-// argument is a variable, but this is mere syntactic sugar: a value of type T does
-// not possess all the methods that a *T pointer does, and as a result it might
-// satisfy fewer interfaces.
+// Although it's legal to call a *T method on an argument of type T so long as
+// the argument is a variable, but this is mere syntactic sugar: a value of
+// type T does not possess all the methods that a *T pointer does, and as a
+// result it might satisfy fewer interfaces.
 type IntSet struct { /* ... */ }
 func (*IntSet) String() string
 
@@ -3005,8 +3003,8 @@ w.Close()                       // compile error: io.Writer lacks Close method
 // Empty Interface Type
 
 // The type `interface{}`, which is called the *empty interface* type, is
-// indispensable. Because the empty interface type places no demands on the types
-// that satisfy it, we can assign *any* value to the empty interface.
+// indispensable. Because the empty interface type places no demands on the
+// types that satisfy it, we can assign *any* value to the empty interface.
 var any interface{}
 any = true
 any = 12.34
@@ -3016,8 +3014,8 @@ any = new(bytes.Buffer)
 ```
 
 Although interface satisfactions is implicit, but sometimes we it's useful to
-document and assert the relationship at compile time. The idiomatic way to do this
-is:
+document and assert the relationship at compile time. The idiomatic way to do
+this is:
 
 ```go
 // *bytes.Buffer must satisfy io.Writer
@@ -3027,15 +3025,16 @@ var _ io.Writer = (*bytes.Buffer)(nil)
 // We use _ because we never intended to use the variable.
 ```
 
-Conceptually, a value of an interface type, or *interface value*, has two components,
-a concrete type and a value of that type. These are called the interface's *dynamic
-type* and *dynamic value*. In our conceptual model, a set of values called *type
-descriptors* provide information about each type, such as its name and methods. In
-an interface value, the type component is represented by the appropriate type
-descriptor.
+Conceptually, a value of an interface type, or *interface value*, has two
+components, a concrete type and a value of that type. These are called the
+interface's *dynamic type* and *dynamic value*. In our conceptual model, a set
+of values called *type descriptors* provide information about each type, such
+as its name and methods. In an interface value, the type component is
+represented by the appropriate type descriptor.
 
-The zero value for an interface has both its type and value components set to nil. An
-interface value is described as nil or non-nil based on its dynamic type.
+The zero value for an interface has both its type and value components set to
+nil. An interface value is described as nil or non-nil based on its dynamic
+type.
 
 ```go
 // initialized to nil interface value
@@ -3044,34 +3043,35 @@ var w io.Writer
 // calling any method of a nil interface value causes a panic.
 w.Write([]byte("hello")) // panic: nil pointer dereference.
 
-// This assignment involves an implicit conversion from a concrete type to an interface
-// type, and is equivalent to the explicit conversion
+// This assignment involves an implicit conversion from a concrete type to an
+// interface type, and is equivalent to the explicit conversion:
 //
 //      io.Writer(os.Stdout)
 //
-// A conversion of this kind, whether explicit or implicit, captures the type and the
-// value of its operand. The interface value's dynamic type is et the type
-// descriptor for the pointer type *os.File, and its dynamic value holds a *copy* of
-// os.Stdout, which is a pointer to the os.File variable representing the standard
-// output of the process.
+// A conversion of this kind, whether explicit or implicit, captures the type
+// and the value of its operand. The interface value's dynamic type is the type
+// descriptor for the pointer type *os.File, and its dynamic value holds
+// a *copy* of os.Stdout, which is a pointer to the os.File variable
+// representing the standard output of the process.
 w = os.Stdout
 
-// Calling the Write method on an interface value containing *os.File pointer cause
-// the (*os.File).Write method to be called.
+// Calling the Write method on an interface value containing *os.File pointer
+// cause the (*os.File).Write method to be called.
 //
-// In general, we cannot know at compile time what the dynamic type of an interface
-// value will be, so call through an interface must use *dynamic dispatch*. Instead
-// of a direct call, the compiler must generate code to obtain the address of the
-// method named Write from the type descriptor, then make an indirect call to that
-// address. The receiver argument for the call is a copy of the interface's dynamic
-// value, os.Stdout. The effect is as if we had made this call directly:
+// In general, we cannot know at compile time what the dynamic type of an
+// interface value will be, so call through an interface must use *dynamic
+// dispatch*. Instead of a direct call, the compiler must generate code to
+// obtain the address of the method named Write from the type descriptor, then
+// make an indirect call to that address. The receiver argument for the call is
+// a copy of the interface's dynamic value, os.Stdout. The effect is as if we
+// had made this call directly:
 //
 //      os.Stdout.Write([]byte("hello")) // "hello"
 //
 w.Write([]byte("hello")) // "hello"
 
 // The dynamic type is now *bytes.Buffer
-w = new (bytes.Buffer)
+w = new(bytes.Buffer)
 // A call to Write uses the same mechanism as before
 w.Write([]byte("hello"))    // (*bytes.Buffer).Write is called
 
@@ -3079,37 +3079,37 @@ w.Write([]byte("hello"))    // (*bytes.Buffer).Write is called
 w = nil
 ```
 
-Interface values may be compared using == and !=. Two interface values are equal if
-both are  nil, or if their dynamic types are identical and their dynamic values are
-equal according to the usual behavior of == for that type. Because interface values
-are comparable, they may be used as the keys of a map or as the operand of a switch
-statement.
+Interface values may be compared using == and !=. Two interface values are equal
+if both are nil, or if their dynamic types are identical and their dynamic
+values are equal according to the usual behavior of == for that type. Because
+interface values are comparable, they may be used as the keys of a map or as
+the operand of a switch statement.
 
-However, if two interface values are compared and have the same dynamic type, but
-that type is not comparable (a slice, for instance), then the comparison fails with
-a panic.
+However, if two interface values are compared and have the same dynamic type,
+but that type is not comparable (a slice, for instance), then the comparison
+fails with a panic.
 
 ```go
 var x interface{} = []int{1, 2, 3}
 fmt.Println(x == x) // panic: comparing uncomparable type []int
 ```
 
-When comparing interface values or aggregate types that contain interface values, we
-must be aware of the potential for a panic. A similar risk exists when using
-interfaces as map keys or switch operands.
+When comparing interface values or aggregate types that contain interface
+values, we must *be aware of the potential for a panic*. A similar risk exists
+when using interfaces as map keys or switch operands.
 
-Only compare interface values if you are certain that they contain dynamic values of
-comparable types.
+Only compare interface values if you are certain that they contain dynamic
+values of comparable types.
 
-# The Trap of Interface Containing a Nil Pointer Is Non-Nil
+## The Trap of Interface Containing a Nil Pointer Is Non-Nil
 
 A nil interface value, which contains no value at all, is not the same as an
 interface value containing a pointer that happens to be nil.
 
 ```go
-// we might expect that changing debug to false would disable the
-// collection of the output, but in fact it causes the program to panic during the
-// out.Write call.
+// we might expect that changing debug to false would disable the collection of
+// the output, but in fact it causes the program to panic during the out.Write
+// call.
 const debug = true
 
 func main() {
@@ -3126,12 +3126,12 @@ func main() {
 func f(out io.Writer) {
     // When main calls f, it assigns a nil pointer of type *bytes.Buffer to the out
     // parameter, so the dynamic value of out is nil. However, its dynamic type is
-    // *bytes.Buffer, meaning that out is a non-nil interface containing a nil pointer
-    // value, so the defensive check out != nil is still true.
+    // *bytes.Buffer, meaning that out is a non-nil interface containing a nil
+    // pointer value, so the defensive check out != nil is still true.
     //
-    // The dynamic dispatch mechanism determines that (*bytes.Buffer).Write must be
-    // called but with a receiver value that is nil. For *bytes.Buffer, nil is not a
-    // valid receiver, so it panic.
+    // The dynamic dispatch mechanism determines that (*bytes.Buffer).Write must
+    // be called but with a receiver value that is nil. For *bytes.Buffer, nil
+    // is not a valid receiver, so it panic.
     if out != nil {
         out.Write([]byte("done!\n"))
     }
@@ -3140,12 +3140,12 @@ func f(out io.Writer) {
 
 Workaround
 
-The problem is that although a nil `*bytes.Buffer` pointer has the methods needed to
-satisfy the interface, it doesn't satisfy the *behavioral* requirements of the
-interface. In particular, the call violates the implicit precondition of `
-(*bytes.Buffer).Write` that is receiver is not nil. The solution is to change the
-type of buf in main to io.Writer, thereby avoiding the assignment of the
-dysfunctional value to the interface in the first place.
+The problem is that although a nil `*bytes.Buffer` pointer has the methods
+needed to satisfy the interface, it doesn't satisfy the *behavioral*
+requirements of the interface. In particular, the call violates the implicit
+precondition of `(*bytes.Buffer).Write` that is receiver is not nil. The
+solution is to change the type of buf in main to io.Writer, thereby avoiding
+the assignment of the dysfunctional value to the interface in the first place.
 
 ```go
 var buf io.Writer
@@ -3157,19 +3157,20 @@ f(buf)
 
 # Type Assertion
 
-A *type assertion* is an operation applied to an interface value. Syntactically, it
-looks like
+A *type assertion* is an operation applied to an interface value. Syntactically,
+it looks like
 
     x.(T)
 
-where x is an expression of an interface type and T is a type, called the *asserted*
-type. A type assertion checks that the dynamic type of its operand matches the
-asserted type.
+where x is an expression of an interface type and T is a type, called
+the *asserted* type. A type assertion checks that the dynamic type of its
+operand matches the asserted type.
 
-If the asserted type T is a concrete type, then the type assertion checks whether x's
-dynamic type is *identical* to T. If this check succeeds, the result of the type
-assertion is x's dynamic value, whose type is of course T. In other words, a type
-assertion to a concrete type extracts the concrete value from its operand.
+If the asserted type T is a concrete type, then the type assertion checks
+whether x's dynamic type is *identical* to T. If this check succeeds, the
+result of the type assertion is x's dynamic value, whose type is of course T.
+In other words, a type assertion to a concrete type extracts the concrete value
+from its operand.
 
 ```go
 var w io.Writer
@@ -3178,18 +3179,19 @@ f := w.(*os.File)       // success: f == os.Stdout
 c := w.(*bytes.Buffer)  // panic: interface holds *os.File, not *bytes.Buffer
 ```
 
-If instead the asserted type T is an interface type, then the type assertion checks
-whether x's dynamic type *satisfies* T. If this check succeeds, the dynamic value is
-not extracted; the result is still an interface value with the same type and value
-components, but the result has the interface type T. In other words, a type
-assertion to an interface type changes the type of the expression, making a
-different (and usually larger) set of methods accessible, but it preserves the
-dynamic type and value components inside the interface value.
+If instead the asserted type T is an interface type, then the type assertion
+checks whether x's dynamic type *satisfies* T. If this check succeeds, the
+dynamic value is not extracted; the result is still an interface value with the
+same type and value components, but the result has the interface type T. In
+other words, a type assertion to an interface type changes the type of the
+expression, making a different (and usually larger) set of methods accessible,
+but it preserves the dynamic type and value components inside the interface
+value.
 
 ```go
-// After the first type assertion, both w and rw hold os.Stdout so each has a dynamic
-// type of *os.File, but w, an io.Writer, exposes only the file's Write method,
-// whereas rw exposes its Read method too
+// After the first type assertion, both w and rw hold os.Stdout so each has a
+// dynamic type of *os.File, but w, an io.Writer, exposes only the file's Write
+// method, whereas rw exposes its Read method too
 var w io.Writer
 w = os.Stdout
 rw := w.(io.ReadWriter)     // success: *os.File has both Read and Write
@@ -3200,17 +3202,18 @@ rw = w.(io.ReadWriter)      // panic: *ByteCounter has no Read method
 
 If the operand is a nil interface value, the type assertion fails.
 
-A type assertion to a less restrictive interface type (one with fewer methods) is
-rarely needed, as it behaves just like an assignment, except in the nil case.
+A type assertion to a less restrictive interface type (one with fewer methods)
+is rarely needed, as it behaves just like an assignment, except in the nil
+case.
 
 ```go
 w = rw                  // io.ReadWriter is assignable to io.Writer
 w = rw.(io.Writer)      // fails only if rw == nil
 ```
 
-If the type assertion appears in an assignment in which two results are expected, the
-operation does not panic on failure but instead returns an additional second result,
-a boolean indicating success:
+If the type assertion appears in an assignment in which two results are
+expected, the operation does not panic on failure but instead returns an
+additional second result, a boolean indicating success:
 
 ```go
 var w io.Writer = os.Stdout
@@ -3220,7 +3223,8 @@ f, ok := w.(*os.File)       // success: ok, f == os.Stdout
 // asserted type
 b, ok := w.(*bytes.Buffer)  // failure: !ok, b == nil
 
-// you'll sometimes see the original name reused, shadowing the original, like this:
+// you'll sometimes see the original name reused, shadowing the original, like
+// this:
 if w, ok := w.(*os.File); ok {
     // ...use w...
 }
@@ -3228,8 +3232,8 @@ if w, ok := w.(*os.File); ok {
 
 # Type Switch
 
-A *type switch* statement simplifies an if-else chain of type assertions. A type switch
-enables a multi-way branch based on the interface value's dynamic type.
+A *type switch* statement simplifies an if-else chain of type assertions. A type
+switch enables a multi-way branch based on the interface value's dynamic type.
 
 1. Simplest form: `x.(type)`
 
@@ -3284,20 +3288,21 @@ func sqlQuote(x interface{}) string {
 
 Interfaces are used in two distinct styles:
 
-1. *subtype polymorphism*: An interface's methods express the similarities of the
-concrete types that satisfy the interface but hide representation details and
-intrinsic operations of those concrete types. The emphasis is on the methods, not on
-the concrete types.
+1. *subtype polymorphism*: An interface's methods express the similarities of
+the concrete types that satisfy the interface but hide representation details
+and intrinsic operations of those concrete types. The emphasis is on the
+methods, not on the concrete types.
 
-2. *ad hoc polymorphism*: Exploits the ability of an interface value to hold values
-of a variety of concrete types and considers the interface to be the union of those
-types. Type assertions are used to discriminate among these types dynamically and
-treat each case differently. The emphasis is on the concrete types that satisfy the
-interface, not on the interface's methods, and there is no hiding of information.
-We'll describe interfaces used this way as *discriminated unions*
+2. *ad hoc polymorphism*: Exploits the ability of an interface value to hold
+values of a variety of concrete types and considers the interface to be the
+*union* of those types. Type assertions are used to discriminate among these
+types dynamically and treat each case differently. The emphasis is on the
+concrete types that satisfy the interface, not on the interface's methods, and
+there is no hiding of information. We'll describe interfaces used this way
+as *discriminated unions*
 
-The previous sqlQuote function is a demo of discriminated unions. We now consider
-another one. In the encodoing/xml package:
+The previous sqlQuote function is a demo of discriminated unions. We now
+consider another one. In the encodoing/xml package:
 
 ```go
 package xml
@@ -3326,12 +3331,13 @@ func (*Decoder) Token() (Token, error)  // returns next Token in sequence
 ```
 
 The Token interface, which has no methods, is also an example of a discriminated
-union. The purpose of a traditional interface like io.Reader is to hide details of
-the concrete types that satisfy it so that new implementations can be created; each
-concrete type is *treated uniformly*. By contrast, the set of concrete types that
-satisfy a discriminated union is fixed by the design and exposed, no hidden.
-Discriminated union types have few methods; functions that operate on the are
-expressed as a set of cases using a type switch, with different logic in each case.
+union. The purpose of a traditional interface like io.Reader is to hide details
+of the concrete types that satisfy it so that new implementations can be
+created; each concrete type is *treated uniformly*. By contrast, the set of
+concrete types that satisfy a discriminated union is fixed by the design and
+exposed, no hidden. Discriminated union types have few methods; functions that
+operate on the are expressed as a set of cases using a type switch, with
+different logic in each case.
 
 ```go
 dec := xml.NewDecoder(os.Stdin)
@@ -3347,21 +3353,75 @@ for {
 
 ---
 
-When designing a new package, novice Go programmers often start by creating a set of
-interfaces and only later define the concrete types that satisfy them. This approach
-results in many interfaces, each of which has only a single implementation. Don't do
-that. Such interfaces are unnecessary abstractions; they also have a run-time cost.
-You can restrict which methods of a type or fields of a struct are visible outside a
-package using the export mechanism. Interfaces are only needed when there are two or
-more concrete types that must be dealt with in a uniform way.
+When designing a new package, novice Go programmers often start by creating a
+set of interfaces and only later define the concrete types that satisfy them.
+This approach results in many interfaces, each of which has only a single
+implementation. Don't do that. Such interfaces are unnecessary abstractions;
+they also have a run-time cost. You can restrict which methods of a type or
+fields of a struct are visible outside a package using the export mechanism.
+Interfaces are only needed when there are two or more concrete types that must
+be dealt with in a uniform way.
 
-We make an exception to this rule when an interface is satisfied by a single concrete
-type but that type cannot live in the same package as the interface because of its
-dependencies. In that case, an interface is a good way to decouple two packages.
+We make an exception to this rule when an interface is satisfied by a single
+concrete type but that type cannot live in the same package as the interface
+because of its dependencies. In that case, an interface is a good way to
+decouple two packages.
 
-Also a small interface witch fewer, simpler methods are easier to satisfy when new
-types come along. A good rule of thumb for interface design is *ask only for what
-you need*.
+Also a small interface with fewer, simpler methods are easier to satisfy when
+new types come along. A good rule of thumb for interface design is *ask only
+for what you need*.
+
+---
+
+(Udemy)
+
+Function operating on interfaces should never accept a pointer to an interface.
+Caller determines whether pointers or value (copy) is used. If we do that,
+caller will never get change if they want to operate on value.
+
+```go
+type MyType int // implements MyInterface
+
+// since our function 'execute' operate on value of i...
+func execute(i MyInterface) {
+	i.Function1()
+}
+
+m := MyType(1)
+
+// hence the caller 'execute' can use either value of m or pointer of m
+execute(m)
+execute(&m)
+
+// suppose we operate on point of i, like this
+// then we are not able to call execute with copy of i
+```
+
+When implementing a pointer receiver function, all functions accepting the
+interface will only accept pointers.
+
+If self-modification is needed, implement all interface functions as receiver
+functions for consistency.
+
+```go
+type MyType int
+
+// we should either define receiver function all accepting pointer
+func (m *MyType) Function1() {}
+// or all accepting value
+func (m MyType) Function2() {}
+// but not mixed, for consistency.
+
+// if we do this (like above)
+func execute(i MyInterface) {
+	i.Function1()
+}
+m := MyType(1)
+// then this call will throw compiler error
+execute(m)	// Compiler Error!
+// we are only restricted to use pointer
+execute(&m)
+```
 
 # Common built-in interface
 
@@ -5315,9 +5375,9 @@ can be dynamically loaded by a C program.
 
 See:
 
-<https://golang.org/cmd/cgo.>
+https://golang.org/cmd/cgo.
 
-<https://go.dev/blog/cgo>
+https://go.dev/blog/cgo
 
 
 # Testing

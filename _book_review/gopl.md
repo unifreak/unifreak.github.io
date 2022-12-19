@@ -15,6 +15,7 @@ title: The Go Programming Langauge
 
 书中每章虽然都是按照 Go 特性来编排的, 但是也有着横跨全书的共通的主题.
 建议阅读过程中自己把这些整理成索引, 方便以后查阅.
+
 - 基础语法, 常见包的 API 和应用, 雷点
 - 常见的算法和应用实现 (树的遍历, 排序, 拓扑排序, 位图)
 - Go 特定的编程习语, 设计原则, 模式, 最佳实践
@@ -27,12 +28,14 @@ title: The Go Programming Langauge
 另外, 虽然为了避免踩翻译的雷, 读的是机械工业的英文版, 可想而知, 索引是被砍掉的.
 我是自己打了一份索引粘到了书后. 有也想这么搞的同学, 可以在后面的链接里下载索引.
 
-阅读建议
+阅读建议:
+
 - 下载源码, 但是要自己打源码并运行成功
 - 做练习. 后面有我参考的练习答案 git repo
 - Go doc 看一遍常用包的文档和 API
 
-一些链接
+一些链接:
+
 - 勘误: <http://gopl.ip/errata.html>
 - Go specification: <https://golang.org/ref/spec>
 - Go 谚语: <http://go-proverbs.github.io> 作者分享的一些 Go 谚语, 类似 "Errors are values" 之类的
