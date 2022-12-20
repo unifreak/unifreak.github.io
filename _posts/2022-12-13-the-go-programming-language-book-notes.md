@@ -22,6 +22,16 @@ old, doesn't cover new features of go1.8 (This article does). But even so, what
 I learned from this book can't be learned else where. You can [read my detailed
 book review](http://unifreak.github.io/book_review/gopl_en).
 
+# See
+
+https://go.dev/tour/
+
+https://go.dev/doc/effective_go
+
+https://go.dev/talks/2012/splash.article
+
+Book [The Go Programming Language](https://amzn.to/3W9uFMp)
+
 # Basics
 
 The language is called Go. The "golang" moniker arose because the web site was
@@ -1197,10 +1207,11 @@ field has the zero value or is otherwise empty.
 ## Text and HTML Templates
 
 A *template* is a string of file containing one or more portions enclosed in
-double braces, {{...}}, called *actions*. Each action contains an expression in
-the template language, a simple but powerful notion for printing values,
-selecting struct fields, calling functions and methods, expressing control flow
-such as if-else statements and range loops, and instantiating other templates.
+double braces, {% raw %}{{...}}{% endraw %}, called *actions*. Each action
+contains an expression in the template language, a simple but powerful notion
+for printing values, selecting struct fields, calling functions and methods,
+expressing control flow such as if-else statements and range loops, and
+instantiating other templates.
 
 html/template package use the same API and expression language as text/template
 but adds features for automatic and context-appropriate escaping of strings
@@ -2363,7 +2374,8 @@ same way.
 
 In general, the call f(x) is responsible for reporting the attempted operation f
 and the argument value x as they relate to the context of the error. The caller
-is responsible for adding further information that it has but the call f(x) does not.
+is responsible for adding further information that it has but the call f
+(x) does not.
 
 3. For errors that represent transient or unpredictable problems, it may make
 sense to retry the failed operation, possibly with a delay between tries, and
@@ -2610,9 +2622,9 @@ func (p Point) Distance(q Point) float64 {
 // the name of this method is (*Point).ScaleBy. the parentheses are necessary.
 //
 // in realistic program, convention dictates that if any method of Point has a
-// pointer receiver, then *all* methods of Point should have a pointer receiver,
-// even ones that don't strictly need it. our example broke this rule to show both
-// kinds of method.
+// pointer receiver, then *all* methods of Point should have a pointer
+// receiver, even ones that don't strictly need it. our example broke this rule
+// to show both kinds of method.
 //
 // methods on a given type should have either value or pointer receivers, but
 // not a mixture of both.
@@ -2621,8 +2633,8 @@ func (p *Point) ScaleBy(factor float64) {
     p.Y *= factor
 }
 
-// method declarations are NOT permitted on named types that are themselves pointer
-// types.
+// method declarations are NOT permitted on named types that are themselves
+// pointer types.
 type P *int
 func (P) f() { /* ... */ } // compile error: invalid receiver type
 
@@ -2738,9 +2750,10 @@ p.ScaleBy(2)
 q.ScaleBy(2)
 fmt.Println(p.Distance(q.Point)) // "10"
 
-// The type of an anonymous field may be a *pointer* to a named type, in which case
-// fields and methods are promoted *indirectly* from the pointed-to object. This lets
-// us share common structures and vary the relationships between objects dynamically.
+// The type of an anonymous field may be a *pointer* to a named type, in which
+// case fields and methods are promoted *indirectly* from the pointed-to
+// object. This lets us share common structures and vary the relationships
+// between objects dynamically.
 func (p *Point) ScaleBy(factor float64) {
     p.X *= factor
     p.Y *= factor
@@ -2757,11 +2770,11 @@ fmt.Println(*p.Point, *q.Point)     // "{2, 2} {2, 2}"
 //
 // When the compiler resolves a selector such as p.ScaleBy to a method, it first
 // look for a directly declared method named ScaleBy, then for methods promoted
-// once from ColoredPoint's embedded fields, then for methods promoted twice from
-// embedded fields within Point and RGBA, and so on.
+// once from ColoredPoint's embedded fields, then for methods promoted twice
+// from embedded fields within Point and RGBA, and so on.
 //
-// The compiler reports an error if the selector was ambiguous because two methods
-// were promoted from the same rank.
+// The compiler reports an error if the selector was ambiguous because two
+// methods were promoted from the same rank.
 type ColoredPoint struct {
     Point
     color.RGBA
@@ -2792,6 +2805,9 @@ func Lookup(key string) string {
 }
 ```
 
+## Method Value
+
+
 The selector p.Distance yields a *method value*, a function that binds a method
 (Point.Distance) to a specific receiver value p.
 
@@ -2816,6 +2832,8 @@ time.AfterFunc(10 * time.Second, func() { r.Launch() })
 // with method value, shorter
 time.AfterFunc(10 * time.Second, r.Launch)
 ```
+
+## Method Expression
 
 A *method expression* written T.f or `(*T).f` where T is a type, yields a
 function value with a regular first parameter taking the place of the
@@ -3423,9 +3441,9 @@ execute(m)	// Compiler Error!
 execute(&m)
 ```
 
-# Common built-in interface
+# Common Built-in Interface
 
-fmt
+## fmt
 
 ```go
 package fmt
@@ -3440,7 +3458,7 @@ type Stringer interface {
 }
 ```
 
-error
+## error
 
 ```go
 package errors
@@ -3452,9 +3470,9 @@ type error interface {
 // The underlying type of errorString is a struct, not a string, to protect its
 // representation from inadvertent update.
 //
-// The reason that the pointer type *errorString, not errorString alone, satisfies
-// the error interface is so that every call to New allocates a distinct error
-// instance that is equal to no other.
+// The reason that the pointer type *errorString, not errorString alone,
+// satisfies the error interface is so that every call to New allocates a
+// distinct error instance that is equal to no other.
 func New(text string) error { return &errorString{text} }
 
 type errorString struct { text string }
@@ -3462,7 +3480,10 @@ type errorString struct { text string }
 func (e *errorString) Error() string { return e.text }
 ```
 
-sort
+Always implement errors as a receiver function, since this prevent problems if
+errors is inspected or compared.
+
+## sort
 
 ```go
 package sort
@@ -3474,7 +3495,7 @@ type Interface interface {
 }
 ```
 
-io Reader Writer Closer
+## io Reader Writer Closer
 
 ```go
 package io
@@ -3495,7 +3516,7 @@ type ReadWriter interface {
 // ...and combinations of above three...
 ```
 
-flag
+## flag
 
 ```go
 package flag
@@ -3507,7 +3528,7 @@ type Value interface {
 }
 ```
 
-net/http
+## net/http
 
 ```go
 package http
@@ -3524,14 +3545,9 @@ See: https://go.dev/doc/tutorial/generics
 With generics, you can declare and use functions or types that are written to
 work with any of a set of types provided by calling code.
 
-# Type Parameter
-
-functions can be written to work on multiple types using type parameters.
-(generic functions).
-
-Each type parameter has a type constraint that acts as a kind of meta-type for
-the type parameter. Each type constraint specifies the permissible type arguments
-that calling code can use.
+Each "type parameter" has a "type constraint" that acts as a kind of meta-type
+for the type parameter. Each type constraint specifies the permissible type
+arguments that calling code can use.
 
 While a type parameter's constraint typically represents a set of types, at
 compile time the type parameter stands for a single type – the type provided as
@@ -3539,8 +3555,11 @@ a type argument by the calling code.
 
 Keep in mind that a type parameter must support all the operations the generic
 code is performing on it. For example, if your function's code were to try to
-perform string operations (such as indexing) on a type parameter whose constraint
-included numeric types, the code wouldn't compile.
+perform string operations (such as indexing) on a type parameter whose
+constraint included numeric types, the code wouldn't compile.
+
+functions can be written to work on multiple types using type parameters.
+(generic functions).
 
 ```go
 // Index returns the index of x in s, or -1 if not found.
@@ -3555,20 +3574,20 @@ func Index[T comparable](s []T, x T) int {
     return -1
 }
 
-// Declare a SumIntsOrFloats function with two type parameters
-// (inside the square brackets), K and V, and one argument that
-// uses the type parameters, m of type map[K]V.
-// The function returns a value of type V.
+// SumIntsOrFloats function is defined with two type parameters(inside the
+// square brackets), K and V, and one argument that uses the type parameters, m
+// of type map[K]V. The function returns a value of type V.
 //
-// Specify for the K type parameter the type constraint comparable. Intended
-// specifically for cases like these, the comparable constraint is predeclared in
-// Go. It allows any type whose values may be used as an operand of the comparison
-// operators == and !=. Go requires that map keys be comparable. So declaring K as
-// comparable is necessary so you can use K as the key in the map variable.
+// 'comparable' is a type constraint for the k type parameter, intended
+// specifically for cases like these, the comparable constraint is predeclared
+// in Go. It allows any type whose values may be used as an operand of the
+// comparison operators == and !=. Go requires that map keys be comparable. So
+// declaring K as comparable is necessary so you can use K as the key in the
+// map variable. NOTE, 'comparable' doesn't enable >, >=, <, <= comparison.
 //
-// Specify for the V type parameter a constraint that is a union of two types: int64
-// and float64. Using | specifies a union of the two types, meaning that this
-// constraint allows either type.
+// 'int64 | float64' specify for the V type parameter a constraint that is a
+//  union of two types: int64 and float64. Using | specifies a union of the two
+//  types, meaning that this constraint allows either type.
 func SumIntsOrFloats[K comparable, V int64 | float64](m map[K]V) V {
     var s V
     for _, v := range m {
@@ -3586,7 +3605,6 @@ func main() {
     ss := []string{"foo", "bar", "baz"}
     fmt.Println(Index(ss, "hello"))
 
-
     // Specify type arguments – the type names in square brackets
     //
     // in each call the compiler replaced the type parameters
@@ -3603,14 +3621,13 @@ func main() {
 
 }
 ```
-# Type Parameters
 
-Go also supports generic types.
-A type can be parameterized with a type parameter.
+Go also supports generic types. A type can be parameterized with a type
+parameter.
 
 ```go
-// move the constraint you defined earlier into its own interface
-// so that you can reuse it in multiple places
+// Declare a type constraint as interface ("constraint interface")
+// so we can reuse the constaint "int64 | float64"
 type Number interface {
     int64 | float64
 }
@@ -3623,8 +3640,6 @@ func SumNumbers[K comparable, V Number](m map[K]V) V {
     return s
 }
 
-// List represents a singly-linked list that holds
-// values of any type.
 type List[T any] struct {
     next *List[T]
     val  T
@@ -3640,27 +3655,29 @@ or *CSP*, a model of concurrency in which values are passed between independent
 activities (goroutines) but variables are for the most part confined to a single
 activity.
 
-2. A more traditional model of *shared memory multithreading*, which will be familiar
-if you've used threads in other mainstream languages.
+2. A more traditional model of *shared memory multithreading*, which will be
+familiar if you've used threads in other mainstream languages.
 
-When we say x *happens before* y, we mean that is is guaranteed that x occurs earlier
-in time than y, and that all its prior effects, such as updates to variables, are
-complete and that you may rely on them.
+When we say x *happens before* y, we mean that is is guaranteed that x occurs
+earlier in time than y, and that all its prior effects, such as updates to
+variables, are complete and that you may rely on them.
 
 When we cannot confidently say that one event happens before the other, then the
 events x and y are *concurrent*.
 
-A function is *concurrency-safe* if it continues to work correctly even when called
-concurrently, that is, from two or more goroutines with no additional
+A function is *concurrency-safe* if it continues to work correctly even when
+called concurrently, that is, from two or more goroutines with no additional
 synchronization. A type is concurrency-safe if all its accessible methods and
 operations are concurrency-safe.
 
-We can make a program concurrency-safe without making every concrete type in that
-program concurrency-safe. Indeed, concurrency-safe types are the exception rather
-than the rule, so you should access a variable concurrently only if the
-documentation for its type says that this is safe. We avoid concurrent access to
-most variables either by *confining* them to a single goroutine or by maintaining a
-higher-level invariant of *mutual exclusion*.
+We can make a program concurrency-safe without making every concrete type in
+that program concurrency-safe. Indeed, concurrency-safe types are the exception
+rather than the rule, so you should access a variable concurrently only if the
+documentation for its type says that this is safe.
+
+We avoid concurrent access to most variables either by *confining* them to a
+single goroutine or by maintaining a higher-level invariant of *mutual
+exclusion*.
 
 In contrast, exported package-level functions *are* generally expected to be
 concurrency-safe. Since package-level variables cannot be confined to a single
@@ -3669,7 +3686,454 @@ goroutine, functions that modify them must enforce mutual exclusion.
 A *race condition* is a situation in which the program does not give the correct
 result for some interleaving of the operations of multiple goroutines.
 
-# Go's Memory Model
+---
+
+There are two types of conccurent code:
+
+1. Threaded: code runs in parallel based on number of CPU cores.
+2. Asynchronous: code can pause and resume execution, while paused, other code
+can resume.
+
+Go will automatically choose the appropriate concurrency method.
+
+# Goroutines
+
+In Go, each concurrently executing activity is called a *goroutine*.
+
+When a program starts, its only goroutine is the one that calls the main
+function, so we call it the *main goroutine*. New goroutines are created by the
+"go statement". A go statement causes the function to be called in a newly
+created goroutine. The go statement itself completes immediately.
+
+```go
+f()         // call f(); wait for it to return
+go f()      // create a new goroutine that calls f(); don't wait
+            //
+            // the arguments to the function started by go are evaluated when
+            // the go statement itself is executed.
+```
+
+When main function returns, all goroutines are abruptly terminated and the
+program exits. Other than by returning from main or existing the program, there
+is no programmatic way for one goroutine to stop another, but there are ways to
+communicate with a goroutine to request that is stop.
+
+```go
+func say(s string) {
+    for i := 0; i < 5; i++ {
+        time.Sleep(100 * time.Millisecond)
+        fmt.Println(s)
+    }
+}
+
+func main() {
+    // evaluation of `say("world")` happens in the current goroutine execution
+    // of `say("world")` happens in the new goroutine goroutines run in the
+    // same address space, so access to shared memory must be synchronized
+    go say("world")
+}
+```
+
+## Goroutine VS Threads
+
+Why goroutines instead of threads?
+
+Goroutines are part of making concurrency easy to use. The idea, which has been
+around for a while, is to multiplex independently executing functions —
+coroutines — onto a set of threads. When a coroutine blocks, such as by calling
+a blocking system call, the run-time automatically moves other coroutines on
+the same operating system thread to a different, runnable thread so they won't
+be blocked. The programmer sees none of this, which is the point. The result,
+which we call goroutines, can be very cheap: they have little overhead beyond
+the memory for the stack, which is just a few kilobytes.
+
+To make the stacks small, Go's run-time uses resizable, bounded stacks. A newly
+minted goroutine is given a few kilobytes, which is almost always enough. When
+it isn't, the run-time grows (and shrinks) the memory for storing the stack
+automatically, allowing many goroutines to live in a modest amount of memory.
+The CPU overhead averages about three cheap instructions per function call. It
+is practical to create hundreds of thousands of goroutines in the same address
+space. If goroutines were just threads, system resources would run out at a
+much smaller number.
+
+The differences between threads and goroutines are essentially quantitative, not
+qualitative. Goroutines are lightweight threads managed by the Go runtime.
+
+1. Growable Stacks
+
+Each OS thread has a fixed-size block of memory (often as large as 2MB) for its
+stack, the work area where it saves the local variables of function calls that
+are in progress or temporarily suspended while another function is called. This
+fixed-size stack is simultaneously too much and too little. A 2MB stack would
+be a huge waste of memory for a little goroutine, such as one that merely waits
+for a WaitGroup then closes a channel. It's not uncommon for a Go program to
+create hundreds of thousands of goroutines at one time, which would be
+impossible with stacks this large. Yet despite their size, fixed-size stacks
+are not always big enough for the most complex and deeply recursive of
+functions. Changing the fixed size can improve space efficiency and allow more
+threads to be created, or it can enable more deeply recursive functions, but it
+cannot do both.
+
+In contrast, a goroutine starts life with a small stack, typically 2KB. A
+goroutine's stack, like the stack of an OS thread, holds the local variables of
+active and suspended function calls, but unlike an OS thread, a goroutine's
+stack is not fixed; it grows and shrinks as needed. The size limit for a
+goroutine stack may be as much as 1GB, orders of magnitude larger than a
+typical fixed-size thread stack, though of course few goroutines use that
+much.
+
+2. Goroutine Scheduling
+
+OS threads are scheduled by the kernel, passing control from one thread to
+another requires a full context switch, that is, saving the state of one user
+thread to memory, restoring the state of another, and updating the scheduler's
+data structures. This operation is slow, due to its poor locality and the
+number of memory accesses required, and has historically only gotten worse as
+the number of CPU cycles required to access memory has increased.
+
+The Go runtime contains its own scheduler that uses a technique known as m:n
+scheduling, because it multiplexes (or schedules) m goroutines on n OS threads.
+The job of the Go scheduler is analogous to that of the kernel scheduler, but
+it is concerned only with the goroutines of a single Go program.
+
+Unlike the operating system's thread scheduler, the Go scheduler is not invoked
+periodically by a hardware timer, but implicitly by certain Go language
+constructs. For example, when a goroutine calls time.Sleep or blocks in a
+channel or mutex operation, the scheduler puts it to sleep and runs another
+goroutine until it is time to wake the first one up. Because it doesn't need a
+switch to kernel context, rescheduling a goroutine is much cheaper than
+rescheduling a thread.
+
+3. GOMAXPROCS
+
+The Go scheduler uses a parameter called GOMAXPROCS to determine how many OS
+threads may be actively executing Go code simultaneously. Its default value is
+the number of CPUs on the machine, so on a machine with 8 CPUs, the scheduler
+will schedule Go code on up to 8 OS threads at once. (GOMAXPROCS is the n in
+m:n scheduling.) Goroutines that are sleeping or blocked in a communication do
+not need a thread at all. Goroutines that are blocked in I/O or other system
+calls or are calling non-Go functions, do need an OS thread, but GOMAXPROCS
+need not account for them.
+
+4. Goroutines Have No Identify
+
+In most operating systems and programming languages that support multithreading,
+the cur- rent thread has a distinct identity that can be easily obtained as an
+ordinary value, typically an integer or pointer. This makes it easy to build an
+abstraction called thread-local storage, which is essentially a global map
+keyed by thread identity, so that each thread can store and retrieve values
+independent of other threads.
+
+Goroutines have no notion of identity that is accessible to the programmer. This
+is by design, since thread-local storage tends to be abused. For example, in a
+web server implemented in a language with thread-local storage, it's common for
+many functions to find information about the HTTP request on whose behalf they
+are currently working by looking in that storage. However, just as with
+programs that rely excessively on global variables, this can lead to an
+unhealthy ‘‘action at a distance’’ in which the behavior of a function is not
+determined by its arguments alone, but by the identity of the thread in which
+it runs. Consequently, if the identity of the thread should change—some worker
+threads are enlisted to help, say—the function misbehaves mysteriously.
+
+Go encourages a simpler style of programming in which parameters that affect the
+behavior of a function are explicit. Not only does this make programs easier to
+read, but it lets us freely assign subtasks of a given function to many
+different goroutines without worrying about their identity.
+
+# Channels
+
+    Operation       Channel State       Result
+    -------------------------------------------------------------------
+    read            nil                 block
+                    open and not empty  value
+                    open and empty      block
+                    closed              default value, false
+                    write only          compile error
+    write           nil                 block
+                    open and full       block
+                    open and not full   write value
+                    closed              panic !!
+                    receive only        compile error
+    close           nil                 panic !!
+                    open and not empty  close channel, read succeed until drained,
+                                        then reads produce default value
+                    open and empty      close channel, read produces default value
+                    closed              panic
+                    receive only        compile error
+
+
+If goroutines are the activities of a concurrent Go program, *channels* are the
+connections between them. A channel is a communication mechanism that lets one
+goroutine send values to another goroutine. Each channel is a conduit for
+values of a particular type, called the channel's *element type*.
+
+To create a channel, we use the built-in make function. A channel created with a
+simple call to make is called an *unbuffered* channel, but make accepts an
+optional second argument, an integer called the channel's *capacity*. If the
+capacity is non-zero, make creates a *buffered* channel.
+
+```go
+    ch = make(chan int)     // unbuffered channel. ch has type 'chan int'
+    ch = make(chan int, 0)  // unbuffered channel
+    ch = make(chan int, 3)  // buffered channel with capacity 3
+
+    fmt.Println(cap(ch))    // "3", capacity can be obtained by cap()
+    ch <- 1
+    ch <- 2
+    fmt.Println(len(ch))    // "2", len returns the number of elements currently
+    						// buffered. Since in a concurrent program this
+    						// information is likely to be stale as soon as it is
+    						// retrieved, its value is limited, but it could
+    						// conceivably be useful during fault diagnosis or
+    						// performance optimization
+```
+
+As with maps, a channel is a *reference* to the data structure created by make.
+When we copy a channel or pass one as an argument to a function, we are copying
+a reference, so caller and callee refer to the same data structure.
+
+As with any other reference type, the zero value of a channel is nil.
+
+Two channels of the same type may be compared using ==. The comparison is true
+if both are references to the same channel data structure. A channel may also
+be compared to nil.
+
+A channel has two principal operations, *send* and *receive*, collectively known
+as *communications*.
+
+Channels also support *close*, which sets a flag indicating that no more values
+will ever be sent on this channel; subsequent attempts to send will panic.
+Receive operations on a closed channel yield the values that have been sent
+until no more values are left; any receive operations thereafter complete
+immediately and yield the zero value of the channel's element type.
+(non-block receive, spin on zero value).
+
+You needn't close every channel when you've finished with it. It's only
+necessary to close a channel when it is important to tell the receiving
+goroutines that all data have been sent. A channel that the garbage collector
+determines to be unreachable will have its resources reclaimed whether or not
+it is closed. (Don't confuse this with the close operation for open files.
+It *is* important to call the Close method on every file when you've finished
+with it.)
+
+Attempting to close an already-closed channel causes a panic, as does closing a
+nil channel.
+
+```go
+ch <- x     // a send statement transmits a value from one goroutine, through the
+            // channel, to another goroutine executing a corresponding receive
+            // expression.
+
+x = <-ch    // a receive expression in an assignment statement
+<-ch        // a receive statement; result is discarded
+
+close(ch)
+```
+
+By default, sends and receives *block until* the other side is ready. A send
+operation on an unbuffered channel blocks the sending goroutine until another
+goroutine executes a corresponding receive on the same channel. If the receive
+operation was attempted first, the receiving goroutine is blocked until another
+goroutine performs a send on the same channel.
+
+This allows goroutines to synchronize without explicit locks or condition
+variables. Hence unbuffered channels are sometimes called *synchronous*
+channels. When a value is sent on an unbuffered channel, the receipt of the
+value *happen before* the reawakening of the sending goroutine.
+
+There is no way to test directly whether a channel has been closed, but there is
+a variant of the receive operation that produces two results: the received
+channel element, plus a boolean value, conventionally called ok, which is true
+for a successful receive and false for a receive on a closed and drained
+channel.
+
+```go
+go func() {
+    for {
+        x ,ok := <-naturals
+        if !ok {
+            break
+        }
+        squares <- x*x
+    }
+    close(squares)
+}()
+```
+
+Because the syntax above is clumsy, Go lets use use a range loop to iterate over
+channels too.
+
+**unbuffered channel**
+
+```go
+func sum(s []int, c chan int) {
+    sum := 0
+    for _, v := range s {
+        sum += v
+    }
+    c <- sum // send to channel
+}
+
+s := []int{7, 2, 8, -9, 4, 0}
+
+// Like maps and slices, channels must be created before use:
+c := make(chan int)
+
+go sum(s[:len(s)/2], c)
+go sum(s[len(s)/2:], c)
+x, y := <-c, <-c // receive from channel
+fmt.Println(x, y, x+y)
+```
+
+**buffered channel**
+
+Sends to a buffered channel block only when the buffer is full. Receives block
+when the buffer is empty.
+
+Novices are sometimes tempted to use buffered channels within a single goroutine
+as a queue, lured by their pleasingly simple syntax, but this is a mistake.
+Channels are deeply connected to goroutine scheduling, and without another
+goroutine receiving from the channel, a sender - and perhaps the whole
+program - risks becoming blocked forever. If all you need is a simple queue,
+make one using a slice.
+
+```go
+// create `buffered channel`, by pass into `make()` buffer size 2
+ch := make(chan int, 2)
+ch <- 1
+ch <- 2
+
+// If we overfill a buffered channel, we will trigger `all goroutines are
+// sleep - deadlock!` error
+//
+// ch <- 3
+
+fmt.Println(<-ch)
+fmt.Println(<-ch)
+```
+
+```go
+func mirroredQuery() string {
+    responses := make(chan string, 3)
+    go func() { responses <= request("asia.gopl.io") }()
+    go func() { responses <= request("europe.gopl.io") }()
+    go func() { responses <= request("americas.gopl.io") }()
+    return <-responses // return the quickest response
+}
+```
+
+Had we used an unbuffered channel, the two slower goroutines would have gotten
+stuck trying to send their responses on a channel from which no goroutine will
+ever receive. This situation, called a *goroutine leak*, would be a bug. Unlike
+garbage variables, leaked goroutines are not automatically collected, so ti is
+important to make sure that goroutines terminate themselves when no longer
+needed.
+
+**range and close**
+
+Sender can close a channel to indicate that no more values will be sent.
+
+Receivers can test whether a channel has been closed.
+
+    v, ok := <-ch
+
+`ok` is false if there are no more values to receive and the channel is closed.
+
+Only the sender should close a channel, never the receiver. Sending on a closed
+channel will cause a panic.
+
+Channels aren't like files; you don't usually need to close them.
+
+Closing is only necessary when the receiver must be told there are no more values
+coming, such as to terminate a range loop.
+
+```go
+func fibonacci(n int, c chan int) {
+    x, y := 0, 1
+    for i := 0; i < n; i++ {
+        c <- x
+        x, y = y, x+y
+    }
+    // close a channel to indicate that no more values will be sent.
+    // only the sender should close a channel, never the receiver.
+    // sending on a closed channel will cause a panic.
+    // only necessary when the receiver must be told there are no more values coming.
+    close(c)
+}
+
+c := make(chan int, 10)
+go fibonacci(cap(c), c)
+for i := range c { // `range` will receive values from channel until it is closed
+                   // can also check whether channel is close manually by `v, ok := <-ch`
+    fmt.Println(i)
+}
+```
+
+**unidirectional channel**
+
+*unidirectional* channel types expose only one or the other of the send receive
+operations. `chan<- int`, a *send-only* channel of int. `<-chan int` a
+receive-only channel of int. Violations of this discipline are detected at
+compile time.
+
+Since the close operation asserts that no more sends will occur on a channel,
+only the sending goroutine is in a position to call it, and for this reason it
+is a compile-time error to attempt to close a receive-only channel.
+
+Conversions from bidirectional to unidirectional channel types are permitted in
+any assignment. There is no going back, however: once you have a value of a
+unidirectional type such as `chan<- int`, there is no way to obtain from it a
+value of type `chan int` that refers to the same channel data structure.
+
+# Select
+
+`select` lets a goroutine wait on multiple communication operations.
+
+```go
+select {
+case <-ch1:         // ...
+case x := <-ch2:    // ...
+case ch3 <- y:      // ...
+default:            // ...
+}
+```
+
+Each case specifies a *communication* (a send or receive operation on some
+channel) and an associated block of statement. A *select* block until a
+communication for some case is ready to proceed. A *select* with no cases,
+`select{}`, waits forever.
+
+If multiple cases are ready, select picks one *at random*, which ensures that
+every channel has an equal chance of being selected.
+
+```go
+func fibonacci(c, quit chan int) {
+    x, y := 0, 1
+    for {
+        select {
+        case c <- x:
+            x, y = y, x+y
+        case <-quit:
+            fmt.Println("quit")
+            return
+        default:
+            // run if no other case is ready
+        }
+    }
+}
+
+c := make(chan int)
+quit := make(chan int)
+go func() {
+    for i := 0; i < 10; i++ {
+        fmt.Println(<-c)
+    }
+    quit <- 0
+}()
+fibonacci(c, quit)
+```
+
+# Memory Model
 
 See: https://go.dev/ref/mem
 
@@ -3679,55 +4143,56 @@ variable in a different goroutine.
 
 Goroutine:
 
-- Within a single goroutine, the happens-before order is the order expressed by the
-program.
+- Within a single goroutine, the happens-before order is the order expressed by
+  the program.
 
 - If a package p imports package q, the completion of q's init functions happens
   before the start of any of p's.
 
-- The start of the function main.main happens after all init functions have finished.
+- The start of the function main.main happens after all init functions have
+  finished.
 
-- The go statement that starts a new goroutine happens before the goroutine's execution
-begins.
+- The go statement that starts a new goroutine happens before the goroutine's
+  execution begins.
 
 Channel:
 
 - A send on a channel happens before the corresponding receive from that channel
-completes.
+  completes.
 
-- The closing of a channel happens before a receive that returns a zero value because
-the channel is closed.
+- The closing of a channel happens before a receive that returns a zero value
+  because the channel is closed.
 
 - The kth receive on a channel with capacity C happens before the k+Cth send
   from that channel completes.
 
 - A receive from an unbuffered channel happens before the send on that channel
-completes.
+  completes.
 
 Locks:
 
 - For any sync.Mutex or sync.RWMutex variable l and n < m, call n of l.Unlock
   () happens before call m of l.Lock() returns.
 
-- For any call to l.RLock on a sync.RWMutex variable l, there is an n such that the
-l.RLock happens (returns) after call n to l.Unlock and the matching l.RUnlock
-happens before call n+1 to l.Lock.
+- For any call to l.RLock on a sync.RWMutex variable l, there is an n such that
+  the l.RLock happens (returns) after call n to l.Unlock and the matching
+  l.RUnlock happens before call n+1 to l.Lock.
 
-- A single call of f() from once.Do(f) happens (returns) before any call of once.Do
-(f) returns.
-
+- A single call of f() from once.Do(f) happens (returns) before any call of
+  once.Do(f) returns.
 
 # Concurrency Patterns
 
-One goroutine per connection (See clock2)
+One goroutine per connection (See clock2).
 
 ---
 
-Multi-goroutine per connection (See reverb2)
+Multi-goroutine per connection (See reverb2).
 
 ---
 
-Using unbuffered channel to synchronize main and background goroutines (See netcat3)
+Using unbuffered channel to synchronize main and background goroutines
+(See netcat3).
 
 ```go
 func main() {
@@ -3745,39 +4210,40 @@ Message send over channels have two important aspects:
 1. its value
 2. and the moment at which it occurs
 
-We call messages *events* to stress the later. And when the event's sole purpose is
-synchronization, we'll emphasize this by using a channel whose element type is
-struct{}. It's also common to use a channel of bool or int like done<-1.
+We call messages *events* to stress the later. And when the event's sole purpose
+is synchronization, we'll emphasize this by using a channel whose element type
+is struct{}. It's also common to use a channel of bool or int like done<-1.
 
 ---
 
-Channels an be used to connect goroutines together so that the output of one is the
-input to another. This is called *pipeline*.
+Channels an be used to connect goroutines together so that the output of one is
+the input to another. This is called *pipeline*.
 
-1. in long-running server programs where channels are used for lifelong communication
-between goroutines containing infinite loops. See ch8/pipeline1.
+1. in long-running server programs where channels are used for lifelong
+communication between goroutines containing infinite loops. See ch8/pipeline1.
 
-2. if only a finite number of values will be sent, it's then useful to communicate
-that no further values will ever be sent on a channel, so that the receiver
-goroutines can stop waiting, by closing the channel and for-range loop. See
-ch8/pipeline2.
+2. if only a finite number of values will be sent, it's then useful to
+communicate that no further values will ever be sent on a channel, so that the
+receiver goroutines can stop waiting, by closing the channel and for-range
+loop. See ch8/pipeline2.
 
 ## Looping in Parallel
 
 Patterns for executing all the iterations of a loop in parallel.
 
-Problem consist entirely of subproblems that are completely independent of each other
-are described as *embarrassingly parallel*. Embarrassingly parallel problems are the
-easiest kind to implement concurrently and enjoy performance that scales linearly
-with the amount of parallelism.
+Problem consist entirely of subproblems that are completely independent of each
+other are described as *embarrassingly parallel*. Embarrassingly parallel
+problems are the easiest kind to implement concurrently and enjoy performance
+that scales linearly with the amount of parallelism.
 
 **Starting Parallel**
 
 ```go
 // INCORRECT!
 //
-// makeThumbnails returns before it has finished doing what is was supposed to do. It
-// starts all the goroutines, one per file name, but doesn't wait for them to finish.
+// makeThumbnails returns before it has finished doing what is was supposed to
+// do. It starts all the goroutines, one per file name, but doesn't wait for
+// them to finish.
 func makeThumbnails(filenames []string) {
     for _, f := range filenames {
         go thumbnail.ImageFile(f) // NOTE: ignoring errors
@@ -3785,14 +4251,14 @@ func makeThumbnails(filenames []string) {
 }
 ```
 
-We can change the inner goroutine to report its completion to the outer goroutine by
-sending an event on a shared channel.
+We can change the inner goroutine to report its completion to the outer
+goroutine by sending an event on a shared channel.
 
 ```go
 func makeThumbnails(filenames []string) {
     ch := make(chan struct{})
-    // notice that we passed the value of f as an explicit argument to the literal
-    // function instead of
+    // notice that we passed the value of f as an explicit argument to the
+    // literal function instead of:
     //
     //      for _, f := range filenames {
     //          go func() {
@@ -3802,8 +4268,8 @@ func makeThumbnails(filenames []string) {
     //
     // See The Trap of Iteration Variable Capture.
     //
-    // By adding an explicit parameter, we ensure that we use the value of f that is
-    // current when the go statement is executed.
+    // By adding an explicit parameter, we ensure that we use the value of f
+    // that is current when the go statement is executed.
     for _, f := range filenames {
         go func(f string) {
             thumbnail.ImageFile(f) // NOTE: ignoring errors
@@ -3848,8 +4314,8 @@ func makeThumbnails(filenames []string) error {
 ```
 
 ```go
-// Solution 1: use buffered channel to return the names of the generated image files
-// along with any errors.
+// Solution 1: use buffered channel to return the names of the generated image
+// files along with any errors.
 func makeThumbnails(filenames []string) (thumbfiles []string, err error) {
     type item struct {
         thumbfile string
@@ -3877,9 +4343,11 @@ func makeThumbnails(filenames []string) (thumbfiles []string, err error) {
 ```
 
 ```go
-// Solution 2: create another goroutine to drain the channel while the main goroutine
-// returns the first error without delay.
+// Solution 2: create another goroutine to drain the channel while the main
+// goroutine returns the first error without delay.
 ```
+
+### WaitGroup
 
 **Unknown Iteration Number**
 
@@ -3946,16 +4414,17 @@ The solution is to limit the number of parallel uses of the resource to match th
 level of parallelism that is available.
 
 We can limit parallelism using a buffered channel of capacity n to model a
-concurrency primitive called a *counting semaphore*. Conceptually, each of the n
-vacant slots in the channel buffer represents a token entitling the holder to
-proceed. Sending a value into the channel acquires a token, and receiving a value
-from the channel releases a token, creating a new vacant slot. This ensures that at
-most n sends can occur without an intervening receive. (Although it might be more
-intuitive to treat *filled* slots in the channel buffer as tokens, using vacant
-slots avoids the need to fill the channel buffer after creating it.)
+concurrency primitive called a *counting semaphore*. Conceptually, each of the
+n vacant slots in the channel buffer represents a token entitling the holder to
+proceed. Sending a value into the channel acquires a token, and receiving a
+value from the channel releases a token, creating a new vacant slot. This
+ensures that at most n sends can occur without an intervening receive.
+(Although it might be more intuitive to treat *filled* slots in the channel
+buffer as tokens, using vacant slots avoids the need to fill the channel buffer
+after creating it.)
 
-It's good practice to keep the semaphore operations as close as possible to the I/O
-operation they regulate.
+It's good practice to keep the semaphore operations as close as possible to the
+I/O operation they regulate.
 
 ```go
 // token is a counting semaphore used to enforce a limit of 20 concurrent requests.
@@ -3974,14 +4443,14 @@ See ch8/crawl3
 
 ## Polling a Channel / Non-Blocking Communication
 
-Sometimes we want to try to send or receive on a channel but avoid blocking if the
-channel is not ready -- a *non-blocking* communication. A select statement can do
-that too. A select may have a default, which specifies what to do when none of the
-other communications can proceed immediately.
+Sometimes we want to try to send or receive on a channel but avoid blocking if
+the channel is not ready -- a *non-blocking* communication. A select statement
+can do that too. A select may have a default, which specifies what to do when
+none of the other communications can proceed immediately.
 
-The select statement below receives a value from the abort channel if there is one to
-receive, otherwise it does nothing. This is a non-blocking receive operation; doing
-it repeatedly is called *polling* a channel.
+The select statement below receives a value from the abort channel if there is
+one to receive, otherwise it does nothing. This is a non-blocking receive
+operation; doing it repeatedly is called *polling* a channel.
 
 ```go
 select {
@@ -4013,59 +4482,60 @@ func main() {
 }
 ```
 
-
 ## Feature Disable with Nil Channel
 
 Because send and receive operations on a nil channel block forever, a case in a
-select statement whose channel is nil is never selected. This lets us use nil to
-enable or disable cases that correspond to features like handling timeouts or
-cancellation. See ch8/du2.
+select statement whose channel is nil is never selected. This lets us use nil
+to enable or disable cases that correspond to features like handling timeouts
+or cancellation. See ch8/du2.
 
 ## Work Cancellation with Broadcast
 
 We need to cancel two goroutines, or an arbitrary number of goroutines.
 
-One possibility might be to send as many events on the abort channel as there are
-goroutines to cancel. If some of the goroutines have already terminated themselves,
-however, our count will be too large, and our sends will get stuck. On the other
-hand, if those goroutines have spawned other goroutines, our count will be too
-small, and some goroutines will remain unaware of the cancellation. In general, it's
-hard to know how many goroutines are working on our behalf at any given moment.
-Moreover, when a goroutine receives a value from the abort channel, it consumes that
-value so that other goroutines won't see it.
+One possibility might be to send as many events on the abort channel as there
+are goroutines to cancel. If some of the goroutines have already terminated
+themselves, however, our count will be too large, and our sends will get stuck.
+On the other hand, if those goroutines have spawned other goroutines, our count
+will be too small, and some goroutines will remain unaware of the cancellation.
+In general, it's hard to know how many goroutines are working on our behalf at
+any given moment. Moreover, when a goroutine receives a value from the abort
+channel, it consumes that value so that other goroutines won't see it.
 
-For cancellation, what we need is a reliable mechanism to broadcast an event over a
-channel so that many goroutines can see it *as* it occurs and can later see that it
+For cancellation, what we need is a reliable mechanism to broadcast an event
+over a channel so that many goroutines can see it *as* it occurs and can later
+see that it
 *has* occurred.
 
 Recall that after a channel has been closed and drained of all sent values,
 subsequent receive operations proceed immediately, yielding zero values. We can
-exploit this to create a broadcast mechanism: don't send a value on the channel,
+exploit this to create a broadcast mechanism: don't send a value on the
+channel,
 *close* it.
 
 See ch8/du4.
 
-Cancellation involves a trade-offs; a quicker response often requires more intrusive
-changes to program logic. Ensuring that no expensive operations ever occur after the
-cancellation event may require updating many places in your code, but often most of
-the benefit can be obtained by checking for cancellation in a few important places.
+Cancellation involves a trade-offs; a quicker response often requires more
+intrusive changes to program logic. Ensuring that no expensive operations ever
+occur after the cancellation event may require updating many places in your
+code, but often most of the benefit can be obtained by checking for
+cancellation in a few important places.
 
-To determine whether main goroutine has cleaned up, There's a handy trick we can use
-during testing: if instead of returning from main in the event of cancellation, we
-execute a call to panic, then the runtime will dump the stack of every goroutine in
-the program. If the main goroutine is the only one left, then it has cleaned up
-after itself. But if other goroutines remain, they may not have been properly
-cancelled, or perhaps they have been cancelled but the cancellation takes time; a
-little investigation may be worthwhile. The panic dump often contains sufficient
-information to distinguish these cases.
-
+To determine whether main goroutine has cleaned up, There's a handy trick we can
+use during testing: if instead of returning from main in the event of
+cancellation, we execute a call to panic, then the runtime will dump the stack
+of every goroutine in the program. If the main goroutine is the only one left,
+then it has cleaned up after itself. But if other goroutines remain, they may
+not have been properly cancelled, or perhaps they have been cancelled but the
+cancellation takes time; a little investigation may be worthwhile. The panic
+dump often contains sufficient information to distinguish these cases.
 
 ## Concurrency with Shared Variables
 
-Data Race.
+### Data Race
 
-A *data race* occurs whenever two goroutines access the same variable concurrently
-and at least one of the accesses is a write.
+A *data race* occurs whenever two goroutines access the same variable
+concurrently and at least one of the accesses is a write.
 
 ```go
 package bank
@@ -4090,17 +4560,18 @@ go bank.Deposit(100)
 Follow the definition, there are three ways to avoid a data race.
 
 1. don't write the variable. Data structures that are never modified or are
-immutable are inherently concurrency-safe and need no synchronization. But obviously
-we can't use this approach if updates are essential, as with a bank account.
+immutable are inherently concurrency-safe and need no synchronization. But
+obviously we can't use this approach if updates are essential, as with a bank
+account.
 
-2. avoid accessing the variable from multiple goroutines. *Confine* those variables
-to a single goroutine. Since other goroutines cannot access the variable directly,
-they must use a channel to send the confining goroutine a request to query or update
-the variable. This is what is meant by the Go mantra "Do not communicate by sharing
-memory; instead, share memory by communicating."" A goroutine that brokers access to
-a confined variable using channel requests is called a *monitor goroutine* for that
-variable. For example, the broadcaster goroutine monitors access to the clients
-map.
+2. avoid accessing the variable from multiple goroutines. *Confine* those
+variables to a single goroutine. Since other goroutines cannot access the
+variable directly, they must use a channel to send the confining goroutine a
+request to query or update the variable. This is what is meant by the Go
+mantra "Do not communicate by sharing memory; instead, share memory by
+communicating."" A goroutine that brokers access to a confined variable using
+channel requests is called a *monitor goroutine* for that variable. For
+example, the broadcaster goroutine monitors access to the clients map.
 
 ```go
 var deposits = make(chan int)
@@ -4126,13 +4597,13 @@ func init() {
 ```
 
 Even when a variable cannot be confined to a single goroutine for its entire
-lifetime, confinement may still be a solution to the problem of concurrent access.
-For example, it's common to share a variable between goroutines in a pipeline by
-passing its address from one stage to the next over a channel. If each stage of the
-pipeline refrains from accessing the variable after sending it to the next stage,
-then all accesses to the variable are sequential. In effect, the variable is
-confined to one stage of the pipeline, then confined to the next, and so on. This
-discipline is sometimes called *serial confinement*.
+lifetime, confinement may still be a solution to the problem of concurrent
+access. For example, it's common to share a variable between goroutines in a
+pipeline by passing its address from one stage to the next over a channel. If
+each stage of the pipeline refrains from accessing the variable after sending
+it to the next stage, then all accesses to the variable are sequential. In
+effect, the variable is confined to one stage of the pipeline, then confined to
+the next, and so on. This discipline is sometimes called *serial confinement*.
 
 ```go
 type Cake struct{ state string }
@@ -4156,11 +4627,11 @@ func icer(iced chan<- *Cake, cooked <-chan *Cake) {
 3. allow many goroutines to access the variable, but only one at a time. This
 approach is known as *mutual exclusion*.
 
-Mutex.
+### Mutex
 
-we can use a channel of capacity 1 to ensure that at most one goroutine accesses a
-shared variable at a time. A semaphore that counts only to 1 is called a *binary
-semaphore*.
+we can use a channel of capacity 1 to ensure that at most one goroutine accesses
+a shared variable at a time. A semaphore that counts only to 1 is called
+a *binary semaphore*.
 
 ```go
 var (
@@ -4188,17 +4659,17 @@ This pattern is supported directly by the Mutex type from the sync package.
 import "sync"
 
 var (
-    // By convention, the variables guarded by a mutex are declared immediately after
-    // the declaration of the mutex itself.
+    // By convention, the variables guarded by a mutex are declared immediately
+    // after the declaration of the mutex itself.
     mu sync.Mutex // guards balance
     balance int
 )
 
 func Deposit(amount int) {
     mu.Lock()
-    // by deferring a call to Unlock, the critical section implicitly extends to the
-    // end of the current function, freeing us from having to remember to insert
-    // Unlock calls in one or more places far from the call to Lock.
+    // by deferring a call to Unlock, the critical section implicitly extends to
+    // the end of the current function, freeing us from having to remember to
+    // insert Unlock calls in one or more places far from the call to Lock.
     //
     // A defer is marginally more expensive than an explicit call to Unlock, but
     // not enough to justify less clear code. As always with concurrent programs,
@@ -4216,29 +4687,29 @@ func Balance() int {
 }
 ```
 
-The region of code between Lock and Unlock in which a goroutine is free to read and
-modify the shared variables is called a *critical section*. The lock holder's call to
-Unlock happens before any other goroutine can acquire the lock for itself. It is
-essential that the goroutine release the lock once it is finished, on all paths
-through the function, including error paths.
+The region of code between Lock and Unlock in which a goroutine is free to read
+and modify the shared variables is called a *critical section*. The lock
+holder's call to Unlock happens before any other goroutine can acquire the lock
+for itself. It is essential that the goroutine release the lock once it is
+finished, on all paths through the function, including error paths.
 
-The bank program above exemplifies a common concurrency pattern. A set of exported
-functions encapsulates one or more variables so that the only way to access the
-variables is through these functions (or methods, for the variables of an object).
-Each function acquires a mutex lock at the beginning and releases it at the end,
-thereby ensuring that the shared variables are not accessed concurrently. This
-arrangement of functions, mutex lock, and variables is called a *monitor*.
-(This older use of the word "monitor" inspired the term "monitor goroutine." Both
-uses share the meaning of a broker that ensures variables are accessed
-sequentially.)
+The bank program above exemplifies a common concurrency pattern. A set of
+exported functions encapsulates one or more variables so that the only way to
+access the variables is through these functions (or methods, for the variables
+of an object). Each function acquires a mutex lock at the beginning and
+releases it at the end, thereby ensuring that the shared variables are not
+accessed concurrently. This arrangement of functions, mutex lock, and variables
+is called a *monitor*.(This older use of the word "monitor" inspired the
+term "monitor goroutine." Both uses share the meaning of a broker that ensures
+variables are accessed sequentially.)
 
-This function eventually gives the correct result, but it has a nasty side effect.
-When an excessive withdrawal is attempted, the balance transiently dips below zero.
-This may cause a concurrent withdrawal for a modest sum to be spuriously rejected.
-So if Bob tries to buy a sports car, Alice can't pay for her morning coffee. The
-problem is that Withdraw is not *atomic*: it consists of a sequence of three separate
-operations, each of which acquires and then releases the mutex lock, but nothing
-locks the *whole* sequence.
+This function eventually gives the correct result, but it has a nasty side
+effect. When an excessive withdrawal is attempted, the balance transiently dips
+below zero. This may cause a concurrent withdrawal for a modest sum to be
+spuriously rejected. So if Bob tries to buy a sports car, Alice can't pay for
+her morning coffee. The problem is that Withdraw is not *atomic*: it consists
+of a sequence of three separate operations, each of which acquires and then
+releases the mutex lock, but nothing locks the *whole* sequence.
 
 ```go
 // NOTE: not atomic!
@@ -4268,13 +4739,14 @@ func Withdraw(amount int) bool {
 }
 ```
 
-because mutex locks are not *re-entrant* -- it's not possible to lock a mutex that's
-already locked—this leads to a deadlock where nothing can proceed, and Withdraw
-blocks forever.
+because mutex locks are not *re-entrant* -- it's not possible to lock a mutex
+that's already locked—this leads to a deadlock where nothing can proceed, and
+Withdraw blocks forever.
 
-A common solution is to divide a function such as Deposit into two: an unexported
-function, deposit, that assumes the lock is already held and does the real work, and
-an exported function Deposit that acquires the lock before calling deposit.
+A common solution is to divide a function such as Deposit into two: an
+unexported function, deposit, that assumes the lock is already held and does
+the real work, and an exported function Deposit that acquires the lock before
+calling deposit.
 
 ```go
 func Withdraw(amount int) bool {
@@ -4301,14 +4773,15 @@ func deposit(amount int) { balance += amount }
 When you use a mutex, make sure that both it and the variables it guards are not
 exported, whether they are package-level variables or the fields of a struct.
 
-Read/Write Mutex: RWMutex.
+### Read/Write Mutex: RWMutex
 
-Since the Balance function only needs to read the state of the variable, it would in
-fact be safe for multiple Balance calls to run concurrently, so long as no Deposit
-or Withdraw call is running. In this scenario we need a special kind of lock that
-allows read-only operations to proceed in parallel with each other, but write
-operations to have fully exclusive access. This lock is called a *multiple readers,
-single writer* lock, and in Go it's provided by sync.RWMutex:
+Since the Balance function only needs to read the state of the variable, it
+would in fact be safe for multiple Balance calls to run concurrently, so long
+as no Deposit or Withdraw call is running. In this scenario we need a special
+kind of lock that allows read-only operations to proceed in parallel with each
+other, but write operations to have fully exclusive access. This lock is called
+a *multiple readers, single writer* lock, and in Go it's provided by
+sync.RWMutex:
 
 ```go
 var mu sync.RWMutex
@@ -4320,42 +4793,44 @@ func Balance() int {
 }
 ```
 
-The Balance function now calls the RLock and RUnlock methods to acquire and release a
-*readers* or *shared* lock. The Deposit function, which is unchanged, calls the
-mu.Lock and mu.Unlock methods to acquire and release a *writer* or *exclusive* lock.
+The Balance function now calls the RLock and RUnlock methods to acquire and
+release a *readers* or *shared* lock. The Deposit function, which is unchanged,
+calls the mu.Lock and mu.Unlock methods to acquire and release a *writer*
+or *exclusive* lock.
 
-RLock can be used only if there are no writes to shared variables in the critical
-section. In general, we should not assume that *logically* read-only functions or
-methods don't also update some variables. For example, a method that appears to be a
-simple accessor might also increment an internal usage counter, or update a cache
-so that repeat calls are faster. If in doubt, use an exclusive Lock.
+RLock can be used only if there are no writes to shared variables in the
+critical section. In general, we should not assume that *logically* read-only
+functions or methods don't also update some variables. For example, a method
+that appears to be a simple accessor might also increment an internal usage
+counter, or update a cache so that repeat calls are faster. If in doubt, use an
+exclusive Lock.
 
-It's only profitable to use an RWMutex when most of the goroutines that acquire the
-lock are readers, and the lock is under *contention*, that is, goroutines routinely
-have to wait to acquire it. An RWMutex requires more complex internal bookkeeping,
-making it slower than a regular mutex for uncontended locks.
+It's only profitable to use an RWMutex when most of the goroutines that acquire
+the lock are readers, and the lock is under *contention*, that is, goroutines
+routinely have to wait to acquire it. An RWMutex requires more complex internal
+bookkeeping, making it slower than a regular mutex for uncontended locks.
 
-Memory Synchronization.
+### Memory Synchronization
 
-In a modern computer there may be dozens of processors, each with its own local cache
-of the main memory. For efficiency, writes to memory are buffered within each
-processor and flushed out to main memory only when necessary. They may even be
-committed to main memory in a different order than they were written by the writing
-goroutine. Synchronization primitives like channel communications and mutex
-operations cause the processor to flush out and commit all its accumulated writes so
-that the effects of goroutine execution up to that point are guaranteed to be
-visible to goroutines running on other processors.
+In a modern computer there may be dozens of processors, each with its own local
+cache of the main memory. For efficiency, writes to memory are buffered within
+each processor and flushed out to main memory only when necessary. They may
+even be committed to main memory in a different order than they were written by
+the writing goroutine. Synchronization primitives like channel communications
+and mutex operations cause the processor to flush out and commit all its
+accumulated writes so that the effects of goroutine execution up to that point
+are guaranteed to be visible to goroutines running on other processors.
 
-Within a single goroutine, the effects of each statement are guaranteed to occur in
-the order of execution; goroutines are sequentially consistent. But in the absence
-of explicit synchronization using a channel or mutex, there is no guarantee that
-events are seen in the same order by all goroutines.
+Within a single goroutine, the effects of each statement are guaranteed to occur
+in the order of execution; goroutines are sequentially consistent. But in the
+absence of explicit synchronization using a channel or mutex, there is no
+guarantee that events are seen in the same order by all goroutines.
 
 All these concurrency problems can be avoided by the consistent use of simple,
-established patterns. Where possible, confine variables to a single goroutine; for
-all other variables, use mutual exclusion.
+established patterns. Where possible, confine variables to a single goroutine;
+for all other variables, use mutual exclusion.
 
-Lazy Initialization: sync.Once.
+### Lazy Initialization: sync.Once
 
 ```go
 // lazy init: NOT concurrency-safe
@@ -4469,429 +4944,6 @@ Due to extra bookkeeping, a program built with race detection needs more time an
 memory to run, but the overhead is tolerable even for many production jobs. For
 infrequently occur- ring race conditions, letting the race detector do its job can
 save hours or days of debugging.
-
-# Goroutines
-
-In Go, each concurrently executing activity is called a *goroutine*.
-
-When a program starts, its only goroutine is the one that calls the main function, so
-we call it the *main goroutine*. New goroutines are created by the go statement. A
-go statement causes the function to be called in a newly created goroutine. The go
-statement itself completes immediately.
-
-```go
-f()         // call f(); wait for it to return
-go f()      // create a new goroutine that calls f(); don't wait
-            //
-            // the arguments to the function started by go are evaluated when the go
-            // statement itself is executed.
-```
-
-When main function returns, all goroutines are abruptly terminated and the program
-exits. Other than by returning from main or existing the program, there is no
-programmatic way for one goroutine to stop another, but there are ways to
-communicate with a goroutine to request that is stop.
-
-Why goroutines instead of threads?
-
-Goroutines are part of making concurrency easy to use. The idea, which has been
-around for a while, is to multiplex independently executing functions — coroutines —
-onto a set of threads. When a coroutine blocks, such as by calling a blocking system
-call, the run-time automatically moves other coroutines on the same operating system
-thread to a different, runnable thread so they won't be blocked. The programmer sees
-none of this, which is the point. The result, which we call goroutines, can be very
-cheap: they have little overhead beyond the memory for the stack, which is just a
-few kilobytes.
-
-To make the stacks small, Go's run-time uses resizable, bounded stacks. A newly
-minted goroutine is given a few kilobytes, which is almost always enough. When
-it isn't, the run-time grows (and shrinks) the memory for storing the stack
-automatically, allowing many goroutines to live in a modest amount of memory.
-The CPU overhead averages about three cheap instructions per function call. It
-is practical to create hundreds of thousands of goroutines in the same address
-space. If goroutines were just threads, system resources would run out at a
-much smaller number.
-
-```go
-func say(s string) {
-    for i := 0; i < 5; i++ {
-        time.Sleep(100 * time.Millisecond)
-        fmt.Println(s)
-    }
-}
-
-func main() {
-    // evaluation of `say("world")` happens in the current goroutine execution of
-    // `say("world")` happens in the new goroutine goroutines run in the same
-    // address space, so access to shared memory must be synchronized
-    go say("world")
-}
-```
-
-# Goroutine VS Threads.
-
-The differences between threads and goroutines are essentially quantitative, not
-qualitative. Goroutines are lightweight threads managed by the Go runtime.
-
-1. Growable Stacks
-
-Each OS thread has a fixed-size block of memory (often as large as 2MB) for its
-stack, the work area where it saves the local variables of function calls that are
-in progress or temporarily suspended while another function is called. This
-fixed-size stack is simultaneously too much and too little. A 2MB stack would be a
-huge waste of memory for a little goroutine, such as one that merely waits for a
-WaitGroup then closes a channel. It's not uncommon for a Go program to create
-hundreds of thousands of goroutines at one time, which would be impossible with
-stacks this large. Yet despite their size, fixed-size stacks are not always big
-enough for the most complex and deeply recursive of functions. Changing the fixed
-size can improve space efficiency and allow more threads to be created, or it can
-enable more deeply recursive functions, but it cannot do both.
-
-In contrast, a goroutine starts life with a small stack, typically 2KB. A goroutine's
-stack, like the stack of an OS thread, holds the local variables of active and
-suspended function calls, but unlike an OS thread, a goroutine's stack is not fixed;
-it grows and shrinks as needed. The size limit for a goroutine stack may be as much
-as 1GB, orders of magnitude larger than a typical fixed-size thread stack, though of
-course few goroutines use that much.
-
-2. Goroutine Scheduling
-
-OS threads are scheduled by the kernel, passing control from one thread to another
-requires a full context switch, that is, saving the state of one user thread to
-memory, restoring the state of another, and updating the scheduler's data
-structures. This operation is slow, due to its poor locality and the number of
-memory accesses required, and has historically only gotten worse as the number of
-CPU cycles required to access memory has increased.
-
-The Go runtime contains its own scheduler that uses a technique known as m:n
-scheduling, because it multiplexes (or schedules) m goroutines on n OS threads. The
-job of the Go scheduler is analogous to that of the kernel scheduler, but it is
-concerned only with the goroutines of a single Go program.
-
-Unlike the operating system's thread scheduler, the Go scheduler is not invoked
-periodically by a hardware timer, but implicitly by certain Go language constructs.
-For example, when a goroutine calls time.Sleep or blocks in a channel or mutex
-operation, the scheduler puts it to sleep and runs another goroutine until it is
-time to wake the first one up. Because it doesn't need a switch to kernel context,
-rescheduling a goroutine is much cheaper than rescheduling a thread.
-
-3. GOMAXPROCS
-
-The Go scheduler uses a parameter called GOMAXPROCS to determine how many OS threads
-may be actively executing Go code simultaneously. Its default value is the number of
-CPUs on the machine, so on a machine with 8 CPUs, the scheduler will schedule Go
-code on up to 8 OS threads at once. (GOMAXPROCS is the n in m:n scheduling.)
-Goroutines that are sleeping or blocked in a communication do not need a thread at
-all. Goroutines that are blocked in I/O or other system calls or are calling non-Go
-functions, do need an OS thread, but GOMAXPROCS need not account for them.
-
-4. Goroutines Have No Identify
-
-In most operating systems and programming languages that support multithreading, the
-cur- rent thread has a distinct identity that can be easily obtained as an ordinary
-value, typically an integer or pointer. This makes it easy to build an abstraction
-called thread-local storage, which is essentially a global map keyed by thread
-identity, so that each thread can store and retrieve values independent of other
-threads.
-
-Goroutines have no notion of identity that is accessible to the programmer. This is
-by design, since thread-local storage tends to be abused. For example, in a web
-server implemented in a language with thread-local storage, it's common for many
-functions to find information about the HTTP request on whose behalf they are
-currently working by looking in that storage. However, just as with programs that
-rely excessively on global variables, this can lead to an unhealthy ‘‘action at a
-distance’’ in which the behavior of a function is not determined by its arguments
-alone, but by the identity of the thread in which it runs. Consequently, if the
-identity of the thread should change—some worker threads are enlisted to help,
-say—the function misbehaves mysteriously.
-
-Go encourages a simpler style of programming in which parameters that affect the
-behavior of a function are explicit. Not only does this make programs easier to
-read, but it lets us freely assign subtasks of a given function to many different
-goroutines without worrying about their identity.
-
-# Channels
-
-    Operation       Channel State       Result
-    -------------------------------------------------------------------
-    read            nil                 block
-                    open and not empty  value
-                    open and empty      block
-                    closed              default value, false
-                    write only          compile error
-    write           nil                 block
-                    open and full       block
-                    open and not full   write value
-                    closed              panic !!
-                    receive only        compile error
-    close           nil                 panic !!
-                    open and not empty  close channel, read succeed until drained,
-                                        then reads produce default value
-                    open and empty      close channel, read produces default value
-                    closed              panic
-                    receive only        compile error
-
-
-If goroutines are the activities of a concurrent Go program, *channels* are the
-connections between them. A channel is a communication mechanism that lets one
-goroutine send values to another goroutine. Each channel is a conduit for values of
-a particular type, called the channel's *element type*.
-
-To create a channel, we use the built-in make function. A channel created with a
-simple call to make is called an *unbuffered* channel, but make accepts an optional
-second argument, an integer called the channel's *capacity*. If the capacity is
-non-zero, make creates a *buffered* channel.
-
-    ch = make(chan int)     // unbuffered channel. ch has type 'chan int'
-    ch = make(chan int, 0)  // unbuffered channel
-    ch = make(chan int, 3)  // buffered channel with capacity 3
-
-    fmt.Println(cap(ch))    // "3", capacity can be obtained by cap()
-    ch <- 1
-    ch <- 2
-    fmt.Println(len(ch))    // "2", len returns the number of elements currently buffered
-                            // Since in a concurrent program this information is likely
-                            // to be stale as soon as it is retrieved, its value is limited, but
-                            // it could conceivably be useful during fault diagnosis or performance
-                            // optimization
-
-As with maps, a channel is a *reference* to the data structure created by make. When
-we copy a channel or pass one as an argument to a function, we are copying a
-reference, so caller and callee refer to the same data structure.
-
-As with any other reference type, the zero value of a channel is nil.
-
-Two channels of the same type may be compared using ==. The comparison is true if
-both are references to the same channel data structure. A channel may also be
-compared to nil.
-
-A channel has two principal operations, *send* and *receive*, collectively known as
-*communications*.
-
-Channels also support *close*, which sets a flag indicating that no more values will
-ever be sent on this channel; subsequent attempts to send will panic. Receive
-operations on a closed channel yield the values that have been sent until no more
-values are left; any receive operations thereafter complete immediately and yield
-the zero value of the channel's element type. (non-block receive, spin on zero
-value).
-
-You needn't close every channel when you've finished with it. It's only necessary to
-close a channel when it is important to tell the receiving goroutines that all data
-have been sent. A channel that the garbage collector determines to be unreachable
-will have its resources reclaimed whether or not it is closed. (Don't confuse this
-with the close operation for open files. It *is* important to call the Close method
-on every file when you've finished with it.)
-
-Attempting to close an already-closed channel causes a panic, as does closing a nil
-channel.
-
-```go
-ch <- x     // a send statement transmits a value from one goroutine, through the
-            // channel, to another goroutine executing a corresponding receive expression.
-
-x = <-ch    // a receive expression in an assignment statement
-<-ch        // a receive statement; result is discarded
-
-close(ch)
-```
-
-By default, sends and receives block until the other side is ready. A send operation
-on an unbuffered channel blocks the sending goroutine until another goroutine
-executes a corresponding receive on the same channel. If the receive operation was
-attempted first, the receiving goroutine is blocked until another goroutine performs
-a send on the same channel.
-
-This allows goroutines to synchronize without explicit locks or condition variables.
-Hence unbuffered channels are sometimes called *synchronous* channels. When a value
-is sent on an unbuffered channel, the receipt of the value *happen before* the
-reawakening of the sending goroutine.
-
-There is no way to test directly whether a channel has been closed, but there is a
-variant of the receive operation that produces two results: the received channel
-element, plus a boolean value, conventionally called ok, which is true for a
-successful receive and false for a receive on a closed and drained channel.
-
-```go
-go func() {
-    for {
-        x ,ok := <-naturals
-        if !ok {
-            break
-        }
-        squares <- x*x
-    }
-    close(squares)
-}()
-```
-
-Because the syntax above is clumsy, Go lets use use a range loop to iterate over
-channels too.
-
-**unbuffered channel**
-
-```go
-func sum(s []int, c chan int) {
-    sum := 0
-    for _, v := range s {
-        sum += v
-    }
-    c <- sum // send to channel
-}
-
-s := []int{7, 2, 8, -9, 4, 0}
-
-// Like maps and slices, channels must be created before use:
-c := make(chan int)
-
-go sum(s[:len(s)/2], c)
-go sum(s[len(s)/2:], c)
-x, y := <-c, <-c // receive from channel
-fmt.Println(x, y, x+y)
-```
-
-**buffered channel**
-
-Sends to a buffered channel block only when the buffer is full. Receives block when
-the buffer is empty.
-
-Novices are sometimes tempted to use buffered channels within a single goroutine as a
-queue, lured by their pleasingly simple syntax, but this is a mistake. Channels are
-deeply connected to goroutine scheduling, and without another goroutine receiving
-from the channel, a sender - and perhaps the whole program - risks becoming blocked
-forever. If all you need is a simple queue, make one using a slice.
-
-```go
-// create `buffered channel`, by pass into `make()` buffer size 2
-ch := make(chan int, 2)
-ch <- 1
-ch <- 2
-
-// If overfill, trigger `all goroutines are sleep - deadlock!` error
-// ch <- 3
-
-fmt.Println(<-ch)
-fmt.Println(<-ch)
-```
-
-```go
-func mirroredQuery() string {
-    responses := make(chan string, 3)
-    go func() { responses <= request("asia.gopl.io") }()
-    go func() { responses <= request("europe.gopl.io") }()
-    go func() { responses <= request("americas.gopl.io") }()
-    return <-responses // return the quickest response
-}
-```
-
-Had we used an unbuffered channel, the two slower goroutines would have gotten stuck
-trying to send their responses on a channel from which no goroutine will ever
-receive. This situation, called a *goroutine leak*, would be a bug. Unlike garbage
-variables, leaked goroutines are not automatically collected, so ti is important to
-make sure that goroutines terminate themselves when no longer needed.
-
-
-**range and close**
-
-Sender can close a channel to indicate that no more values will be sent.
-
-Receivers can test whether a channel has been closed.
-
-    v, ok := <-ch
-
-`ok` is false if there are no more values to receive and the channel is closed.
-
-Only the sender should close a channel, never the receiver. Sending on a closed
-channel will cause a panic.
-
-Channels aren't like files; you don't usually need to close them.
-
-Closing is only necessary when the receiver must be told there are no more values
-coming, such as to terminate a range loop.
-
-```go
-func fibonacci(n int, c chan int) {
-    x, y := 0, 1
-    for i := 0; i < n; i++ {
-        c <- x
-        x, y = y, x+y
-    }
-    // close a channel to indicate that no more values will be sent
-    // only the sender should close a channel, never the receiver
-    // sending on a closed channel will cause a panic
-    // only necessary when the receiver must be told there are no more values coming
-    close(c)
-}
-
-c := make(chan int, 10)
-go fibonacci(cap(c), c)
-for i := range c { // `range` will receive values from channel until it is closed
-                   // can also check whether channel is close manually by `v, ok := <-ch`
-    fmt.Println(i)
-}
-```
-
-**unidirectional channel**
-
-*unidirectional* channel types expose only one or the other of the send and receive
-operations. `chan<- int`, a *send-only* channel of int. `<-chan int` a receive-only
-channel of int. Violations of this discipline are detected at compile time.
-
-Since the close operation asserts that no more sends will occur on a channel, only
-the sending goroutine is in a position to call it, and for this reason it is a
-compile-time error to attempt to close a receive-only channel.
-
-Conversions from bidirectional to unidirectional channel types are permitted in any
-assignment. There is no going back, however: once you have a value of a
-unidirectional type such as `chan<- int`, there is no way to obtain from it a value
-of type `chan int` that refers to the same channel data structure.
-
-# Select
-
-`select` lets a goroutine wait on multiple communication operations.
-
-```go
-select {
-case <-ch1:         // ...
-case x := <-ch2:    // ...
-case ch3 <- y:      // ...
-default:            // ...
-}
-```
-
-Each case specifies a *communication* (a send or receive operation on some channel)
-and an associated block of statement. A *select* block until a communication for some
-case is ready to proceed. A *select* with no cases, `select{}`, waits forever.
-
-If multiple cases are ready, select picks one at random, which ensures that every
-channel has an equal chance of being selected.
-
-
-```go
-func fibonacci(c, quit chan int) {
-    x, y := 0, 1
-    for {
-        select {
-        case c <- x:
-            x, y = y, x+y
-        case <-quit:
-            fmt.Println("quit")
-            return
-        default:
-            // run if no other case is ready
-        }
-    }
-}
-
-c := make(chan int)
-quit := make(chan int)
-go func() {
-    for i := 0; i < 10; i++ {
-        fmt.Println(<-c)
-    }
-    quit <- 0
-}()
-fibonacci(c, quit)
-```
 
 # Reflection
 
