@@ -29,8 +29,18 @@ shout: # Required: **TWO** lines, will be displayed on page's header.
 description: "Fanghao's personal blog, on IT tech, personal thoughts and other things..." # Required
 
 disqus:
-  comments: true # Global toggle on/off disqus comment
-  shortname: unifreak # Required if you use disqus. Repalce with your disqus shortname here
+  comments: false # Global toggle on/off disqus comment
+  shortname:  # Required if you use disqus. Replace with your disqus shortname here
+
+gitalk:
+  comments: true # Global toggle on/off gitalk comment
+  # replace all of those below with your own
+  client_id: a9e60308f00d4f50c0a2
+  client_secret: af1124f1579da047b071f58a86a9b70c4c172351
+  repo: unifreak.github.io
+  owner: unifreak
+  admin: unifreak
+  distraction_free_mode: true
 
 google_analytics:
   id: "G-35QT9DQRZH" # Required if you use google analytics. Replace with your tracking id here

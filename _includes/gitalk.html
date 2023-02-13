@@ -1,0 +1,17 @@
+<div id="gitalk-container" class="col-lg-9"></div>
+
+<script src="{{ '/assets/js/gitalk.min.js' | relative_url }}"></script>
+
+<script>
+	var gitalk = new Gitalk({
+		clientID: '{{ site.gitalk.client_id }}',
+		clientSecret: '{{ site.gitalk.client_secret }}',
+		repo: '{{ site.gitalk.repo }}',
+		owner: '{{ site.gitalk.owner }}',
+		admin: ['{{ site.gitalk.admin }}'],
+		id: location.pathname,
+		distractionFreeMode: {{ site.gitalk.distraction_free_mode }},
+	});
+
+	gitalk.render('gitalk-container');
+</script>

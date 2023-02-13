@@ -34,7 +34,11 @@ markdown: true
   <div id="markdown-outline" class="col-lg-3">
   </div>
 
-  {% if site.disqus.comments and jekyll.environment == "production" %}
+  {% if site.disqus.comments %}
     {% include disqus.html %}
+  {% endif %}
+
+  {% if site.gitalk.comments %}
+    {% include gitalk.html %}
   {% endif %}
 </div>
