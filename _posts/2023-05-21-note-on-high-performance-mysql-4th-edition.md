@@ -2,7 +2,7 @@
 title: "« 高性能 MySQL 第四版 » 学习笔记"
 layout: post
 category: note
-tags: [mysql, sql, database]
+tags: [mysql, sql, database, perf]
 
 excerpt: "这是我阅读 «高性能 MySQL 第四版» 时做学习笔记. 我认为这本书依然是优化 MySQL 和
 运维 MySQL 极具实践性的最佳指导. 这篇笔记大部分内容都整理自此书, 主要用于自己日后参考用, 不适
