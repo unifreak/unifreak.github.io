@@ -1,7 +1,8 @@
 ---
 stars: 5
 date: 2021-09-10
-title: The Go Programming Langauge
+title: 书评 -- The Go Programming Langauge
+tags: [go]
 ---
 
 读这本书让我重新体验了一次读 K&R C 的乐趣.

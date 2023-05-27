@@ -1,7 +1,7 @@
 ---
 stars: 4
 date: 2023-04-28
-title: 性能之巅 (第 2 版)
+title: 书评 -- 性能之巅 (第 2 版)
 tags: [perf]
 ---
 

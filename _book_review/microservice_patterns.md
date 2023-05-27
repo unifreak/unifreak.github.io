@@ -1,7 +1,7 @@
 ---
 stars: 5
 date: 2023-04-10
-title: 微服务架构设计模式
+title: 书评 -- 微服务架构设计模式
 tags: [microservice, sysdesign, pattern]
 ---
 
@@ -36,5 +36,6 @@ tags: [microservice, sysdesign, pattern]
 否则有些地方是看不明白的.
 
 至于勘误就不贴了. 帖上自己的阅读笔记, 笔记中图换成了英文版中的图:
+
 <https://unifreak.github.io/note/note-microservice-patterns>.
 

@@ -1,7 +1,8 @@
 ---
 star: 3
 date: 2019-12-08
-title: Nginx Cookbook
+title: 书评 -- Nginx Cookbook
+tags: [nginx]
 ---
 
 (看的英文, 2019 update 版本)

@@ -1,7 +1,8 @@
 ---
 star: 2
 date: 2020-01-30
-title: 蝇王
+title: 书评 -- 蝇王
+tag: [literature]
 ---
 
 这是书封中写的对书的评价:

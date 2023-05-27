@@ -1,7 +1,7 @@
 ---
 stars: 5
 date: 2021-09-11
-title: Book Review - The Go Programming Langauge (gopl)
+title: Book Review -- The Go Programming Langauge (gopl)
 tags: [golang, book]
 ---
 

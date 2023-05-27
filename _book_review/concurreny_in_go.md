@@ -1,7 +1,7 @@
 ---
 stars: 5
 date: 2022-06-10
-title: Concurreny in Go
+title: 书评 -- Concurreny in Go
 tags: [go, concurrency]
 ---
 

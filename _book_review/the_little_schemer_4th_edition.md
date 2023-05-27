@@ -1,7 +1,8 @@
 ---
 star: 5
 date: 2021-12-19
-title: Book Review on The Little Schemer (4th Edition)
+title: Book Review - The Little Schemer (4th Edition)
+tags: [schemer, lisp]
 ---
 
 书很薄, 但绝非 "轻读物". 如果真想从中学到 "递归", 建议不要泛泛读过,

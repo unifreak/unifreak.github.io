@@ -1,5 +1,5 @@
 ---
-title: "«微服务架构设计模式» 阅读笔记"
+title: "« 微服务架构设计模式 » 学习笔记"
 layout: post
 category: note
 tags: [microservice, sysdesign]
@@ -8,6 +8,8 @@ excerpt: "这是我阅读 «微服务架构设计模式» 学习笔记. 这本�
 问题及其可选的方案优劣对比, 并具体到实现甚至代码. 这篇笔记大部分内容都整理自此书, 主要用于自己
 日后参考用. 笔记中的图来源于英文原版."
 ---
+
+书评: <http://localhost:4000/book_review/microservice_patterns>
 
 # 架构
 

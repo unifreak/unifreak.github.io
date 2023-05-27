@@ -1,7 +1,8 @@
 ---
 stars: 4
 date: 2020-09-10
-title: Introduction To Programming Using Python
+title: 书评 -- Introduction To Programming Using Python
+tags: [python]
 ---
 
 看的英文版
