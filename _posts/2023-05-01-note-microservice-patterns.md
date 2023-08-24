@@ -9,7 +9,7 @@ excerpt: "这是我阅读 «微服务架构设计模式» 学习笔记. 这本�
 日后参考用. 笔记中的图来源于英文原版."
 ---
 
-书评: <http://localhost:4000/book_review/microservice_patterns>
+书评: <http://unifreak.github.io/book_review/microservice_patterns>
 
 # 架构
 
