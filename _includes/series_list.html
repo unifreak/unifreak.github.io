@@ -3,7 +3,7 @@
 <div class="row">
     <ul class="col-lg-2" id="group-list">
         {% assign idx = 0 %}
-        {% for group in include.groups }} %}
+        {% for group in include.groups %}
           <!-- Jekyll have a built-in `posts` collection
             So here we need to filter it out -->
           {% unless group.label == "posts" %}

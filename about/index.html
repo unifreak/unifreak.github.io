@@ -6,18 +6,18 @@ layout: default
 <div class="row" id="about">
     <header id="title">
         <img src="{{ my.avatar_img | relative_url }}">
-        <h1>{{ my.name }} | <small>{{ my.job | upcase }}</small></h1>
+        <h1>{{ my.name }}<!--  | <small>{{ my.job | upcase }} --></small></h1>
     </header>
 
     <section id="intro">
         <h2>{{ my.hi }}</h2>
-        {% for line in my.intro %}
+<!--         {% for line in my.intro %}
         <p>{{ line }}</p>
         {% endfor %}
-    </section>
+ -->    </section>
 
     <section id="skillsets">
-        <h2>SKILL SETS</h2>
+<!--         <h2>SKILL SETS</h2>
         {% for skillset in my.skills %}
           <div>
             <i class="{{ skillset.icon-class }}" title=" {{ skillset.name }}"></i>
@@ -27,19 +27,19 @@ layout: default
             <hr>
           </div>
         {% endfor %}
-    </section>
+ -->    </section>
 
     <section id="findme">
-        <h2>FIND ME ON</h2>
+<!--         <h2>Contact</h2>
         <ul>
           {% for social in my.social %}
             <li><a href="{{ social.link }}"><i class=" {{ social.icon-class }}"></i></a></li>
           {% endfor %}
         </ul>
-    </section>
+ -->    </section>
 
     <section id="action">
-        <h2>MORE</h2>
-        <a href="{{ '/resume' | relative_url }}">Check out my resume</a>
+        <!-- <h2>MORE</h2> -->
+        <!-- <a href="{{ '/resume' | relative_url }}">Check out my resume</a> -->
     </section>
 </div>

@@ -1,5 +1,5 @@
 ---
-title: "The Go Programming Langauge (gopl) Book Learning Notes"
+title: "Golang Learning Notes"
 layout: post
 category: tutorial
 tags: [golang]

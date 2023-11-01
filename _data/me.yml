@@ -1,11 +1,11 @@
 # About page & Footer
 
-name: 方浩
-job: "PHP Coder"
-hi: "HIYA!"
+name: "𝑓𝑛.h"
+job: ""
+hi: "…"
 avatar_img: "/assets/img/me.png"
 intro:
-  - "一个 PHP 程序员, 技术宅, 总是在追求上进的吹毛求疵者"
+  - "技术宅, 总是在追求上进的吹毛求疵者"
   - "除了敲代码, 还喜欢看书, 听摇滚, 做瑜伽, 以及猫猫狗狗"
   - "业余时间你会看到我不是在像模像样的弹吉他, 就是骑着车子在城里晃荡"
 skills:

@@ -22,11 +22,11 @@ excerpt_separator: "[-----]"
 
 url: # Required: replace this with your domain
 name: unifreak # Required: will be displayed on every page's header
-title: UniFreak's blog # Required: site's default title
+title: unifreak's blog # Required: site's default title
 shout: # Required: **TWO** lines, will be displayed on page's header.
-  - NEVER
-  - OR NOW
-description: "Fanghao's personal blog, on IT tech, personal thoughts and other things..." # Required
+  -
+  -
+description: "unifreak's blog." # Required
 
 disqus:
   comments: false # Global toggle on/off disqus comment
@@ -48,6 +48,9 @@ google_analytics:
 collections: # Define post series here
   book_review:
     output: true
+  gonote:
+    output: true
+    sort_by: sort
 
 defaults:
   - scope:

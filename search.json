@@ -2,14 +2,16 @@
 layout: null
 ---
 [
-  {% for post in site.posts %}
-    {
-      "title"    : "{{ post.title | escape }}",
-      "category" : "{{ post.category }}",
-      "tags"     : "{{ post.tags | join: ', ' }}",
-      "url"      : "{{ site.baseurl }}{{ post.url }}",
-      "date"     : "{{ post.date }}",
-      "content": {{ post.content | jsonify }}
-    } {% unless forloop.last %},{% endunless %}
+  {% for group in site.collections %}
+    {% for post in group.docs %}
+      {
+        "title"    : "{{ post.title | escape }}",
+        "category" : "{{ post.category }}",
+        "tags"     : "{{ post.tags | join: ', ' }}",
+        "url"      : "{{ site.baseurl }}{{ post.url }}",
+        "date"     : "{{ post.date }}",
+        "content": {{ post.content | jsonify }}
+      } {% unless forloop.last %},{% endunless %}
+    {% endfor %} {% unless forloop.last %},{% endunless %}
   {% endfor %}
 ]
