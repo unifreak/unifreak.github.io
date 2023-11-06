@@ -5,9 +5,8 @@ job: ""
 hi: "…"
 avatar_img: "/assets/img/me.png"
 intro:
-  - "技术宅, 总是在追求上进的吹毛求疵者"
-  - "除了敲代码, 还喜欢看书, 听摇滚, 做瑜伽, 以及猫猫狗狗"
-  - "业余时间你会看到我不是在像模像样的弹吉他, 就是骑着车子在城里晃荡"
+  - "Read book. Write code."
+  - "Learning up. Noting down."
 skills:
   - name: "Programming"
     icon-class: "fa fa-terminal"

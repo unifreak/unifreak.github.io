@@ -3,4 +3,5 @@
 _site/
 .sass-cache/
 node_modules/
+_templates/
 package-lock.json

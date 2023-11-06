@@ -48,7 +48,7 @@ google_analytics:
 collections: # Define post series here
   book_review:
     output: true
-  gonote:
+  ref-go:
     output: true
     sort_by: sort
 
