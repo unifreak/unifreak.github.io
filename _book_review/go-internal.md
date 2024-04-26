@@ -2,7 +2,7 @@
 stars: 3
 date: 2023-11-30
 title: 书评 -- Go 语言设计与实现 (开源书)
-tags: [go]
+tags: [go, internal]
 ---
 
 把网上的开源书大概看了一遍, 所以这个评论只针对开源书.
