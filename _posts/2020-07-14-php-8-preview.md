@@ -4,10 +4,11 @@ layout: post
 category: note
 tags: [php]
 description: PHP 8 syntax, feature, preview
-excerpt: "PHP 将于 2020 年 11 月 26 日发布. 这篇文章简要罗列了一些其重要更新. 注意, PHP 8 仍在开发. 此列表随时间可能变得不全."
+excerpt: "PHP 将于 2020 年 11 月 26 日发布. 这篇文章简要罗列了一些其重要更新. 注
+意, PHP 8 仍在开发. 此列表随时间可能变得不全."
 ---
 
-_这是一个阅读 [这篇文章]('https://stitcher.io/blog/new-in-php-8') 后的简要总结_
+_这是一个阅读 [这篇文章]('https://stitcher.io/blog/new-in-php-8') 后的简要总结._
 
 ---
 
@@ -16,7 +17,6 @@ PHP 将于 2020 年 11 月 26 日发布.
 注意, PHP 8 仍在开发. 此列表随时间可能变得不全.
 
 # 新特性
-
 
 ### 联合类型
 
@@ -35,11 +35,11 @@ public function bar(?Bar $bar): void;
 
 ### JIT 即时编译器
 
-JIT (Just In Time) 即时编译器将带来大幅性能提升
+JIT (Just In Time) 即时编译器将带来大幅性能提升.
 
 ### `Attributes`
 
-`Attributes` 提供了一种为类添加元信息的方式
+`Attributes` 提供了一种为类添加元信息的方式.
 
 ```php
 use App\Attributes\ExampleAttribute;
@@ -70,7 +70,8 @@ class ExampleAttribute
 
 ### `Match` 语句
 
-类似 `switch` 语句, 但是
+类似 `switch` 语句, 但是:
+
 - `break` 非必须
 - 可一起指定多个匹配条件
 - 使用严格类型比较
@@ -85,7 +86,7 @@ $result = match($input) {
 
 ### 构造器属性提升
 
-可用于快速创建值对象或数据传输对象
+可用于快速创建值对象或数据传输对象.
 
 ```php
 class Money
@@ -103,7 +104,7 @@ class Money
 
 ### 静态返回类型
 
-`static` 将成为合法的返回类型
+`static` 将成为合法的返回类型.
 
 ```php
 class Foo
@@ -118,7 +119,7 @@ class Foo
 
 ### `Throw` 语句
 
-`throw` 从声明变成了语句, 这意味着可以从更多地方抛出异常
+`throw` 从声明变成了语句, 这意味着可以从更多地方抛出异常.
 
 ```php
 $triggerError = fn () => throw new MyError();

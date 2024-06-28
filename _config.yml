@@ -3,7 +3,7 @@ highlighter: rouge
 markdown: kramdown
 
 kramdown:
-  input: GFM
+  input: GFM # The default, can be omitted.
   syntax_highlighter: rouge
   syntax_highlighter_opts: # Rouge Options › https://github.com/jneen/rouge#full-options
     css_class: 'highlight'

@@ -5,7 +5,7 @@ markdown: true
 <div class="row">
   <div id="markdown-container" class="col-lg-9">
     <header>
-      <p id="post-title">{{ page.title | replace: "_", " " | capitalize}}</p>
+      <p id="post-title">{{ page.title }}</p>
       {% if page.tags %}
       <ul class="tags clearfix">
         {% for tag in page.tags %}

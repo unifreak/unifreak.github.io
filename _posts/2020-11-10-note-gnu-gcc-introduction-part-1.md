@@ -3,7 +3,7 @@ title: "GCC 基本使用教程 - part 1"
 layout: post
 category: tutorial
 tags: [gcc]
-excerpt: "这是我阅读《 An Introduction to GCC 》 的笔记. 这篇文章介绍如何使用 gcc 编译 c 文件, 以及编译相关的概念和选项等. 下一篇将介绍如何使用预处理器, 如何为了调试或性能优化进行编译已经常用的相关工具等."
+excerpt: "这是我阅读 «An Introduction to GCC» 的笔记. 这篇文章介绍如何使用 gcc 编译 c 文件, 以及编译相关的概念和选项等. 下一篇将介绍如何使用预处理器, 如何为了调试或性能优化进行编译已经常用的相关工具等."
 ---
 
 GCC (GNU Compiler Collection) 除了编译 C/C++, GCC 本身还有着这些特性:

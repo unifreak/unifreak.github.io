@@ -1,12 +1,12 @@
 ---
-title: "在 jekyll 博客中使用数学符号"
+title: "在 Jekyll 主题中支持 LaTeX 数学符号渲染"
 layout: post
 category: note
 tags: [jekyll, tuts]
 usemath: [latex, ascii]
 ---
 
-jekyll 可以通过 MathJax 插件支持对数学符号的渲染. 这篇文章记录如何配置 jekyll 和使用数学符号.
+Jekyll 可以通过 MathJax 插件支持对数学符号的渲染. 这篇文章记录如何配置 jekyll 和使用数学符号.
 
 # 配置 jekyll
 

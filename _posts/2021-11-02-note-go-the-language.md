@@ -1,7 +1,7 @@
 ---
-title: Go Notes - The Language
+title: Note - Go, The Language
 layout: post
-category: ref
+category: notes
 tags: [go]
 excerpt: "Reading notes on Go language."
 ---
@@ -1282,7 +1282,7 @@ called *unmarshaling*. Only exported fields are marshaled.
 A *field tag* is a string of metadata associated at compile time with the field
 of a struct. A field tag may be any literal string, but it is conventionally
 interpreted as a **space-separated list of key:"value" pairs**. The json key
-controls the behavior of the encoding/json package, and other encoding/...
+controls the behavior of the encoding/json package, and other "encoding/..."
 packages follow this convention.
 
 The tag "omitempty" indicates that no JSON output should be produced if the
@@ -1291,7 +1291,7 @@ field has the zero value or is otherwise empty.
 ## Text and HTML Templates
 
 A *template* is a string of file containing one or more portions enclosed in
-double braces, {{...}}, called *actions*. Each action contains an expression in
+double braces, `{{...}}`, called *actions*. Each action contains an expression in
 the template language, a simple but powerful notion for printing values,
 selecting struct fields, calling functions and methods, expressing control flow
 such as if-else statements and range loops, and instantiating other templates.

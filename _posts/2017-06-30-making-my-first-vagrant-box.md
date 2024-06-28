@@ -1,18 +1,29 @@
 ---
-title: "制作自己第一个 vagrant box"
+title: "制作自己第一个 Vagrant Box"
 layout: post
 category: [tutorial]
 tags: [php, vagrant]
-excerpt: "作为程序员, 基本上换一次工作, 换一个电脑就要搭建一次开发环境. 手工搭建环境并不是件容易的事儿. 虽然网上有很多教程和文档可供参考, 但是在实际操作时总是会遇到莫名其妙的坑, 一折腾就是半天. 所以自己终于下决心自己打包一个 vagrant box 了. 这篇文章就当是笔记, 为以后作参考"
+excerpt: "作为程序员, 基本上换一次工作, 换一个电脑就要搭建一次开发环境. 手工搭建
+环境并不是件容易的事儿. 虽然网上有很多教程和文档可供参考, 但是在实际操作时总是会
+遇到莫名其妙的坑, 一折腾就是半天. 所以自己终于下决心自己打包一个 vagrant box 了.
+这篇文章就当是笔记, 为以后作参考"
 ---
 
-作为程序员, 基本上每换一次电脑就要搭建一次开发环境. 手工搭建环境并不是件容易的事儿. 虽然网上有很多教程和文档可供参考, 但是在实际操作时总是会遇到莫名其妙的坑, 一折腾就是半天. 相信每个 PHP 程序员都对此深有体会
+作为程序员, 基本上每换一次电脑就要搭建一次开发环境. 手工搭建环境并不是件容易的事
+儿. 虽然网上有很多教程和文档可供参考, 但是在实际操作时总是会遇到莫名其妙的坑, 一
+折腾就是半天. 相信每个 PHP 程序员都对此深有体会.
 
-使用集成环境或 vagrant box 是另外一种选择, 但是这个选项的问题就是不够灵活: 可能版本不是你自己想要的, 又可能遇到问题的时候, 网上很难找到相关资料
+使用集成环境或 vagrant box 是另外一种选择, 但是这个选项的问题就是不够灵活: 可能
+版本不是你自己想要的, 又可能遇到问题的时候, 网上很难找到相关资料.
 
-我之前也试着用了几个 vagrant box, 包括 ubuntu-trusty64, [scotch box][scoth], 还有 laravel 的 [homestead][homestead]. homestead 的配置方式最为便捷, 尤其是如果你也使用 laravel 框架的话. 但是以上这些 box 都没能完全满足需求, 因为他们的 php 版本太高了, 而我所在公司还停留在 5.6
+我之前也试着用了几个 vagrant box, 包括 ubuntu-trusty64, [scotch box][scoth], 还
+有 laravel 的 [homestead][homestead]. homestead 的配置方式最为便捷, 尤其是如果你
+也使用 laravel 框架的话. 但是以上这些 box 都没能完全满足需求, 因为他们的 php 版
+本太高了, 而我所在公司还停留在 5.6.
 
-自己也折腾过手工降级 php, 但是总是还会遇到其他防不胜防的问题(比如装不上 php-ldap 扩展). 所以自己终于下决心自己打包一个 vagrant box 了. 这篇文章就当是笔记, 为以后作参考
+自己也折腾过手工降级 php, 但是总是还会遇到其他防不胜防的问题(比如装不上 php-ldap
+扩展). 所以自己终于下决心自己打包一个 vagrant box 了. 这篇文章就当是笔记, 为以后
+作参考.
 
 # 准备工作
 
@@ -26,27 +37,32 @@ excerpt: "作为程序员, 基本上换一次工作, 换一个电脑就要搭建
 
 先决条件:
 
-- Host 机上装好 vagrant, virtualBox
-- 下载好 centOS 虚拟镜像
+- Host 机上装好 vagrant, virtualBox.
+- 下载好 centOS 虚拟镜像.
 
 # 安装虚拟机
 
-具体虚拟机如何安装不具体讲了, virtualBox 安装算是比较简单的. 这是此次安装时的一些参数:
+具体虚拟机如何安装不具体讲了, virtualBox 安装算是比较简单的. 这是此次安装时的一
+些参数:
 
 - 硬盘: 32GB
 - 内存: 512MB
 - 禁用 USB, 禁用音频
 - 创建 vagrant 账户, 密码 vagrant. root 密码也是 vagrant
 
-安装完虚拟机后, __最好先配置好 ssh, 然后从 Host 机 ssh 到虚拟机进行后续的步骤__. 否则直接在 vBox 的命令终端, 不能复制粘贴, 是非常蛋疼的. 我使用 NAT 端口转发实现 ssh 到虚拟机. 如下: 
+安装完虚拟机后, __最好先配置好 ssh, 然后从 Host 机 ssh 到虚拟机进行后续的步骤__.
+否则直接在 vBox 的命令终端, 不能复制粘贴, 是非常蛋疼的. 我使用 NAT 端口转发实现
+ssh 到虚拟机. 如下:
 
-1. 在 vBox 中打开该虚拟机的配置窗口, 选择 `Network->Adapter1(NAT)->Port Forwarding`
-2. 添加一条端口转发规则: 
+1. 在 vBox 中打开该虚拟机的配置窗口, 选择 `Network->Adapter1(NAT)->Port
+   Forwarding`
+2. 添加一条端口转发规则:
         
         |Name:ssh|Protocal:TCP|HostIP:127.0.0.1|HostPort:2222|GuestIP:127.0.0.1|GuestPort:22|
 
-3. 保存, 然后尝试在 Host 机运行 `ssh -p 2222 vagrant@localhost`. 如果 ssh 不成功, 重启虚拟机试试
-4. 不用尝试使用 `root@localhost` ssh, __centOS 默认禁用 root 远程登录的__
+3. 保存, 然后尝试在 Host 机运行 `ssh -p 2222 vagrant@localhost`. 如果 ssh 不成功,
+   重启虚拟机试试.
+4. 不用尝试使用 `root@localhost` ssh, __centOS 默认禁用 root 远程登录的__.
 
 # 配置账号
 
@@ -87,9 +103,11 @@ excerpt: "作为程序员, 基本上换一次工作, 换一个电脑就要搭建
         wget http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
         sudo rpm -Uvh remi-release-6*.rpm epel-release-6*.rpm
 
-2. 运行 `sudo yum install php php-ldap php-redis php-pdo` 安装 PHP 以及自己需要的扩展
+2. 运行 `sudo yum install php php-ldap php-redis php-pdo` 安装 PHP 以及自己需要
+   的扩展
 3. 运行 `sudo yum install php-fpm phpunit composer` 安装 PHP 相关的其他软件
-4. 打开 `/etc/php-fpm.d/www.conf`, 找到 `php_flag[display_errors]` 这一行, 配置值为 `on`, 保存
+4. 打开 `/etc/php-fpm.d/www.conf`, 找到 `php_flag[display_errors]` 这一行, 配置
+   值为 `on`, 保存
 
 相关资料看[这里][source]
 
@@ -108,9 +126,11 @@ excerpt: "作为程序员, 基本上换一次工作, 换一个电脑就要搭建
 
 ### 其他
 
-安装并配置完这些软件之后, 因为 centOS 的一些安全策略, 并不能保证能从 Host 访问到虚拟机中的网站, 因此需要额外进行些配置:
+安装并配置完这些软件之后, 因为 centOS 的一些安全策略, 并不能保证能从 Host 访问到
+虚拟机中的网站, 因此需要额外进行些配置:
 
-1. 运行 `sudo chmod o+x /home/vagrant` 以使 nginx 能访问 vagrant 家目录中的项目代码
+1. 运行 `sudo chmod o+x /home/vagrant` 以使 nginx 能访问 vagrant 家目录中的项目
+   代码
 2. 打开 `/etc/sysconfig/selinux`, 找到 `SELINUX` 项, 配置为 `disabled`. 保存
 3. 运行 `sudo service iptables stop` 停用防火墙
 
@@ -118,19 +138,25 @@ excerpt: "作为程序员, 基本上换一次工作, 换一个电脑就要搭建
 
 # 打包
 
-至此, 预想中的虚拟机算是弄完了. 现在要做的就是把这个虚拟机打包成 vagrant box, 以便在任何地方重用
+至此, 预想中的虚拟机算是弄完了. 现在要做的就是把这个虚拟机打包成 vagrant box, 以
+便在任何地方重用
 
-在 Host 机运行 `vagrant package --base <VBoxName> --output <saveFileName>` 即可将 vBox 中对应的虚拟机`<VBoxName>`打包输出为`<saveFileName>`
+在 Host 机运行 `vagrant package --base <VBoxName> --output <saveFileName>` 即可
+将 vBox 中对应的虚拟机`<VBoxName>`打包输出为`<saveFileName>`
 
-如果在打包过程中报 `error: cannot load such file -- vagrant-share/helper/api` 这样的错误, 尝试运行 `vagrant plugin install vagrant-share --plugin-version 1.1.8` 之后重试一遍
+如果在打包过程中报 `error: cannot load such file -- vagrant-share/helper/api` 这
+样的错误, 尝试运行 `vagrant plugin install vagrant-share --plugin-version 1.1.8`
+之后重试一遍
 
 # 配置方式
 
-Box 虽然弄完了, 但是使用 vagrant 另外一个很重要的方面就是 `provision` (不知道该翻译成什么好). 我之前也说过, laravel 的 homestead 的配置方法很便捷. 
+Box 虽然弄完了, 但是使用 vagrant 另外一个很重要的方面就是 `provision` (不知道该
+翻译成什么好). 我之前也说过, laravel 的 homestead 的配置方法很便捷.
 
-所以我 fork 了一下它的代码, 根据自己需要, 加入了 "为每个站点引入 nginx include file" 的功能. 有兴趣可以[看看这里][uxinstead]
+所以我 fork 了一下它的代码, 根据自己需要, 加入了 "为每个站点引入 nginx include
+file" 的功能. 有兴趣可以[看看这里][uxinstead]
 
-
+---
 
 [scoth]: https://box.scotch.io/
 [homestead]: https://laravel.com/docs/5.4/homestead

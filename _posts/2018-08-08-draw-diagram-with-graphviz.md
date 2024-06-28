@@ -3,13 +3,19 @@ title: "使用 graphviz 生成 UML 图形"
 layout: post
 category: [tutorial]
 tags: [graphviz]
-description: 如何使用 graphviz 生成各种图形. 通过文本和代码生成流程图等 UML 图形. 配置 sublime text 使用 graphviz
-excerpt: "程序员都喜欢操纵文本, 即使是为了生成一个流程图, 操纵文本也比拿鼠标拖拖拽拽的灵活快速. 有什么办法能让你使用自己喜欢的编辑器来生成各种图形呢. 我用过的有两个工具: plantUML 和 graphviz. 这篇文章介绍一下 graphviz."
+description: "如何使用 graphviz 生成各种图形. 通过文本和代码生成流程图等 UML 图
+形. 配置 sublime text 使用 graphviz"
+excerpt: "程序员都喜欢操纵文本, 即使是为了生成一个流程图, 操纵文本也比拿鼠标拖拖
+拽拽的灵活快速. 有什么办法能让你使用自己喜欢的编辑器来生成各种图形呢. 我用过的有
+两个工具: plantUML 和 graphviz. 这篇文章介绍一下 graphviz."
+
 ---
 
 _原文: <https://ncona.com/2020/06/create-diagrams-with-code-using-graphviz/>_
 
-程序员都喜欢操纵文本, 即使是为了生成一个流程图, 操纵文本也比拿鼠标拖拖拽拽的灵活快速. 有什么办法能让你使用自己喜欢的编辑器来生成各种图形呢. 我用过的有两个工具: plantUML 和 graphviz.
+程序员都喜欢操纵文本, 即使是为了生成一个流程图, 操纵文本也比拿鼠标拖拖拽拽的灵活
+快速. 有什么办法能让你使用自己喜欢的编辑器来生成各种图形呢. 我用过的有两个工具:
+plantUML 和 graphviz.
 
 这篇文章介绍一下 graphviz.
 
@@ -19,14 +25,16 @@ _原文: <https://ncona.com/2020/06/create-diagrams-with-code-using-graphviz/>_
 - Linux 可以使用 apt: `sudo apt install graphviz`
 - 其他平台可参见官方文档: <https://www.graphviz.org/>
 
-安装之后便可以使用 `dot` 命令从代码生成图形图片: `dot -Tpng input.gv -o output.png`.
+安装之后便可以使用 `dot` 命令从代码生成图形图片: `dot -Tpng input.gv -o
+output.png`.
 
-上面这条命令从 `input.gv` 生成 `output.png` 图片. graphviz 代码文件一般用 `.gv` 后缀.
-`-Tpng` 指示 `dot` 生成 png 格式图片.
+上面这条命令从 `input.gv` 生成 `output.png` 图片. graphviz 代码文件一般用 `.gv`
+后缀. `-Tpng` 指示 `dot` 生成 png 格式图片.
 
 # 可选: SublimeText 配置
 
-如果你使用 SublimeText, 可以新增一套 build 系统. 这样一来便可以直接在 SublimeText 中, 通过快捷键直接生成并预览图片了:
+如果你使用 SublimeText, 可以新增一套 build 系统. 这样一来便可以直接在
+SublimeText 中, 通过快捷键直接生成并预览图片了:
 
 1. 新建一个文件, 内容如下:
 
@@ -59,7 +67,8 @@ digraph MyGraph {
 }
 ```
 
-![graphviz-directed-graph](/assets/img/posts/202008/graphviz-directed-graph.png "graphviz-directed-graph")
+![graphviz-directed-graph](/assets/img/posts/202008/graphviz-directed-graph.png
+"graphviz-directed-graph")
 
 箭头可以是单向, 也可以是双向的:
 
@@ -70,7 +79,8 @@ digraph MyGraph {
 }
 ```
 
-![graphviz-bidirectional-arrow](/assets/img/posts/202008/graphviz-bidirectional-arrow.png "graphviz-bidirectional-arrow")
+![graphviz-bidirectional-arrow](/assets/img/posts/202008/graphviz-bidirectional-arrow.png
+"graphviz-bidirectional-arrow")
 
 # 形状 (Shape)
 
@@ -98,7 +108,8 @@ digraph MyGraph {
 }
 ```
 
-![graphviz-shapes](/assets/img/posts/202008/graphviz-shapes.png "[graphviz-shapes")
+![graphviz-shapes](/assets/img/posts/202008/graphviz-shapes.png
+"[graphviz-shapes")
 
 也可以给节点添加颜色和样式:
 
@@ -128,7 +139,8 @@ digraph MyGraph {
 }
 ```
 
-![graphviz-shapes-styles](/assets/img/posts/202008/graphviz-shapes-styles.png "graphviz-shapes-styles")
+![graphviz-shapes-styles](/assets/img/posts/202008/graphviz-shapes-styles.png
+"graphviz-shapes-styles")
 
 # 箭头 (Arrow)
 
@@ -145,7 +157,8 @@ digraph MyGraph {
 }
 ```
 
-![graphviz-arrows](/assets/img/posts/202008/graphviz-arrows.png "[graphviz-arrows")
+![graphviz-arrows](/assets/img/posts/202008/graphviz-arrows.png
+"[graphviz-arrows")
 
 以及给箭头线添加样式:
 
@@ -163,9 +176,11 @@ digraph MyGraph {
 }
 ```
 
-![graphviz-arrows-styles](/assets/img/posts/202008/graphviz-arrows-styles.png "graphviz-arrows-styles")
+![graphviz-arrows-styles](/assets/img/posts/202008/graphviz-arrows-styles.png
+"graphviz-arrows-styles")
 
-注意上面的代码中, 指定了多个颜色则会生成多条线. 如果想只为一条线指定多个颜色, 则必须为其中至少一个颜色指定权重比, 如第四行的:
+注意上面的代码中, 指定了多个颜色则会生成多条线. 如果想只为一条线指定多个颜色, 则
+必须为其中至少一个颜色指定权重比, 如第四行的:
 
 ```dot
 a -> e [dir=none,color="green:red;.3:blue"]
@@ -183,7 +198,8 @@ digraph MyGraph {
 }
 ```
 
-![graphviz-labels](/assets/img/posts/202008/graphviz-labels.png "[graphviz-labels")
+![graphviz-labels](/assets/img/posts/202008/graphviz-labels.png
+"[graphviz-labels")
 
 也可以为顶点添加标签:
 
@@ -195,7 +211,8 @@ digraph MyGraph {
 }
 ```
 
-![graphviz-vertix-label](/assets/img/posts/202008/graphviz-vertix-label.png "graphviz-vertix-label")
+![graphviz-vertix-label](/assets/img/posts/202008/graphviz-vertix-label.png
+"graphviz-vertix-label")
 
 可以为标签添加样式:
 
@@ -207,7 +224,8 @@ digraph MyGraph {
 }
 ```
 
-![graphviz-label-styles](/assets/img/posts/202008/graphviz-label-styles.png "graphviz-label-styles")
+![graphviz-label-styles](/assets/img/posts/202008/graphviz-label-styles.png
+"graphviz-label-styles")
 
 # 集群 (Cluster)
 
@@ -224,7 +242,8 @@ digraph MyGraph {
 }
 ```
 
-![graphviz-cluster](/assets/img/posts/202008/graphviz-cluster.png "[graphviz-cluster")
+![graphviz-cluster](/assets/img/posts/202008/graphviz-cluster.png
+"[graphviz-cluster")
 
 子图也可以嵌套:
 
@@ -244,11 +263,13 @@ digraph MyGraph {
 }
 ```
 
-![graphviz-clusters-nested](/assets/img/posts/202008/graphviz-clusters-nested.png "graphviz-clusters-nested")
+![graphviz-clusters-nested](/assets/img/posts/202008/graphviz-clusters-nested.png
+"graphviz-clusters-nested")
 
 # HTML
 
-使用 HTML 可以创建更复杂的节点, 并且可以拆分每个节点成多个部分, 每个部分都能独立的在图形中被引用:
+使用 HTML 可以创建更复杂的节点, 并且可以拆分每个节点成多个部分, 每个部分都能独立
+的在图形中被引用:
 
 ```dot
 digraph MyGraph {
@@ -311,7 +332,8 @@ digraph MyGraph {
 }
 ```
 
-![graphviz-html-style](/assets/img/posts/202008/graphviz-html-style.png "graphviz-html-style")
+![graphviz-html-style](/assets/img/posts/202008/graphviz-html-style.png
+"graphviz-html-style")
 
 # 图片 (Image)
 
@@ -345,7 +367,8 @@ digraph MyGraph {
 }
 ```
 
-![graphviz-images](/assets/img/posts/202008/graphviz-images.png "[graphviz-images")
+![graphviz-images](/assets/img/posts/202008/graphviz-images.png
+"[graphviz-images")
 
 # 等级 (Rank)
 
@@ -362,7 +385,8 @@ digraph MyGraph {
 }
 ```
 
-![graphviz-top-bottom](/assets/img/posts/202008/graphviz-top-bottom.png "graphviz-top-bottom")
+![graphviz-top-bottom](/assets/img/posts/202008/graphviz-top-bottom.png
+"graphviz-top-bottom")
 
 使用 `rankdir` 属性, 可以改成从左到右渲染:
 
@@ -377,7 +401,8 @@ digraph MyGraph {
 }
 ```
 
-![graphviz-left-right](/assets/img/posts/202008/graphviz-left-right.png "graphviz-left-right")
+![graphviz-left-right](/assets/img/posts/202008/graphviz-left-right.png
+"graphviz-left-right")
 
 Rank 还可以用来强制一个节点跟另一个节点在同一层:
 
@@ -394,11 +419,13 @@ digraph MyGraph {
 }
 ```
 
-![graphviz-rank-same](/assets/img/posts/202008/graphviz-rank-same.png "graphviz-rank-same")
+![graphviz-rank-same](/assets/img/posts/202008/graphviz-rank-same.png
+"graphviz-rank-same")
 
 上例中, 使用了 `rank=same` 让 c 和 b 对齐
 
-`rankdir` 属性是全局的, 所以不能在子图中改变它. 但是使用 `rank` 属性, 可以模拟一个从左到右渲染的子图:
+`rankdir` 属性是全局的, 所以不能在子图中改变它. 但是使用 `rank` 属性, 可以模拟一
+个从左到右渲染的子图:
 
 ```dot
 digraph MyGraph {
@@ -421,7 +448,8 @@ digraph MyGraph {
 }
 ```
 
-![graphviz-rank-cluster](/assets/img/posts/202008/graphviz-rank-cluster.png "graphviz-rank-cluster")
+![graphviz-rank-cluster](/assets/img/posts/202008/graphviz-rank-cluster.png
+"graphviz-rank-cluster")
 
 使用 `rank` 和 `constraint=false`, 可以创建更紧凑的图形:
 
@@ -451,7 +479,8 @@ digraph MyGraph {
 }
 ```
 
-![graphviz-constraint](/assets/img/posts/202008/graphviz-constraint.png "[graphviz-constraint")
+![graphviz-constraint](/assets/img/posts/202008/graphviz-constraint.png
+"[graphviz-constraint")
 
 Rank 也可以用来指定每个节点之间的距离:
 
@@ -465,17 +494,19 @@ digraph MyGraph {
 }
 ```
 
-![graphviz-ranksep](/assets/img/posts/202008/graphviz-ranksep.png "[graphviz-ranksep")
+![graphviz-ranksep](/assets/img/posts/202008/graphviz-ranksep.png
+"[graphviz-ranksep")
 
 默认的 `ranksep` 是 `.5`
 
 # 结语
 
-这篇文章只是简单介绍一下 graphviz 的我最常使用的用法和功能. 有关更多的诸如形状, 箭头语法, 可使用的颜色名, HTML 子集等, 可参见官方文档.
+这篇文章只是简单介绍一下 graphviz 的我最常使用的用法和功能. 有关更多的诸如形状,
+箭头语法, 可使用的颜色名, HTML 子集等, 可参见官方文档.
 
 一些相关的工具:
+
 - 在线可视化 graphviz 编辑器: <http://magjac.com/graphviz-visual-editor/>
 - 另一个在线工具: <http://www.webgraphviz.com>
-- 提供 graphviz 实时预览, 语法检测 SublimeText 包: <https://packagecontrol.io/packages/Graphvizer>
-
-下一篇文章介绍 PlantUML
+- 提供 graphviz 实时预览, 语法检测 SublimeText 包:
+  <https://packagecontrol.io/packages/Graphvizer>

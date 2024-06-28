@@ -1,5 +1,5 @@
 ---
-title: "使用 php printf() 和 sprintf() 格式化字符串"
+title: "PHP printf() 和 sprintf() 格式化字符串"
 layout: post
 category: translation
 tags: [php]

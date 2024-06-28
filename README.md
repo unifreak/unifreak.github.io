@@ -1,8 +1,10 @@
-# My Blog...
+# My Blog
 
-...On IT tech, personal thoughts and so on...
+Mainly my personal notes made when learning new tech, also some thoughts on
+tech, reviews of books, brains dumps...
 
-Built on github pages, powered by jekyll. Served at <https://unifreak.github.io>.
+Built on github pages, powered by Jekyll.
 
-If you are insterested in the blog's jekyll theme, see [jekyll-theme-textalic](https://github.com/UniFreak/jekyll-theme-textalic).
+If you are insterested in the blog's Jekyll theme, see
+[jekyll-theme-textalic](https://github.com/UniFreak/jekyll-theme-textalic).
 
