@@ -28,7 +28,7 @@ markdown: true
       </p>
     </header>
 
-    {{ content }}
+    {{ content | replace: "./img/", "/assets/img/" }}
   </div>
 
   <div id="markdown-outline" class="col-lg-3">
