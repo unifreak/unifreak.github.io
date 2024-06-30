@@ -32,6 +32,8 @@ clear when looking at an identifier whether it is part of the public API. After
 using Go for a while, it feels burdensome when going back to other languages
 that require looking up the declaration to discover this information.
 
+> K8s, Docker, Terraform, Prometheus are all written in Go.
+
 ## Go and C
 
 Go makes many small changes to C semantics, mostly in the service of robustness.
@@ -47,8 +49,8 @@ These include:
 - it is legal (encouraged even) to take the address of a stack variable
 - and many more
 
-There are some much bigger changes too, stepping far from the traditional C, C++,
-and even Java models. These include linguistic support for:
+There are some much bigger changes too, stepping far from the traditional C,
+C++, and even Java models. These include linguistic support for:
 
 - concurrency
 - garbage collection
@@ -78,12 +80,12 @@ expressions.
 ## CSP
 
 CSP was chosen partly due to familiarity (one of us had worked on predecessor
-languages that built on CSP's ideas), but also because CSP has the property
-that it is easy to add to a procedural programming model without profound
-changes to that model. That is, given a C-like language, CSP can be added to
-the language in a mostly orthogonal way, providing extra expressive power
-without constraining the language's other uses. In short, the rest of the
-language can remain "ordinary".
+languages that built on CSP's ideas), but also because CSP has the property that
+it is easy to add to a procedural programming model without profound changes to
+that model. That is, given a C-like language, CSP can be added to the language
+in a mostly orthogonal way, providing extra expressive power without
+constraining the language's other uses. In short, the rest of the language can
+remain "ordinary".
 
 There is one important caveat: **Go is not purely memory safe in the presence of
 concurrency**. Sharing is legal and passing a pointer over a channel is
@@ -101,8 +103,7 @@ step back.
 
 Interface composition is a different style of programming, and people accustomed
 to type hierarchies need to adjust their thinking to do it well, but the result
-is an adaptability of design that is harder to achieve through type
-hierarchies.
+is an adaptability of design that is harder to achieve through type hierarchies.
 
 **The only way to have dynamically dispatched methods is through an interface.
 Methods on a struct or any other concrete type are always resolved statically.**
@@ -121,31 +122,30 @@ Note too that the elimination of the type hierarchy also eliminates a form of
 dependency hierarchy. Interface satisfaction allows the program to grow
 organically without predetermined contracts. And it is a linear form of growth;
 a change to an interface affects only the immediate clients of that interface;
-there is no subtree to update. The lack of implements declarations disturbs
-some people but it enables programs to grow naturally, gracefully, and safely.
+there is no subtree to update. The lack of implements declarations disturbs some
+people but it enables programs to grow naturally, gracefully, and safely.
 
 ## Error Handling
 
 There is no control structure associated with error handling. It was a
 deliberate choice not to incorporate exceptions in Go. Here is why:
 
-1. First, there is nothing truly exceptional about errors in computer programs. For
-instance, the inability to open a file is a common issue that does not deserve
-special linguistic constructs; if and return are fine.
+1. First, there is nothing truly exceptional about errors in computer programs.
+For instance, the inability to open a file is a common issue that does not
+deserve special linguistic constructs; if and return are fine.
 
     f, err := os.Open(fileName) if err != nil { return err }
 
 2. Also, if errors use special control structures, error handling distorts the
 control flow for a program that handles errors. The Java-like style of
 try-catch-finally blocks interlaces multiple overlapping flows of control that
-interact in complex ways. Although in contrast Go makes it more verbose to
-check errors, the explicit design keeps the flow of control
-straightforward—literally.
+interact in complex ways. Although in contrast Go makes it more verbose to check
+errors, the explicit design keeps the flow of control straightforward—literally.
 
 Explicit error checking forces the programmer to think about errors—and deal
 with them—when they arise. Exceptions make it too easy to ignore them rather
-than handle them, passing the buck up the call stack until it is too late to
-fix the problem or diagnose it well.
+than handle them, passing the buck up the call stack until it is too late to fix
+the problem or diagnose it well.
 
 ```go
 // most compact, but may be used only within a function, not for package-level
@@ -206,15 +206,16 @@ Predeclared names for built-in constant, types, and functions:
 Go programs lean toward short names, espacially for local variables with small
 scopes.
 
-Go use "camel case", acronyms always in the same case: HTMLescape, NOT HtmlEscape.
+Go use "camel case", acronyms always in the same case: HTMLescape, NOT
+HtmlEscape.
 
 # Package
 
 Every package is identified by a unique string called its "import path".
 
 Each package has a package name, which is the short name that appears in its
-package declaration. By convention, a package's name matches the last segment
-of its import path.
+package declaration. By convention, a package's name matches the last segment of
+its import path.
 
 Package `main` is special: It defines a standalone executable program, not a
 library.
@@ -260,6 +261,8 @@ package. The naming rules decouple packages, providing scaling, clarity, and
 robustness.
 
 ## Package Initialization and Init Function
+
+![](./img/go/init_seq.png)
 
 Pacakge initialization begins by initializing package-level variables in the
 order in which they are declared, except that dependencies are resolved first:
@@ -316,7 +319,7 @@ dependencies first.
 
 Go's types fall into four categories:
 
-Basic Types. See #Basic_Types.
+Basic Types. See [[#Basic Types]].
 
 Aggregate Types.
 
@@ -352,13 +355,13 @@ In Go, the sign of the remainder is always the same as **the sign of the
 dividend**, so -5%3 and -5%-3 are both -2.
 
 The behavior of / depends on whether its operands are integers, so 5.0/4.0 is
-1.25, but 5/4 is 1 integer division truncates the result **toward zero**.
-When overflow, the high-order bits that do not fit are **silently discarded**.
+1.25, but 5/4 is 1 integer division truncates the result **toward zero**. When
+overflow, the high-order bits that do not fit are **silently discarded**.
 
 Left shifts fill the vacated bits with zeros, as do right shifts of unsigned
-numbers, but right shifts of signed numbers fill the vacated bits with copies
-of the sign bit. For this reason, it is important to **use unsigned arithmetic
-when you're treating an integer as a bit pattern**.
+numbers, but right shifts of signed numbers fill the vacated bits with copies of
+the sign bit. For this reason, it is important to **use unsigned arithmetic when
+you're treating an integer as a bit pattern**.
 
 Unary operators.
 
@@ -404,10 +407,11 @@ for i := len(medals) - 1; i >= 0; i-- {
 ```
 
 In general, an explicit conversion is required to convert a value from one type
-to another, and binary operators for arithmetic and logic (**except shifts**) must
-have operands of the same type.
+to another, and binary operators for arithmetic and logic (**except shifts**)
+must have operands of the same type.
 
-Float to integer conversion discards any fractional part, trucating **toward zero**.
+Float to integer conversion discards any fractional part, trucating **toward
+zero**.
 
 ```go
 f := 3.141
@@ -417,8 +421,8 @@ f = 1.99
 fmt.Println(int(f)) // "1"
 ```
 
-You should **avoid conversions in which the operand is out of range for the target
-type, the behavior depends on the implementation**.
+You should **avoid conversions in which the operand is out of range for the
+target type, the behavior depends on the implementation**.
 
 # Basic Types
 
@@ -458,8 +462,8 @@ a Go program with a C library or an operating system.
 Regardless of their size, int, uint and uintptr are **different types** from
 their explicitly sized siblings.
 
-When you need an integer value you should use int unless you have a specific reason
-to use a sized or unsigned integer type.
+When you need an integer value you should use int unless you have a specific
+reason to use a sized or unsigned integer type.
 
 ## Float
 
@@ -467,17 +471,17 @@ to use a sized or unsigned integer type.
 always meant to be hexadecimal and the exponent is always meant to be decimal.
 So `1.3DEp42` represents `1.3DEₕ × 2⁴²` (42 is decimal).
 
-A float32 provides *approximately* **six decimal** digits of precision, whereas a
-float64 provides about **15 digits**; float64 should be preferred for most purpose
-because float32 computations accumulate error rapidly, and the smallest
+A float32 provides *approximately* **six decimal** digits of precision, whereas
+a float64 provides about **15 digits**; float64 should be preferred for most
+purpose because float32 computations accumulate error rapidly, and the smallest
 positive integer that cannot be exactly represented as a float32 is not large:
 
 Quoting from Poe:
 
 > In the IEEE 754 single-precision format (float32), 32 bits are used to store
-  the floating-point number. The format consists of three components: a sign
-  bit for the sign of the number, an 8-bit exponent field, and a 23-bit
-  significand (also known as the mantissa) field.
+  the floating-point number. The format consists of three components: a sign bit
+  for the sign of the number, an 8-bit exponent field, and a 23-bit significand
+  (also known as the mantissa) field.
 
 > The 23-bit significand field can represent 2^23 (or approximately 8.4 million)
   distinct binary fractions. When converted to decimal, this corresponds to
@@ -487,9 +491,9 @@ Quoting from Poe:
   representations, leading to rounding errors.
 
 > In general, a rough guideline is that each additional binary bit represents
-  approximately 3.3 decimal digits of precision. With 23 bits in the
-  significand field, we can expect around 7 significant decimal digits of
-  precision (23 / 3.3 ≈ 7).
+  approximately 3.3 decimal digits of precision. With 23 bits in the significand
+  field, we can expect around 7 significant decimal digits of precision (23 /
+  3.3 ≈ 7).
 
 > However, it's important to note that the precision of floating-point numbers
   can vary depending on the specific number being represented. Some numbers can
@@ -535,13 +539,19 @@ short-circuit behavior, making it safe to write expressions like:
 
 ## Strings
 
-A string is an **IMMUTABLE** sequence of bytes: the byte sequence contained in a
+> String's zero value is "", there is no such thing as "nil string".
+
+A string is an **immutable** sequence of bytes: the byte sequence contained in a
 string value can never be changed.
 
-len returns the number of **bytes** (not runes) in a string. The i-th *byte*
+len returns the number of **bytes (not runes)** in a string. The i-th *byte*
 (NOT character) of a string is not necessarily the i-th character of a string.
 
 Strings are length-delimited NOT NUL-terminated.
+
+> Because they are read-only, there is no need for a capacity (you can’t grow
+  them), but otherwise for most purposes you can treat them just like read-only
+  slices of bytes.
 
 ### Strings and Byte Slice
 
@@ -568,9 +578,9 @@ backslash `\` can be used to insert arbitrary byte values into the string using
 hexadecimal or octal. A hexadecimal escape is written \xhh, with exactly two
 hexadecimal digits h. An octal escape is written \ooo with exactly three octal
 digits o not exceeding \377 (= decimal 255). Both denote a single byte with the
-specified value. Unicode escapes have two forms, `\uhhhh` for a 16-bit value
-and `\Uhhhhhhhh` for 32-bit value, where each `h` is a hexadecimal digit.
-(note JSON's \Uhhhh numeric escapes denote UTF-16 codes, not runes)
+specified value. Unicode escapes have two forms, `\uhhhh` for a 16-bit value and
+`\Uhhhhhhhh` for 32-bit value, where each `h` is a hexadecimal digit. (note
+JSON's \Uhhhh numeric escapes denote UTF-16 codes, not runes)
 
 One set of escape handles ASCII control code:
 
@@ -607,6 +617,7 @@ fmt.Println(s[7:])      // "world"
 fmt.Println(s[:])       // "hello, world"
 
 // Concatenating with +
+//
 fmt.Println("goodbye" + s[5:])  // "goodby, world"
 
 // Since strings are immutable, try to modify a string's data in place are not
@@ -687,18 +698,18 @@ Composite types -- array, struct, pointer, function, interface, slice, map, and
 channel types -- may be constructed using type literals.
 
 Array and structs are "aggregate types"; their values are *concatenations* of
-other values in memory. Array are "homogeneous" whereas structs
-are "heterogeneous". Both arrays and structs are *fixed size*. In contrast,
-slices and maps are dynamic data structures that grow as values are added.
+other values in memory. Array are "homogeneous" whereas structs are
+"heterogeneous". Both arrays and structs are *fixed size*. In contrast, slices
+and maps are dynamic data structures that grow as values are added.
 
 ## Arrays
 
 **Length is part of its type**, `[4]int` and `[5]int` is distinct, incompatible
 types. Length is fixed, arrays cannot be resized.
 
-Go's arrays **are values**. An array variable denotes the entire array; it is not a
-pointer to the first array like in C. This means when you assign or pass around
-an array value you **will MAKE A COPY** of its contents.
+Go's arrays **are values**. An array variable denotes the entire array; it is
+not a pointer to the first array like in C. This means when you assign or pass
+around an array value you **will MAKE A COPY** of its contents.
 
 One way to think about arrays is as a sort of struct but with indexed rather
 than named fields.
@@ -731,6 +742,8 @@ r := [...]int{99: -1}
 a[0] = "Hello"
 ```
 
+**For pointer to array type, `a[x]` is shorthand for `(*a)[x]`**.
+
 Passing large array as function argument can be inefficient, and inherently
 inflexible because of their fixed size. For these reason, other than special
 cases like SHA256's fixed-size hash, arrays are seldom used as function
@@ -738,20 +751,29 @@ parameters.
 
 ## Slices
 
-https://go.dev/blog/slices-intro
+See:
+
+* https://go.dev/blog/slices-intro.
+* https://go.dev/blog/slices.
 
 Slice is a dynamically-sized, flexible view into the elements of an array. A
-slice is a lightweight data structure that gives access to a subsequence
-(or perhaps all) of the elements of an array, which is known as the
-slice's "underlying array".
+slice is a lightweight data structure that gives access to a subsequence (or
+perhaps all) of the elements of an array, which is known as the slice's
+"underlying array".
 
-A slice is a descriptor of an array segment.
+A slice is a descriptor ("slice header") of an array segment, a slice header has
+**three components**: a pointer, a length, and a capacity:
 
-A slice has **three components**: a pointer, a length, and a capacity. The
-pointer points to the first element of the the array that is reachable through
-the slice, which is not necessarily the array's first element. The length is
-the number of slice elements; it can't exceed the capacity, which is usually
-the number of elements between the start of the slice and the end of the
+    type SliceHeader struct {
+        Data uintptr
+        Len  int
+        Cap  int
+    }
+
+The pointer points to the first element of the the array that is reachable
+through the slice, which is not necessarily the array's first element. The
+length is the number of slice elements; it can't exceed the capacity, which is
+usually the number of elements between the start of the slice and the end of the
 underlying array.
 
 Multiple slices can share the same underlying array and may refer to overlapping
@@ -762,26 +784,26 @@ underlying array. Other than comparing equal to nil, a nil slice behaves like
 any other zero length slice. Go functions should treat all zero-length slices
 the same way, whether nil or non-nil.
 
+Creating Slices
+
+A slice type is written `[]T`, where the elements have type T; it looks like
+array type without a size.
+
+The slice operator `s[i:j]`, where 0<=i<=j<=caps(s), creates a new slice that
+refers to elements i through j-1 of the sequence s, which may be:
+
+* an array variable,
+* a pointer to an array,
+* or another slice.
+
+The resulting slice of `s[i:j]` contains j-i elements.
+
+The slice operator `s[i:j:m]` cause resulting slice's **cap set to m-i**.
+
+All indexing in Go uses half-open intervals that include the first index but
+exclude the last.
+
 ```go
-// Creating Slices.
-
-// A slice type is written []T, where the elements have type T;
-// it looks like array type without a size.
-//
-// The slice operator s[i:j], where 0<=i<=j<=caps(s), creates a new slice that
-// refers to elements i through j-1 of the sequence s, which may be:
-//
-// * an array variable,
-// * a pointer to an array,
-// * or another slice.
-//
-// The slice operator s[i:j:m] cause resulting slice's cap set to m-i
-//
-// All indexing in Go uses half-open intervals that include the first index but
-// exclude the last.
-//
-// s[i:j] contains j-i elements.
-
 // 1. From Array
 
 months := [...]string{1: "Jan", /* ... */, 12: "Dec"}
@@ -815,9 +837,9 @@ e := []struct {
 
 // 2-D slice
 f := [][]string{
-    // type declaration []string is *optional for primitive types* like string.
-    // but it's good idea to always specify type declaration when you are
-    // dealing with more complex types.
+	// type declaration []string is *optional for primitive types* like string.
+	// but it's good idea to always specify type declaration when you are
+	// dealing with more complex types.
     []string{"_", "_", "_"},
     []string{"_", "_", "_"},
     []string{"_", "_", "_"},
@@ -851,16 +873,16 @@ cap(a)
 // copy the contents of the original slice into it.
 //
 // copy() supports copying between slices of different lengths, it will copy
-// only up to the smaller number of elements. In addition, copy can handle
+// only *up to the smaller* number of elements. In addition, copy can handle
 // source and destination slices that share the same underlying array, handling
 // overlapping slices correctly.
-t := make([]byte, len(s), (cap(s)+1)*2)
-copy(t, s) // copy(dest, source)
+t := make([]byte, len(s), (cap(s)+1)*2) // +1 in case cap(s) == 0
+copy(t, s)                              // copy(dest, source)
 s = t
 
 // append() will grow a slice if a greater capacity is needed.
 //
-// If underlying array is too small, append WILL REALLOCATE a new underlying
+// If underlying array is too small, append will *reallocate* a new underlying
 // array, the returned slice will point to the newly allocated array.
 //
 // Hence we must not assume that operations on elements of the old slice will
@@ -874,14 +896,7 @@ b := []string{"George", "Ringo"}
 a = append(a, b...) // equivalent to "append(a, b[0], b[1])"
 ```
 
-Since a slice contains a pointer to an element of an array, passing a slice to a
-function permits the function to modify the underlying array elements. In other
-words, copying a slice creates an *alias* for the underlying array.
-
-It does not store any data, it just describes a section of an underlying array.
-Changing the elements of a slice modifies the corresponding elements of its
-underlying array. Other slices that share the same underlying array will see
-those changes.
+Modifying Slice
 
 ```go
 names := [4]string{
@@ -907,29 +922,87 @@ fmt.Println(names)
 // [John XXX George Ringo]
 ```
 
+### Passing Slices To Functions
+
+Since a slice contains a pointer to an element of an array, passing a slice to a
+function permits the function to modify the underlying array elements. In other
+words, copying a slice creates an *alias* for the underlying array, other slices
+that share the same underlying array will see those changes.
+
+```go
+func AddOneToEachElement(slice []byte) {
+    for i := range slice {
+        slice[i]++
+    }
+}
+
+func main() {
+    slice := make([]byte, 10)
+    for i := 0; i < len(slice); i++ {
+        slice[i] = byte(i)
+    }
+    fmt.Println("before", slice)    // [0 1 2 3 4 5 6 7 8 9]
+    AddOneToEachElement(slice)
+    fmt.Println("after", slice)     // [1 2 3 4 5 6 7 8 9 10]
+}
+```
+
+But it’s important to understand that even though a slice contains a pointer, it
+is *itself a value*. Under the covers, it is a struct value holding a pointer
+and a length. It is not a pointer to a struct. So modification to the header's
+len and cap won't been seen by others.
+
+> differentiate between modification to contents (elements) and slice headers
+  (len and cap).
+
+```go
+func SubtractOneFromLength(slice []byte) []byte {
+    slice = slice[0 : len(slice)-1]
+    return slice
+}
+
+func main() {
+    slice := make([]byte, 10)
+    fmt.Println("Before: len(slice) =", len(slice))         // 10
+    newSlice := SubtractOneFromLength(slice)
+    fmt.Println("After:  len(slice) =", len(slice))         // still 10
+    fmt.Println("After:  len(newSlice) =", len(newSlice))   // 9
+}
+```
+
+Another way to have a function modify the slice header is to pass a pointer to
+it. But it is clumsy to dealing with the extra level of indirection(a temporary
+variable helps), but there is one common case where you see pointers to slices.
+It is **idiomatic to use a pointer receiver for a method that modifies a
+slice**.
+
+### comparability
+
 Slices are **not comparable. The only legal slice comparison is against nil**.
 The standard library provides "bytes.Equal" function for comparing two
 `[]bytes`, but for other types of slice, we must do the comparison ourselves.
+(Now, there is slices package, which has a Equal() function).
 
 Why we don't allow slice comparison?
 
 There are two reasons why deep equivalence is problematic for slice:
 
 - First, unlike array elements, the elements of a slice are indirect, making it
-  **possible for a slice to contain itself**. Although there are ways to deal with
-  such cases, none is simple, efficient, and most importantly, obvious.
+  **possible for a slice to contain itself**. Although there are ways to deal
+  with such cases, none is simple, efficient, and most importantly, obvious.
 
 - Second, because slice elements are indirect, **a fixed slice value may contain
-  different elements at different times** as the contents of the underlying array
-  are modified. Because a hash table such as Go's map type makes only shallow
-  copies of its keys, it requires that equality for each key remain the same
-  throughout the lifetime of the hash table. **Deep equivalence would thus make
-  slices unsuitable for use as map keys**. For reference types like pointers and
-  channels, the == operator tests *reference identify*, that is, whether the
-  two entities refer to the same thing. An analogous "shallow" equality test
-  for slice could be useful, and it would solve the problem with maps, but the
-  inconsistent treatment of slices and arrays by the == operator would be
-  confusing. The safest choice is to disallow slice comparisons altogether.
+  different elements at different times** as the contents of the underlying
+  array are modified. Because a hash table such as Go's map type makes only
+  shallow copies of its keys, it requires that equality for each key remain the
+  same throughout the lifetime of the hash table. **Deep equivalence would thus
+  make slices unsuitable for use as map keys**. For reference types like
+  pointers and channels, the == operator tests *reference identify*, that is,
+  whether the two entities refer to the same thing. An analogous "shallow"
+  equality test for slice could be useful, and it would solve the problem with
+  maps, but the inconsistent treatment of slices and arrays by the == operator
+  would be confusing. The safest choice is to disallow slice comparisons
+  altogether.
 
 ### Trap: Re-slicing Cause Big Data Unreclaimable
 
@@ -938,6 +1011,8 @@ See <https://stackoverflow.com/questions/55045402/>
 ```go
 var digitRegexp = regexp.MustCompile("[0-9]+")
 
+// FindDigits loads a file into memory and searches it for the first group of
+// consecutive numeric digits, returning them as a new slice.
 func FindDigits(filename string) []byte {
     b, _ := ioutil.ReadFile(filename)
     return digitRegexp.Find(b)
@@ -948,12 +1023,12 @@ In the above code, the returned `[]byte` points into an array containing the
 entire file, Since the slice reference the original array, as long as the slice
 is kept around the garbage collector can't release the array.
 
-Workaround: copy the interesting data to a new slice before return. like
+Workaround: copy the interesting data to a new slice before return.
 
 ```go
 func FindDigits(filename string) []byte {
-    //...
-    return append([]byte{}, b...)
+	//...
+	return append([]byte{}, b...)
 }
 ```
 
@@ -969,8 +1044,8 @@ and a map type is wirtten `map[K][V]`, where K and V are the types of its keys
 and values.
 
 **Key can be of any type for which the equality operator is defined, such as
-integers, floating point and complex numbers, strings, pointers, interfaces
-(as long as the dynamic type supports equality), structs and arrays. Though
+integers, floating point and complex numbers, strings, pointers, interfaces (as
+long as the dynamic type supports equality), structs and arrays. Though
 floating-point numbers are comparable, it's a bad idea to compare floats for
 equality.**
 
@@ -984,6 +1059,11 @@ m[foo(1)] = 1
 m[bar(1)] = 1
 ```
 
+> In some cases, if you know how many items you need to put in map, it's better
+  to specify size at the moment of creation, like `make(map[int]int, 10000)`. Go
+  will automatically create suitable number of buckets, so expenses of grow
+  process could be avoided.
+
 The value type of a map can itself be a composite type, such as a map or slice.
 
 **Slices cannot be used as map keys**, because equality is not defined on them.
@@ -995,17 +1075,13 @@ When a map is passed to a function, the function receives a "copy of the
 reference", so any changes makes to the underlying data structure is visible
 through the caller's map reference too.
 
-```go
+```go 
 // Creating Maps.
 
-// 1. With make
-ages := make(map[string]int)
+// 1. With make ages := make(map[string]int)
 
-// 2. With map literals
-ages := map[string]int{
-    "alice": 31,
-    "charlie": 34, // NOTE the tailing comma is required
-}
+// 2. With map literals ages := map[string]int{ "alice": 31, "charlie": 34, //
+NOTE the tailing comma is required }
 
 // Lookup Maps.
 
@@ -1105,25 +1181,15 @@ modify its argument.
 If all the fields of a struct are comparable, the struct itself is comparable.
 Comparable struct types may be used as the key type of a map.
 
-```go
-// Declaration.
+```go // Declaration.
 
-// NOTE: Field order is significant to type identity.
-type Employee struct {
-    // the name of a struct field is exported if it begins with a capital letter.
-    // A struct type may contain a mixture of exported and unexported fields.
-    //
-    // NOTE: a struct can have both exported field "Name" and unexported
-    // field "name"
-    ID              int
-    // consecutive fields of the same type may be combined.
-    // typically we only combine the declarations of related fields.
-    Name, Address   string
-    DoB             time.Time
-    Position        string
-    Salary          int
-    ManagerID       int
-}
+// NOTE: Field order is significant to type identity. type Employee struct { //
+the name of a struct field is exported if it begins with a capital letter. // A
+struct type may contain a mixture of exported and unexported fields. // // NOTE:
+a struct can have both exported field "Name" and unexported // field "name" ID
+int // consecutive fields of the same type may be combined. // typically we only
+combine the declarations of related fields. Name, Address string DoB time.Time
+Position string Salary int ManagerID int }
 
 var dilbert Employee
 
@@ -1184,26 +1250,26 @@ employeeOfTheMonth.Position += " (proactive team player)"
 // Anonymous Struct.
 
 var sample struct {
-    field string
-    a, b int
+	field string
+	a, b int
 }
 sample.field = "hello"
 sample.a = 9
 
 // or
 sample := struct {
-    field string
-    a, b int
+	field string
+	a, b int
 }{
-    "hello",
-    1, 2,  // comma is required!
+	"hello",
+	1, 2,  // comma is required!
 }
 ```
 
-### Struct Embedding
+### Struct Embedding, Anonymous Field
 
 Go's unusual *struct embedding* mechanism lets us use one named struct type as
-an "anonymous filed" of another struct type, providing a convenient syntactic
+an "anonymous field" of another struct type, providing a convenient syntactic
 shortcut so that a simple dot expression like "x.f" can stand for a chain of
 fields like "x.d.e.f".
 
@@ -1263,16 +1329,16 @@ w = Wheel{
     },
     Spokes: 20,
 }
-
-// Because anonymous fields do have implicit names, you can't have two anonymous
-// fields of the same type since their names would conflict. And because the
-// name of the field is implicitly determined by its type, so too is the
-// visibility of the field.
-
-// Had it been unexported (point and circle). we could still use the shorthand
-// form, but the explicit long form would be forbidden outside the declaring
-// package, because circle and point would be inaccessible.
 ```
+
+Because anonymous fields do have implicit names, you can't have two anonymous
+fields of the same type since their names would conflict. And because the name
+of the field is implicitly determined by its type, so too is the visibility of
+the field.
+
+Had it been unexported (point and circle). we could still use the shorthand
+form, but the explicit long form would be forbidden outside the declaring
+package, because circle and point would be inaccessible.
 
 ## JSON
 
@@ -1282,7 +1348,7 @@ called *unmarshaling*. Only exported fields are marshaled.
 A *field tag* is a string of metadata associated at compile time with the field
 of a struct. A field tag may be any literal string, but it is conventionally
 interpreted as a **space-separated list of key:"value" pairs**. The json key
-controls the behavior of the encoding/json package, and other "encoding/..."
+controls the behavior of the encoding/json package, and other encoding/...
 packages follow this convention.
 
 The tag "omitempty" indicates that no JSON output should be produced if the
@@ -1291,14 +1357,17 @@ field has the zero value or is otherwise empty.
 ## Text and HTML Templates
 
 A *template* is a string of file containing one or more portions enclosed in
-double braces, `{{...}}`, called *actions*. Each action contains an expression in
+double braces, {{...}}, called *actions*. Each action contains an expression in
 the template language, a simple but powerful notion for printing values,
 selecting struct fields, calling functions and methods, expressing control flow
 such as if-else statements and range loops, and instantiating other templates.
 
-"html/template" package use the same API and expression language as "text/template"
-but adds features for automatic and context-appropriate escaping of strings
-appearing within HTML, Javascript, CSS, or URLs.
+"html/template" package use the same API and expression language as
+"text/template" but adds features for automatic and context-appropriate escaping
+of strings appearing within HTML, Javascript, CSS, or URLs.
+
+See [[go-the-language]]
+See [[file:@go.ref.pkg.md::text/template]]
 
 # Declaration
 
@@ -1380,8 +1449,8 @@ Another way to create a variable is to use the built-in function new.
     new(T)
 
 creates an "unnamed variable" of type T, initializes it to the zero value of T,
-and returns its address, which is a value of type `*T`. Each call to new
-returns a distinct variable with a *unique address*:
+and returns its address, which is a value of type `*T`. Each call to new returns
+a distinct variable with a *unique address*:
 
     p := new(int)   // p, of type *int, points to an unnamed int variable
     q := new(int)
@@ -1408,10 +1477,10 @@ Even though both have the same underlying type, they are **not the same type**,
 so they cannot be compared or combined in arithmetic expression.
 
 The "underlying type" of a named type determines its structure and
-representation, and also the set of intrinsic operations it supports.
-Comparison operators like == and < can also be used to compare a value of a
-named type to another of the same type, or to a value of the underlying type.
-But two values of different named types cannot be compared directly:
+representation, and also the set of intrinsic operations it supports. Comparison
+operators like == and < can also be used to compare a value of a named type to
+another of the same type, or to a value of the underlying type. But two values
+of different named types cannot be compared directly:
 
 ```go
 type Celsius float64
@@ -1443,8 +1512,8 @@ is assignable to T, a conversion is permitted but is usually redundant.
 Conversions are also allowed between numeric types, and between string and some
 slice types. These conversions may change the representation of the value. For
 example, converting a floating-point number to an integer discards any
-fractional part, and converting a string to a `[]byte` slice allocates a copy
-of the string data. In any case, a **conversion never fails at run time**.
+fractional part, and converting a string to a `[]byte` slice allocates a copy of
+the string data. In any case, a **conversion never fails at run time**.
 
 See also #Type_Assertion, #Type_Switch.
 
@@ -1497,7 +1566,8 @@ global after f has returned, despite being declared as a local variable; we say
 unreachable and can be recycled. Since `*y` does not escape from g, it's safe
 for the compiler to allocate `*y` on the stack, even though it was allocated
 with new. It's good to keep in mind during performance optimization the notion
-of escaping, since each variable that escapes requires an *extra memory allocation*.
+of escaping, since each variable that escapes requires an *extra memory
+allocation*.
 
 # Scope
 
@@ -1505,21 +1575,21 @@ Go is lexically scoped using blocks. See go.ref.spec#scope.
 
 Don't confuse scope with lifetime. There is a lexical block for the entire
 source code, called the "universe block"; Built-in types, functions, and
-constants are in the universe block and can be referred to throughout the
-entire program. Declaration outside any function, that is, at **"package
-level"**, can be referred to from any file in the same pacakge. Imported
-packages are declared at the **"file level"**, so they can be referred to from
-the same file, but not from another file in the same package without another
-import. Many declarations are **"local"**, so they can be referred to only from
-within the same function or perhaps just a part of it.
+constants are in the universe block and can be referred to throughout the entire
+program. Declaration outside any function, that is, at **"package level"**, can
+be referred to from any file in the same pacakge. Imported packages are declared
+at the **"file level"**, so they can be referred to from the same file, but not
+from another file in the same package without another import. Many declarations
+are **"local"**, so they can be referred to only from within the same function
+or perhaps just a part of it.
 
 When compiler encounters a reference to a name, it looks for a declaration,
 *starting with the innermost enclosing lexical block and workin up to the
 universe block*. The inner declaration is said to "shadow or hide" the outer
 one, making it inaccessible.
 
-Also NOTE: the scope of *function parameters and return values is the same as the
-function body*, even though they appear lexically outside the braces that
+Also NOTE: the scope of *function parameters and return values is the same as
+the function body*, even though they appear lexically outside the braces that
 enclose the body.
 
 Short variable declarations demand an awareness of scope:
@@ -1536,7 +1606,47 @@ func init() {
 
 ```
 
-# Trap: Iteration Variable Capture
+# Trap: Iteration Variable Share (by reference) or Capture (by Closure)
+
+Quoting spec:
+
+> Variables declared by the init statement are re-used in each iteration.
+
+In Go, the **loop iterator variable is a single variable that takes different
+values in each loop iteration**. This is very efficient, But tends to leading to
+two forms of common programming traps in Go:
+
+* Using *referenct to* loop iterator variable:
+
+```go
+arr := []int{1, 2, 3}
+newArr := []*int{}
+for _, v := range arr {
+    // In each iteration we append the address of v to the out slice, but
+    // since it is the same variable, we append the same address which
+    // eventually contains the last value that was assigned to v.
+    newArr = append(newArr, &v)
+}
+for _, v := range newArr {
+    fmt.Println(*v) // "3 3 3", NOT EXPECTED!
+}
+```
+
+A more subtle example is the as following, the loop variable can be an array and
+the **reference can be a slice** (instead of a obvious pointer as in the last
+example):
+
+{% raw %}
+```go
+var out [][]int
+for _, v := range [][1]int{{1}, {2}, {3}} {
+    out = append(out, v[:])
+}
+fmt.Println("Values:", out) // "[[3] [3] [3]]"
+```
+{% endraw %}
+
+* Same iterator variable captured by closure:
 
 ```go
 var rmdirs []func()
@@ -1550,7 +1660,7 @@ for _, dir := range tempDirs() {
 
 In this code, the for loop introduces a new lexical block in which the variable
 dir is declared. All function values created by this loop "capture" and share
-the same variable -- an addressable storage location, not its value at the
+the same variable -- an **addressable storage location, not its value** at the
 particular moment. The value of dir is updated in successive iterations, so by
 the time the cleanup functions are called, the dir variable has been updated
 several times by the now-completed for loop. Thus dir holds the value from the
@@ -1571,9 +1681,9 @@ for i := 0; i < len(dirs); i++ {
 This code suffers from the same problem due to unintended capture of the index
 variable i.
 
-This trap is most often encountered when using the `go` statement or with `defer`
-since both may delay the execution of a function value until after the loop has
-finished. But the problem is not inherent to go or defer.
+This trap is most often encountered when using the `go` statement or with
+`defer` since both may delay the execution of a function value until after the
+loop has finished. But the problem is not inherent to go or defer.
 
 Workaround:
 
@@ -1593,8 +1703,8 @@ It's easier to read in large function and nested loops.
 ```go
 arr := [...]int{1, 2, 3}
 for i := 0; i < len(arr); i++ {
-    item := arr[i]
-    fmt.Println(item)
+	item := arr[i]
+	fmt.Println(item)
 }
 ```
 
@@ -1607,7 +1717,8 @@ The value held by a variable is updated by an assignment statement.
     person.name = "bob"
     count[x] = count[x] * scale
 
-Numeric variables can also be incremented and decremented by ++ and -- statements.
+Numeric variables can also be incremented and decremented by ++ and --
+statements.
 
     v := 1
     v++     // same as v = v + 1
@@ -1615,8 +1726,8 @@ Numeric variables can also be incremented and decremented by ++ and -- statement
 
 "Tuple assignment" allows several variables to be assigned at once. All of the
 right-hand side expression are evaluated before any of the variables are
-updated, making this form most useful when some of the variables appear on
-both sides of the assignment, for example when swapping:
+updated, making this form most useful when some of the variables appear on both
+sides of the assignment, for example when swapping:
 
     x, y = y, x
     a[i], a[j] = a[j], a[i]
@@ -1627,24 +1738,28 @@ Avoid tuple form if the expressions are complex.
 
 Assignment also occurs implicitly when:
 
-- function call assigns the argument values to the corresponding parameter variables
-- a return statement assigns the return operands to the corresponding result variables
-- a literal expression for a composite type such assigns each element
+* function call assigns the argument values to the corresponding parameter
+  variables.
+* a return statement assigns the return operands to the corresponding result
+  variables.
+* a literal expression for a composite type assigns each element.
 
 Assignability rule:
 
-- types must exactly match
-- nil may be assigned to any variable of interface or reference type
-- constants have more flexible rules
+* types must exactly match.
+* nil may be assigned to any variable of interface or reference type.
+* constants have more flexible rules.
 
 Go assignment between items of different type requires an explicit conversion.
 
 # Constant
 
-Constants are *created at compile time*, even when defined as locals in functions,
-and can only be numbers, characters (runes), strings or booleans. The
+Constants are *created at compile time*, even when defined as locals in
+functions, and can only be numbers, characters (runes), strings or booleans. The
 *underlying type of every constant is a basic type*: boolean, string, or number,
 including named basic types like time.Duration.
+
+Note: const are allowed inside function body.
 
 The expressions that define them must be constant expressions.
 
@@ -1808,8 +1923,7 @@ There are two form of switch:
 1. expression switch, which compares value
 2. type switch, which compare type. See #Type_Switch.
 
-```go
-// Go evaluate cases from top to bottom, stop when a case succeeds.
+```go // Go evaluate cases from top to bottom, stop when a case succeeds.
 
 switch os := runtime.GOOS; os {
 // cases need not be constants, values involved need not be integers.
@@ -1855,8 +1969,8 @@ default:
 # Break, Continue
 
 A "break" statement terminates execution of the **innermost** "for", "switch",
-or "select" statement within the same function. There is NO `break n` where n
-is a number in Go, but statements may be labeled so that break and continue can
+or "select" statement within the same function. There is NO `break n` where n is
+a number in Go, but statements may be labeled so that break and continue can
 refer to them.
 
 "continue" works similar.
@@ -1866,23 +1980,27 @@ refer to them.
 A pointer value is the address of a variable, thus the location at which a value
 is stored. Not every value has an address, but every variable does.
 
+## Addressable
+
 Variables are sometimes described as addressable values. Expressions that denote
 variables are the only expressions to which the address-of operator & may be
-applied. Hence the "addressable" operand of & is either
+applied. Hence the "addressable" operand of & is either:
 
-- a variable
-- pointer indirection
-- slice indexing operation
-- a field selector of an addressable struct operand
-- an array indexing operation of an addressable array
+* A variable.
+* Pointer indirection.
+* Slice indexing operation.
+* A field selector of an addressable struct operand.
+* An array indexing operation of an addressable array.
+
+### Vs. C
 
 Like C:
 
-- declaration use `*`: `var p *int`
-- generation use `&`: `p = &i`
-- dereferencing/indirecting use `*`: `*p = 21`
+* Declaration use `*`: `var p *int`.
+* Generation use `&`: `p = &i`.
+* Dereferencing/indirecting use `*`: `*p = 21`.
 
-Unlike C: Go has no pointer arithmetic.
+Unlike C: Go has **no pointer arithmetic**.
 
 ```go
 p := &i         // point to i
@@ -1891,18 +2009,18 @@ fmt.Println(*p) // read i through the pointer
 fmt.Println(i)  // see the new value of i
 ```
 
-It is perfectly safe for a function to return the address of a local variable.
-It will remain in existence even after the call has retuned, and the pointer
-will still refer to it. See #Escaping.
+It is **perfectly safe for a function to return the address of a local
+variable**. It will remain in existence even after the call has retuned, and the
+pointer will still refer to it. See [[#Lifetime, Escaping, Allocation]].
 
-Aliasing.
+## Aliasing
 
 Each time we take the address of a variable or copy a pointer, we create new
 "aliases" or ways to identify the same variable. Pointer aliasing is useful
-because it allows us to access a variable without using its name. **It's not just
-pointers that create aliases; aliasing also occurs when we copy values of other
-reference types like slices, maps, and channels, and even structs, arrays, and
-interfaces that contain there types**.
+because it allows us to access a variable without using its name. **It's not
+just pointers that create aliases; aliasing also occurs when we copy values of
+other reference types like slices, maps, and channels, and even structs, arrays,
+and interfaces that contain these types**.
 
 # Range
 
@@ -1931,31 +2049,40 @@ for pos, char := range "日本\x80語" { // \x80 is an illegal UTF-8 encoding
 
 # Function
 
+Key Points
+
+- Passed by value.
+- Variable-sized stack.
+- *Named* functions can be declared only at package level, no nesting.
+
 Functions are values too (first-class citizen). They can be passed around just
 like other values.
 
-Arguments are **passed by value**. When a function is called, a copy of each
-argument value is assigned to the corresponding parameter variable, so the
-function receive a copy, not the original; modifications to the copy do not
-affect the caller. However, if the argument contains some kind of reference,
-like a pointer, slice, map, function, or channel, then the caller may be
-affected by any modifications the function makes to variables *indirectly*
-referred to by the argument.
+Arguments are **passed by value**:
 
-Multiple return values can be used to improve on a couple of clumsy idioms in C
-programs, such as:
+- When a function is called, a **copy** of each argument value is assigned to
+  the corresponding parameter variable, so the function receive a copy, not the
+  original; 
+- Modifications to the copy do not affect the caller. 
+- However, if the argument contains some kind of reference, like a pointer,
+  slice, map, function, or channel, then the caller may be affected by any
+  modifications the function makes to variables *indirectly* referred to by the
+  argument.
 
-- in-band error returns such as -1 for EOF
-- modifying an argument passed by address
+**Multiple return values** can be used to improve on a couple of clumsy idioms
+in C programs, such as:
+
+- In-band error returns such as -1 for EOF.
+- Modifying an argument passed by address.
 
 Go has **no concept of default parameter values, nor any way to specify
 arguments by name**.
 
 Many programming language implementations use a fixed-size function call stack;
-size from 64KB to 2MB are typical. Fixed-size stacks impose a limit on the
-depth of recursion, so one must be careful to avoid a stack overflow when
-traversing large data structures recursively; fixed-size stacks may even pose a
-security risk.
+size from 64KB to 2MB are typical. Fixed-size stacks impose a limit on the depth
+of recursion, so one must be careful to avoid a stack overflow when traversing
+large data structures recursively; fixed-size stacks may even pose a security
+risk.
 
 In contrast, typical Go implementations use **variable-size stacks** that start
 small and grow as needed up to a limit on the order of a gigabyte. This lets us
@@ -2074,8 +2201,8 @@ fmt.Println(strings.Map(add1, "VMS"))   // "WNT"
 
 ## Function Value, Literal, Closure
 
-Named functions can be declared **only at the package level** (Go don't allow
-nested function declarationi), but we can use a *function literal* to denote a
+Named functions can be declared **only at the package level (Go don't allow
+nested function declaration**), but we can use a *function literal* to denote a
 function value within any expression. A function literal is written like a
 function declaration, but without a name following the func keyword. It is an
 expression, and its value is called an *anonymous function*.
@@ -2085,15 +2212,17 @@ strings.Map(func(r rune) rune { return r + 1 }, "VMS") // "WNT"
 ```
 
 More importantly, function defined in this way have access to the entire lexical
-environment. so the inner function can refer to variables from the enclosing
-function. That is, function values are not just code but can have state. This
+environment. so the inner function **can refer to variables from the enclosing
+function. That is, function values are not just code but can have state**. This
 hidden variable references are why we classify functions as reference types and
 why function values are not comparable.
 
 Go programmer often use *closure* for function values. A closure is a function
 value that references variables from outside its body. The function may access
-and assign to the referenced variables; in this sense the function is "bound"
-to the variables.
+and assign to the referenced variables; in this sense the function is "bound" to
+the variables.
+
+> Read: closure is a function value, but "bounded" to some state.
 
 ```go
 func adder() func(int) int {
@@ -2144,9 +2273,9 @@ func main() {
 Function may be *recursive*, that is, they may call themselves, either directly
 or indirectly.
 
-When an anonymous function requires recursion, we must first declare a variable,
-and then assign the anonymous function to that variable. These two steps can
-NOT be combined in one declaration, like:
+When an anonymous function requires recursion, we must **first declare a
+variable, and then assign** the anonymous function to that variable. These two
+steps can NOT be combined in one declaration, like:
 
 ```go
 // WRONG!
@@ -2171,7 +2300,8 @@ visitAll = func(items []string) {
 
 ## Variadic Function
 
-A "variadic function" is one that can be called with varying numbers of arguments.
+A "variadic function" is one that can be called with varying numbers of
+arguments.
 
 ```go
 // Declare Variadic Function
@@ -2259,10 +2389,10 @@ it's not "block-based" but "function-based".
 1. Go's garbage collector recycles unused memory, but do not assume it will
 release unused operating system resources like open files and network
 connections. They should be closed explicitly. A defer statement is often used
-with "paired operation" like open and close, connect and disconnect, or lock
-and unlock to ensure that resources are released in all cases, no matter how
-complex the control flow. The right place for a defer statement that releases a
-resource is immediately after the resource has been successfully acquired.
+with "paired operation" like open and close, connect and disconnect, or lock and
+unlock to ensure that resources are released in all cases, no matter how complex
+the control flow. The right place for a defer statement that releases a resource
+is immediately after the resource has been successfully acquired.
 
 ```go
 // for network connections
@@ -2436,11 +2566,10 @@ See
 * go.ref.pkg#wrap,unwrap,is,as.
 
 A function for which failure is an expected behavior returns an additional
-result, conventionally the last one. If the failure has only one possible
-cause, the result is a boolean, usually called ok. More often, and especially
-for I/O, the failure may have a variety of causes for which the caller will
-need an explanation. In such cases, the type of the additional result
-is *error*.
+result, conventionally the last one. If the failure has only one possible cause,
+the result is a boolean, usually called ok. More often, and especially for I/O,
+the failure may have a variety of causes for which the caller will need an
+explanation. In such cases, the type of the additional result is *error*.
 
 Usually when a function returns a non-nil error, its other results are undefined
 and should be ignored. However, a few functions may return partial results in
@@ -2468,7 +2597,8 @@ The 'error' type is a interface type, predeclared in universe block:
         Error() string
     }
 
-The most commonly-used implementation is the "errors" package's errorString Type:
+Typically there are two ways to create a new error, one way is to utilize the
+most commonly-used implementation: the "errors" package's errorString Type:
 
 ```go
 // The underlying type of errorString is a struct, not a string, to protect its
@@ -2492,13 +2622,25 @@ func New(text string) error {
 }
 ```
 
+Another way is to use fmt.Errorf():
+
+```go
+// Errorf formats according to a format specifier and returns the string as a
+// value that satisfies error.
+//
+// * The %v verb will cause Errorf return a *errors.errorString.
+// * The %w verb with cause Errorf return a *fmt.wrapError or []error.
+func Errorf(format string, a ...any) error
+```
+
 Always implement errors as a receiver function, since this prevent problems if
 errors is inspected or compared. @??
 
-The fmt package formats error value by calling its Error(). fmt.Errorf() formats
-a string and returns it as an error created by errors.New().
+* The fmt package formats error value by calling its Error().
+* fmt.Errorf() formats a string and returns it as an error created by
+  errors.New().
 
-Comparing To Sentinel Error
+### Comparing To Sentinel Error
 
 1. errString sentinel, checked with ==
 
@@ -2523,9 +2665,9 @@ if e, ok := err.(*NotFoundError); ok {
 }
 ```
 
-Wrap, Unwrap, %w
+### Wrap, Unwrap, %w
 
-1. wrap by embedding, unwrap by type assertion
+1. Wrapping by embedding, unwrapping by type assertion.
 
 ```go
 type QueryError struct {
@@ -2539,7 +2681,9 @@ if e, ok := err.(*QueryError); ok && e.Err == ErrPermission {
 }
 ```
 
-2. Wrap by embedding, unwrap by Unwrap
+2. Wrapping by embedding, unwrapping by Unwrap
+
+> Unwrap will return nil if the given error is unwrappable.
 
 The result of unwrapping an error may itself have an Unwrap method; we call the
 sequence of errors produced by repeated unwrapping the "error chain".
@@ -2548,11 +2692,11 @@ sequence of errors produced by repeated unwrapping the "error chain".
 func (e *QueryError) Unwrap() error { return e.Err }
 ```
 
-3. Wrap by %w
+3. Wrapping by %w.
 
-fmt.Errorf will have an Unwrap method returning the argument of %w, which must
-be an error. wrapping with %w make it also available to errors.Is and
-errors.As.
+`fmt.Errorf` will return a `*fmt.wrapError` or `*fmt.wrapErrors` which have a
+Unwrap method, if provided verb %w. Wrapping with %w make it also available to
+errors.Is and errors.As.
 
 ```go
 if err != nil {
@@ -2560,7 +2704,7 @@ if err != nil {
 }
 ```
 
-Is, As
+### Is, As
 
 In the simplest case, the errors.Is function behaves like a comparison to a
 sentinel error, and the errors.As function behaves like a type assertion. When
@@ -2583,81 +2727,10 @@ if errors.As(err, &e) {
 }
 ```
 
----
-
-Usually fmt.Errorf is good enough. But since error is an interface, you can use
-arbitrary data structures as error values, to allow callers to inspect the
-details of the error.
-
-1. Additional fields for caller to inspect/"unwrapping" with type assertion or
-type switch.
-
-```go
-// package json
-type SyntaxError struct {
-    msg    string // description of error
-    Offset int64  // error occurred after reading Offset bytes
-}
-
-// Offset field isn't even shown in default error formatting
-func (e *SyntaxError) Error() string { return e.msg }
-```
-
-```go
-// But caller can use it to add additional info to their error when needed, using
-// type assertion.
-if err := dec.Decode(&val); err != nil {
-    if serr, ok := err.(*json.SyntaxError); ok {
-        line, col := findLine(f, serr.Offset)
-        return fmt.Errorf("%s:%d:%d: %v", f.Name(), line, col, err)
-    }
-    return err
-}
-```
-
-2. Embed the underlying error, additional methods.
-
-```go
-// package net
-type Error interface {
-    error
-    Timeout() bool   // Is the error a timeout?
-    Temporary() bool // Is the error temporary?
-}
-```
-
-```go
-// Client code can distinguish transient errors from permanent ones, then decide
-// what to do
-if nerr, ok := err.(net.Error); ok && nerr.Temporary() {
-    time.Sleep(1e9)
-    continue
-}
-if err != nil {
-    log.Fatal(err)
-}
-```
-
-## Error Design
-
-Two important thing when thinking about error in Go:
-
-* errors are value, they can be programmed just as other values in Go.
-* wrapping an error makes that error part of your API, as the wrapped error is
-  exposed to your caller.
-
-If you don't want to expose implementation details, or don't want to commit to
-supporting that error as part of your API in the future, you shouln't wrap the
-error.
-
-The choice to wrap is about whether to give programs additional information so
-they can make more informed decisions, or to withhold that information to
-preserve an abstraction layer.
-
 ## Error Handling Strategies
 
-1. **Propagate** the errors directly, so that a failure in a subroutine becomes a
-failure of the calling routine.
+1. **Propagate** the errors directly, so that a failure in a subroutine becomes
+a failure of the calling routine.
 
 ```go
 resp, error := http.Get(url)
@@ -2666,8 +2739,8 @@ if err != nil {
 }
 ```
 
-2. Construct a new error message that **include** missing pieces of information as
-well as the underlying error, then propagate the errors.
+2. Construct a new error message that **include** missing pieces of information
+as well as the underlying error, then propagate the errors.
 
 ```go
 doc, err := html.Parse(resp.Body)
@@ -2689,8 +2762,8 @@ same way.
 
 In general, the call f(x) is responsible for reporting the attempted operation f
 and the argument value x as they relate to the context of the error. The caller
-is responsible for adding further information that it has but the call f
-(x) does not.
+is responsible for adding further information that it has but the call f (x)
+does not.
 
 3. For errors that represent transient or unpredictable problems, it may make
 sense to **retry** the failed operation, possibly with a delay between tries,
@@ -2708,9 +2781,9 @@ for tries := 0; time.Now().Before(deadline); tries++ {
 
 4. If progress is impossible, the caller can print the error and stop the
 program gracefully, but this course of action should generally be reserved for
-the main package of a program. Library functions should usually propagate
-errors to the caller, unless the error is a sign of an internal
-inconsistency -- that is, a bug.
+the main package of a program. Library functions should usually propagate errors
+to the caller, unless the error is a sign of an internal inconsistency -- that
+is, a bug.
 
 ```go
 // (In function main)
@@ -2746,7 +2819,80 @@ if err != nil {
 or.RemoveAll(dir) // ignore errors; $TMPDIR is cleaned periodically
 ```
 
+## Error Design
+
+Usually fmt.Errorf is good enough, but we lost the original error context when
+simply contatenating error strings together.
+
+Since error is an interface, you can use arbitrary data structures as error
+values, to allow callers to inspect the details of the error.
+
+1. Additional fields for caller to inspect/"unwrapping" with type assertion or
+type switch.
+
+```go
+// package json
+type SyntaxError struct {
+    msg    string // description of error
+    Offset int64  // error occurred after reading Offset bytes
+}
+
+// Offset field isn't even shown in default error formatting
+func (e *SyntaxError) Error() string { return e.msg }
+```
+
+```go
+// But caller can use it to add additional info to their error when needed,
+// using type assertion.
+if err := dec.Decode(&val); err != nil {
+    if serr, ok := err.(*json.SyntaxError); ok {
+        line, col := findLine(f, serr.Offset)
+        return fmt.Errorf("%s:%d:%d: %v", f.Name(), line, col, err)
+    }
+    return err
+}
+```
+
+2. Embed the underlying error, additional methods.
+
+```go
+// package net
+type Error interface {
+    error
+    Timeout() bool   // Is the error a timeout?
+    Temporary() bool // Is the error temporary?
+}
+```
+
+```go
+// Client code can distinguish transient errors from permanent ones, then decide
+// what to do
+if nerr, ok := err.(net.Error); ok && nerr.Temporary() {
+    time.Sleep(1e9)
+    continue
+}
+if err != nil {
+    log.Fatal(err)
+}
+```
+
+3. To eliminate the type assertion, see also Wrapping/Unwrapping/Is/As.
+
 ## Simplify Repetitive Error Hanlding
+
+Two important thing when thinking about error in Go:
+
+* errors are value, they can be programmed just as other values in Go.
+* wrapping an error makes that error part of your API, as the wrapped error is
+  exposed to your caller.
+
+If you don't want to expose implementation details, or don't want to commit to
+supporting that error as part of your API in the future, you shouln't wrap the
+error.
+
+The choice to wrap is about whether to give programs additional information so
+they can make more informed decisions, or to withhold that information to
+preserve an abstraction layer.
 
 # Panic
 
@@ -2755,8 +2901,8 @@ of-bounds array access or nil pointer dereference, require checks at run time.
 When the Go runtime detects these mistakes, it "panics".
 
 During a typical panic, normal execution stops, all deferred function calls in
-that goroutine are executed, and the program crashes with a log message. This
-log message includes the *panic value*, which is usually an error message of
+that goroutine are executed, and the program crashes with a log message. **This
+log message includes the "panic value"**, which is usually an error message of
 some sort, and, for each goroutine, a *stack trace* showing the stack of
 function calls that were active at the time of the panic.
 
@@ -2796,34 +2942,34 @@ func Reset(x *Buffer) {
 
 Although Go's panic mechanism resembles exceptions in other languages, but since
 a panic causes the program to crash, it is generally used for grave errors.
-Diligent programmers consider any crash to be proof of a bug in their code. In
-a robust program, "expected" errors, the kind that arise from incorrect input,
+Diligent programmers consider any crash to be proof of a bug in their code. In a
+robust program, "expected" errors, the kind that arise from incorrect input,
 misconfiguration, or failing I/O, should be handled gracefully; they are best
 dealt with using *error* values.
 
 Go's panic mechanism runs the deferred function *before* it unwinds the stack,
-so runtime.Stack can print information about functions that seem to have
-already been "unwound".
+so runtime.Stack can print information about functions that seem to have already
+been "unwound".
 
-> Wikipedia: Adding a subroutine's entry to the call stack is sometimes
-  called "winding"; conversely, removing entries is "unwinding".
+> Wikipedia: Adding a subroutine's entry to the call stack is sometimes called
+  "winding"; conversely, removing entries is "unwinding".
 
 > Starting in Go 1.21, calling panic with a nil interface value or an untyped
   nil causes a run-time error (a different panic). The GODEBUG setting
   panicnil=1 disables the run-time error.
 
-# Recover
+# Recover, Fatal Error
 
 Giving up is usually the right response to a panic, but not always. It might be
 possible to recover in some way, or at least clean up the mess before quitting.
 
-If the built-in recover function is called **within a deferred function** and
-the function containing the defer statement is panicking, recover ends the
-current state of panic and returns the panic value. The function that was
-panicking does not continue where it left off but returns normally.
+If the built-in recover function is called **directly within a deferred
+function** and the function containing the defer statement is panicking, recover
+ends the current state of panic and **returns the panic value**. The function
+that was panicking does not continue where it left off but returns normally.
 
-> Recover is **only useful inside deferred functions**. During normal execution, a
-  call to recover will return nil and have no other effect.
+Recover is **only useful directly called inside deferred functions**. During
+normal execution, a call to recover will return nil and have no other effect.
 
 ```go
 func Parse(input string) (s *Syntax, err error) {
@@ -2884,22 +3030,22 @@ Recovering indiscriminately from panic is a dubious practice because the state
 of a package's variable after a panic is rarely well defined or documented.
 Perhaps a critical update to a data structure was incomplete, a file or network
 connection was opened but not closed, or a lock was acquired but not released.
-Furthermore, by replacing a crash with, say, a line in a log file, indiscriminate
-recovery may cause bugs to go unnoticed.
+Furthermore, by replacing a crash with, say, a line in a log file,
+**indiscriminate recovery may cause bugs to go unnoticed**.
 
 Recovering from a panic within the same package can help simplify the handling
-of complex or unexpected errors, but as a **general rule, you should not
-attempt to recover from another pacakge's panic**. Public APIs should report
-failures as errors. Similarly, you should not recover from a panic that may
-pass through a function you do not maintain, such as a caller-provided
-callback, since you cannot reason about its safety.
+of complex or unexpected errors, but as a **general rule, you should not attempt
+to recover from another pacakge's panic**. Public APIs should report failures as
+errors. Similarly, you should not recover from a panic that may pass through a
+function you do not maintain, such as a caller-provided callback, since you
+cannot reason about its safety.
 
 For all the above reasons, it's safest to recover selectively if at all. In
 other words, recover only from panics that were intended to be recovered from,
 which should be rare. **This intention can be encoded by using a distinct,
 unexported type for the panic value and testing whether the value returned by
-recover has that type. If so, we report the panic as an ordinary error; if
-not, we call panic with the same value to resume the state of panic**.
+recover has that type. If so, we report the panic as an ordinary error; if not,
+we call panic with the same value to resume the state of panic**.
 
 ```go
 // soleTitle returns the text of the first non-empty title element in doc, and
@@ -2943,6 +3089,9 @@ func soleTitle(doc *html.Node) (title string, err error) {
 For some conditions there is *no recovery*. Running out of memory, for example,
 causes the Go runtime to terminate the program with a **fatal error**.
 
+**The convention** in the Go libraries is that even when a package uses panic
+internally, its external API still presents explicit error return values.
+
 For a real-world example of panic and recover, see the json package from the Go
 standard library. It encodes an interface with a set of recursive functions. If
 an error occurs when traversing the value, panic is called to unwind the stack
@@ -2950,35 +3099,46 @@ to the top-level function call, which recovers from the panic and returns an
 appropriate error value (see the ’error’ and ‘marshal’ methods of the
 encodeState type in encode.go).
 
-The convention in the Go libraries is that even when a package uses panic
-internally, its external API still presents explicit error return values.
-
 # Methods
+
+Key Points
+
+- Only on named type that itself is not a pointer type.
+- Must be in the same package with its receiver's type definition.
+- Convention: don't mix value and pointer receiver.
+- Method name can conflict even one for value receiver and another for pointer
+  receiver, or even with field namess.
+- Value methods can be called on both; pointer methods can be called on pointers
+  and *addressable* values.
+- Avoid copying instance of T if it has pointer methods.
+
+---
 
 Go does not have classes.
 
-*Method* is a function with a special "receiver" argument.
+"Method" is a function with a special "receiver" argument.
 
 Methods may be declared on any **named type** defined in the same package, so
 long as its underlying type is **neither a pointer nor an interface**.
 
-Receiver's type definition and method definition **must be in the same package**,
-this means you can NOT define methods on built-in types.
+Receiver's type definition and method definition **must be in the same
+package**, this means you can NOT define methods on built-in types.
 
-Why doesn't Go support overloading of methods and operators?
+Go **doesn't support overloading of methods and operators**.
 
-Method dispatch is simplified if it doesn't need to do type matching as well.
-Experience with other languages told us that having a variety of methods with
-the same name but different signatures was occasionally useful but that it could
-also be confusing and fragile in practice. Matching only by name and requiring
-consistency in the types was a major simplifying decision in Go's type system.
+> Method dispatch is simplified if it doesn't need to do type matching as well.
+> Experience with other languages told us that having a variety of methods with
+> the same name but different signatures was occasionally useful but that it
+> could also be confusing and fragile in practice. Matching only by name and
+> requiring consistency in the types was a major simplifying decision in Go's
+> type system.
 
-Regarding operator overloading, it seems more a convenience than an absolute
-requirement. Again, things are simpler without it.
+> Regarding operator overloading, it seems more a convenience than an absolute
+> requirement. Again, things are simpler without it.
+
+Method Declaration
 
 ```go
-// Method Declarations
-
 type Point struct { X, Y float64 }
 
 // Traditional function
@@ -2997,30 +3157,34 @@ func (p Point) Distance(q Point) float64 {
     return math.Hypot(q.X-p.X, q.Y-p.Y)
 }
 
-// Functions are called by values. the same goes for methods. so if we need to
-// update the receiver variable, we attach them to the pointer type.
-//
-// The name of this method is (*Point).ScaleBy. the parentheses are necessary.
-//
-// NOTE: in realistic program, convention dictates that if any method of Point
-// has a pointer receiver, then *all* methods of Point should have a pointer
-// receiver, even ones that don't strictly need it. our example broke this rule
-// to show both kinds of method.
-//
-// Methods on a given type should have either value or pointer receivers, but
-// not a mixture of both.
+```
+
+Functions are called by values. the same goes for methods. so if we need to
+update the receiver variable, we attach them to the pointer type.
+
+The name of this method is `(*Point).ScaleBy`. the parentheses are necessary.
+
+```go
 func (p *Point) ScaleBy(factor float64) {
     p.X *= factor
     p.Y *= factor
 }
 
-// NOTE: method declarations are NOT permitted on named types that are
-// themselves pointer types.
+// Method declarations are NOT permitted on named types that are themselves
+// pointer types
 type P *int
 func (P) f() { /* ... */ } // compile error: invalid receiver type
+```
 
-// Method Calls
+NOTE: in realistic program, **convention** - methods on a given type should have
+either value or pointer receivers, but **not a mixture of both** - dictates that
+if any method of Point has a pointer receiver, then *all* methods of Point
+should have a pointer receiver, even ones that don't strictly need it. our
+example broke this rule to show both kinds of method.
 
+Method Calls
+
+```go
 // There is no conflict between the two declarations of functions called Distance.
 // the first declares a package-level function called geometry.Distance. the second
 // declares a method of the type Point, so its name is Point.Distance.
@@ -3048,10 +3212,10 @@ pointers.
 
 This rule arises because pointer methods can modify the receiver; invoking them
 on a value would cause the method to receive a copy of the value, so any
-modifications would be discarded. The language therefore disallows this
-mistake. There is a handy exception, though. When the value is **addressable**,
-the language takes care of the common case of invoking a pointer method on a
-value by inserting the address operator automatically.
+modifications would be discarded. The language therefore disallows this mistake.
+There is a handy exception, though. When the value is **[[#Addressable]]**, the
+language takes care of the common case of invoking a pointer method on a value
+by inserting the address operator automatically.
 
 ```go
 // The (*Point).ScaleBy method can be called by providing a *Point receiver, like:
@@ -3086,22 +3250,20 @@ pptr.Distance(q)
 
 // In summary, a method call is valid in three cases:
 //
-// 1. either the receiver argument has the same type as the receiver parameter
-//
-// 2. or the receiver argument is a variable of type T and the reciver parameter
-// has type *T. compiler implicitly take the address of the variable
-//
-// 3. or the receiver argument has type *T and the receiver parameter has type
-// T. compiler implicitly dereferences the receiver
+// 1. Either the receiver argument has the same type as the receiver parameter.
+// 2. Or the receiver argument is a variable of type T and the reciver parameter
+//    has type *T. compiler implicitly take the address of the variable.
+// 3. Or the receiver argument has type *T and the receiver parameter has type
+//    T. compiler implicitly dereferences the receiver.
 ```
 
-If all the methods of a named type T have a receiver type of T itself(not `*T`),
-it is safe to copy instances of that type; calling any of its methods
-necessarily makes a copy. But **if any method has a pointer receiver, you
-should avoid copying instances of T** because doing so may violate internal
-invariants. For example, copying an instance of bytes.Buffer would cause the
-original and the copy to alias the same underlying array of bytes. Subsequent
-method calls would have unpredictable effects.
+If all the methods of a named type T have a receiver type of T itself (not
+`*T`), it is safe to copy instances of that type; calling any of its methods
+necessarily makes a copy. But **if any method has a pointer receiver, you should
+avoid copying instances of T** because doing so may violate internal invariants.
+For example, copying an instance of bytes.Buffer would cause the original and
+the copy to alias (see [[#Aliasing]]) the same underlying array of bytes.
+Subsequent method calls would have unpredictable effects.
 
 ## Nil Receiver
 
@@ -3183,9 +3345,9 @@ type ColoredPoint struct {
 
 ## Method for Unnamed Struct Type
 
-Although **methods can be declared only on named types and pointers to them**,
-but using embedding, It's possible and sometimes useful for *unnamed* struct
-types to have methods too.
+Although methods can be declared only on named types and pointers to them, but
+**using embedding, It's possible and sometimes useful for *unnamed* struct types
+to have methods too**.
 
 ```go
 // cache is a unnamed struct type, but have methods promoted from sync.Mutex.
@@ -3207,10 +3369,51 @@ func Lookup(key string) string {
 }
 ```
 
+## Method Expression
+
+A "method expression" written `T.f` or `(*T).f` where T is a type, yields a
+*function* value with a regular first parameter taking the place of the
+receiver.
+
+```go
+distance := Point.Distance  // method expression
+fmt.Println(distance(p, q)) // "5", p supplied as receiver
+fmt.Printf("%T\n", distance)// "func(Point, Point) float64"
+
+scale := (*Point).ScaleBy
+scale(&p, 2)
+fmt.Println(p)              // "{2 4}"
+fmt.Printf("%T\n", scale)   // "func(*Point, float64)"
+```
+
+Method expression can be helpful **when you need a value to represent a choice
+among several methods** belonging to the same type so that you can call the
+chosen method with many different receiver.
+
+```go
+package geometry
+
+type Path []Point
+
+func (path Path) TranslateBy(offset Point, add bool) {
+    // variable op represents either the addition or the subtraction method of
+    // type Point will be called
+    var op func(p, q Point) Point
+    if add {
+        op = Point.Add
+    } else {
+        op = Point.Sub
+    }
+    for i := range path {
+        path[i] = op(path[i], offset)
+    }
+}
+```
+
 ## Method Value
 
-The selector p.Distance yields a "method value", a *function* that binds a method
-(Point.Distance) to a specific receiver value p.
+The selector p.Distance yields a "method value", a *function* that binds a
+method (Point.Distance) to a specific "receiver value" p.
 
 ```go
 distanceFromP := p.Distance     // method value
@@ -3234,54 +3437,21 @@ time.AfterFunc(10 * time.Second, func() { r.Launch() })
 time.AfterFunc(10 * time.Second, r.Launch)
 ```
 
-## Method Expression
+Note the relationship between method expression and method value:
 
-A "method expression" written `T.f` or `(*T).f` where T is a type, yields a
-*function* value with a regular first parameter taking the place of the
-receiver.
-
-```go
-distance := Point.Distance  // method expression
-fmt.Println(distance(p, q)) // "5", p supplied as receiver
-fmt.Printf("%T\n", distance)// "func(Point, Point) float64"
-
-scale := (*Point).ScaleBy
-scale(&p, 2)
-fmt.Println(p)              // "{2 4}"
-fmt.Printf("%T\n", scale)   // "func(*Point, float64)"
-```
-
-Method expression can be helpful when you need a value to represent a choice
-among several methods belonging to the same type so that you can call the chosen
-method with many different receiver.
-
-```go
-package geometry
-
-type Path []Point
-
-func (path Path) TranslateBy(offset Point, add bool) {
-    // variable op represents either the addition or the subtraction method of
-    // type Point will be called
-    var op func(p, q Point) Point
-    if add {
-        op = Point.Add
-    } else {
-        op = Point.Sub
-    }
-    for i := range path {
-        path[i] = op(path[i], offset)
-    }
-}
-```
+- expression: transformed from a type, resulting a function value, with
+  additional first parameter of receiver type.
+- value: extracted from a value, resulting a function, who bind its original
+  receiver value.
+  
+Method value is like argumented ("binded") method expression.
 
 # Encapsulation
 
 "Encapsulation" or "information hiding" provides three benefits:
 
 * First, because clients cannot directly modify the objects' variables, one need
-  inspect fewer statements to understand the possible values of those
-  variables.
+  inspect fewer statements to understand the possible values of those variables.
 * Second, hiding implementation details prevents clients from depending on
   things that might change, which gives the designer greater freedom to evolve
   the implementation without breaking API compatibility.
@@ -3290,9 +3460,8 @@ func (path Path) TranslateBy(offset Point, add bool) {
 
 Go has **only one mechanism** to control the visibility of names: capitalized
 identifier are exported from the package in which they are defined, and
-uncapitalized names are not. The same mechanism that limits access to members
-of package also limits access to the fields of a struct or the methods of a
-type.
+uncapitalized names are not. The same mechanism that limits access to members of
+package also limits access to the fields of a struct or the methods of a type.
 
 As a consequence, **to encapsulate an object, we must make it a struct**. Like:
 
@@ -3302,8 +3471,9 @@ type IntSet struct {
 }
 ```
 
-Although it is is essentially equivalent to `type IntSet []uint64`, but the later
-would allow clients from other package to read and modify the slice directly.
+Although it is is essentially equivalent to `type IntSet []uint64`, but the
+later would allow clients from other package to read and modify the slice
+directly.
 
 Another consequence of this name-based mechanism is that the unit of
 encapsulation is the package, not the type as in many other languages.
@@ -3322,37 +3492,38 @@ type.
 geometry.Path vs IntSet:
 
 geometry.Path is *intrinsically* a sequence of points, no more and no less, and
-we **don't foresee adding new fields to it, so it makes sense for it to
-reveal** that Path is a slice. In contrast, and IntSet merely happens to be
-represented as `[]uint64` slice. It could have been represented using `
-[]uint`, or something completely different for sets that are sparse or very
-small, and it might perhaps benefit from additional features like an extra
-field to record the number of elements in the set. For these reason, it makes
-sense for IntSet to be opaque.
+we **don't foresee adding new fields to it, so it makes sense for it to reveal**
+that Path is a slice. In contrast, and IntSet merely happens to be represented
+as `[]uint64` slice. It could have been represented using ` []uint`, or
+something completely different for sets that are sparse or very small, and it
+might perhaps benefit from additional features like an extra field to record the
+number of elements in the set. For these reason, it makes sense for IntSet to be
+opaque.
 
 # Interface
 
-(@todo Need update due to generic features)
-
-See: https://research.swtch.com/interfaces.
+See: go.internal.md#interface.
 
 A "concrete type" specifies the exact **representation of its values** and
-exposes the **intrinsic operations** of that representation. It may also
-provide additional behaviors through its methods. When you have a value of a
-concrete type, you know exactly what it *is* and what you can *do* with it.
+exposes the **intrinsic operations** of that representation. It may also provide
+additional behaviors through its methods. When you have a value of a concrete
+type, you know exactly what it *is* and what you can *do* with it.
 
-An "interface type" is an abstract type. It doesn't expose the representation
-or internal structure of its value, or the set of basic operations they
-support; it **reveals only some of their methods**. When you have a value of an
-interface type, you know nothing about what is *is*; you know only what i
-can *do*, or more precisely, what behaviors are provided by its methods.
+An "interface type" is an abstract type. It doesn't expose the representation or
+internal structure of its value, or the set of basic operations they support; it
+**reveals only some of their methods**. When you have a value of an interface
+type, you know nothing about what is *is*; you know only what i can *do*, or
+more precisely, what behaviors are provided by its methods.
 
 Interface types express generalizations or abstractions about the behaviors of
 other types.
 
-A type "satisfies" an interface if it possesses all the methods the interface
-requires. Go programmers often say that a concrete type "is a" particular
-interface type, meaning that is satisfies the interface.
+Before Go 1.18, a type "satisfies" an interface if it possesses all the methods
+the interface requires. Go programmers often say that a concrete type "is a"
+particular interface type, meaning that is satisfies the interface.
+
+Since Go 1.18 introducing generics, we changed how we view interfaces. See
+#Generic.
 
 What makes Go's interfaces so distinctive is that they are *satisfied
 implicitly*. This design **lets you create new interfaces that are satisfied by
@@ -3419,12 +3590,12 @@ type ReadCloser interface {
 // 3. "General Interfaces": the most general form. See #Generic_Type
 ```
 
-## Assignment
+## Assignment, Satisfication
 
 See <https://stackoverflow.com/questions/44370277/>
 
-The rules is simple: an expression may be assigned to an interface only if
-its type satisfies the interface.
+The rules is simple: an expression may be assigned to an interface only if its
+type satisfies the interface.
 
 ```go
 var w io.Writer
@@ -3434,37 +3605,6 @@ w = time.Second     // compile error: time.Duration lacks Write method
 // This rule applied even when the right-hand side is itself an interface.
 var rw io.ReadWriter
 w = rw              // OK: io.ReadWriter has Write method
-```
-
-Although it's legal to call a `*T` method on an argument of type T so long as
-the argument is a variable, but this is mere syntactic sugar: **a value of
-type T does not possess all the methods that a `*T` pointer does, and as a
-result it might satisfy fewer interfaces**.
-
-For example:
-
-    var v interface{} = T{}
-    var v interface{} = &T{}
-
-The former is passing the struct/concrete type into the interface, while the
-latter is passing a pointer to it instead. In the former case, only value
-methods `func(t T) M()` can be used to fulfill the interface methods, while in
-the later **both** value methods and pointer methods `func(t *T) M()` can be
-used.
-
-This is because when assinging value to a interface type, Go is storing
-a **copy** of the original structure in the interface, pointer methods would
-have unexpected effects, ie. unable to alter the original structure: A value
-stored in an interface forces a copy that you *cannot then get a reference to*,
-so pointer receivers cannot modify the original.
-
-```go
-type IntSet struct { /* ... */ }
-func (*IntSet) String() string
-
-var s IntSet
-var _ fmt.Stringer = &s     // OK
-var _ fmt.Stringer = s      // compile error: IntSet lacks String method
 
 // Method call of Interface Type
 
@@ -3477,7 +3617,6 @@ w = os.Stdout
 w.Write([]byte("hello"))        // OK: io.Writer has Write method
 w.Close()                       // compile error: io.Writer lacks Close method
                                 // even *os.File has Close method, this still fail
-
 // Empty Interface Type
 
 // The type `interface{}`, which is called the *empty interface* type, is
@@ -3506,14 +3645,51 @@ var _ io.Writer = (*bytes.Buffer)(nil)
 Conceptually, a value of an interface type, or "interface value", has two
 components, a concrete type and a value of that type. These are called the
 interface's "dynamic type" and "dynamic value". In our conceptual model, a set
-of values called *type descriptors* provide information about each type, such
-as its name and methods. In an interface value, the type component is
-represented by the appropriate type descriptor.
+of values called *type descriptors* provide information about each type, such as
+its name and methods. In an interface value, the type component is represented
+by the appropriate type descriptor.
 
 **A variable of interface type stores a pair: the concrete value assigned to the
 variable, and that value's type descriptor**. To be more precise, the value is
 the underlying concrete data item that implements the interface and the type
-describes the full type of that item.
+describes the full type of that item. For instace:
+
+    var r io.Reader
+    tty, err := os.OpenFile("/dev/tty", os.O_RDWR, 0)
+    if err != nil {
+        return nil, err
+    }
+    r = tty
+
+r contains, schematically, the (value, type) pair, `(tty, *os.File)`. Notice
+that the type `*os.File` implements methods other than Read; even though the
+interface value provides access only to the Read method, the value inside
+carries all the type information about that value. That’s why we can do things
+like this:
+
+    var w io.Writer
+    w = r.(io.Writer)
+
+The expression in this assignment is a type assertion; what it asserts is that
+the item inside r also implements io.Writer, and so we can assign it to w. After
+the assignment, w will contain the pair `(tty, *os.File)`. That’s the same pair
+as was held in r. The static type of the interface determines what methods may
+be invoked with an interface variable, even though the concrete value inside may
+have a larger set of methods.
+
+Continuing, we can do this:
+
+    var empty interface{}
+    empty = w
+
+and our empty interface value empty will again contain that same pair, `(tty,
+*os.File)`. That’s handy: an empty interface can hold any value and contains all
+the information we could ever need about that value.
+
+(We don’t need a type assertion here because it’s **known statically** that w
+satisfies the empty interface. In the example where we moved a value from a
+Reader to a Writer, we needed to be explicit and use a type assertion because
+Writer’s methods are not a subset of Reader’s.)
 
 The zero value for an interface has both its type and value components set to
 nil. An interface value is described as nil or non-nil based on its dynamic
@@ -3562,13 +3738,50 @@ w.Write([]byte("hello"))    // (*bytes.Buffer).Write is called
 w = nil
 ```
 
+Although it's legal to call a `*T` method on an argument of type T so long as
+the argument is a variable, but this is mere syntactic sugar: **a value of type
+T does not possess all the methods that a `*T` pointer does, and as a result it
+might satisfy fewer interfaces**.
+
+For example:
+
+    var v interface{} = T{}
+    var v interface{} = &T{}
+
+The former is passing the struct/concrete type into the interface, while the
+latter is passing a pointer to it instead. In the former case, only value
+methods `func(t T) M()` can be used to fulfill the interface methods, while in
+the later **both** value methods and pointer methods `func(t *T) M()` can be
+used.
+
+This is because when assinging value to a interface type, Go is storing a
+**copy** of the original structure in the interface, pointer methods would have
+unexpected effects, ie. unable to alter the original structure: A value stored
+in an interface forces a copy that you *cannot then get a reference to*, so
+pointer receivers cannot modify the original.
+
+```go
+type IntSet struct { /* ... */ }
+func (*IntSet) String() string
+
+var s IntSet
+var _ fmt.Stringer = &s     // OK
+var _ fmt.Stringer = s      // compile error: IntSet lacks String method
+```
+
+In practical, **using pointer to interface is discouraged** like this:
+
+```go
+func doI(i *I) {}   // DISCOURAGED!
+```
+
 ## Comparison
 
 Interface values may be compared using == and !=. Two interface values are equal
 if both are nil, or if their dynamic types are identical and their dynamic
 values are equal according to the usual behavior of == for that type. Because
-interface values are comparable, they may be used as the keys of a map or as
-the operand of a switch statement.
+interface values are comparable, they may be used as the keys of a map or as the
+operand of a switch statement.
 
 However, if two interface values are compared and have the same dynamic type,
 but that type is not comparable (a slice, for instance), then the **comparison
@@ -3580,11 +3793,13 @@ fmt.Println(x == x) // panic: comparing uncomparable type []int
 ```
 
 When comparing interface values or aggregate types that contain interface
-values, we must **be aware of the potential for a panic**. A similar risk
-exists when using interfaces **as map keys or switch operands**.
+values, we must **be aware of the potential for a panic**. A similar risk exists
+when using interfaces **as map keys or switch operands**.
 
 Only compare interface values if you are certain that they contain dynamic
 values of comparable types.
+
+See #Trap:comparable.
 
 ## Trap: Interface Containing a Nil Pointer Is Non-Nil
 
@@ -3612,7 +3827,7 @@ func f(out io.Writer) {
     // When main calls f, it assigns a nil pointer of type *bytes.Buffer to the out
     // parameter, so the dynamic value of out is nil. However, its dynamic type is
     // *bytes.Buffer, meaning that out is a non-nil interface containing a nil
-    // pointer value, so the defensive check out != nil is still true.
+    //  pointer value, so the defensive check out != nil is still true.
     //
     // The dynamic dispatch mechanism determines that (*bytes.Buffer).Write must
     // be called but with a receiver value that is nil. For *bytes.Buffer, nil
@@ -3629,8 +3844,8 @@ The problem is that although a nil `*bytes.Buffer` pointer has the methods
 needed to satisfy the interface, it doesn't satisfy the *behavioral*
 requirements of the interface. In particular, the call violates the implicit
 precondition of `(*bytes.Buffer).Write` that is receiver is not nil. The
-solution is to change the type of buf in main to io.Writer, thereby avoiding
-the assignment of the dysfunctional value to the interface in the first place.
+solution is to change the type of buf in main to io.Writer, thereby avoiding the
+assignment of the dysfunctional value to the interface in the first place.
 
 ```go
 var buf io.Writer
@@ -3647,17 +3862,17 @@ Syntactically, it looks like:
 
     x.(T)
 
-where x is an expression of an **interface type** and T is a type, called
-the "asserted type". A type assertion checks that the *dynamic type* of its
-operand matches the asserted type.
+where x is an expression of an **interface type** and T is a type, called the
+"asserted type". A type assertion checks that the *dynamic type* of its operand
+matches the asserted type.
 
 ## Assert Concrete Type
 
 If the asserted type T is a concrete type, then the type assertion checks
-whether x's dynamic type is *identical* to T. If this check succeeds, the
-result of the type assertion is x's dynamic value, whose type is of course T.
-In other words, a **type assertion to a concrete type extracts the concrete value
-from its operand**.
+whether x's dynamic type is *identical* to T. If this check succeeds, the result
+of the type assertion is x's dynamic value, whose type is of course T. In other
+words, a **type assertion to a concrete type extracts the concrete value from
+its operand**.
 
 ```go
 var w io.Writer
@@ -3721,8 +3936,9 @@ if w, ok := w.(*os.File); ok {
 
 # Type Switch
 
-A "type switch" statement *simplifies an if-else chain of type assertions*. A type
-switch enables a multi-way branch based on the interface value's **dynamic type**.
+A "type switch" statement *simplifies an if-else chain of type assertions*. A
+type switch enables a multi-way branch based on the interface value's **dynamic
+type**.
 
 1. Simplest form: `x.(type)`
 
@@ -3782,9 +3998,9 @@ func sqlQuote(x interface{}) string {
 
 ```go
 type Interface interface {
-    Len() int
-    Less(i, j int) bool
-    Swap(i, j int)
+	Len() int
+	Less(i, j int) bool
+	Swap(i, j int)
 }
 ```
 
@@ -3796,13 +4012,13 @@ type Interface interface {
 // Suppose our code use a IntConfig to store integer configuration, and it has
 // both Get and Set method.
 type IntConfig struct {
-    // ...
+	// ...
 }
 
 // But in our client code, we need to make it read-only. We can do this by rely
 // on intConfigGetter instead.
 type intConfigGetter interface {
-    Get() int
+	Get() int
 }
 ```
 
@@ -3820,8 +4036,8 @@ values of a variety of concrete types and considers the interface to be the
 *union* of those types. Type assertions are used to discriminate among these
 types dynamically and treat each case differently. The emphasis is on the
 concrete types that satisfy the interface, not on the interface's methods, and
-there is no hiding of information. We describe interfaces used this way
-as *discriminated unions*
+there is no hiding of information. We describe interfaces used this way as
+*discriminated unions*
 
 The previous sqlQuote function is a demo of discriminated unions. We now
 consider another one. In the encodoing/xml package:
@@ -3897,24 +4113,24 @@ because of its dependencies. In that case, an interface is a good way to
 decouple two packages**.
 
 Also a small interface with fewer, simpler methods are easier to satisfy when
-new types come along. A good rule of thumb for interface design is *ask only
-for what you need*.
+new types come along. A good rule of thumb for interface design is *ask only for
+what you need*.
 
 ---
 
 (taken from Udemy course)
 
-Function operating on interfaces should **never accept a pointer to an
-interface (like `do(i *MyInterface)`)**. If we do that, caller will never get
-chance if they want to operate on value. In short, caller should determines
-whether pointers or value(copy) is used.
+Function operating on interfaces should **never accept a pointer to an interface
+(like `do(i *MyInterface)`)**. If we do that, caller will never get chance if
+they want to operate on value. In short, caller should determines whether
+pointers or value(copy) is used.
 
 ```go
 type MyType int // implements MyInterface
 
 // since our function 'execute' operate on value of i...
 func execute(i MyInterface) { // DONT do this: execute(i *MyInterface)
-    i.Function1()
+	i.Function1()
 }
 
 m := MyType(1)
@@ -3944,11 +4160,11 @@ func (m MyType) M2() {}
 
 // if we do this (like above)
 func execute(i MyInterface) {
-    i.M1()
+	i.M1()
 }
 m := MyType(1)
 // then this call will throw compiler error
-execute(m)  // Compiler Error!
+execute(m)	// Compiler Error!
 // we are only restricted to use pointer
 execute(&m)
 ```
@@ -4044,12 +4260,12 @@ type Handler interface {
 }
 ```
 
-# Generics
+# Generics (v1.18)
 
 See: https://go.dev/doc/tutorial/generics.
 
-With generics, you can declare and use functions or types that are written to
-work with any of **a set of types** provided by calling code.
+With generics, you can declare and use **functions or types** that are written
+to work with any of a set of types **provided by calling code**.
 
 Type Parameter, Type Constraint, Type Elem
 
@@ -4067,14 +4283,67 @@ Each "type parameter" has a "type constraint" that acts as a kind of meta-type
 for the type parameter. Each type constraint specifies the permissible type
 arguments that calling code can use.
 
-While a type parameter's constraint typically represents a set of types, at
-compile time the type parameter stands for a single type – the type provided as
-a type argument by the calling code.
+While a type parameter's constraint typically represents a set of types, **at
+compile time the type parameter stands for a single type** – the type provided
+as a "type argument" by the calling code.
 
-Keep in mind that a type parameter must support all the operations the generic
-code is performing on it. For example, if your function's code were to try to
-perform string operations (such as indexing) on a type parameter whose
-constraint included numeric types, the code wouldn't compile. @??
+Keep in mind that a **type parameter must support _all_ the operations** the
+generic code is performing on it. For example, if your function's code were to
+try to perform string operations (such as indexing) on a type parameter whose
+constraint included numeric types, the code wouldn't compile.
+
+TODO verify:
+
+- What if the generic code is NOT performing all but some of the operation
+  specified by constaint? Does this mean some type parameter can get around?
+  
+  Say a generic node do(generic-type) perform something with generic-type.M1 but
+  not M2. Then T have M1 but not M2, can we pass T as type argument?
+  
+  Answer: Not it won't compile. The point is about what "constraint" requires,
+  not what operations the generic code use. See:
+  [[~/projects/learn/go/lang/generic/generic_test.go::func TestPartial]]
+
+## Interface, Type Set, Satisfy, Implement
+
+**In the past an interface defined a set of methods**, all types *implement* a
+interface because they have the required methods.
+
+**Now an interface defines a set of types**, we can describe a set of types
+explicitly, not only indirectly through methods. This gives us new ways to
+control a type set.
+
+> Read: we still are using methods to describe set of types, but now it's not
+> the only option anymore, we can explicitly control an interface's type set
+> with generics.
+
+Starting with Go 1.18, an interface may embed not just other interfaces, but any
+type, a union of types, or an infinite set of types that share the same
+underlying type. These types are then included in the type set computation: the
+union notation A|B means “type A or type B”, and the ~T notation stands for “all
+types that have the underlying type T”. Such **generalized interfaces can't be
+used as variable types, but used as type constraints** (See [[#Generic Type]]).
+
+With the new type set view we also need a new way to explain what it means to
+"implement" an interface. We say that a (non-interface) type T implements an
+interface I if T is an element of the interface’s type set. If T is an interface
+itself, it describes a type set. Every single type in that set must also be in
+the type set of I, otherwise T would contain types that do not implement I.
+Thus, **if T is an interface, it implements interface I if the type set of T is
+a subset of the type set of I**.
+
+A "type constraint" describes the set of acceptable argument types for a type
+parameter. A type argument **satisfies** the corresponding type parameter
+constraint if the type argument is in the set described by the constraint
+interface. This is another way of saying that the type argument **implements**
+the constraint.
+
+Type constaint also **determines the operations** that are possible on values of
+a type parameter. As we would expect, if a constraint defines a method such as
+Write, the Write method can be called on a value of the respective type
+parameter. More generally, an operation such as + or * that is supported by all
+types in the type set defined by a constraint is permitted with values of the
+corresponding type parameter.
 
 ## Generic Functions
 
@@ -4143,7 +4412,8 @@ func main() {
 
 ## Generic Type
 
-Go also supports generic types. A type can be parameterized with a type parameter.
+Go also supports generic types. A type can be parameterized with a type
+parameter.
 
 ```go
 // Declare a type constraint as interface ("constraint interface")
@@ -4172,33 +4442,219 @@ compile:
 
 ```go
 type Foo struct {}
-func (Foo) bar[T any](t T) {}
-./main.go:29:15: methods cannot have type parameters
+func (Foo) bar[T any](t T) {}  // COMPILE ERROR: methods cannot have type parameters
 ```
 
-If we want to use generics with methods, it’s **the receiver** that needs to be a
-type parameter.
+If we want to use generics with methods, it’s **the receiver** that needs to be
+a type parameter.
 
-## Trap: "any does not implement comparable"
+TODO Why the design?
 
-See: <https://go.dev/blog/comparable>.
+## Deconstructing Type Parameters
+
+See <https://go.dev/blog/deconstructing-type-parameters>.
+
+The slices.Clone function is defined as:
+
+```go
+func Clone[S ~[]E, E any](s S) S {
+    return append(s[:0:0], s...)
+}
+```
+
+Why the type parameters must be defined as so? Let's consider several
+alternative approachs that don't work as expected.
+
+Our first take is Clone1:
+
+```go
+func Clone1[E any](s []E) []E {
+    // ...
+}
+```
+
+But there is a problem for named slice types, suppose we have:
+
+```go
+type MySlice []string
+func (s MySlice) String() string {
+    return strings.Join(s, "+")
+}
+```
+
+Let's say we want to make a copy of a MySlice and then get a sorted printable
+version:
+
+```go
+func PrintSorted(ms MySlice) string {
+    // Clone1() is instantiate as:
+    //      func InstantiatedClone1(s []string) []string
+    c := Clone1(ms)
+    slices.Sort(c)
+    return c.String()   // FAILS TO COMPILE:
+                        // c.String undefined (type []string has no field or method String)
+}
+```
+
+So we need something like this to return the same type as its arguments:
+
+    func Clone2[S []E, E any](s S) S
+
+This will compile, but we get an error when call Clone2(ms):
+
+    MySlice does not satisfy []string (possibly missing ~ for []string in []string)
+
+That's because `[]E` as a constraint only permits a slice type literal, like
+`[]string`, it doesn't permit a named type like MySlice, we need to add ~ for
+that. Now we arrived at the final version as slices.Clone().
+
+---
+
+The general technique we’ve used here, in which we define one type parameter S
+using another type parameter E, is a way to deconstruct types in generic
+function signatures. By deconstructing a type, we can name, and constrain, all
+aspects of the type.
+
+For example, here is the signature for maps.Clone.
+
+    func Clone[M ~map[K]V, K comparable, V any](m M) M
+
+Just as with slices.Clone, we use a type parameter for the type of the parameter
+m, and then deconstruct the type using two other type parameters K and V.
+
+In maps.Clone we constrain K to be comparable, as is required for a map key
+type. We can constrain the component types any way we like.
+
+    func WithStrings[S ~[]E, E interface { String() string }](s S) (S, []string)
+
+This says that the argument of WithStrings must be a slice type for which the
+element type has a String method.
+
+Since all Go types can be built up from component types, we can always use type
+parameters to deconstruct those types and constrain them as we like.
+
+## Trap: "any does not implement comparable" (before Go 1.20)
+
+See <https://go.dev/blog/comparable>.
+
+The "comparable" constaint contains only types that the compiler guarantees will
+not panic with ==. We call these types "strictly comparable".
+
+Before 1.20, some comparable types did not satisfy the predeclared `comparable`
+type constraint (such as `any`), preventing us from write useful generic codes:
 
 ```go
 // any is comparable, this works fine.
 var lookupTable map[any]string
 
-// but before Go1.2, the seemingly equivalent generic map type:
-type genericLookupTable[K comparable, V any] map[K]V
-
-// produced a compile-time error when any was used as the key type: the set of
-// types comprised by comparable is not the same as the set of all comparable
+// but before Go1.20, the seemingly equivalent generic map type produced a
+// compile-time error when any was used as the key type, becuase the set of
+// types comprised by 'comparable' is not the same as the set of all comparable
 // types defined by the Go spec.
+type genericLookupTable[K comparable, V any] map[K]V
 
 // ERROR: any does not implement comparable (Go 1.18 and Go 1.19).
 var lookupTable genericLookupTable[any, string]
-// Before Go1.2, "satisfy" means "implement". Starting with go1.2, the above
-// code works fine: a type that supports == also satisfies comparable
-// (even though it may not implement it).
+```
+
+Another example:
+
+```go
+func f[Q comparable]() { … }
+
+func g[P any]() {
+        _ = f[int] // (1) ok: int implements comparable
+        _ = f[P]   // (2) error: type parameter P does not implement comparable
+        _ = f[any] // (3) error: any does not implement comparable (Go 1.18, Go.19)
+}
+```
+
+This delima arise because constraint satisfaction *is* interface implementation:
+a type argument T satisfies a constraint C if T implements C. That make sense,
+but also preventing us from using non-strictly comparable types as type
+arguments for comparable.
+
+In Go 1.20, to solve this delima and avoid inconsistency, rather than changing
+what comparable means, we **differentiated between interface implementation,
+which is relevant for passing values to variables, and constraint satisfaction,
+which is relevant for passing type arguments to type parameters**. Once
+separated, we could give each of those concepts (slightly) different rules:
+
+A type T "satisfies a constraint" C if:
+
+* T implements C; or
+* C can be written in the form interface{ comparable; E }, where E is a basic
+  interface and T is comparable and implements E.
+
+The second bullet point is the exception: a type that supports == also a
+constraint C that expects strictly comparable types (and which may also have
+other requirements such as methods E) is satisfied by any type argument T that
+supports == (and which also implements the methods in E, if any). Or even
+shorter: a type that supports == also satisfies comparable (even though it may
+not implement it).
+
+So now:
+
+```go
+func f[Q comparable]() { … }
+
+func g[P any]() {
+        _ = f[int] // (1) ok: int satisfies comparable
+        _ = f[P]   // (2) error: type parameter P does not satisfy comparable
+        _ = f[any] // (3) ok: satisfies comparable (Go 1.20)
+}
+```
+
+Now, any does satisfy (but not implement!) comparable. Why? Because Go permits
+== to be used with values of type any (which corresponds to the type T in the
+spec rule), and because the constraint comparable (which corresponds to the
+constraint C in the rule) can be written as interface{ comparable; E } where E
+is simply the empty interface in this example (case 3).
+
+Interestingly, P still does not satisfy comparable (case 2). The reason is that
+P is a type parameter constrained by any (it is not any). The operation == is
+not available with all types in the type set of P and thus not available on P;
+it is not a comparable type. Therefore the exception doesn’t apply. But this is
+ok: we do like to know that comparable, the strict comparability requirement, is
+enforced most of the time. We just need an exception for Go types that support
+==, essentially for historical reasons: we always had the ability to compare
+non-strictly comparable types.
+
+The Catch
+
+Generic functions that rely on comparable are not statically type-safe anymore.
+The == and != operations **may panic** if applied to operands of comparable type
+parameters, even though the declaration says that they are strictly comparable.
+A single non-comparable value may sneak its way through multiple generic
+functions or types by way of a single non-strictly comparable type argument and
+cause a panic. In Go 1.20 we can now declare:
+
+    var lookupTable genericLookupTable[any, string]
+
+without compile-time error, but we will get a run-time panic if we ever use a
+non-strictly comparable key type in this case, exactly like we would with the
+built-in map type. We have given up static type safety for a run-time check.
+
+There may be situations where this is not good enough, and where we want to
+enforce strict comparability. The following observation allows us to do exactly
+that, at least in limited form: type parameters do not benefit from the
+exception that we added to the constraint satisfaction rule. For instance, in
+our earlier example, the type parameter P in the function g is constrained by
+any (which by itself is comparable but not strictly comparable) and so P does
+not satisfy comparable. We can use this knowledge to craft a compile-time
+assertion of sorts for a given type T:
+
+```go
+// T is not strictly comparable.
+type T struct {
+    x any // any is not strictly comparable
+}
+
+func isComparable[_ comparable]() {}
+
+func _[P T]() {
+    _ = isComparable[P] // P supports == only if T is strictly comparable
+}
 ```
 
 # Concurrency
@@ -4206,9 +4662,9 @@ var lookupTable genericLookupTable[any, string]
 Go enable two style of concurrent programming:
 
 1. Goroutines and channels, which support "communicating sequential processes"
-or "CSP", a model of concurrency in which *values* are passed between independent
-activities (goroutines) but *variables* are for the most part confined to a single
-activity.
+or "CSP", a model of concurrency in which *values* are passed between
+independent activities (goroutines) but *variables* are for the most part
+confined to a single activity.
 
 2. A more traditional model of "shared memory multithreading", which will be
 familiar if you've used threads in other mainstream languages.
@@ -4275,8 +4731,8 @@ go f()      // create a new goroutine that calls f(); don't wait
 
 When main function returns, all goroutines are **abruptly terminated** and the
 program exits. Other than by returning from main or existing the program, there
-is **no programmatic way for one goroutine to stop another, but there are ways to
-communicate with a goroutine to request that is stop**.
+is **no programmatic way for one goroutine to stop another, but there are ways
+to communicate with a goroutine to request that is stop**.
 
 ```go
 func say(s string) {
@@ -4309,53 +4765,51 @@ overhead beyond the memory for the stack, which is just a few kilobytes.
 
 To make the stacks small, Go's run-time uses **resizable, bounded stacks**. A
 newly minted goroutine is given a few kilobytes, which is almost always enough.
-When it isn't, the run-time grows (and shrinks) the memory for storing the
-stack automatically, allowing many goroutines to live in a modest amount of
-memory. The CPU overhead averages about three cheap instructions per function
-call. It is practical to create **hundreds of thousands of goroutines in the
-same address space**. If goroutines were just threads, system resources would
-run out at a much smaller number.
+When it isn't, the run-time grows (and shrinks) the memory for storing the stack
+automatically, allowing many goroutines to live in a modest amount of memory.
+The CPU overhead averages about three cheap instructions per function call. It
+is practical to create **hundreds of thousands of goroutines in the same address
+space**. If goroutines were just threads, system resources would run out at a
+much smaller number.
 
 The differences between threads and goroutines are essentially quantitative, not
 qualitative. Goroutines are lightweight threads managed by the Go runtime.
 
 1. Growable Stacks
 
-Each OS thread has a fixed-size block of memory (often as large as **2MB**) for its
-stack, the work area where it saves the local variables of function calls that
-are in progress or temporarily suspended while another function is called. This
-fixed-size stack is simultaneously too much and too little. A 2MB stack would
-be a huge waste of memory for a little goroutine, such as one that merely waits
-for a WaitGroup then closes a channel. It's not uncommon for a Go program to
-create hundreds of thousands of goroutines at one time, which would be
-impossible with stacks this large. Yet despite their size, fixed-size stacks
-are not always big enough for the most complex and deeply recursive of
-functions. Changing the fixed size can improve space efficiency and allow more
-threads to be created, or it can enable more deeply recursive functions, but it
-cannot do both.
+Each OS thread has a fixed-size block of memory (often as large as **2MB**) for
+its stack, the work area where it saves the local variables of function calls
+that are in progress or temporarily suspended while another function is called.
+This fixed-size stack is simultaneously too much and too little. A 2MB stack
+would be a huge waste of memory for a little goroutine, such as one that merely
+waits for a WaitGroup then closes a channel. It's not uncommon for a Go program
+to create hundreds of thousands of goroutines at one time, which would be
+impossible with stacks this large. Yet despite their size, fixed-size stacks are
+not always big enough for the most complex and deeply recursive of functions.
+Changing the fixed size can improve space efficiency and allow more threads to
+be created, or it can enable more deeply recursive functions, but it cannot do
+both.
 
 In contrast, a goroutine starts life with a small stack, typically **2KB**. A
 goroutine's stack, like the stack of an OS thread, holds the local variables of
 active and suspended function calls, but unlike an OS thread, a goroutine's
 stack is not fixed; it grows and shrinks as needed. The size limit for a
 goroutine stack may be as much as **1GB**, orders of magnitude larger than a
-typical fixed-size thread stack, though of course few goroutines use that
-much.
+typical fixed-size thread stack, though of course few goroutines use that much.
 
 2. Goroutine Scheduling
 
 OS threads are scheduled by the kernel, passing control from one thread to
-another requires a **full context switch**, that is, saving the state of one user
-thread to memory, restoring the state of another, and updating the scheduler's
-data structures. This operation is slow, due to its poor locality and the
-number of memory accesses required, and has historically only gotten worse as
-the number of CPU cycles required to access memory has increased.
+another requires a **full context switch**, that is, saving the state of one
+user thread to memory, restoring the state of another, and updating the
+scheduler's data structures. This operation is slow, due to its poor locality
+and the number of memory accesses required, and has historically only gotten
+worse as the number of CPU cycles required to access memory has increased.
 
 The Go runtime contains its own scheduler that uses a technique known as **m:n
 scheduling**, because it multiplexes (or schedules) m goroutines on n OS
 threads. The job of the Go scheduler is analogous to that of the kernel
-scheduler, but it is concerned only with the goroutines of a single Go
-program.
+scheduler, but it is concerned only with the goroutines of a single Go program.
 
 Unlike the operating system's thread scheduler, the **Go scheduler is not
 invoked periodically by a hardware timer, but implicitly by certain Go language
@@ -4370,11 +4824,11 @@ rescheduling a thread.
 The Go scheduler uses a parameter called GOMAXPROCS to determine how many OS
 threads may be actively executing Go code simultaneously. Its default value is
 the number of CPUs on the machine, so on a machine with 8 CPUs, the scheduler
-will schedule Go code on up to 8 OS threads at once. (GOMAXPROCS is the n in
-m:n scheduling.) Goroutines that are sleeping or blocked in a communication do
-not need a thread at all. Goroutines that are blocked in I/O or other system
-calls or are calling non-Go functions, do need an OS thread, but GOMAXPROCS
-need not account for them.
+will schedule Go code on up to 8 OS threads at once. (GOMAXPROCS is the n in m:n
+scheduling.) Goroutines that are sleeping or blocked in a communication do not
+need a thread at all. Goroutines that are blocked in I/O or other system calls
+or are calling non-Go functions, do need an OS thread, but GOMAXPROCS need not
+account for them.
 
 4. Goroutines Have No Identify
 
@@ -4383,19 +4837,19 @@ need not account for them.
 In most operating systems and programming languages that support multithreading,
 the current thread has a distinct identity that can be easily obtained as an
 ordinary value, typically an integer or pointer. This makes it easy to build an
-abstraction called thread-local storage, which is essentially a global map
-keyed by thread identity, so that each thread can store and retrieve values
+abstraction called thread-local storage, which is essentially a global map keyed
+by thread identity, so that each thread can store and retrieve values
 independent of other threads.
 
 Goroutines have **no notion of identity** that is accessible to the programmer.
 This is by design, since thread-local storage tends to be abused. For example,
-in a web server implemented in a language with thread-local storage, it's
-common for many functions to find information about the HTTP request on whose
-behalf they are currently working by looking in that storage. However, just as
-with programs that rely excessively on global variables, this can lead to an
+in a web server implemented in a language with thread-local storage, it's common
+for many functions to find information about the HTTP request on whose behalf
+they are currently working by looking in that storage. However, just as with
+programs that rely excessively on global variables, this can lead to an
 unhealthy "action at a distance" in which the behavior of a function is not
-determined by its arguments alone, but by the identity of the thread in which
-it runs. Consequently, if the identity of the thread should change—some worker
+determined by its arguments alone, but by the identity of the thread in which it
+runs. Consequently, if the identity of the thread should change—some worker
 threads are enlisted to help, say—the function misbehaves mysteriously.
 
 Go encourages a simpler style of programming in which parameters that affect the
@@ -4406,9 +4860,9 @@ different goroutines without worrying about their identity.
 # Channels
 
 If goroutines are the activities of a concurrent Go program, channels are the
-connections between them. A "channel" is a communication mechanism that lets
-one goroutine send values to another goroutine. Each channel is a conduit for
-values of a particular type, called the channel's "element type".
+connections between them. A "channel" is a communication mechanism that lets one
+goroutine send values to another goroutine. Each channel is a conduit for values
+of a particular type, called the channel's "element type".
 
 To create a channel, we use the built-in make function. A channel created with a
 simple call to make is called an "unbuffered" channel, but make accepts an
@@ -4424,11 +4878,11 @@ fmt.Println(cap(ch))    // "3", capacity can be obtained by cap()
 ch <- 1
 ch <- 2
 fmt.Println(len(ch))    // "2", len returns the number of elements currently
-                        // buffered. Since in a concurrent program this
-                        // information is likely to be stale as soon as it is
-                        // retrieved, its value is limited, but it could
-                        // conceivably be useful during fault diagnosis or
-                        // performance optimization
+						// buffered. Since in a concurrent program this
+						// information is likely to be stale as soon as it is
+						// retrieved, its value is limited, but it could
+						// conceivably be useful during fault diagnosis or
+						// performance optimization
 ```
 
 As with maps, a channel is a *reference* to the data structure created by make.
@@ -4438,8 +4892,8 @@ a reference, so caller and callee refer to the same data structure.
 As with any other reference type, the zero value of a channel is nil.
 
 Two channels of the same type may be compared using ==. The comparison is true
-if both are references to the same channel data structure. A channel may also
-be compared to nil.
+if both are references to the same channel data structure. A channel may also be
+compared to nil.
 
 Send, Receive, Close
 
@@ -4469,13 +4923,13 @@ Channels also support "close", which **sets a flag** indicating that no more
 values will ever be sent on this channel; subsequent attempts to send will
 panic. Receive operations on a closed channel yield the values that have been
 sent until no more values are left; any receive operations thereafter complete
-immediately and yield the zero value of the channel's element type.
-(non-block receive, spin on zero value).
+immediately and yield the zero value of the channel's element type. (non-block
+receive, spin on zero value).
 
 You needn't close every channel when you've finished with it. It's **only
 necessary to close a channel when it is important to tell the receiving
-goroutines that all data have been sent** (such as to terminate a range loop).
-A channel that the garbage collector determines to be unreachable will have its
+goroutines that all data have been sent** (such as to terminate a range loop). A
+channel that the garbage collector determines to be unreachable will have its
 resources reclaimed whether or not it is closed. (Don't confuse this with the
 close operation for open files. It *is* important to call the Close method on
 every file when you've finished with it.)
@@ -4585,9 +5039,9 @@ when the buffer is empty.
 Novices are sometimes tempted to use buffered channels within a single goroutine
 as a queue, lured by their pleasingly simple syntax, but this is a mistake.
 Channels are deeply connected to goroutine scheduling, and without another
-goroutine receiving from the channel, a sender - and perhaps the whole
-program - risks becoming blocked forever. If all you need is a simple queue,
-make one using a slice.
+goroutine receiving from the channel, a sender - and perhaps the whole program -
+risks becoming blocked forever. If all you need is a simple queue, make one
+using a slice.
 
 ```go
 // create `buffered channel`, by pass into `make()` buffer size 2
@@ -4635,9 +5089,9 @@ only the sending goroutine is in a position to call it, and for this reason it
 is a compile-time error to attempt to close a receive-only channel.
 
 Conversions **from bidirectional to unidirectional channel types are permitted**
-in any assignment. There is **no going back**, however: once you have a value
-of a unidirectional type such as `chan<- int`, there is no way to obtain from
-it a value of type `chan int` that refers to the same channel data structure.
+in any assignment. There is **no going back**, however: once you have a value of
+a unidirectional type such as `chan<- int`, there is no way to obtain from it a
+value of type `chan int` that refers to the same channel data structure.
 
 # Select
 
@@ -4659,7 +5113,7 @@ default:    // run if none of the other communication can proceed immediately
 
 If multiple cases are ready (DO NOTE the precondition: **multiple, ready**),
 select picks one **at random**, which ensures that every channel has an **equal
-chance** of being selected.
+chance** of being selected, **preventing from starvation**.
 
 ```go
 func fibonacci(c, quit chan int) {
@@ -4728,8 +5182,8 @@ Channel:
 
 Locks:
 
-* For any sync.Mutex or sync.RWMutex variable l and n < m, call n of l.Unlock
-  () happens before call m of l.Lock() returns.
+* For any sync.Mutex or sync.RWMutex variable l and n < m, call n of l.Unlock ()
+  happens before call m of l.Lock() returns.
 * For any call to l.RLock on a sync.RWMutex variable l, there is an n such that
   the l.RLock happens (returns) after call n to l.Unlock and the matching
   l.RUnlock happens before call n+1 to l.Lock.
@@ -4783,8 +5237,8 @@ communication between goroutines containing infinite loops. See ch8/pipeline1.
 
 2. If only a finite number of values will be sent, it's then useful to
 communicate that no further values will ever be sent on a channel, so that the
-receiver goroutines can stop waiting, by closing the channel and for-range
-loop. See ch8/pipeline2.
+receiver goroutines can stop waiting, by closing the channel and for-range loop.
+See ch8/pipeline2.
 
 ## Looping in Parallel
 
@@ -4913,8 +5367,8 @@ We need to know when the last goroutine has finished, but the *iteration number
 is unspecified*. So we need to increment a counter before each goroutine starts
 and decrement it as each goroutine finishes. This demands a special kind of
 counter, one that can be safely manipulated from multiple goroutines and that
-provides a way to wait until it become zero. This counter type is known
-as "sync.WaitGroup".
+provides a way to wait until it become zero. This counter type is known as
+"sync.WaitGroup".
 
 ```go
 // This time makeThumbnails receive files from a channel, and returns the number
@@ -4974,18 +5428,18 @@ workload, the number of spindles and heads for local disk I/O operations, the
 bandwidth of the network for streaming downloads, or the serving capacity of a
 web service.
 
-The solution is to limit the number of parallel uses of the resource to match the
-level of parallelism that is available.
+The solution is to limit the number of parallel uses of the resource to match
+the level of parallelism that is available.
 
 We can limit parallelism using a buffered channel of capacity n to model a
-concurrency primitive called a *counting semaphore*. Conceptually, each of the
-n vacant slots in the channel buffer represents a token entitling the holder to
+concurrency primitive called a *counting semaphore*. Conceptually, each of the n
+vacant slots in the channel buffer represents a token entitling the holder to
 proceed. Sending a value into the channel acquires a token, and receiving a
 value from the channel releases a token, creating a new vacant slot. This
-ensures that at most n sends can occur without an intervening receive.
-(Although it might be more intuitive to treat *filled* slots in the channel
-buffer as tokens, using vacant slots avoids the need to fill the channel buffer
-after creating it.)
+ensures that at most n sends can occur without an intervening receive. (Although
+it might be more intuitive to treat *filled* slots in the channel buffer as
+tokens, using vacant slots avoids the need to fill the channel buffer after
+creating it.)
 
 It's good practice to keep the semaphore operations as close as possible to the
 I/O operation they regulate.
@@ -5049,9 +5503,9 @@ func main() {
 ## Feature Disable with Nil Channel
 
 Because send and receive operations on a nil channel block forever, a case in a
-select statement whose channel is nil is never selected. This lets us use nil
-to enable or disable cases that correspond to features like handling timeouts
-or cancellation. See ch8/du2.
+select statement whose channel is nil is never selected. This lets us use nil to
+enable or disable cases that correspond to features like handling timeouts or
+cancellation. See ch8/du2.
 
 ## Work Cancellation with Broadcast
 
@@ -5072,16 +5526,16 @@ see that it *has* occurred.
 
 Recall that after a channel has been closed and drained of all sent values,
 subsequent receive operations proceed immediately, yielding zero values. We can
-exploit this to create a broadcast mechanism: don't send a value on the
-channel, *close* it.
+exploit this to create a broadcast mechanism: don't send a value on the channel,
+*close* it.
 
 See ch8/du4 for example code.
 
 Cancellation involves a trade-offs; a quicker response often requires more
 intrusive changes to program logic. Ensuring that no expensive operations ever
 occur after the cancellation event may require updating many places in your
-code, but often most of the benefit can be obtained by checking for
-cancellation in a few important places.
+code, but often most of the benefit can be obtained by checking for cancellation
+in a few important places.
 
 To determine whether main goroutine has cleaned up, There's a handy trick we can
 use during testing: if instead of returning from main in the event of
@@ -5117,8 +5571,8 @@ go bank.Deposit(100)                    // B
 
 Here is a possible operation sequence, in which Bob's deposit occurs in the
 middle of Alice's deposit, after the balance has been read but before it has
-been updated (A: Alice, r:read, w:write). The final balance is only 200, bank
-is $100 richer at Bob's expense:
+been updated (A: Alice, r:read, w:write). The final balance is only 200, bank is
+$100 richer at Bob's expense:
 
                 0
     A1r         0       ... = balance+amount
@@ -5136,11 +5590,11 @@ account.
 2. Avoid accessing the variable from multiple goroutines. *Confine* those
 variables to a single goroutine. Since other goroutines cannot access the
 variable directly, they must use a channel to send the confining goroutine a
-request to query or update the variable. This is what is meant by the Go
-mantra "Do not communicate by sharing memory; instead, share memory by
-communicating." A goroutine that brokers access to a confined variable using
-channel requests is called a "monitor goroutine" for that variable. For
-example, the broadcaster goroutine monitors access to the clients map.
+request to query or update the variable. This is what is meant by the Go mantra
+"Do not communicate by sharing memory; instead, share memory by communicating."
+A goroutine that brokers access to a confined variable using channel requests is
+called a "monitor goroutine" for that variable. For example, the broadcaster
+goroutine monitors access to the clients map.
 
 ```go
 var deposits = make(chan int)
@@ -5169,10 +5623,10 @@ Even when a variable cannot be confined to a single goroutine for its entire
 lifetime, confinement may still be a solution to the problem of concurrent
 access. For example, it's common to share a variable between goroutines in a
 pipeline by passing its address from one stage to the next over a channel. If
-each stage of the pipeline refrains from accessing the variable after sending
-it to the next stage, then all accesses to the variable are sequential. In
-effect, the variable is confined to one stage of the pipeline, then confined to
-the next, and so on. This discipline is sometimes called "serial confinement".
+each stage of the pipeline refrains from accessing the variable after sending it
+to the next stage, then all accesses to the variable are sequential. In effect,
+the variable is confined to one stage of the pipeline, then confined to the
+next, and so on. This discipline is sometimes called "serial confinement".
 
 ```go
 type Cake struct{ state string }
@@ -5199,8 +5653,8 @@ approach is known as "mutual exclusion".
 ### Binary Semphor, Mutex
 
 We can use a channel of capacity 1 to ensure that at most one goroutine accesses
-a shared variable at a time. A semaphore that counts only to 1 is called
-a "binary semaphore".
+a shared variable at a time. A semaphore that counts only to 1 is called a
+"binary semaphore".
 
 ```go
 var (
@@ -5265,12 +5719,12 @@ finished, on all paths through the function, including error paths.
 The bank program above exemplifies a common concurrency pattern. A set of
 exported functions encapsulates one or more variables so that the only way to
 access the variables is through these functions (or methods, for the variables
-of an object). Each function acquires a mutex lock at the beginning and
-releases it at the end, thereby ensuring that the shared variables are not
-accessed concurrently. This arrangement of functions, mutex lock, and variables
-is called a "monitor".(This older use of the word "monitor" inspired the
-term "monitor goroutine." Both uses share the meaning of a broker that ensures
-variables are accessed sequentially.)
+of an object). Each function acquires a mutex lock at the beginning and releases
+it at the end, thereby ensuring that the shared variables are not accessed
+concurrently. This arrangement of functions, mutex lock, and variables is called
+a "monitor".(This older use of the word "monitor" inspired the term "monitor
+goroutine." Both uses share the meaning of a broker that ensures variables are
+accessed sequentially.)
 
 Now consider the Withdraw function:
 
@@ -5290,8 +5744,8 @@ This function eventually gives the correct result, but it has a nasty side
 effect. When an excessive withdrawal is attempted, the balance transiently dips
 below zero. This may cause a concurrent withdrawal for a modest sum to be
 spuriously rejected. So if Bob tries to buy a sports car, Alice can't pay for
-her morning coffee. The problem is that Withdraw is not "atomic": it consists
-of a sequence of three separate operations, each of which acquires and then
+her morning coffee. The problem is that Withdraw is not "atomic": it consists of
+a sequence of three separate operations, each of which acquires and then
 releases the mutex lock, but nothing locks the *whole* sequence.
 
 However, this attempt won't work:
@@ -5315,8 +5769,8 @@ that's already locked—this leads to a deadlock where nothing can proceed, and
 Withdraw blocks forever.
 
 A common solution is to divide a function such as Deposit into two: an
-unexported function, deposit, that assumes the lock is already held and does
-the real work, and an exported function Deposit that acquires the lock before
+unexported function, deposit, that assumes the lock is already held and does the
+real work, and an exported function Deposit that acquires the lock before
 calling deposit.
 
 ```go
@@ -5347,11 +5801,12 @@ exported, whether they are package-level variables or the fields of a struct.
 ### Read/Write Mutex: RWMutex
 
 Since the Balance function only needs to read the state of the variable, it
-would in fact be safe for multiple Balance calls to run concurrently, so long
-as no Deposit or Withdraw call is running. In this scenario we need a special
-kind of lock that **allows read-only operations to proceed in parallel with each
-other, but write operations to have fully exclusive access**. This lock is called
-a "multiple readers, single writer" lock, and in Go it's provided by sync.RWMutex:
+would in fact be safe for multiple Balance calls to run concurrently, so long as
+no Deposit or Withdraw call is running. In this scenario we need a special kind
+of lock that **allows read-only operations to proceed in parallel with each
+other, but write operations to have fully exclusive access**. This lock is
+called a "multiple readers, single writer" lock, and in Go it's provided by
+sync.RWMutex:
 
 ```go
 var mu sync.RWMutex
@@ -5365,8 +5820,8 @@ func Balance() int {
 
 The Balance function now calls the RLock and RUnlock methods to acquire and
 release a "readers" or "shared lock". The Deposit function, which is unchanged,
-calls the mu.Lock and mu.Unlock methods to acquire and release a "writer"
-or "exclusive lock".
+calls the mu.Lock and mu.Unlock methods to acquire and release a "writer" or
+"exclusive lock".
 
 **RLock can be used only if there are no writes to shared variables in the
 critical section**. In general, we should not assume that *logically* read-only
@@ -5375,21 +5830,22 @@ that appears to be a simple accessor might also increment an internal usage
 counter, or update a cache so that repeat calls are faster. If in doubt, use an
 exclusive Lock.
 
-It's **only profitable to use an RWMutex when most of the goroutines that acquire
-the lock are readers, and the lock is under "contention"**, that is, goroutines
-routinely have to wait to acquire it. An RWMutex requires more complex internal
-bookkeeping, making it slower than a regular mutex for uncontended locks.
+It's **only profitable to use an RWMutex when most of the goroutines that
+acquire the lock are readers, and the lock is under "contention"**, that is,
+goroutines routinely have to wait to acquire it. An RWMutex requires more
+complex internal bookkeeping, making it slower than a regular mutex for
+uncontended locks.
 
 Memory Synchronization
 
 In a modern computer there may be dozens of processors, each with its own local
 cache of the main memory. For efficiency, writes to memory are buffered within
-each processor and flushed out to main memory only when necessary. They may
-even be committed to main memory in a different order than they were written by
-the writing goroutine. Synchronization primitives like channel communications
-and mutex operations cause the processor to flush out and commit all its
-accumulated writes so that the effects of goroutine execution up to that point
-are guaranteed to be visible to goroutines running on other processors.
+each processor and flushed out to main memory only when necessary. They may even
+be committed to main memory in a different order than they were written by the
+writing goroutine. Synchronization primitives like channel communications and
+mutex operations cause the processor to flush out and commit all its accumulated
+writes so that the effects of goroutine execution up to that point are
+guaranteed to be visible to goroutines running on other processors.
 
 Within a single goroutine, the effects of each statement are guaranteed to occur
 in the order of execution; goroutines are sequentially consistent. But in the
@@ -5502,26 +5958,31 @@ See:
 
 # Race Detector
 
+See:
+
+* usage: <https://go.dev/blog/race-detector>
+* algo: <https://github.com/google/sanitizers/wiki/ThreadSanitizerAlgorithm>
+
 Go runtime equipped a dynamic analysis tool to check concurrency mistakes. To
 use it, just add `-race` flag to your go build, go run, or go test command.
 
 The race detector studies the stream of synchronization events, looking for
 cases in which one goroutine **reads or writes a shared variable that was most
-recently written by a different goroutine without an intervening
-synchronization operation**. This indicates a concurrent access to the shared
-variable, and thus a data race.
+recently written by a different goroutine without an intervening synchronization
+operation**. This indicates a concurrent access to the shared variable, and thus
+a data race.
 
 However, it can only detect race conditions that occur during a run; it **cannot
-prove** that none will ever occur. For best results, **make sure that your
-tests exercise your packages using concurrency**, the Go team recommends
-running a build of your application built with the race flag under **real-world
-load**. I highly recommend integrating it **as part of your continuous
-integration process**.
+prove** that none will ever occur. For best results, **make sure that your tests
+exercise your packages using concurrency**, the Go team recommends running a
+build of your application built with the race flag under **real-world load**. I
+highly recommend integrating it **as part of your continuous integration
+process, load tests and integration tests are good candidates.**.
 
 Due to extra bookkeeping, a program built with race detection needs more time
 and memory to run, but the overhead is tolerable even for many production jobs.
-For infrequently occurring race conditions, letting the race detector do its
-job can save hours or days of debugging.
+For infrequently occurring race conditions, letting the race detector do its job
+can save hours or days of debugging.
 
 The following env can be used to tweak the behavior of the race detector:
 
@@ -5531,16 +5992,14 @@ The following env can be used to tweak the behavior of the race detector:
 * STRIP_PATH_PREFIX. This tells the race detector to strip the beginnings of
   file paths in reports to make them more concise.
 * HISTORY_SIZE. This sets the per-goroutine history size, which controls how
-  many previous memory accesses are remembered per goroutine. The valid range
-  of values is `[0, 7]`. The memory allocated for goroutine history begins at
-  **32 KB** when HISTORY_SIZE is 0, and **doubles** with each subsequent value for a
+  many previous memory accesses are remembered per goroutine. The valid range of
+  values is `[0, 7]`. The memory allocated for goroutine history begins at **32
+  KB** when HISTORY_SIZE is 0, and **doubles** with each subsequent value for a
   **maximum of 4 MB** at a HISTORY_SIZE of 7. When you see “failed to restore
-    the stack” in reports, that’s an indicator to increase this value; however,
-    it can significantly increase memory consumption.
+  the stack” in reports, that’s an indicator to increase this value; however, it
+  can significantly increase memory consumption.
 
 # Reflection
-
-See: https://golang.org/doc/articles/laws_of_reflection.html.
 
 Sometimes we need to write a function capable of dealing uniformly with values
 of types that don't satisfy a common interface, don't have a known
@@ -5554,7 +6013,7 @@ is called "reflection". Reflection also lets us treat types themselves as
 first-class values.
 
 However, reflection is complex to reason about and not for casual use, so
-although packages like `fmt`, `encoding/*`,  `*/template` are implemented using
+although packages like `fmt`, `encoding/*`, `*/template` are implemented using
 reflection, they do not expose reflection in their own APIs.
 
 It should be used with care, for three reasons:
@@ -5570,8 +6029,8 @@ Best way to avoid this fragility is to ensure that the use of reflection is
 possible, **perform additional dynamic checks before each risky operation**.
 
 2. Since types serve as a form of documentation and the operations of reflection
-cannot be subject to static type checking, heavily reflective code is often
-hard to understand.
+cannot be subject to static type checking, heavily reflective code is often hard
+to understand.
 
 Always carefully document the expected types and other invariants of functions
 that accept an interface{} or a reflect.Value.
@@ -5589,8 +6048,8 @@ Type and Value.
 ## Reflect.Type
 
 A Type represents a Go type. It is an interface with many methods for
-discriminating among types and inspecting their components, like the fields of
-a struct or the parameters of a function.
+discriminating among types and inspecting their components, like the fields of a
+struct or the parameters of a function.
 
 The reflect.TypeOf function accepts any interface{} and returns its **dynamic
 type** as a reflect.Type:
@@ -5623,8 +6082,8 @@ fmt.Printf("%T\n", 3)   // "int"
 A reflect.Value can hold a value of any type.
 
 The reflect.ValueOf function accepts any interface{} and returns a reflect.Value
-containing the interface's dynamic value. As with reflect.TypeOf, the results
-of reflect.ValueOf are **always concrete, but a reflect.Value can hold interface
+containing the interface's dynamic value. As with reflect.TypeOf, the results of
+reflect.ValueOf are **always concrete, but a reflect.Value can hold interface
 values too**.
 
 ```go
@@ -5659,8 +6118,8 @@ Instead of a type switch, we use reflect.Value's Kind method to discriminate the
 cases. Although there are infinitely many types, there are only a finite number
 of "kinds of type": the basic types Bool, String, and all the numbers; the
 aggregate types Array and Struct; the reference types Chan, Func, Ptr, Slice,
-and Map; Interface types; and finally Invalid, meaning no value at all.
-(The zero value of a reflect.Value has kind Invalid.)
+and Map; Interface types; and finally Invalid, meaning no value at all. (The
+zero value of a reflect.Value has kind Invalid.)
 
 ```go
 // Although reflect.Value has many methods, only a few are safe to call on any
@@ -5690,6 +6149,150 @@ case reflect.Ptr, reflect.Interface:
     // v.IsNil()
 }
 ```
+
+## Laws of Reflection
+
+See: https://golang.org/doc/articles/laws_of_reflection.html.
+
+1. Reflection goes from interface value to reflection object.
+
+At the basic level, **reflection is just a mechanism to examine the type and
+value pair stored inside an interface variable**. Those two types give access to
+the contents of an interface variable, and two simple functions, called
+reflect.TypeOf and reflect.ValueOf, retrieve reflect.Type and reflect.Value
+pieces out of an interface value.
+
+    var x float64 = 3.4
+    fmt.Println("type:", reflect.TypeOf(x)) // "type: float64"
+
+You might be wondering where the interface is here, since the program looks like
+it’s passing the float64 variable x, not an interface value, to reflect.TypeOf.
+But it’s there: the parameter type of TypeOf is {}interface, when we call
+reflect.TypeOf(x), x is first stored in an empty interface, which is then passed
+as the argument; reflect.TypeOf unpacks that empty interface to recover the type
+information.
+
+The reflection library has a couple of properties worth singling out. First, to
+keep the API simple, the “getter” and “setter” methods of Value operate on the
+largest type that can hold the value: int64 for all the signed integers, for
+instance. That is, the Int method of Value returns an int64 and the SetInt value
+takes an int64; it may be necessary to convert to the actual type involved:
+
+    var x uint8 = 'x'
+    v := reflect.ValueOf(x)
+    fmt.Println("type:", v.Type())                            // uint8.
+    fmt.Println("kind is uint8: ", v.Kind() == reflect.Uint8) // true.
+    x = uint8(v.Uint())                                       // v.Uint returns a uint64.
+
+The second property is that the Kind of a reflection object describes the
+underlying type, not the static type. If a reflection object contains a value of
+a user-defined integer type, as in
+
+    type MyInt int
+    var x MyInt = 7
+    v := reflect.ValueOf(x)
+
+the Kind of v is still reflect.Int, even though the static type of x is MyInt,
+not int. In other words, the Kind cannot discriminate an int from a MyInt even
+though the Type can.
+
+2. Reflection goes from reflection object to interface value.
+
+Given a reflect.Value we can recover an interface value using the Interface
+method; in effect the method packs the type and value information back into an
+interface representation and returns the result.
+
+3. To modify a reflection object, the value must be settable.
+
+```go
+var x float64 = 3.4
+v := reflect.ValueOf(x)
+v.SetFloat(7.1) // panic: reflect.Value.SetFloat using unaddressable value
+```
+
+The problem is not that the value 7.1 is not addressable; it’s that v is not
+settable. Settability is a property of a reflection Value, and not all
+reflection Values have it.
+
+Settability is a bit like addressability, but stricter. It’s the property that a
+reflection object can modify the actual storage that was used to create the
+reflection object. "**Settability**" is determined by whether the reflection
+object holds the *original* item. When we say:
+
+    var x float64 = 3.4
+    v := reflect.ValueOf(x)
+
+we pass a *copy* of x to reflect.ValueOf, so the interface value created as the
+argument to reflect.ValueOf is a copy of x, not x itself. Thus, if the statement
+
+    v.SetFloat(7.1)
+
+were allowed to succeed, it would not update x, even though v looks like it was
+created from x. Instead, it would update the copy of x stored inside the
+reflection value and x itself would be unaffected. That would be confusing and
+useless, so it is illegal, and settability is the property used to avoid this
+issue. Think of passing x to a function:
+
+    f(x)
+
+We would not expect f to be able to modify x because we passed a copy of x’s
+value, not x itself. If we want f to modify x directly we must pass our function
+the address of x (that is, a pointer to x):
+
+    f(&x)
+
+This is straightforward and familiar, and reflection works the same way. If we
+want to modify x by reflection, we must give the reflection library a pointer to
+the value we want to modify. So let's try that:
+
+    var x float64 = 3.4
+    p := reflect.ValueOf(&x) // Note: take the address of x.
+    fmt.Println("type of p:", p.Type())
+    fmt.Println("settability of p:", p.CanSet())
+    // type of p: *float64
+    // settability of p: false
+
+The reflection object p still isn’t settable, but it’s **not p we want to set,
+it’s(in effect) `*p`. To get to what p points to, we call the Elem method of
+Value, which indirects through the pointer**, and save the result in a
+reflection Value called v:
+
+    v := p.Elem()
+    fmt.Println("settability of v:", v.CanSet()) // true
+
+Now v is a settable reflection object, as the output demonstrates,
+
+Keep in mind that reflection Values **need the address of something in order to
+modify what they represent**. Let's see an example for struct:
+
+```go
+type T struct {
+    A int
+    B string
+}
+t := T{23, "skidoo"}
+// We create the reflection object with the address of the struct because
+// we’ll want to modify it later.
+s := reflect.ValueOf(&t).Elem()
+typeOfT := s.Type()
+for i := 0; i < s.NumField(); i++ {
+    f := s.Field(i)
+    fmt.Printf("%d: %s %s = %v\n", i,
+        typeOfT.Field(i).Name, f.Type(), f.Interface())
+        // Output:
+        // 0: A int = 23
+        // 1: B string = skidoo
+}
+
+s.Field(0).SetInt(77)
+s.Field(1).SetString("Sunset Strip")
+fmt.Println("t is now", t) // "t is now {77 Sunset Strip}"
+```
+
+For structs, only exported fields of a struct are settable.
+
+Also if we modified the program so that s was created from t, not &t, the calls
+to SetInt and SetString would fail as the fields of t would not be settable.
 
 ## Design
 
@@ -5745,14 +6348,14 @@ We obtain an addressable reflect.Value whenever we indirect through a pointer,
 even if we started from a non-addressable Value. All the usual rules for
 addressability have analogs for reflection. For example, since the slice
 indexing expression `e[i]` implicitly follows a pointer, it is addressable even
-if the expression e is not. By analogy, **reflect.ValueOf(e).Index(i) refers to a
-variable, and is thus addressable even if reflect.ValueOf(e) is not**.
+if the expression e is not. By analogy, **reflect.ValueOf(e).Index(i) refers to
+a variable, and is thus addressable even if reflect.ValueOf(e) is not**.
 
 To recover the variable from an addressable reflect.Value requires three steps.
 First, we call Addr(), which returns a Value holding a pointer to the variable.
 Next, we call Interface() on this Value, which returns an interface{} value
-containing the pointer. Finally, if we know the type of the variable, we can
-use a type assertion to retrieve the contents of the interface as an ordinary
+containing the pointer. Finally, if we know the type of the variable, we can use
+a type assertion to retrieve the contents of the interface as an ordinary
 pointer. We can then update the variable through the pointer:
 
 ```go
@@ -5789,10 +6392,10 @@ b.Set(reflect.ValueOf(3))   // panic: Set using unaddressable value
 
 In some ways these methods are more forgiving. SetInt, for example, will succeed
 so long as the variable's type is some kind of signed integer, or even a named
-type whose underlying type is a signed integer, and if the value is too large
-it will be quietly truncated to fit. But tread carefully: calling SetInt on a
-reflect.Value that refers to an interface{} variable will panic, even though
-Set would succeed.
+type whose underlying type is a signed integer, and if the value is too large it
+will be quietly truncated to fit. But tread carefully: calling SetInt on a
+reflect.Value that refers to an interface{} variable will panic, even though Set
+would succeed.
 
 ```go
 x := 1
@@ -5810,7 +6413,8 @@ ry.SetString("hello")                   // panic: SetString called on interface 
 ry.Set(reflect.ValueOf("hello"))        // OK, y = "hello"
 ```
 
-Although reflection **can see unexported fields, but cannot update** such values:
+Although reflection **can see unexported fields, but cannot update** such
+values:
 
 ```go
 stdout := reflect.ValueOf(os.Stdout).Elem() // *os.Stdout, an os.File var
@@ -5820,8 +6424,8 @@ fmt.Println(fd.Int())                       // "1"
 fd.SetInt(2)                                // panic: unexported field
 ```
 
-The related method CanSet reports whether a reflect.Value is addressable
-and *settable*.
+The related method CanSet reports whether a reflect.Value is addressable and
+*settable*.
 
 ```go
 fmt.Println(fd.CanAddr(), fd.CanSet()) // "true false"
@@ -5836,13 +6440,13 @@ a Get method to parse and extract the substring for a particular key.
 
 ## Methods of a Type
 
-Both reflect.Type and reflect.Value have a method called Method. Each t.Method(i)
-call returns an instance of reflect.Method, a struct type that describes
-the name and type of a single method. Each v.Method(i) call returns a
+Both reflect.Type and reflect.Value have a method called Method. Each
+t.Method(i) call returns an instance of reflect.Method, a struct type that
+describes the name and type of a single method. Each v.Method(i) call returns a
 reflect.Value representing a method value, that is, a method bound to its
-receiver. Using the reflect.Value.Call method (which we don't have space to
-show here), it's possible to call Values of kind Func like this one, but this
-program needs only its Type.
+receiver. Using the reflect.Value.Call method (which we don't have space to show
+here), it's possible to call Values of kind Func like this one, but this program
+needs only its Type.
 
 # Unsafe
 
@@ -5856,9 +6460,9 @@ Go guarantees a number of "safety properties":
   bugs, as well as most memory leaks.
 
 Occasionally, we may choose to forfeit some of these helpful guarantees to
-achieve the highest possible performance, to interoperate with libraries
-written in other languages, or to implement a function that cannot be expressed
-in pure Go.
+achieve the highest possible performance, to interoperate with libraries written
+in other languages, or to implement a function that cannot be expressed in pure
+Go.
 
 The "unsafe" package lets us step outside the usual rules. It is actually
 implemented by the compiler, used extensively within low-level packages like
@@ -5894,10 +6498,11 @@ Typical Sizes (for reference type, we give size in words, which is 4 bytes on
 If the types of a struct's fields are of different sizes, it may be more
 space-efficient to declare the fields in an order that packs them as tightly as
 possible. it's certainly not worth worrying about every struct, but efficient
-packing may make frequently allocated data structures more compact and
-therefore faster.
+packing may make frequently allocated data structures more compact and therefore
+faster.
 
-This shows how different **order of declaration affects memory space-efficiency**:
+This shows how different **order of declaration affects memory
+space-efficiency**:
 
                                     // 64-bit       32-bit
     struct{ bool; float64; int16 }  // 3 words      4 words
@@ -5905,8 +6510,8 @@ This shows how different **order of declaration affects memory space-efficiency*
     struct{ bool; int16; float64 }  // 2 words      3 words
 
 Alignof reports the required alignment of its argument's type. Typically boolean
-and numeric types are aligned to their size (up to a maximum of 8 bytes) and
-all other types are word-aligned.
+and numeric types are aligned to their size (up to a maximum of 8 bytes) and all
+other types are word-aligned.
 
 Offsetof(x.f) computes the offset of a field relative to the start of its
 enclosing struct x.
@@ -5978,7 +6583,8 @@ fmt.Println(x.b) // "42"
 
 Traps:
 
-DON'T be tempted to introduce temporary variable of type uintptr to break the line:
+DON'T be tempted to introduce temporary variable of type uintptr to break the
+line:
 
     tmp := uintptr(unsafe.Pointer(&x)) + unsafe.Offsetof(x.b)
     pb := (*int16)(unsafe.Pointer(tmp))
@@ -5986,15 +6592,15 @@ DON'T be tempted to introduce temporary variable of type uintptr to break the li
 
 Some garbage collectors move variables around in memory to reduce fragmentation
 or bookkeeping. Garbage collectors of this kind are known as "moving GCs". When
-a variable is moved, all pointers that hold the address of the old location
-must be updated to point to the new one. From the perspective of the garbage
+a variable is moved, all pointers that hold the address of the old location must
+be updated to point to the new one. From the perspective of the garbage
 collector, an unsafe.Pointer is a pointer and thus its value must change as the
-variable moves, but a uintptr is just a number so its value must not change.
-The incorrect code above *hides a pointer* from the garbage collector in the
+variable moves, but a uintptr is just a number so its value must not change. The
+incorrect code above *hides a pointer* from the garbage collector in the
 non-pointer variable tmp. By the time the second statement executes, the
-variable x could have moved and the number in tmp would no longer be the
-address &x.b. The third statement clobbers an arbitrary memory location with
-the value 42.
+variable x could have moved and the number in tmp would no longer be the address
+&x.b. The third statement clobbers an arbitrary memory location with the value
+42.
 
 DON'T do:
 
@@ -6011,34 +6617,6 @@ and minimize the number of operations between converting an unsafe.Pointer to a
 uintptr and using that uintptr. When calling a library function that returns a
 uintptr, the result should be immediately converted to an unsafe.Pointer to
 ensure that it continues to point to the same variable.
-
-# Cgo
-
-See:
-
-* https://golang.org/cmd/cgo.
-* https://go.dev/blog/cgo
-
-A Go program might need to use a hardware driver implemented in C, query an
-embedded database implemented in C++, or use some linear algebra routines
-implemented in Fortran.
-
-cgo, a tool that **creates Go bindings for C functions**. Such tools are called
-"foreign-function interfaces" (FFIs), and cgo is not the only one for Go
-programs. SWIG (swig.org) is another; it provides more complex features for
-integrating with C++ classes.
-
-When To Use Cgo
-
-If the C library were small, we would just port it to pure Go, and if its
-performance were not critical for our purposes, we would be better off invoking
-a C program as a helper subprocess using the os/exec package. It's when you
-need to use a complex, performance-critical library with a narrow C API that it
-may make sense to wrap it using cgo.
-
-Going in the other direction, it's also possible to compile a Go program as a
-static archive that can be linked into a C program or as a shared library that
-can be dynamically loaded by a C program.
 
 # Testing
 
@@ -6073,21 +6651,20 @@ See gopl#echo_test.
 
 A package named main ordinarily produces an executable program, but it can be
 **imported as a library** too. Although the package name is main and it defnies
-a main function, during testing this package acts as a library that exposes
-its TestXXX funcs to the test driver; its **main function is ignored**.
+a main function, during testing this package acts as a library that exposes its
+TestXXX funcs to the test driver; its **main function is ignored**.
 
 We can write tests for main program **by splitting** main program into two: one
-that does the real work, while main parses and reads flag values and reports
-any error returned by the former. As for input/output, we can let the function
-being test write to another varaibles instead directly using
-os.Stdin/os.Stdout, so that it can be replaced by any Writer implementation
-while testing.
+that does the real work, while main parses and reads flag values and reports any
+error returned by the former. As for input/output, we can let the function being
+test write to another varaibles instead directly using os.Stdin/os.Stdout, so
+that it can be replaced by any Writer implementation while testing.
 
 It’s important that code being tested **not call log.Fatal or os.Exit**, since
 these will stop the process in its tracks; calling these functions should be
-regarded as the exclusive right of main. If something totally unexpected
-happens and a function panics, the test driver will recover, though the test
-will of course be considered a failure.
+regarded as the exclusive right of main. If something totally unexpected happens
+and a function panics, the test driver will recover, though the test will of
+course be considered a failure.
 
 ## Whtie-Box Testing: Fake, Replace, Restore
 
@@ -6095,14 +6672,14 @@ We've seen two types of testing:
 
 * **Black-box testing**: assume nothing about the implementation detail, like in
   TestIsPalindrome, it calls only the exposed function. Black-box testing are
-  usually  more robust, needing fewer updates as the software envolves.
+  usually more robust, needing fewer updates as the software envolves.
 * **White-box testing**: has the privileged access to the internal functions and
   data structure of the package and can make observations and changes that an
-  ordinary client cannot, like in TestEcho, it calls the echo function and updates
-  the global variable out, both of which are unexported.
+  ordinary client cannot, like in TestEcho, it calls the echo function and
+  updates the global variable out, both of which are unexported.
 
-Using the same technique as TestEcho, we can replace other parts of the production
-code with easy-to-test "fake" implementations.
+Using the same technique as TestEcho, we can replace other parts of the
+production code with easy-to-test "fake" implementations.
 
 Suppose we need to test a function that will send a email, but when testing, we
 don't want the email actually sent out. So we can move the email logic into its
@@ -6115,8 +6692,8 @@ This pattern can be used to temporarily save and restore all kinds of global
 variables, including command-line flags, debugging options, and performance
 parameters; to install and remove hooks that cause the production code to call
 some test code when something interesting happens; and to coax the production
-code into rare but important states, such as timeouts, errors, and even
-specifc interleavings of concurrent activities.
+code into rare but important states, such as timeouts, errors, and even specifc
+interleavings of concurrent activities.
 
 Using global variables in this way is **safe only because go test does not
 normally run multiple tests concurrently**.
@@ -6124,34 +6701,33 @@ normally run multiple tests concurrently**.
 ## External Test Package
 
 Consider this situation: higher-level net/http package depend on lower-level
-net/url pacakge, However one of the tests in net/url is an example
-demonstrating the interaction between URLs and HTTP client library, so the
-lower-level net/url need import higher-level net/http -- but it cannot, since
-that would create a **import cycles** which Go spec forbid.
+net/url pacakge, However one of the tests in net/url is an example demonstrating
+the interaction between URLs and HTTP client library, so the lower-level net/url
+need import higher-level net/http -- but it cannot, since that would create a
+**import cycles** which Go spec forbid.
 
 We resolve the problem by declaring the test function in an "external test
 package", that is, in a flie in the net/url directory whose package declaration
 reads package url_test. The extra suffix `_test` is a signal to go test that it
 should build an additional package containing just these flies and run its
-tests. It may be helpful to think of this external test package as if it had
-the import path net/url_test, but it **cannot be imported** under this or any
-other name.
+tests. It may be helpful to think of this external test package as if it had the
+import path net/url_test, but it **cannot be imported** under this or any other
+name.
 
 Because external tests live in a separate package, they may import helper
-packages that also depend on the package being tested, so instead of let
-net/url depend on net/http and create import cycle, we let net/url_test depend
-on both, breaking the import cycle. External test package is also useful to do
+packages that also depend on the package being tested, so instead of let net/url
+depend on net/http and create import cycle, we let net/url_test depend on both,
+breaking the import cycle. External test package is also useful to do
 **"integratioin tests"**, which test the interaction of several components.
 
 Sometimes **an external test package may need privileged access to the internals
 of the package under test**, if for example a white-box test must live in a
-separate package to avoid an import cycle. In such cases, we use a trick: we
-add declarations to an in-package `_test.go` file to expose the necessary
-internals to the external test. This file thus offers the test a **"back
-door"** to the package. If the source flie exists only for this purpose and
-contains no tests itself, it is often called export_test.go. This trick can
-also be used whenever an external test needs to use some of the techniques of
-white-box testing.
+separate package to avoid an import cycle. In such cases, we use a trick: we add
+declarations to an in-package `_test.go` file to expose the necessary internals
+to the external test. This file thus offers the test a **"back door"** to the
+package. If the source flie exists only for this purpose and contains no tests
+itself, it is often called export_test.go. This trick can also be used whenever
+an external test needs to use some of the techniques of white-box testing.
 
 ---
 
@@ -6184,8 +6760,8 @@ elaborate data structure, or a file, it’s tempting to check that the output is
 exactly equal to some ‘‘golden’’ value that was expected when the test was
 written. But as the program evolves, parts of the output will likely change ,
 probably in good ways, but change nonetheless. And it’s not just the output;
-functions with complex inputs often break because the input used in a test is
-no longer valid.
+functions with complex inputs often break because the input used in a test is no
+longer valid.
 
 The easiest way to avoid brittle tests is to **check only the properties you
 care about**. Test your program’s simpler and more stable interfaces in
@@ -6215,17 +6791,16 @@ Gathering
 
 `-coverprofile` flag enables the collection of coverage data by "instrumenting"
 the production code. That is, it modifies a copy of the source code so that
-before each block of statements is executed, a boolean variable is set, with
-one variable per block. Just before the modified program exits, it writes the
-value of each variable to the specifeid log file c.out and prints a summary of
-the fraction of statements that were executed. (If all you need is the summary,
-use go test `-cover`.)
+before each block of statements is executed, a boolean variable is set, with one
+variable per block. Just before the modified program exits, it writes the value
+of each variable to the specifeid log file c.out and prints a summary of the
+fraction of statements that were executed. (If all you need is the summary, use
+go test `-cover`.)
 
 If go test is run with the `-covermode=count` flag, the instrumentation for each
 block increments a counter instead of setting a boolean. The resulting log of
-execution counts of each block enables quantitative comparisons
-between "hotter" blocks, which are more frequently executed, and "colder"
-ones.
+execution counts of each block enables quantitative comparisons between "hotter"
+blocks, which are more frequently executed, and "colder" ones.
 
 Showing
 
@@ -6253,18 +6828,18 @@ In many settings the interesting performance questions are about the relative
 timings of two different operations. For example:
 
 * If a function takes 1ms to process 1,000 elements, how long will it take to
-  process 10,000 or a million? Such comparisons **reveal the asymptotic
-  growth** of the running time of the function.
+  process 10,000 or a million? Such comparisons **reveal the asymptotic growth**
+  of the running time of the function.
 * What is the best size for an I/O buffer? Benchmarks of application throughput
-  over a range of sizes can **help us choose** the smallest buffer that
-  delivers satisfactory performance.
+  over a range of sizes can **help us choose** the smallest buffer that delivers
+  satisfactory performance.
 * Which algorithm performs best for a given job? Benchmarks that evaluate two
   different algorithms on the same input data can often show the strengths and
   weaknesses of each one on important or representative work loads.
 
-Comparative benchmarks are just regular code. They typically take the form
-of **a single parameterized function, called from several Benchmark functions
-with different values**, like this:
+Comparative benchmarks are just regular code. They typically take the form of
+**a single parameterized function, called from several Benchmark functions with
+different values**, like this:
 
     func benchmark(b *testing.B, size int) { /* ... */ }
     func Benchmark10(b *testing.B) { benchmark(b, 10) }
@@ -6272,59 +6847,7 @@ with different values**, like this:
     func Benchmark1000(b *testing.B) { benchmark(b, 1000) }
 
 The parameter size, which specifies the size of the input, varies across
-benchmarks but is constant within each benchmark. **Resist the temptation to
-use the parameter b.N as the input size**. Unless you interpret it as an
-iteration count for a fixed-size input, the results of your benchmark will be
-meaningless.
-
-# Profiling
-
-See:
-
-* https://go.dev/blog/pprof
-* https://github.com/google/pprof/blob/main/doc/README.md
-* go doc runtime/pprof
-* go doc net/http/pprof
-
-The best technique for identifying the critical code (so we know "where to
-begin" our optimization) is profiling. "Profiling" is an automated approach
-to performance measurement based on **sampling a number of profile events
-during execution**, then extrapolating from them during a post-processing
-step; the resulting statistical summary is called a profile.
-
-The go test tool has built-in support for several kinds of profiling:
-
-* A "CPU profile" identifeis the functions whose execution requires the most CPU
-  time. The currently running thread on each CPU is interrupted periodically by
-  the operating system every few milliseconds, with each interruption recording
-  one profile event before normal execution resumes.
-* A "heap proflie" identifeis the statements responsible for allocating the most
-  memory. The profiling library samples calls to the internal memory allocation
-  routines so that on average, one profile event is recorded per 512KB of
-  allocated memory.
-* A "blocking profile" identifies the operations responsible for blocking
-  goroutines the longest, such as system calls, channel sends and receives, and
-  acquisitions of locks. The profiling library records an event every time a
-  goroutine is blocked by one of these operations.
-
-Gathering For Test Code
-
-    $ go test -cpuprofile=cpu.out
-    $ go test -blockprofile=block.out
-    $ go test -memprofile=mem.out
-
-Be careful when using more than one flag at a time: the machinery for gathering
-one kind of profile may skew the results of others.
-
-Gathering For Non-Test Code
-
-Though the details of how we do that vary between short-lived command-line
-tools and long-running server applications. Profiling is especially
-useful in long-running applications, so the Go runtime’s profiling features can
-be enabled under programmer control using the **runtime API**.
-
-Analyse
-
-We can use `go tool pprof` to analyze the profile.
-
+benchmarks but is constant within each benchmark. **Resist the temptation to use
+the parameter b.N as the input size**. Unless you interpret it as an iteration
+count for a fixed-size input, the results of your benchmark will be meaningless.
 
